@@ -1,0 +1,137 @@
+.vxe-table {
+
+  .vxe-body--column,
+  .vxe-footer--column,
+  .vxe-header--column {
+    position   : relative;
+    min-height : 30px;
+    line-height: 30px;
+    text-align : left
+  }
+
+
+  .vxe-cell {
+    white-space  : pre-line;
+    word-break   : break-all;
+    padding-left : 10px;
+    padding-right: 10px
+  }
+
+  .vxe-body--column:not(.col--ellipsis),
+  .vxe-footer--column:not(.col--ellipsis),
+  .vxe-header--column:not(.col--ellipsis) {
+    padding: 0
+  }
+
+  /* large */
+
+  &.size--large {
+
+    .vxe-body--column.col--ellipsis,
+    .vxe-footer--column.col--ellipsis,
+    .vxe-header--column.col--ellipsis,
+    &.vxe-editable .vxe-body--column,
+    .vxe-table--empty-block,
+    .vxe-table--empty-placeholder {
+      min-height: 38px
+    }
+
+    .vxe-header--column,
+    .vxe-body--column,
+    .vxe-footer--column {
+      line-height: 38px;
+    }
+
+    .vxe-cell {
+
+      .vxe-default-input,
+      .vxe-default-select,
+      .vxe-default-textarea {
+        height: 38px
+      }
+
+      .vxe-default-input[type=date]::-webkit-inner-spin-button {
+        margin-top: 3px
+      }
+    }
+
+  }
+
+  /* small */
+
+  &.size--small {
+
+    .vxe-body--column.col--ellipsis,
+    .vxe-footer--column.col--ellipsis,
+    .vxe-header--column.col--ellipsis,
+    &.vxe-editable .vxe-body--column,
+    .vxe-table--empty-block,
+    .vxe-table--empty-placeholder {
+      min-height: 24px
+    }
+
+    .vxe-header--column,
+    .vxe-body--column,
+    .vxe-footer--column {
+      line-height: 24px;
+    }
+
+    .vxe-cell {
+
+      .vxe-default-input,
+      .vxe-default-select,
+      .vxe-default-textarea {
+        height: 24px
+      }
+
+      .vxe-default-input[type=date]::-webkit-inner-spin-button {
+        margin-top: 2px
+      }
+    }
+
+  }
+
+
+
+
+
+
+
+
+  /* mini */
+  &.size--mini {
+    font-size: 12px;
+
+    .vxe-body--column.col--ellipsis,
+    .vxe-footer--column.col--ellipsis,
+    .vxe-header--column.col--ellipsis,
+    &.vxe-editable .vxe-body--column,
+    .vxe-table--empty-block,
+    .vxe-table--empty-placeholder {
+      min-height: 18px
+    }
+
+    .vxe-header--column {
+      line-height: 18px;
+    }
+
+    .vxe-body--column,
+    .vxe-footer--column {
+      line-height: 20px;
+    }
+
+    .vxe-cell {
+
+      .vxe-default-input,
+      .vxe-default-select,
+      .vxe-default-textarea {
+        height: 18px
+      }
+
+      .vxe-default-input[type=date]::-webkit-inner-spin-button {
+        margin-top: 1px
+      }
+    }
+
+  }
+}

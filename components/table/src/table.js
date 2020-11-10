@@ -421,10 +421,10 @@ export default {
     },
     rowHeightMaps () {
       return {
-        default: 48,
-        medium: 44,
-        small: 40,
-        mini: 36
+        default: 30,
+        large: 38,
+        small: 24,
+        mini: 20
       }
     },
     columnOpts () {

@@ -5,11 +5,6 @@ export const menuRouter = [
         name: 'Home',
         component: () => import('@/views/Home.vue')
     },
-    /* {
-      path: '/about',
-      name: 'About',
-      component: () => import('@/views/About.vue')
-    }, */
     {
         path: '/base',
         meta: {
@@ -33,6 +28,22 @@ export const menuRouter = [
             name: 'size',
             component: () =>
                 import('@/views/base/size/index.vue')
+        },{
+            path: 'seq',
+            meta: {
+                title: '序号',
+            },
+            name: 'seq',
+            component: () =>
+                import('@/views/base/seq/index.vue')
+        },{
+            path: 'width',
+            meta: {
+                title: '列宽',
+            },
+            name: 'width',
+            component: () =>
+                import('@/views/base/width/index.vue')
         }]
     },
     {

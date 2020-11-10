@@ -41,7 +41,7 @@ export default {
 };
 </script>
 <style lang="less">
-@import "../components/styles/index.css";
+@import "../components/styles/index.less";
 html,
 body {
   width: 100%;
@@ -52,4 +52,86 @@ body {
 .app-main {
   height: 100vh;
 }
+
+
+
+
+@textColor : red,
+orange,
+green,
+cyan,
+blue,
+purple,
+magenta,
+aqua,
+lime;
+
+.text-color-classes(@i: length(@textColor)) when (@i > 0) {
+    .text-color-classes(@i - 1);
+    @color: extract(@textColor, @i);
+
+    .@{color}-text {
+        color: @color;
+    }
+}
+
+.text-color-classes();
+
+
+
+@spacinglist: 5, 10, 15, 20, 25, 30, 35, 40, 50, 100, 200;
+
+.spacing-loop(@counter) when (@counter > 0) {
+  @class: extract(@spacinglist, @counter);
+  .m-@{class}{
+    margin: (1px * extract(@spacinglist, @counter)); 
+  }
+  .mt-@{class}{
+    margin-top: (1px * extract(@spacinglist, @counter)); 
+  }
+  .mb-@{class}{
+    margin-bottom: (1px * extract(@spacinglist, @counter)); 
+  }
+  .mtb-@{class}{
+    margin-top: (1px * extract(@spacinglist, @counter)); 
+    margin-bottom: (1px * extract(@spacinglist, @counter)); 
+  }
+  .ml-@{class}{
+    margin-left: (1px * extract(@spacinglist, @counter)); 
+  }
+  .mr-@{class}{
+    margin-right: (1px * extract(@spacinglist, @counter)); 
+  }
+  .mlr-@{class}{
+    margin-left: (1px * extract(@spacinglist, @counter)); 
+    margin-right: (1px * extract(@spacinglist, @counter)); 
+  }
+
+  .p-@{class}{
+    padding: (1px * extract(@spacinglist, @counter)); 
+  }
+  .pt-@{class}{
+    padding-top: (1px * extract(@spacinglist, @counter)); 
+  }
+  .pb-@{class}{
+    padding-bottom: (1px * extract(@spacinglist, @counter)); 
+  }
+  .ptb-@{class}{
+    padding-top: (1px * extract(@spacinglist, @counter)); 
+    padding-bottom: (1px * extract(@spacinglist, @counter)); 
+  }
+  .pl-@{class}{
+    padding-left: (1px * extract(@spacinglist, @counter)); 
+  }
+  .pr-@{class}{
+    padding-right: (1px * extract(@spacinglist, @counter)); 
+  }
+  .plr-@{class}{
+    padding-left: (1px * extract(@spacinglist, @counter)); 
+    padding-right: (1px * extract(@spacinglist, @counter)); 
+  }
+  .spacing-loop((@counter - 1));  
+}
+
+.spacing-loop(11);
 </style>
