@@ -3,8 +3,8 @@
     <a-layout class="app-main">
       <a-layout-sider>
         <a-menu mode="inline" theme="dark" @click="handleClickMenu">
-          <template v-for="(item, index) in menuList">
-            <a-sub-menu :key="index" v-if="item.children">
+          <template v-for="item in menuList">
+            <a-sub-menu :key="item.name" v-if="item.children">
               <span slot="title">{{ item.meta.title }}</span>
               <a-menu-item :key="subitem.name" v-for="subitem in item.children">
                 {{ subitem.meta.title }}

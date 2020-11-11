@@ -44,6 +44,22 @@ export const menuRouter = [
             name: 'width',
             component: () =>
                 import('@/views/base/width/index.vue')
+        },{
+            path: 'autoBreak',
+            meta: {
+                title: '自动换行',
+            },
+            name: 'autoBreak',
+            component: () =>
+                import('@/views/base/autoBreak/index.vue')
+        },{
+            path: 'overflow',
+            meta: {
+                title: '单元格溢出省略号',
+            },
+            name: 'overflow',
+            component: () =>
+                import('@/views/base/overflow/index.vue')
         }]
     },
     {
