@@ -8,8 +8,12 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 Vue.use(Antd);
 
-import vcuTable from "../components/index";
-Vue.use(vcuTable);
+import VXETable from "../components/vxe-table.js";
+Vue.use(VXETable);
+
+
+import Uicomponents from '@/components';
+Vue.use(Uicomponents)
 
 
 Vue.config.productionTip = false

@@ -55,7 +55,7 @@ export default {
               'is--indeterminate': multiple && filterStore.isIndeterminate
             }],
             attrs: {
-              title: multiple ? '全选/取消' : '全部'
+              title: GlobalConfig.i18n(multiple ? 'vxe.table.allTitle' : 'vxe.table.allFilter')
             },
             on: {
               click: evnt => {
@@ -75,7 +75,7 @@ export default {
           ] : []).concat([
             h('span', {
               class: 'vxe-checkbox--label'
-            }, "全部")
+            }, GlobalConfig.i18n('vxe.table.allFilter'))
           ]))
         ]),
         h('ul', {
@@ -131,12 +131,12 @@ export default {
             on: {
               click: this.confirmFilter
             }
-          }, "筛选"),
+          }, GlobalConfig.i18n('vxe.table.confirmFilter')),
           h('button', {
             on: {
               click: this.resetFilter
             }
-          }, "重置")
+          }, GlobalConfig.i18n('vxe.table.resetFilter'))
         ])
       ] : []
     },

@@ -1,7 +1,11 @@
 <template>
   <a-card title="序号">
     <div class="mb-30">
-      <a-alert message="设置 type=seq 开启序号列" type="info" class="mb-10" />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          设置 <span class="blue-text">type=seq</span> 开启序号列
+        </div>
+      </a-alert>
       <vxe-table :data="tableData">
         <vxe-table-column type="seq" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -15,7 +19,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert message="使用 seq-config={startIndex} 自定义起始序号" type="info" class="mb-10" />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          使用 <span class="blue-text">seq-config={startIndex}</span> 自定义起始序号
+        </div>
+      </a-alert>
       <vxe-table :data="tableData" :seq-config="{startIndex: 100}">
         <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -29,7 +37,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert message="使用 seq-config={seqMethod} 自定义方法" type="info" class="mb-10" />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          使用 <span class="blue-text">seq-config={seqMethod}</span> 自定义方法
+        </div>
+      </a-alert>
       <vxe-table :seq-config="{seqMethod: seqMethod}" :data="tableData">
         <vxe-table-column type="seq" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -56,7 +68,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 28,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10002,
@@ -82,7 +94,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 23,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10005,
@@ -100,7 +112,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 21,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10007,
@@ -109,7 +121,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 29,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10008,
@@ -118,7 +130,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 35,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
       ],
     };

@@ -8,15 +8,15 @@ const cellType = 'body'
 const lineOffsetSizes = {
   mini: 3,
   small: 2,
-  medium: 1
+  large: 1
 }
 
 // 滚动、拖动过程中不需要触发
-function isOperateMouse ($xetable) {
+function isOperateMouse($xetable) {
   return $xetable._isResize || ($xetable.lastScrollTime && Date.now() < $xetable.lastScrollTime + $xetable.delayHover)
 }
 
-function countTreeExpand (prevRow, params) {
+function countTreeExpand(prevRow, params) {
   const { $table } = params
   const rowChildren = prevRow[$table.treeOpts.children]
   let count = 1
@@ -28,11 +28,11 @@ function countTreeExpand (prevRow, params) {
   return count
 }
 
-function getOffsetSize ($xetable) {
+function getOffsetSize($xetable) {
   return lineOffsetSizes[$xetable.vSize] || 0
 }
 
-function calcTreeLine (params, items) {
+function calcTreeLine(params, items) {
   const { $table, $rowIndex } = params
   let expandSize = 1
   if ($rowIndex) {
@@ -41,7 +41,7 @@ function calcTreeLine (params, items) {
   return $table.rowHeight * expandSize - ($rowIndex ? 1 : (12 - getOffsetSize($table)))
 }
 
-function renderLine (h, _vm, $xetable, rowLevel, items, params) {
+function renderLine(h, _vm, $xetable, rowLevel, items, params) {
   const column = params.column
   const { treeOpts, treeConfig } = $xetable
   const { slots, treeNode } = column
@@ -66,7 +66,7 @@ function renderLine (h, _vm, $xetable, rowLevel, items, params) {
   return []
 }
 
-function mergeMethod (mergeList, _rowIndex, _columnIndex) {
+function mergeMethod(mergeList, _rowIndex, _columnIndex) {
   for (let mIndex = 0; mIndex < mergeList.length; mIndex++) {
     const { row: mergeRowIndex, col: mergeColIndex, rowspan: mergeRowspan, colspan: mergeColspan } = mergeList[mIndex]
     if (mergeColIndex > -1 && mergeRowIndex > -1 && mergeRowspan && mergeColspan) {
@@ -83,7 +83,7 @@ function mergeMethod (mergeList, _rowIndex, _columnIndex) {
 /**
  * 渲染列
  */
-function renderColumn (h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, row, rowIndex, $rowIndex, _rowIndex, column, $columnIndex, columns, items) {
+function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, row, rowIndex, $rowIndex, _rowIndex, column, $columnIndex, columns, items) {
   const {
     $listeners: tableListeners,
     afterFullData,
@@ -294,7 +294,7 @@ function renderColumn (h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, 
   }, tdVNs)
 }
 
-function renderRows (h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tableColumn) {
+function renderRows(h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tableColumn) {
   const {
     stripe,
     rowKey,
@@ -414,7 +414,7 @@ function renderRows (h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tab
  * css3 translate 方式：对于同步滚动效果会有产生卡顿感觉，虽然可以利用硬件加速，渲染性能略优，但失去table布局能力
  */
 let scrollProcessTimeout
-function syncBodyScroll (scrollTop, elem1, elem2) {
+function syncBodyScroll(scrollTop, elem1, elem2) {
   if (elem1 || elem2) {
     if (elem1) {
       elem1.onscroll = null
@@ -445,7 +445,7 @@ export default {
     size: String,
     fixedType: String
   },
-  mounted () {
+  mounted() {
     const { $parent: $xetable, $el, $refs, fixedType } = this
     const { elemStore } = $xetable
     const prefix = `${fixedType || 'main'}-body-`
@@ -459,11 +459,11 @@ export default {
     this.$el.onscroll = this.scrollEvent
     this.$el._onscroll = this.scrollEvent
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.$el._onscroll = null
     this.$el.onscroll = null
   },
-  render (h) {
+  render(h) {
     const { _e, $parent: $xetable, fixedColumn, fixedType } = this
     let { $scopedSlots, tId, tableData, tableColumn, showOverflow: allColumnOverflow, keyboardConfig, keyboardOpts, mergeList, spanMethod, scrollXLoad, emptyRender, emptyOpts, mouseConfig, mouseOpts } = $xetable
     // 如果是固定列与设置了超出隐藏
@@ -484,7 +484,15 @@ export default {
       if (compConf && compConf.renderEmpty) {
         emptyContent = compConf.renderEmpty.call(this, h, emptyOpts, { $table: $xetable }, { $table: $xetable })
       } else {
-        emptyContent = $xetable.emptyText || "暂无数据"
+        //emptyContent = $xetable.emptyText || GlobalConfig.i18n('vxe.table.emptyText')
+        emptyContent = [
+          h('div', {
+            class: 'vxe-table--empty-img'
+          }),
+          h('div', {
+            class: 'vxe-table--empty-text'
+          }, this.emptyText || GlobalConfig.i18n('vxe.table.emptyText'))
+        ]
       }
     }
     return h('div', {
@@ -543,7 +551,7 @@ export default {
           h('span', {
             staticClass: 'vxe-table--cell-main-area-btn',
             on: {
-              mousedown (evnt) {
+              mousedown(evnt) {
                 $xetable.triggerCellExtendMousedownEvent(evnt, { $table: $xetable, fixed: fixedType, type: cellType })
               }
             }
@@ -578,7 +586,7 @@ export default {
      * 如果存在列固定左侧，同步更新滚动状态
      * 如果存在列固定右侧，同步更新滚动状态
      */
-    scrollEvent (evnt) {
+    scrollEvent(evnt) {
       const { $el, $parent: $xetable, fixedType } = this
       const { $refs, highlightHoverRow, scrollXLoad, scrollYLoad, lastScrollTop, lastScrollLeft } = $xetable
       const { tableHeader, tableBody, leftBody, rightBody, tableFooter, validTip } = $refs

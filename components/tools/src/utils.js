@@ -5,13 +5,13 @@ import formats from '../../v-x-e-table/src/formats'
 let zindexIndex = 0
 let lastZindex = 1
 
-function getColFuncWidth(isExists, defaultWidth = 16) {
+function getColFuncWidth (isExists, defaultWidth = 16) {
   return isExists ? defaultWidth : 0
 }
 
 class ColumnInfo {
   /* eslint-disable @typescript-eslint/no-use-before-define */
-  constructor($xetable, _vm, { renderHeader, renderCell, renderFooter, renderData } = {}) {
+  constructor ($xetable, _vm, { renderHeader, renderCell, renderFooter, renderData } = {}) {
     const $xegrid = $xetable.$xegrid
     const proxyOpts = $xegrid ? $xegrid.proxyOpts : null
     const formatter = _vm.formatter
@@ -105,15 +105,15 @@ class ColumnInfo {
     }
   }
 
-  getTitle() {
-    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? "#" : ''))
+  getTitle () {
+    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? GlobalConfig.i18n('vxe.table.seqTitle') : ''))
   }
 
-  getKey() {
+  getKey () {
     return this.property || (this.type ? `type=${this.type}` : null)
   }
 
-  update(name, value) {
+  update (name, value) {
     // 不支持双向的属性
     if (name !== 'filters') {
       if (name === 'field') {
@@ -125,7 +125,7 @@ class ColumnInfo {
   }
 }
 
-function outLog(type) {
+function outLog (type) {
   return function (message, params) {
     const msg = UtilTools.getLog(message, params)
     console[type](msg)
@@ -136,41 +136,40 @@ function outLog(type) {
 export const UtilTools = {
   warn: outLog('warn'),
   error: outLog('error'),
-  getLog(message, params) {
-    console.error("123456 err", message, params)
+  getLog (message, params) {
     return `[vxe-table] ${XEUtils.template(GlobalConfig.i18n(message), params)}`
   },
-  getFuncText(content) {
+  getFuncText (content) {
     return XEUtils.isFunction(content) ? content() : (GlobalConfig.translate ? GlobalConfig.translate(content) : content)
   },
-  nextZIndex() {
+  nextZIndex () {
     lastZindex = GlobalConfig.zIndex + zindexIndex++
     return lastZindex
   },
-  getLastZIndex() {
+  getLastZIndex () {
     return lastZindex
   },
   // 行主键 key
-  getRowkey($xetable) {
+  getRowkey ($xetable) {
     return $xetable.rowId || '_XID'
   },
   // 行主键 value
-  getRowid($xetable, row) {
+  getRowid ($xetable, row) {
     const rowId = XEUtils.get(row, UtilTools.getRowkey($xetable))
     return rowId ? encodeURIComponent(rowId) : ''
   },
   // 获取所有的列，排除分组
-  getColumnList(columns) {
+  getColumnList (columns) {
     const result = []
     columns.forEach(column => {
       result.push(...(column.children && column.children.length ? UtilTools.getColumnList(column.children) : [column]))
     })
     return result
   },
-  getClass(property, params) {
+  getClass (property, params) {
     return property ? XEUtils.isFunction(property) ? property(params) : property : ''
   },
-  getFilters(filters) {
+  getFilters (filters) {
     if (filters && XEUtils.isArray(filters)) {
       return filters.map(({ label, value, data, resetValue, checked }) => {
         return { label, value, data, resetValue, checked: !!checked, _checked: !!checked }
@@ -178,13 +177,13 @@ export const UtilTools = {
     }
     return filters
   },
-  formatText(value, placeholder) {
+  formatText (value, placeholder) {
     return '' + (value === '' || value === null || value === undefined ? (placeholder ? GlobalConfig.emptyCell : '') : value)
   },
-  getCellValue(row, column) {
+  getCellValue (row, column) {
     return XEUtils.get(row, column.property)
   },
-  getCellLabel(row, column, params) {
+  getCellLabel (row, column, params) {
     const { formatter } = column
     const cellValue = UtilTools.getCellValue(row, column)
     let cellLabel = cellValue
@@ -222,17 +221,17 @@ export const UtilTools = {
     }
     return cellLabel
   },
-  setCellValue(row, column, value) {
+  setCellValue (row, column, value) {
     return XEUtils.set(row, column.property, value)
   },
-  isColumn(column) {
+  isColumn (column) {
     return column instanceof ColumnInfo
   },
-  getColumnConfig($xetable, _vm, options) {
+  getColumnConfig ($xetable, _vm, options) {
     return UtilTools.isColumn(_vm) ? _vm : new ColumnInfo($xetable, _vm, options)
   },
   // 组装列配置
-  assemColumn(_vm) {
+  assemColumn (_vm) {
     const { $el, $xetable, $xecolumn, columnConfig } = _vm
     const groupConfig = $xecolumn ? $xecolumn.columnConfig : null
     columnConfig.slots = _vm.$scopedSlots
@@ -246,22 +245,22 @@ export const UtilTools = {
     }
   },
   // 销毁列
-  destroyColumn(_vm) {
+  destroyColumn (_vm) {
     const { $xetable, columnConfig } = _vm
     const matchObj = XEUtils.findTree($xetable.staticColumns, column => column === columnConfig)
     if (matchObj) {
       matchObj.items.splice(matchObj.index, 1)
     }
   },
-  hasChildrenList(item) {
+  hasChildrenList (item) {
     return item && item.children && item.children.length > 0
   },
-  getColMinWidth(_vm, column) {
+  getColMinWidth (_vm, column) {
     const { sortOpts, filterOpts, editOpts } = _vm
     const { type, filters, sortable, remoteSort, editRender, titleHelp } = column
     return 40 + getColFuncWidth(type === 'checkbox', 18) + getColFuncWidth(titleHelp, 18) + getColFuncWidth(filters && filterOpts.showIcon) + getColFuncWidth((sortable || remoteSort) && sortOpts.showIcon) + getColFuncWidth(editRender && editOpts.showIcon, 32)
   },
-  parseFile(file) {
+  parseFile (file) {
     const name = file.name
     const tIndex = XEUtils.lastIndexOf(name, '.')
     const type = name.substring(tIndex + 1, name.length)

@@ -1,11 +1,11 @@
 <template>
   <a-card title="尺寸">
     <div class="mb-30">
-      <a-alert
-        message="使用 size=default"
-        type="info"
-        class="mb-10"
-      />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          使用 <span class="blue-text"> size=default</span>
+        </div>
+      </a-alert>
       <vxe-table size="default" :data="tableData">
         <vxe-table-column type="seq" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -19,11 +19,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert
-        message="使用 size=large"
-        type="info"
-        class="mb-10"
-      />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          使用 <span class="blue-text"> size=large</span>
+        </div>
+      </a-alert>
       <vxe-table size="large" :data="tableData">
         <vxe-table-column type="seq" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -37,7 +37,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert message="使用 size=small" type="info" class="mb-10" />
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          使用 <span class="blue-text"> size=small</span>
+        </div>
+      </a-alert>
       <vxe-table :data="tableData" size="small">
         <vxe-table-column type="seq" width="60"></vxe-table-column>
         <vxe-table-column type="radio" width="60"></vxe-table-column>
@@ -49,20 +53,7 @@
         <vxe-table-column field="address" title="Address"></vxe-table-column>
       </vxe-table>
     </div>
-
-    <div class="mb-30">
-      <a-alert message="使用 size=mini" type="info" class="mb-10" />
-      <vxe-table :data="tableData" size="mini">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="radio" width="60"></vxe-table-column>
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="sex2" title="Sex2"></vxe-table-column>
-        <vxe-table-column field="address" title="Address"></vxe-table-column>
-      </vxe-table>
-    </div>
+    
   </a-card>
 </template>
 <script>
@@ -77,7 +68,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 28,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10002,
@@ -103,7 +94,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 23,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10005,
@@ -121,7 +112,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 21,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10007,
@@ -130,7 +121,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 29,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10008,
@@ -139,7 +130,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 35,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
       ],
     };

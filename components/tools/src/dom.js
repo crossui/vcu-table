@@ -3,19 +3,20 @@ import XEUtils from 'xe-utils'
 import UtilTools from './utils'
 
 const { getRowid } = UtilTools
+
 const browse = XEUtils.browse()
 const htmlElem = browse.isDoc ? document.querySelector('html') : 0
 const bodyElem = browse.isDoc ? document.body : 0
 const reClsMap = {}
 
-function getClsRE(cls) {
+function getClsRE (cls) {
   if (!reClsMap[cls]) {
     reClsMap[cls] = new RegExp(`(?:^|\\s)${cls}(?!\\S)`, 'g')
   }
   return reClsMap[cls]
 }
 
-function getNodeOffset(elem, container, rest) {
+function getNodeOffset (elem, container, rest) {
   if (elem) {
     const parentElem = elem.parentNode
     rest.top += elem.offsetTop
@@ -31,21 +32,21 @@ function getNodeOffset(elem, container, rest) {
   return rest
 }
 
-function isScale(val) {
+function isScale (val) {
   return val && /^\d+%$/.test(val)
 }
 
-function hasClass(elem, cls) {
+function hasClass (elem, cls) {
   return elem && elem.className && elem.className.match && elem.className.match(getClsRE(cls))
 }
 
-function removeClass(elem, cls) {
+function removeClass (elem, cls) {
   if (elem && hasClass(elem, cls)) {
     elem.className = elem.className.replace(getClsRE(cls), '')
   }
 }
 
-function getDomNode() {
+function getDomNode () {
   const documentElement = document.documentElement
   const bodyElem = document.body
   return {
@@ -58,25 +59,25 @@ function getDomNode() {
 
 export const DomTools = {
   browse,
-  isPx(val) {
+  isPx (val) {
     return val && /^\d+(px)?$/.test(val)
   },
   isScale,
   hasClass,
   removeClass,
-  addClass(elem, cls) {
+  addClass (elem, cls) {
     if (elem && !hasClass(elem, cls)) {
       removeClass(elem, cls)
       elem.className = `${elem.className} ${cls}`
     }
   },
-  updateCellTitle(overflowElem, column) {
+  updateCellTitle (overflowElem, column) {
     const content = column.type === 'html' ? overflowElem.innerText : overflowElem.textContent
     if (overflowElem.getAttribute('title') !== content) {
       overflowElem.setAttribute('title', content)
     }
   },
-  rowToVisible($xetable, row) {
+  rowToVisible ($xetable, row) {
     const bodyElem = $xetable.$refs.tableBody.$el
     const trElem = bodyElem.querySelector(`[data-rowid="${getRowid($xetable, row)}"]`)
     if (trElem) {
@@ -100,7 +101,7 @@ export const DomTools = {
     }
     return Promise.resolve()
   },
-  colToVisible($xetable, column) {
+  colToVisible ($xetable, column) {
     const bodyElem = $xetable.$refs.tableBody.$el
     const tdElem = bodyElem.querySelector(`.${column.id}`)
     if (tdElem) {
@@ -136,7 +137,7 @@ export const DomTools = {
   /**
    * 检查触发源是否属于目标节点
    */
-  getEventTargetNode(evnt, container, queryCls, queryMethod) {
+  getEventTargetNode (evnt, container, queryCls, queryMethod) {
     let targetElem
     let target = evnt.target
     while (target && target.nodeType && target !== document) {
@@ -152,17 +153,17 @@ export const DomTools = {
   /**
    * 获取元素相对于 document 的位置
    */
-  getOffsetPos(elem, container) {
+  getOffsetPos (elem, container) {
     return getNodeOffset(elem, container, { left: 0, top: 0 })
   },
-  getAbsolutePos(elem) {
+  getAbsolutePos (elem) {
     const bounding = elem.getBoundingClientRect()
     const boundingTop = bounding.top
     const boundingLeft = bounding.left
     const { scrollTop, scrollLeft, visibleHeight, visibleWidth } = getDomNode()
     return { boundingTop, top: scrollTop + boundingTop, boundingLeft, left: scrollLeft + boundingLeft, visibleHeight, visibleWidth }
   },
-  toView(elem) {
+  toView (elem) {
     const scrollIntoViewIfNeeded = 'scrollIntoViewIfNeeded'
     const scrollIntoView = 'scrollIntoView'
     if (elem) {
@@ -173,7 +174,7 @@ export const DomTools = {
       }
     }
   },
-  triggerEvent(targetElem, type) {
+  triggerEvent (targetElem, type) {
     let evnt
     if (typeof Event === 'function') {
       evnt = new Event(type)
@@ -183,7 +184,7 @@ export const DomTools = {
     }
     targetElem.dispatchEvent(evnt)
   },
-  calcHeight($xetable, key) {
+  calcHeight ($xetable, key) {
     const val = $xetable[key]
     let num = 0
     if (val) {

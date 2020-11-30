@@ -16,7 +16,7 @@ const { browse } = DomTools
  * @param {Object} $xetable 表格实例
  * @param {String} fixedType 固定列类型
  */
-function renderFixed (h, $xetable, fixedType) {
+function renderFixed(h, $xetable, fixedType) {
   const { tableData, tableColumn, tableGroupColumn, vSize, showHeader, showFooter, columnStore, footerData } = $xetable
   const fixedColumn = columnStore[`${fixedType}List`]
   const tableChilds = []
@@ -73,6 +73,8 @@ export default {
   props: {
     /** 基本属性 */
     id: String,
+    //表头数据
+    columns: Array,
     // 数据
     data: Array,
     // 表格的高度
@@ -95,6 +97,8 @@ export default {
     loading: Boolean,
     // 所有的列对其方式
     align: { type: String, default: () => GlobalConfig.table.align },
+    // 分页对齐方式
+    paginationAlign: { type: String, default: () => GlobalConfig.table.paginationAlign },
     // 所有的表头列的对齐方式
     headerAlign: { type: String, default: () => GlobalConfig.table.headerAlign },
     // 所有的表尾列的对齐方式
@@ -220,7 +224,7 @@ export default {
   components: {
     VxeTableBody
   },
-  provide () {
+  provide() {
     return {
       $xetable: this
     }
@@ -230,7 +234,7 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       tId: `${XEUtils.uniqueId()}`,
       isCloak: false,
@@ -410,16 +414,16 @@ export default {
     }
   },
   computed: {
-    validOpts () {
+    validOpts() {
       return Object.assign({ message: 'default' }, GlobalConfig.table.validConfig, this.validConfig)
     },
-    sXOpts () {
+    sXOpts() {
       return Object.assign({}, GlobalConfig.table.scrollX, this.scrollX)
     },
-    sYOpts () {
+    sYOpts() {
       return Object.assign({}, GlobalConfig.table.scrollY, this.scrollY)
     },
-    rowHeightMaps () {
+    rowHeightMaps() {
       return {
         default: 30,
         large: 38,
@@ -427,61 +431,61 @@ export default {
         mini: 20
       }
     },
-    columnOpts () {
+    columnOpts() {
       return Object.assign({}, this.columnConfig)
     },
-    seqOpts () {
+    seqOpts() {
       return Object.assign({ startIndex: 0 }, GlobalConfig.table.seqConfig, this.seqConfig)
     },
-    radioOpts () {
+    radioOpts() {
       return Object.assign({}, GlobalConfig.table.radioConfig, this.radioConfig)
     },
-    checkboxOpts () {
+    checkboxOpts() {
       return Object.assign({}, GlobalConfig.table.checkboxConfig, this.checkboxConfig)
     },
-    tooltipOpts () {
+    tooltipOpts() {
       return Object.assign({ leaveDelay: 300 }, GlobalConfig.table.tooltipConfig, this.tooltipConfig)
     },
-    vaildTipOpts () {
+    vaildTipOpts() {
       return Object.assign({ isArrow: false }, this.tooltipOpts)
     },
-    editOpts () {
+    editOpts() {
       return Object.assign({}, GlobalConfig.table.editConfig, this.editConfig)
     },
-    sortOpts () {
+    sortOpts() {
       return Object.assign({ orders: ['asc', 'desc', null] }, GlobalConfig.table.sortConfig, this.sortConfig)
     },
-    filterOpts () {
+    filterOpts() {
       return Object.assign({}, GlobalConfig.table.filterConfig, this.filterConfig)
     },
-    mouseOpts () {
+    mouseOpts() {
       return Object.assign({}, GlobalConfig.table.mouseConfig, this.mouseConfig)
     },
-    keyboardOpts () {
+    keyboardOpts() {
       return Object.assign({}, this.keyboardConfig)
     },
-    hasTip () {
+    hasTip() {
       return VXETable._tooltip
     },
-    headerCtxMenu () {
+    headerCtxMenu() {
       const headerOpts = this.ctxMenuOpts.header
       return headerOpts && headerOpts.options ? headerOpts.options : []
     },
-    bodyCtxMenu () {
+    bodyCtxMenu() {
       const bodyOpts = this.ctxMenuOpts.body
       return bodyOpts && bodyOpts.options ? bodyOpts.options : []
     },
-    footerCtxMenu () {
+    footerCtxMenu() {
       const footerOpts = this.ctxMenuOpts.footer
       return footerOpts && footerOpts.options ? footerOpts.options : []
     },
-    isCtxMenu () {
+    isCtxMenu() {
       return this.headerCtxMenu.length || this.bodyCtxMenu.length || this.footerCtxMenu.length
     },
-    ctxMenuOpts () {
+    ctxMenuOpts() {
       return Object.assign({}, GlobalConfig.table.contextMenu, this.contextMenu)
     },
-    ctxMenuList () {
+    ctxMenuList() {
       const rest = []
       this.ctxMenuStore.list.forEach(list => {
         list.forEach(item => {
@@ -490,31 +494,31 @@ export default {
       })
       return rest
     },
-    exportOpts () {
+    exportOpts() {
       return Object.assign({}, GlobalConfig.table.exportConfig, this.exportConfig)
     },
-    importOpts () {
+    importOpts() {
       return Object.assign({}, GlobalConfig.table.importConfig, this.importConfig)
     },
-    printOpts () {
+    printOpts() {
       return Object.assign({}, GlobalConfig.table.printConfig, this.printConfig)
     },
-    expandOpts () {
+    expandOpts() {
       return Object.assign({}, GlobalConfig.table.expandConfig, this.expandConfig)
     },
-    treeOpts () {
+    treeOpts() {
       return Object.assign({}, GlobalConfig.table.treeConfig, this.treeConfig)
     },
-    emptyOpts () {
+    emptyOpts() {
       return Object.assign({}, GlobalConfig.table.emptyRender, this.emptyRender)
     },
-    cellOffsetWidth () {
+    cellOffsetWidth() {
       return this.border ? Math.max(2, Math.ceil(this.scrollbarWidth / this.tableColumn.length)) : 1
     },
-    customOpts () {
+    customOpts() {
       return Object.assign({}, GlobalConfig.table.customConfig, this.customConfig)
     },
-    tableBorder () {
+    tableBorder() {
       const { border } = this
       if (border === true) {
         return 'full'
@@ -527,7 +531,7 @@ export default {
     /**
      * 判断列全选的复选框是否禁用
      */
-    isAllCheckboxDisabled () {
+    isAllCheckboxDisabled() {
       const { tableFullData, treeConfig, checkboxOpts } = this
       const { strict, checkMethod } = checkboxOpts
       if (strict) {
@@ -547,7 +551,10 @@ export default {
     }
   },
   watch: {
-    data (value) {
+    columns(value) {
+      this.$nextTick(() => this.loadColumn(value))
+    },
+    data(value) {
       this.loadTableData(value).then(() => {
         if (!this.inited) {
           this.inited = true
@@ -558,29 +565,29 @@ export default {
         }
       })
     },
-    staticColumns (value) {
+    staticColumns(value) {
       this.handleColumn(value)
     },
-    tableColumn () {
+    tableColumn() {
       this.analyColumnWidth()
     },
-    showHeader () {
+    showHeader() {
       this.$nextTick(() => {
         this.recalculate(true).then(() => this.refreshScroll())
       })
     },
-    showFooter () {
+    showFooter() {
       this.$nextTick(() => {
         this.recalculate(true).then(() => this.refreshScroll())
       })
     },
-    height () {
+    height() {
       this.$nextTick(() => this.recalculate(true))
     },
-    maxHeight () {
+    maxHeight() {
       this.$nextTick(() => this.recalculate(true))
     },
-    syncResize (value) {
+    syncResize(value) {
       if (value) {
         const { $el } = this
         // 只在可视状态下才去更新
@@ -597,7 +604,7 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     const { scrollXStore, sYOpts, scrollYStore, data, editOpts, treeOpts, treeConfig, showOverflow } = Object.assign(this, {
       tZindex: 0,
       elemStore: {},
@@ -720,7 +727,7 @@ export default {
     GlobalEvent.on(this, 'contextmenu', this.handleGlobalContextmenuEvent)
     this.preventEvent(null, 'created')
   },
-  mounted () {
+  mounted() {
     if (this.autoResize) {
       const resizeObserver = new ResizeEvent(() => this.recalculate(true))
       resizeObserver.observe(this.$el)
@@ -728,15 +735,19 @@ export default {
       this.$resize = resizeObserver
     }
     this.preventEvent(null, 'mounted')
+
+    if (this.columns && this.columns.length) {
+      this.loadColumn(this.columns)
+    }
   },
-  activated () {
+  activated() {
     this.recalculate().then(() => this.refreshScroll())
     this.preventEvent(null, 'activated')
   },
-  deactivated () {
+  deactivated() {
     this.preventEvent(null, 'deactivated')
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.$resize) {
       this.$resize.disconnect()
     }
@@ -744,7 +755,7 @@ export default {
     this.closeMenu()
     this.preventEvent(null, 'beforeDestroy')
   },
-  destroyed () {
+  destroyed() {
     GlobalEvent.off(this, 'paste')
     GlobalEvent.off(this, 'copy')
     GlobalEvent.off(this, 'cut')
@@ -756,7 +767,7 @@ export default {
     GlobalEvent.off(this, 'contextmenu')
     this.preventEvent(null, 'destroyed')
   },
-  render (h) {
+  render(h) {
     const {
       $scopedSlots,
       tId,
@@ -796,12 +807,14 @@ export default {
       footerData,
       hasTip,
       emptyRender,
-      emptyOpts
+      emptyOpts,
+      paginationAlign
     } = this
     const tableChilds = []
     const fixedChilds = []
     const tableComps = []
     const { leftList, rightList } = columnStore
+    //空数据
     let emptyContent
     if ($scopedSlots.empty) {
       emptyContent = $scopedSlots.empty.call(this, { $table: this }, h)
@@ -810,9 +823,25 @@ export default {
       if (compConf) {
         emptyContent = compConf.renderEmpty.call(this, h, emptyOpts, { $table: this }, { $table: this })
       } else {
-        emptyContent = this.emptyText || "暂无数据"
+        //emptyContent = this.emptyText || GlobalConfig.i18n('vxe.table.emptyText')
+        emptyContent = [
+          h('div', {
+            class: 'vxe-table--empty-img'
+          }),
+          h('div', {
+            class: 'vxe-table--empty-text'
+          }, this.emptyText || GlobalConfig.i18n('vxe.table.emptyText'))
+        ]
       }
     }
+
+    //分页
+    let pagination
+    if ($scopedSlots.pagination) {
+      pagination = $scopedSlots.pagination.call(this, { $table: this }, h);
+
+    }
+
     // 头部
     if (showHeader) {
       tableChilds.push(
@@ -935,7 +964,7 @@ export default {
         'row--highlight': highlightHoverRow,
         'column--highlight': highlightHoverColumn,
         'is--loading': isCloak || loading,
-        'is--empty': !loading && !tableData.length,
+        'is--empty': !tableData.length,
         'scroll--y': overflowY,
         'scroll--x': overflowX,
         'virtual--x': scrollXLoad,
@@ -995,7 +1024,20 @@ export default {
       }, [
         h('div', {
           class: 'vxe-loading--spinner'
-        })
+        }, [
+          h('i', {
+            class: 'vxe-loading--item'
+          }),
+          h('i', {
+            class: 'vxe-loading--item'
+          }),
+          h('i', {
+            class: 'vxe-loading--item'
+          }),
+          h('i', {
+            class: 'vxe-loading--item'
+          })
+        ])
       ]),
       /**
        * 工具提示
@@ -1006,7 +1048,11 @@ export default {
         on: tooltipOpts.enterable ? {
           leave: this.handleTooltipLeaveEvent
         } : null
-      }) : null
+      }) : null,
+      //分页
+      pagination ? h("div", {
+        class: ["vxe-pagination", `vxe-pagination-${paginationAlign}`]
+      }, pagination) : null
     ].concat(tableComps))
   },
   methods

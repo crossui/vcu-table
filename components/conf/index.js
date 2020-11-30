@@ -10,6 +10,8 @@ const GlobalConfig = {
     showHeader: true,
     animat: true,
     delayHover: 250,
+    paginationAlign: "right",
+    // stripe: true,
     // keepSource: false,
     // cloak: false,
     // showOverflow: null,
@@ -20,7 +22,6 @@ const GlobalConfig = {
     // zIndex: null,
     // resizable: false,
     // autoResize: false,
-    // stripe: false,
     // border: false,
     // round: false,
     // emptyRender: {

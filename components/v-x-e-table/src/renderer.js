@@ -5,62 +5,54 @@ import { UtilTools } from '../../tools'
 const inputEventTypes = ['input', 'textarea', '$input', '$textarea']
 const defaultCompProps = { transfer: true }
 
-function isEmptyValue(cellValue) {
+function isEmptyValue (cellValue) {
   return cellValue === null || cellValue === undefined || cellValue === ''
 }
 
-function getChangeEvent(renderOpts) {
+function getChangeEvent (renderOpts) {
   return inputEventTypes.indexOf(renderOpts.name) > -1 ? 'input' : 'change'
 }
 
-function parseDate(value, props) {
+function parseDate (value, props) {
   return value && props.valueFormat ? XEUtils.toStringDate(value, props.valueFormat) : value
 }
 
-function getFormatDate(value, props, defaultFormat) {
+function getFormatDate (value, props, defaultFormat) {
   const { dateConfig = {} } = props
   return XEUtils.toDateString(parseDate(value, props), dateConfig.labelFormat || defaultFormat)
 }
 
-function getLabelFormatDate(value, props) {
-  let labelFormat = {
-    date: 'yyyy-MM-dd',
-    time: 'HH:mm:ss',
-    datetime: 'yyyy-MM-dd HH:mm:ss',
-    week: 'yyyy 年第 WW 周',
-    month: 'yyyy-MM',
-    year: 'yyyy'
-  }
-  return getFormatDate(value, props, labelFormat[props.type]);  //GlobalConfig.i18n(`vxe.input.date.labelFormat.${props.type}`))
+function getLabelFormatDate (value, props) {
+  return getFormatDate(value, props, GlobalConfig.i18n(`vxe.input.date.labelFormat.${props.type}`))
 }
 
-function getDefaultComponentName({ name }) {
+function getDefaultComponentName ({ name }) {
   return `vxe-${name.replace('$', '')}`
 }
 
-function handleConfirmFilter(params, checked, option) {
+function handleConfirmFilter (params, checked, option) {
   const { $panel } = params
   $panel.changeOption({}, checked, option)
 }
 
-function getNativeAttrs({ name, attrs }) {
+function getNativeAttrs ({ name, attrs }) {
   if (name === 'input') {
     attrs = Object.assign({ type: 'text' }, attrs)
   }
   return attrs
 }
 
-function getCellEditFilterProps(renderOpts, params, value, defaultProps) {
+function getCellEditFilterProps (renderOpts, params, value, defaultProps) {
   const { vSize } = params.$table
   return XEUtils.assign(vSize ? { size: vSize } : {}, defaultCompProps, defaultProps, renderOpts.props, { value })
 }
 
-function getItemProps(renderOpts, params, value, defaultProps) {
+function getItemProps (renderOpts, params, value, defaultProps) {
   const { vSize } = params.$form
   return XEUtils.assign(vSize ? { size: vSize } : {}, defaultCompProps, defaultProps, renderOpts.props, { value })
 }
 
-function getNativeOns(renderOpts, params) {
+function getNativeOns (renderOpts, params) {
   const { nativeEvents } = renderOpts
   const nativeOns = {}
   XEUtils.objectEach(nativeEvents, (func, key) => {
@@ -71,7 +63,7 @@ function getNativeOns(renderOpts, params) {
   return nativeOns
 }
 
-function getOns(renderOpts, params, inputFunc, changeFunc) {
+function getOns (renderOpts, params, inputFunc, changeFunc) {
   const { events } = renderOpts
   const modelEvent = 'input'
   const changeEvent = getChangeEvent(renderOpts)
@@ -104,7 +96,7 @@ function getOns(renderOpts, params, inputFunc, changeFunc) {
   return ons
 }
 
-function getEditOns(renderOpts, params) {
+function getEditOns (renderOpts, params) {
   const { $table, row, column } = params
   return getOns(renderOpts, params, (value) => {
     // 处理 model 值双向绑定
@@ -115,7 +107,7 @@ function getEditOns(renderOpts, params) {
   })
 }
 
-function getFilterOns(renderOpts, params, option) {
+function getFilterOns (renderOpts, params, option) {
   return getOns(renderOpts, params, (value) => {
     // 处理 model 值双向绑定
     option.data = value
@@ -124,7 +116,7 @@ function getFilterOns(renderOpts, params, option) {
   })
 }
 
-function getItemOns(renderOpts, params) {
+function getItemOns (renderOpts, params) {
   const { $form, data, property } = params
   return getOns(renderOpts, params, (value) => {
     // 处理 model 值双向绑定
@@ -135,11 +127,11 @@ function getItemOns(renderOpts, params) {
   })
 }
 
-function isSyncCell(renderOpts, params) {
+function isSyncCell (renderOpts, params) {
   return renderOpts.immediate || params.$type === 'cell'
 }
 
-function getNativeEditOns(renderOpts, params) {
+function getNativeEditOns (renderOpts, params) {
   const { $table, row, column } = params
   const { model } = column
   return getOns(renderOpts, params, (evnt) => {
@@ -158,7 +150,7 @@ function getNativeEditOns(renderOpts, params) {
   })
 }
 
-function getNativeFilterOns(renderOpts, params, option) {
+function getNativeFilterOns (renderOpts, params, option) {
   return getOns(renderOpts, params, (evnt) => {
     // 处理 model 值双向绑定
     option.data = evnt.target.value
@@ -167,7 +159,7 @@ function getNativeFilterOns(renderOpts, params, option) {
   })
 }
 
-function getNativeItemOns(renderOpts, params) {
+function getNativeItemOns (renderOpts, params) {
   const { $form, data, property } = params
   return getOns(renderOpts, params, (evnt) => {
     // 处理 model 值双向绑定
@@ -183,7 +175,7 @@ function getNativeItemOns(renderOpts, params) {
  * 单元格可编辑渲染-原生的标签
  * input、textarea、select
  */
-function nativeEditRender(h, renderOpts, params) {
+function nativeEditRender (h, renderOpts, params) {
   const { row, column } = params
   const { name } = renderOpts
   const attrs = getNativeAttrs(renderOpts)
@@ -200,7 +192,7 @@ function nativeEditRender(h, renderOpts, params) {
   ]
 }
 
-function defaultEditRender(h, renderOpts, params) {
+function defaultEditRender (h, renderOpts, params) {
   const { row, column } = params
   const cellValue = UtilTools.getCellValue(row, column)
   return [
@@ -212,7 +204,7 @@ function defaultEditRender(h, renderOpts, params) {
   ]
 }
 
-function defaultButtonEditRender(h, renderOpts, params) {
+function defaultButtonEditRender (h, renderOpts, params) {
   return [
     h('vxe-button', {
       props: getCellEditFilterProps(renderOpts, params),
@@ -222,11 +214,11 @@ function defaultButtonEditRender(h, renderOpts, params) {
   ]
 }
 
-function defaultButtonsEditRender(h, renderOpts, params) {
+function defaultButtonsEditRender (h, renderOpts, params) {
   return renderOpts.children.map(childRenderOpts => defaultButtonEditRender(h, childRenderOpts, params)[0])
 }
 
-function renderNativeOptgroups(h, renderOpts, params, renderOptionsMethods) {
+function renderNativeOptgroups (h, renderOpts, params, renderOptionsMethods) {
   const { optionGroups, optionGroupProps = {} } = renderOpts
   const groupOptions = optionGroupProps.options || 'options'
   const groupLabel = optionGroupProps.label || 'label'
@@ -243,7 +235,7 @@ function renderNativeOptgroups(h, renderOpts, params, renderOptionsMethods) {
 /**
  * 渲染原生的 option 标签
  */
-function renderNativeOptions(h, options, renderOpts, params) {
+function renderNativeOptions (h, options, renderOpts, params) {
   const { optionProps = {} } = renderOpts
   const { row, column } = params
   const labelProp = optionProps.label || 'label'
@@ -265,7 +257,7 @@ function renderNativeOptions(h, options, renderOpts, params) {
   })
 }
 
-function nativeFilterRender(h, renderOpts, params) {
+function nativeFilterRender (h, renderOpts, params) {
   const { column } = params
   const { name } = renderOpts
   const attrs = getNativeAttrs(renderOpts)
@@ -282,7 +274,7 @@ function nativeFilterRender(h, renderOpts, params) {
   })
 }
 
-function defaultFilterRender(h, renderOpts, params) {
+function defaultFilterRender (h, renderOpts, params) {
   const { column } = params
   return column.filters.map((option, oIndex) => {
     const optionValue = option.data
@@ -294,25 +286,25 @@ function defaultFilterRender(h, renderOpts, params) {
   })
 }
 
-function handleFilterMethod({ option, row, column }) {
+function handleFilterMethod ({ option, row, column }) {
   const { data } = option
   const cellValue = XEUtils.get(row, column.property)
   /* eslint-disable eqeqeq */
   return cellValue == data
 }
 
-function nativeSelectEditRender(h, renderOpts, params) {
+function nativeSelectEditRender (h, renderOpts, params) {
   return [
     h('select', {
       class: 'vxe-default-select',
       attrs: getNativeAttrs(renderOpts),
       on: getNativeEditOns(renderOpts, params)
     },
-      renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeOptions) : renderNativeOptions(h, renderOpts.options, renderOpts, params))
+    renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeOptions) : renderNativeOptions(h, renderOpts.options, renderOpts, params))
   ]
 }
 
-function defaultSelectEditRender(h, renderOpts, params) {
+function defaultSelectEditRender (h, renderOpts, params) {
   const { row, column } = params
   const { options, optionProps, optionGroups, optionGroupProps } = renderOpts
   const cellValue = UtilTools.getCellValue(row, column)
@@ -324,7 +316,7 @@ function defaultSelectEditRender(h, renderOpts, params) {
   ]
 }
 
-function getSelectCellValue(renderOpts, { row, column }) {
+function getSelectCellValue (renderOpts, { row, column }) {
   const { props = {}, options, optionGroups, optionProps = {}, optionGroupProps = {} } = renderOpts
   const cellValue = XEUtils.get(row, column.property)
   let selectItem
@@ -354,7 +346,7 @@ function getSelectCellValue(renderOpts, { row, column }) {
  * 渲染表单-项
  * 用于渲染原生的标签
  */
-function nativeItemRender(h, renderOpts, params) {
+function nativeItemRender (h, renderOpts, params) {
   const { data, property } = params
   const { name } = renderOpts
   const attrs = getNativeAttrs(renderOpts)
@@ -371,7 +363,7 @@ function nativeItemRender(h, renderOpts, params) {
   ]
 }
 
-function defaultItemRender(h, renderOpts, params) {
+function defaultItemRender (h, renderOpts, params) {
   const { data, property } = params
   const itemValue = XEUtils.get(data, property)
   return [
@@ -383,7 +375,7 @@ function defaultItemRender(h, renderOpts, params) {
   ]
 }
 
-function defaultButtonItemRender(h, renderOpts, params) {
+function defaultButtonItemRender (h, renderOpts, params) {
   return [
     h('vxe-button', {
       props: getItemProps(renderOpts, params),
@@ -393,14 +385,14 @@ function defaultButtonItemRender(h, renderOpts, params) {
   ]
 }
 
-function defaultButtonsItemRender(h, renderOpts, params) {
+function defaultButtonsItemRender (h, renderOpts, params) {
   return renderOpts.children.map(childRenderOpts => defaultButtonItemRender(h, childRenderOpts, params)[0])
 }
 
 /**
  * 渲染原生的 select 标签
  */
-function renderNativeFormOptions(h, options, renderOpts, params) {
+function renderNativeFormOptions (h, options, renderOpts, params) {
   const { data, property } = params
   const { optionProps = {} } = renderOpts
   const labelProp = optionProps.label || 'label'
@@ -422,7 +414,7 @@ function renderNativeFormOptions(h, options, renderOpts, params) {
   })
 }
 
-function handleExportSelectMethod(params) {
+function handleExportSelectMethod (params) {
   const { column } = params
   return getSelectCellValue(column.editRender || column.cellRender, params)
 }
@@ -431,7 +423,7 @@ function handleExportSelectMethod(params) {
  * 渲染表单-项中
  * 单选框和复选框
  */
-function defaultFormItemRadioAndCheckboxRender(h, renderOpts, params) {
+function defaultFormItemRadioAndCheckboxRender (h, renderOpts, params) {
   const { options, optionProps = {} } = renderOpts
   const { data, property } = params
   const labelProp = optionProps.label || 'label'
@@ -477,10 +469,10 @@ const renderMap = {
   select: {
     renderEdit: nativeSelectEditRender,
     renderDefault: nativeSelectEditRender,
-    renderCell(h, renderOpts, params) {
+    renderCell (h, renderOpts, params) {
       return getSelectCellValue(renderOpts, params)
     },
-    renderFilter(h, renderOpts, params) {
+    renderFilter (h, renderOpts, params) {
       const { column } = params
       return column.filters.map((option, oIndex) => {
         return h('select', {
@@ -489,18 +481,18 @@ const renderMap = {
           attrs: getNativeAttrs(renderOpts),
           on: getNativeFilterOns(renderOpts, params, option)
         },
-          renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeOptions) : renderNativeOptions(h, renderOpts.options, renderOpts, params))
+        renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeOptions) : renderNativeOptions(h, renderOpts.options, renderOpts, params))
       })
     },
     filterMethod: handleFilterMethod,
-    renderItem(h, renderOpts, params) {
+    renderItem (h, renderOpts, params) {
       return [
         h('select', {
           class: 'vxe-default-select',
           attrs: getNativeAttrs(renderOpts),
           on: getNativeItemOns(renderOpts, params)
         },
-          renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeFormOptions) : renderNativeFormOptions(h, renderOpts.options, renderOpts, params))
+        renderOpts.optionGroups ? renderNativeOptgroups(h, renderOpts, params, renderNativeFormOptions) : renderNativeFormOptions(h, renderOpts.options, renderOpts, params))
       ]
     },
     cellExportMethod: handleExportSelectMethod
@@ -508,7 +500,7 @@ const renderMap = {
   $input: {
     autofocus: '.vxe-input--inner',
     renderEdit: defaultEditRender,
-    renderCell(h, renderOpts, params) {
+    renderCell (h, renderOpts, params) {
       const { props = {} } = renderOpts
       const { row, column } = params
       const digits = props.digits || GlobalConfig.input.digits
@@ -549,10 +541,10 @@ const renderMap = {
     autofocus: '.vxe-input--inner',
     renderEdit: defaultSelectEditRender,
     renderDefault: defaultSelectEditRender,
-    renderCell(h, renderOpts, params) {
+    renderCell (h, renderOpts, params) {
       return getSelectCellValue(renderOpts, params)
     },
-    renderFilter(h, renderOpts, params) {
+    renderFilter (h, renderOpts, params) {
       const { column } = params
       const { options, optionProps, optionGroups, optionGroupProps } = renderOpts
       const nativeOn = getNativeOns(renderOpts, params)
@@ -567,7 +559,7 @@ const renderMap = {
       })
     },
     filterMethod: handleFilterMethod,
-    renderItem(h, renderOpts, params) {
+    renderItem (h, renderOpts, params) {
       const { data, property } = params
       const { options, optionProps, optionGroups, optionGroupProps } = renderOpts
       const itemValue = XEUtils.get(data, property)
@@ -601,14 +593,14 @@ const renderMap = {
  * 全局渲染器
  */
 const renderer = {
-  mixin(map) {
+  mixin (map) {
     XEUtils.each(map, (options, name) => renderer.add(name, options))
     return renderer
   },
-  get(name) {
+  get (name) {
     return renderMap[name] || null
   },
-  add(name, options) {
+  add (name, options) {
     if (name && options) {
       const renders = renderMap[name]
       if (renders) {
@@ -619,7 +611,7 @@ const renderer = {
     }
     return renderer
   },
-  delete(name) {
+  delete (name) {
     delete renderMap[name]
     return renderer
   }

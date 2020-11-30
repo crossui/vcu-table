@@ -4,12 +4,23 @@
       <a-alert type="info" class="mb-10">
         <div slot="description">
           <div>
-            当内容溢出时显示为省略号，show-overflow 和 show-header-overflow 和
-            show-footer-overflow
+            当内容溢出时显示为省略号，<span class="blue-text"
+              >show-overflow</span
+            >
+            和 <span class="blue-text">show-header-overflow</span> 和
+            <span class="blue-text">show-footer-overflow</span>
           </div>
-          <div>ellipsis 当内容溢出时显示为省略号</div>
-          <div>title 当内容溢出时显示为省略号并用原生 title 显示</div>
-          <div>tooltip 当内容溢出时显示为省略号并用 tooltip 显示</div>
+          <div>
+            <span class="blue-text">ellipsis</span> 当内容溢出时显示为省略号
+          </div>
+          <div>
+            <span class="blue-text">title</span>
+            当内容溢出时显示为省略号并用原生 title 显示
+          </div>
+          <div>
+            <span class="blue-text">tooltip</span> 当内容溢出时显示为省略号并用
+            tooltip 显示
+          </div>
         </div>
       </a-alert>
       <vxe-table
@@ -54,6 +65,20 @@
     </div>
 
     <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="description">
+          <div>
+            通过设置 <span class="blue-text">contentMethod</span>
+            方法重写默认的提示内容，显示逻辑完全自定义控制，可以返回 null
+            使用默认的提示消息
+          </div>
+          <div>
+            还可以通过
+            <span class="blue-text">enterable</span> 开启鼠标是否可进入到
+            tooltip 中
+          </div>
+        </div>
+      </a-alert>
       <vxe-table
         border
         show-footer
@@ -77,13 +102,13 @@
           show-overflow
           show-footer-overflow
         ></vxe-table-column>
-        <vxe-table-colgroup title="基本信息">
-          <vxe-table-colgroup field="rate" show-header-overflow="title">
+        <vxe-table-column title="基本信息">
+          <vxe-table-column field="rate" show-header-overflow="title">
             <template v-slot:header>
               <span>标题溢出显示原生 title xxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
             </template>
-          </vxe-table-colgroup>
-          <vxe-table-colgroup title="详细信息">
+          </vxe-table-column>
+          <vxe-table-column title="详细信息">
             <vxe-table-column
               type="html"
               field="address"
@@ -92,8 +117,8 @@
               show-header-overflow
               show-overflow
             ></vxe-table-column>
-          </vxe-table-colgroup>
-        </vxe-table-colgroup>
+          </vxe-table-column>
+        </vxe-table-column>
       </vxe-table>
     </div>
   </a-card>

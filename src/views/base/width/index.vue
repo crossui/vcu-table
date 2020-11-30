@@ -65,7 +65,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 28,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10002,
@@ -91,7 +91,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 23,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10005,
@@ -109,7 +109,7 @@ export default {
           sex: "Women",
           sex2: "Man",
           age: 21,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10007,
@@ -118,7 +118,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 29,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
         {
           id: 10008,
@@ -127,7 +127,7 @@ export default {
           sex: "Man",
           sex2: "Man",
           age: 35,
-          address: "从入门到放弃",
+          address: "好好学习天天向上",
         },
       ],
     };
