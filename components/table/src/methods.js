@@ -1473,14 +1473,17 @@ const Methods = {
       elemStore,
       editStore,
       currentRow,
-      mouseConfig
+      mouseConfig,
+      height
     } = this
     const containerList = ['main', 'left', 'right']
     const emptyPlaceholderElem = $refs.emptyPlaceholder
-    //const bodyWrapperElem = elemStore['main-body-wrapper']
+    const bodyWrapperElem = elemStore['main-body-wrapper']
     if (emptyPlaceholderElem) {
       emptyPlaceholderElem.style.top = `${headerHeight}px`
-      //emptyPlaceholderElem.style.height = bodyWrapperElem ? `${bodyWrapperElem.offsetHeight - scrollbarHeight}px` : ''
+      if (height) {
+        emptyPlaceholderElem.style.height = bodyWrapperElem ? `${bodyWrapperElem.offsetHeight - scrollbarHeight}px` : ''
+      }
     }
     if (customHeight > 0) {
       if (showFooter) {
@@ -1737,6 +1740,7 @@ const Methods = {
             // 如果手动调用了激活单元格，避免触发源被移除后导致重复关闭
             this.preventEvent(evnt, 'event.clearActived', actived.args, () => {
               let isClear
+
               if (editOpts.mode === 'row') {
                 const rowNode = getEventTargetNode(evnt, $el, 'vxe-body--row')
                 // row 方式，如果点击了不同行
@@ -1745,6 +1749,7 @@ const Methods = {
                 // cell 方式，如果是非编辑列
                 isClear = !getEventTargetNode(evnt, $el, 'col--edit').flag
               }
+
               // 如果点击表头行，则清除激活状态
               if (!isClear) {
                 isClear = getEventTargetNode(evnt, $el, 'vxe-header--row').flag
@@ -1765,6 +1770,13 @@ const Methods = {
                 // 如果点击了当前表格之外
                 !getEventTargetNode(evnt, $el).flag
               ) {
+                //判断是否在指定类的范围内
+                if (
+                  getEventTargetNode(evnt, document.body, 'autoTypewrit-modal').flag ||
+                  getEventTargetNode(evnt, document.body, 'ant-select-dropdown').flag) {
+                  return
+                }
+
                 requestAnimationFrame(() => this.clearActived(evnt))
               }
             })

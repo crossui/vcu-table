@@ -1,0 +1,36 @@
+.autoTypewrit-modal {
+    background-color: #fff;
+    box-shadow      : 0 0 21px rgba(51, 51, 51, .41);
+    border-radius   : 4px;
+
+    .tableView {
+        padding: 0 5px 5px;
+    }
+
+    .condition {
+        .condition-select {
+            width: 120px;
+
+            &.condition-select-one {
+                width: 70px;
+            }
+        }
+
+        padding: 5px;
+    }
+
+
+}
+
+.has-error {
+
+    .condition-input.ant-input,
+    .condition-select.ant-select-sm .ant-select-selection--single {
+        border-color: #e1e1e1 !important;
+        box-shadow  : 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .condition-select .ant-select-arrow {
+        color: rgba(0, 0, 0, 0.25);
+    }
+}

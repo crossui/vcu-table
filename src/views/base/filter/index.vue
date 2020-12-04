@@ -18,13 +18,23 @@
             如果是动态数据请通过 setFilter 方法更新，参数
             <span class="blue-text">filters</span> 不支持动态数据
           </div>
-          <div>默认的筛选，通过 <span class="blue-text">checked</span> 属性设置默认的选中的选项</div>
+          <div>
+            默认的筛选，通过
+            <span class="blue-text">checked</span> 属性设置默认的选中的选项
+          </div>
           <div>$panel 对象（查看高级用法）:</div>
           <div style="padding-left: 40px">
-            <span class="orange-text">changeOption(event, checked, option)</span> 更新选项的状态
+            <span class="orange-text"
+              >changeOption(event, checked, option)</span
+            >
+            更新选项的状态
           </div>
-          <div style="padding-left: 40px"><span class="orange-text">confirmFilter()</span> 确认筛选</div>
-          <div style="padding-left: 40px"><span class="orange-text">resetFilter()</span> 清除筛选条件</div>
+          <div style="padding-left: 40px">
+            <span class="orange-text">confirmFilter()</span> 确认筛选
+          </div>
+          <div style="padding-left: 40px">
+            <span class="orange-text">resetFilter()</span> 清除筛选条件
+          </div>
         </div>
       </a-alert>
       <vxe-table :data="tableData">
@@ -64,6 +74,36 @@
             />
           </template>
         </vxe-table-column>
+      </vxe-table>
+    </div>
+
+    <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          改变图标，通过设置
+          <span class="blue-text">filter-config={iconMatch, iconMatch}</span>
+          局部替换默认的图标，例如第三方图标库：<span class="red-text">inconfont</span>
+        </div>
+      </a-alert>
+      <vxe-table
+        :data="tableData"
+        :filter-config="{
+          iconNone: 'iconfont icon-filter',
+          iconMatch: 'iconfont icon-filter-fill',
+        }"
+      >
+        <vxe-table-column type="seq" width="60"></vxe-table-column>
+        <vxe-table-column field="name" title="Name"></vxe-table-column>
+        <vxe-table-column
+          field="sex"
+          title="Sex"
+          :filters="[
+            { label: 'Man', value: 'Man' },
+            { label: 'Woman', value: 'Woman' },
+          ]"
+          :filter-multiple="false"
+        ></vxe-table-column>
+        <vxe-table-column field="age" title="Age"></vxe-table-column>
       </vxe-table>
     </div>
   </a-card>

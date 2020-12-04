@@ -1,0 +1,14 @@
+.dateTime {
+
+  .dateTimewrap,
+  .dateTimeitem,
+  .dateTimespan {
+    display: inline-block;
+  }
+
+  .dateTimeitem {}
+
+  .dateTimespan {
+    margin: 0 5px;
+  }
+}

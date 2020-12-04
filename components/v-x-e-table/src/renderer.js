@@ -2,7 +2,7 @@ import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
 import { UtilTools } from '../../tools'
 
-const inputEventTypes = ['input', 'textarea', '$input', '$textarea']
+const inputEventTypes = ['input', 'textarea'] //, '$input', '$textarea'
 const defaultCompProps = { transfer: true }
 
 function isEmptyValue (cellValue) {
@@ -497,7 +497,7 @@ const renderMap = {
     },
     cellExportMethod: handleExportSelectMethod
   },
-  $input: {
+  /* $input: {
     autofocus: '.vxe-input--inner',
     renderEdit: defaultEditRender,
     renderCell (h, renderOpts, params) {
@@ -586,7 +586,7 @@ const renderMap = {
     renderEdit: defaultEditRender,
     renderDefault: defaultEditRender,
     renderItem: defaultItemRender
-  }
+  } */
 }
 
 /**

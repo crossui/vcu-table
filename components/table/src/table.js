@@ -551,8 +551,12 @@ export default {
     }
   },
   watch: {
-    columns(value) {
-      this.$nextTick(() => this.loadColumn(value))
+    columns: {
+      handler(value, oldValue) {
+        value && this.$nextTick(() => this.loadColumn(value))
+      },
+      immediate: true,
+      deep: true
     },
     data(value) {
       this.loadTableData(value).then(() => {

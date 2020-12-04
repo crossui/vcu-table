@@ -5,25 +5,27 @@ import Column from './column'
 import Header from './header'
 import Footer from './footer'
 import Filter from './filter'
-//import Grid from './grid'
-//import Menu from './menu'
+import Menu from './menu'
 import Tooltip from './tooltip'
-//import Toolbar from './toolbar'
-//import Pager from './pager'
-//import Checkbox from './checkbox'
-//import Radio from './radio'
-//import Input from './input'
-//import Textarea from './textarea'
-//import Button from './button'
-//import Modal from './modal'
-//import Form from './form'
-//import Select from './select'
-//import Switch from './switch'
-//import List from './list'
-//import Pulldown from './pulldown'
+
+
+/* import Grid from './grid'
+import Toolbar from './toolbar'
+import Pager from './pager'
+import Checkbox from './checkbox'
+import Radio from './radio'
+import Input from './input'
+import Textarea from './textarea'
+import Button from './button'
+import Modal from './modal'
+import Form from './form'
+import Select from './select'
+import Switch from './switch'
+import List from './list'
+import Pulldown from './pulldown' */
 
 import Edit from './edit'
-//import Export from './export'
+import Export from './export'
 import Keyboard from './keyboard'
 import Validator from './validator'
 import zhCN from './locale/lang/zh-CN'
@@ -35,25 +37,26 @@ const components = [
   Header,
   Footer,
   Filter,
-  //Grid,
-  //Menu,
+  Menu,
   Tooltip,
-  //Toolbar,
-  //Pager,
-  //Checkbox,
-  //Radio,
-  //Input,
-  //Textarea,
-  //Button,
-  //Modal,
-  //Form,
-  //Select,
-  //Switch,
-  //List,
-  //Pulldown,
+
+  /*   Grid,
+    Toolbar,
+    Pager,
+    Checkbox,
+    Radio,
+    Input,
+    Textarea,
+    Button,
+    Modal,
+    Form,
+    Select,
+    Switch,
+    List,
+    Pulldown, */
 
   Edit,
-  //Export,
+  Export,
   Keyboard,
   Validator,
   // 核心
@@ -61,7 +64,7 @@ const components = [
 ]
 
 // 默认安装
-function install (Vue, options) {
+function install(Vue, options) {
   if (XEUtils.isPlainObject(options)) {
     VXETable.setup(options)
   }
@@ -107,5 +110,6 @@ export * from './export'
 export * from './keyboard'
 export * from './validator'
 export * from './table' */
+
 
 export default VXETable

@@ -999,6 +999,8 @@
   /*展开行*/
   .vxe-table--expanded {
     cursor: pointer;
+    position: relative;
+    top: -2px;
 
     .vxe-table--expand-btn {
       width      : 1em;
@@ -1344,7 +1346,8 @@
   .vxe-header--column,
   .vxe-body--column,
   .vxe-body--row,
-  .vxe-footer--row {
+  .vxe-footer--row,
+  .vxe-footer--column {
     &.bg-red {
       background-color: red;
       color           : #fff;

@@ -66,6 +66,9 @@
     position: relative;
     margin: 1px 0;
     border: 1px solid transparent;
+    .iconfont {
+      top: 0;
+    }
     &:last-child {
       border: 0;
     }

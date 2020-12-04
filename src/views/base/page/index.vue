@@ -35,7 +35,7 @@
   </a-card>
 </template>
 <script>
-import * as api from "@/api/page";
+import * as api from "@/api/test";
 export default {
   data() {
     return {
