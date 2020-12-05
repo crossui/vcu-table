@@ -28,17 +28,17 @@
         >
         <a-button @click="$refs.xTable1.clearSort()">清除排序</a-button>
       </a-button-group>
-      <vxe-table ref="xTable1" :data="tableData" border>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name" sortable></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" sortable></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+      <vcu-table ref="xTable1" :data="tableData" border>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name" sortable></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" sortable></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -50,26 +50,26 @@
         </div>
       </a-alert>
 
-      <vxe-table ref="xTable2" :data="tableData" border>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="单个排序 Name" sortable>
+      <vcu-table ref="xTable2" :data="tableData" border>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="单个排序 Name" sortable>
           <template #default="{ row }"
             ><span class="red-text"> 名字：{{ row.name }} </span></template
           >
-        </vxe-table-column>
-        <vxe-table-column
+        </vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="多字段排序 Age+Sex"
           :sort-by="['sex', 'age']"
           sortable
-        ></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -81,22 +81,22 @@
         </div>
       </a-alert>
 
-      <vxe-table ref="xTable3" :data="tableData" border>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table ref="xTable3" :data="tableData" border>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           :sort-method="sortNameMethod"
           sortable
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" sortable></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" sortable></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -111,7 +111,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable4"
         :sort-config="{
           trigger: 'cell',
@@ -122,16 +122,16 @@
         :data="tableData"
         border
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name" sortable></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" sortable></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name" sortable></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" sortable></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -141,22 +141,22 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable5"
         :data="tableData"
         border
         @header-cell-click="headerCellClickEvent"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name" sortable></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" sortable></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name" sortable></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" sortable></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -168,7 +168,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable6"
         :data="tableData"
         :sort-config="{
@@ -177,16 +177,16 @@
         }"
         border
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name" sortable></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" sortable></vxe-table-column>
-        <vxe-table-column field="age" title="Age" sortable></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name" sortable></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" sortable></vcu-table-column>
+        <vcu-table-column field="age" title="Age" sortable></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>
@@ -261,14 +261,14 @@ export default {
 };
 </script>
 <style>
-.vxe-cell--sort .iconfont {
+.vcu-cell--sort .iconfont {
   font-size: 12px;
 }
-.vxe-cell--sort .icon-down {
+.vcu-cell--sort .icon-down {
   top: 5px;
 }
 
-.vxe-cell--sort .icon-up {
+.vcu-cell--sort .icon-up {
   top: -5px;
 }
 </style>

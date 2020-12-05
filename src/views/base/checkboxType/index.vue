@@ -18,23 +18,23 @@
         <a-button @click="clearCheckboxRowEevnt">取消选中</a-button>
         <a-button @click="getCheckboxEvent1">获取选中</a-button>
       </a-button-group>
-      <vxe-table
+      <vcu-table
         ref="xTable1"
         :data="tableData"
         :checkbox-config="{ highlight: true }"
         @checkbox-change="checkboxChangeEvent"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="checkbox"
           width="60"
           align="center"
-        ></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -45,22 +45,22 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable2"
         :data="tableData"
         :checkbox-config="{ checkMethod: checkCheckboxMethod }"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="checkbox"
           width="60"
           align="center"
-        ></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -72,21 +72,21 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         :data="tableData"
         :checkbox-config="{ strict: true, checkMethod: checCheckboxkMethod }"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="checkbox"
           width="60"
           align="center"
-        ></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -97,21 +97,21 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable3"
         :data="tableData"
         :checkbox-config="{ labelField: 'name' }"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="checkbox"
           field="name"
           title="name"
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -123,7 +123,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable4"
         :data="tableData"
         :checkbox-config="{ labelField: 'name', trigger: 'row' }"
@@ -131,15 +131,15 @@
         highlight-current-row
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="checkbox"
           field="name"
           title="name"
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -152,18 +152,18 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         :data="tableData"
         row-id="id"
         :checkbox-config="{ checkRowKeys: defaultSelecteRows }"
         border
       >
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -173,17 +173,17 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         :data="tableData"
         border
         :radio-config="{labelField: 'name'}"
       >
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column type="radio" field="name" title="name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column type="radio" field="name" title="name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

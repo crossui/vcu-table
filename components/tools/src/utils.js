@@ -1,6 +1,6 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
-import formats from '../../v-x-e-table/src/formats'
+import formats from '../../v-c-u-table/src/formats'
 
 let zindexIndex = 0
 let lastZindex = 1
@@ -17,23 +17,23 @@ class ColumnInfo {
     const formatter = _vm.formatter
     const visible = XEUtils.isBoolean(_vm.visible) ? _vm.visible : true
     if (_vm.cellRender && _vm.editRender) {
-      UtilTools.warn('vxe.error.errConflicts', ['column.cell-render', 'column.edit-render'])
+      UtilTools.warn('vcu.error.errConflicts', ['column.cell-render', 'column.edit-render'])
     }
     if (_vm.type === 'expand') {
       if ($xetable.treeConfig && $xetable.treeOpts.line) {
-        UtilTools.error('vxe.error.errConflicts', ['tree-config.line', 'column.type=expand'])
+        UtilTools.error('vcu.error.errConflicts', ['tree-config.line', 'column.type=expand'])
       }
     }
     if (formatter) {
       if (XEUtils.isString(formatter)) {
         const globalFunc = formats.get(formatter) || XEUtils[formatter]
         if (!XEUtils.isFunction(globalFunc)) {
-          UtilTools.error('vxe.error.notFunc', [formatter])
+          UtilTools.error('vcu.error.notFunc', [formatter])
         }
       } else if (XEUtils.isArray(formatter)) {
         const globalFunc = formats.get(formatter[0]) || XEUtils[formatter[0]]
         if (!XEUtils.isFunction(globalFunc)) {
-          UtilTools.error('vxe.error.notFunc', [formatter[0]])
+          UtilTools.error('vcu.error.notFunc', [formatter[0]])
         }
       }
     }
@@ -106,7 +106,7 @@ class ColumnInfo {
   }
 
   getTitle () {
-    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? GlobalConfig.i18n('vxe.table.seqTitle') : ''))
+    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? GlobalConfig.i18n('vcu.table.seqTitle') : ''))
   }
 
   getKey () {
@@ -137,7 +137,7 @@ export const UtilTools = {
   warn: outLog('warn'),
   error: outLog('error'),
   getLog (message, params) {
-    return `[vxe-table] ${XEUtils.template(GlobalConfig.i18n(message), params)}`
+    return `[vcu-table] ${XEUtils.template(GlobalConfig.i18n(message), params)}`
   },
   getFuncText (content) {
     return XEUtils.isFunction(content) ? content() : (GlobalConfig.translate ? GlobalConfig.translate(content) : content)

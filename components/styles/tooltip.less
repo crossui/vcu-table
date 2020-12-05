@@ -1,20 +1,20 @@
 /**Variable**/
 
 /*tppltip*/
-.vxe-table--tooltip-wrapper {
+.vcu-table--tooltip-wrapper {
   display: none;
   position: absolute;
   top: -100%;
   left: -100%;
   font-size: 12px;
   max-width: 400px;
-  border-radius: $vxe-border-radius;
+  border-radius: @vcu-border-radius;
   padding: 8px 12px;
   white-space: normal;
   word-break: break-word;
   box-shadow: 2px 2px 4px -2px rgba(0,0,0,.2);
-  color: $vxe-font-color;
-  font-family: $vxe-font-family;
+  color: @vcu-font-color;
+  font-family: @vcu-font-family;
   &:not(.is--enterable) {
     pointer-events: none;
   }
@@ -22,7 +22,7 @@
     display: block;
   }
   &.is--arrow {
-    .vxe-table--tooltip-arrow {
+    .vcu-table--tooltip-arrow {
       display: block;
     }
   }
@@ -36,10 +36,10 @@
       background-color: transparent;
     }
   }
-  .vxe-table--tooltip-content {
+  .vcu-table--tooltip-content {
     white-space: pre-line;
   }
-  .vxe-table--tooltip-arrow {
+  .vcu-table--tooltip-arrow {
     display: none;
     position: absolute;
     border-color: transparent;
@@ -62,7 +62,7 @@
         bottom: -6px;
       }
     }
-    .vxe-table--tooltip-arrow {
+    .vcu-table--tooltip-arrow {
       bottom: -12px;
       &:before {
         top: -7px;
@@ -75,7 +75,7 @@
         top: -6px;
       }
     }
-    .vxe-table--tooltip-arrow {
+    .vcu-table--tooltip-arrow {
       top: -12px;
       &:before {
         top: -4px;
@@ -83,43 +83,43 @@
     }
   }
 }
-.vxe-table--tooltip-wrapper {
+.vcu-table--tooltip-wrapper {
   &.theme--light {
-    background-color: $vxe-tooltip-light-background-color;
-    border: 1px solid $vxe-input-border-color;
+    background-color: @vcu-tooltip-light-background-color;
+    border: 1px solid @vcu-input-border-color;
     &.placement--top {
-      .vxe-table--tooltip-arrow {
-        border-top-color: $vxe-input-border-color;
+      .vcu-table--tooltip-arrow {
+        border-top-color: @vcu-input-border-color;
         &:before {
-          border-top-color: $vxe-tooltip-light-background-color;
+          border-top-color: @vcu-tooltip-light-background-color;
         }
       }
     }
     &.placement--bottom {
-      .vxe-table--tooltip-arrow {
-        border-bottom-color: $vxe-input-border-color;
+      .vcu-table--tooltip-arrow {
+        border-bottom-color: @vcu-input-border-color;
         &:before {
-          border-bottom-color: $vxe-tooltip-light-background-color;
+          border-bottom-color: @vcu-tooltip-light-background-color;
         }
       }
     }
   }
   &.theme--dark {
-    background: $vxe-tooltip-dark-background-color;
-    color: $vxe-tooltip-dark-color;
+    background: @vcu-tooltip-dark-background-color;
+    color: @vcu-tooltip-dark-color;
     &.placement--top {
-      .vxe-table--tooltip-arrow {
-        border-top-color: $vxe-tooltip-dark-background-color;
+      .vcu-table--tooltip-arrow {
+        border-top-color: @vcu-tooltip-dark-background-color;
         &:before {
-          border-top-color: $vxe-tooltip-dark-background-color;
+          border-top-color: @vcu-tooltip-dark-background-color;
         }
       }
     }
     &.placement--bottom {
-      .vxe-table--tooltip-arrow {
-        border-bottom-color: $vxe-tooltip-dark-background-color;
+      .vcu-table--tooltip-arrow {
+        border-bottom-color: @vcu-tooltip-dark-background-color;
         &:before {
-          border-bottom-color: $vxe-tooltip-dark-background-color;
+          border-bottom-color: @vcu-tooltip-dark-background-color;
         }
       }
     }
@@ -127,9 +127,9 @@
 }
 
 /*valid error*/
-.vxe-table--tooltip-wrapper {
-  &.vxe-table--valid-error {
-    background-color: $vxe-tooltip-validate-error-background-color;
-    color: $vxe-tooltip-validate-error-color;
+.vcu-table--tooltip-wrapper {
+  &.vcu-table--valid-error {
+    background-color: @vcu-tooltip-validate-error-background-color;
+    color: @vcu-tooltip-validate-error-color;
   }
 }

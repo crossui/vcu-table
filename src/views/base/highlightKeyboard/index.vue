@@ -8,12 +8,12 @@
           启用方向键功能
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         highlight-current-row
         :columns="tableColumn"
         :data="tableData"
         :keyboard-config="{ isArrow: true }"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

@@ -1,8 +1,8 @@
-import VxeTableHeader from './src/header'
+import VcuTableHeader from './src/header'
 
-VxeTableHeader.install = function (Vue) {
-  Vue.component(VxeTableHeader.name, VxeTableHeader)
+VcuTableHeader.install = function (Vue) {
+  Vue.component(VcuTableHeader.name, VcuTableHeader)
 }
 
-export const Header = VxeTableHeader
-export default VxeTableHeader
+export const Header = VcuTableHeader
+export default VcuTableHeader

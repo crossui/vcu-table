@@ -1,12 +1,12 @@
 <template>
   <a-card title="基础">
     <div class="mb-30">
-      <vxe-table :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -21,11 +21,11 @@
         <a-button @click="allAlign = 'center'"> 居中 </a-button>
         <a-button @click="allAlign = 'right'"> 居右 </a-button>
       </a-button-group>
-      <vxe-table
+      <vcu-table
         :columns="tableColumn"
         :align="allAlign"
         :data="tableData"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

@@ -11,7 +11,7 @@
           >等常用事件
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         resizable
         show-footer
@@ -28,7 +28,7 @@
         @cell-mouseleave="cellMouseleaveEvent"
         @cell-context-menu="cellContextMenuEvent"
         @scroll="scrollEvent"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

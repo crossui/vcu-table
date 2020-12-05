@@ -1,0 +1,201 @@
+// 单选框和复选框
+
+.XERadio {
+  position   : relative;
+  user-select: none;
+  cursor     : pointer;
+
+  .vcu-radio--icon {
+
+    display  : none;
+    position : absolute;
+    height   : 1em;
+    width    : 1em;
+    font-size: @vcu-radio-font-size-default;
+
+    &:before {
+      content         : "";
+      position        : absolute;
+      height          : 1em;
+      width           : 1em;
+      top             : 0;
+      left            : 0;
+      border          : @vcu-radio-border-width solid @vcu-input-border-color;
+      background-color: @vcu-radio-icon-background-color;
+      border-radius   : 50%;
+    }
+  }
+
+  .vcu-radio--unchecked-icon {
+    display: inline-block;
+  }
+
+  .vcu-radio--checked-icon {
+    &:after {
+      content         : "";
+      position        : absolute;
+      height          : 0.5em;
+      width           : 0.5em;
+      top             : 0.25em;
+      left            : 0.25em;
+      border-radius   : 50%;
+      background-color: @vcu-primary-color; //@vcu-radio-checked-icon-background-color;
+    }
+  }
+
+  &.is--checked {
+    color: @vcu-primary-color;
+
+    .vcu-radio--unchecked-icon {
+      display: none;
+    }
+
+    .vcu-radio--checked-icon {
+      display: inline-block;
+
+      &:before {
+        border-color      : @vcu-primary-color;
+        //background-color: @vcu-primary-color;
+      }
+    }
+  }
+
+  &:not(.is--disabled) {
+    &:hover {
+      .vcu-radio--icon {
+        &:before {
+          border-color: @vcu-primary-color;
+        }
+      }
+    }
+  }
+
+  &.is--disabled {
+    cursor: not-allowed;
+    color : @vcu-disabled-color;
+
+    .vcu-radio--icon {
+      &:before {
+        border-color    : @vcu-input-disabled-color;
+        background-color: @vcu-input-disabled-background-color;
+      }
+
+      &:after {
+        background-color: @vcu-primary-disabled-color;
+      }
+    }
+  }
+}
+
+.XECheckbox {
+
+  position   : relative;
+  user-select: none;
+  cursor     : pointer;
+
+  .vcu-checkbox--icon {
+    display  : none;
+    position : absolute;
+    height   : 1em;
+    width    : 1em;
+    font-size: @vcu-checkbox-font-size-default;
+
+    &:before {
+      content         : "";
+      position        : absolute;
+      height          : 1em;
+      width           : 1em;
+      top             : 0;
+      left            : 0;
+      background-color: @vcu-checkbox-icon-background-color;
+      border-radius   : @vcu-checkbox-border-radius;
+      border          : @vcu-checkbox-border-width solid @vcu-input-border-color;
+    }
+  }
+
+  .vcu-checkbox--unchecked-icon {
+    display: inline-block;
+  }
+
+  .vcu-checkbox--checked-icon {
+    &:after {
+      content    : "";
+      position   : absolute;
+      height     : @vcu-checkbox-checked-height;
+      width      : @vcu-checkbox-checked-width;
+      top        : 47%;
+      left       : 50%;
+      border     : @vcu-checkbox-checked-border solid @vcu-checkbox-checked-icon-border-color;
+      border-left: 0;
+      border-top : 0;
+      transform  : translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  .vcu-checkbox--indeterminate-icon {
+    &:after {
+      content         : "";
+      position        : absolute;
+      top             : 50%;
+      left            : 50%;
+      height          : @vcu-checkbox-indeterminate-height;
+      width           : @vcu-checkbox-indeterminate-width;
+      background-color: @vcu-checkbox-indeterminate-icon-background-color;
+      transform       : translate(-50%, -50%);
+    }
+  }
+
+  &.is--checked,
+  &.is--indeterminate {
+    color: @vcu-primary-color;
+
+    .vcu-checkbox--unchecked-icon {
+      display: none;
+    }
+
+    .vcu-checkbox--icon {
+      &:before {
+        border-color    : @vcu-primary-color;
+        background-color: @vcu-primary-color;
+      }
+    }
+  }
+
+  &.is--checked {
+    .vcu-checkbox--checked-icon {
+      display: inline-block;
+    }
+  }
+
+  &.is--indeterminate {
+    .vcu-checkbox--indeterminate-icon {
+      display: inline-block;
+    }
+  }
+
+  &:not(.is--disabled) {
+    &:hover {
+      .vcu-checkbox--icon {
+        &:before {
+          border-color: @vcu-primary-color;
+        }
+      }
+    }
+  }
+
+  &.is--disabled {
+    cursor: not-allowed;
+    color : @vcu-disabled-color;
+
+    .vcu-checkbox--icon {
+      &:before {
+        border-color    : @vcu-input-disabled-color;
+        background-color: @vcu-input-disabled-background-color;
+      }
+
+      &:after {
+        border-color: @vcu-primary-disabled-color;
+      }
+    }
+  }
+}

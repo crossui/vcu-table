@@ -18,27 +18,27 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         :footer-method="footerMethod"
         :columns="tableColumn"
         :data="tableData"
         :span-method="colspanMethod"
-      ></vxe-table>
+      ></vcu-table>
     </div>
 
     <div class="mb-30">
       <a-alert type="info" class="mb-10">
         <div slot="message">实现横向树列表</div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         :scroll-y="{ gt: -1 }"
         :span-method="rowspanMethod1"
         :data="tableData1"
       >
-        <vxe-table-column field="name1" title="功能模块">
+        <vcu-table-column field="name1" title="功能模块">
           <template v-slot="{ row }">
             <a-checkbox
               v-model="row.check1"
@@ -46,8 +46,8 @@
               >{{ row.name1 }}</a-checkbox
             >
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name2" title="详细功能">
+        </vcu-table-column>
+        <vcu-table-column field="name2" title="详细功能">
           <template v-slot="{ row }">
             <a-checkbox
               v-model="row.check2"
@@ -55,8 +55,8 @@
               >{{ row.name2 }}</a-checkbox
             >
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name3" title="权限类型">
+        </vcu-table-column>
+        <vcu-table-column field="name3" title="权限类型">
           <template v-slot="{ row }">
             <a-checkbox
               v-model="row.check3"
@@ -64,8 +64,8 @@
               >{{ row.name3 }}</a-checkbox
             >
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name4" title="权限列表">
+        </vcu-table-column>
+        <vcu-table-column field="name4" title="权限列表">
           <template v-slot="{ row }">
             <a-checkbox
               v-model="row.check4"
@@ -73,8 +73,8 @@
               >{{ row.name4 }}</a-checkbox
             >
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -95,14 +95,14 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         :footer-method="footerMethod1"
         :columns="tableColumn"
         :data="tableData"
         :footer-span-method="footerColspanMethod"
-      ></vxe-table>
+      ></vcu-table>
     </div>
 
     <div class="mb-30">
@@ -119,7 +119,7 @@
         <a-button @click="handleCellUpdate">更新单元格合并</a-button>
         <a-button @click="handleFooterUpdate">更新表尾单元格合并</a-button>
       </a-button-group>
-      <vxe-table
+      <vcu-table
         ref="xTable"
         border
         show-footer
@@ -128,7 +128,7 @@
         :data="tableData"
         :merge-cells="mergeCells"
         :merge-footer-items="mergeFooterItems"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

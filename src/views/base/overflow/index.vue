@@ -23,31 +23,31 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         show-footer
         highlight-hover-row
         :footer-method="footerMethod"
         :data="tableData1"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="名称"
           show-overflow="ellipsis"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="role"
           title="角色"
           show-overflow
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="date"
           title="标题溢出，显示为 tooltip xxxxxxxxxx"
           show-header-overflow
           show-overflow="title"
           show-footer-overflow
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="rate"
           title="Rate"
           show-header-overflow="title"
@@ -55,13 +55,13 @@
           <template v-slot:header>
             <span>标题显示原生 title ___________________________</span>
           </template>
-        </vxe-table-column>
-        <vxe-table-column
+        </vcu-table-column>
+        <vcu-table-column
           field="address"
           title="不换行不换行不换行不换行不换行不换行不换行不换行不换行"
           width="160"
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -79,7 +79,7 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         show-header-overflow
@@ -88,38 +88,38 @@
         :data="tableData2"
         :tooltip-config="{ contentMethod: showTooltipMethod, enterable: true }"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="名称"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="名称"></vcu-table-column>
+        <vcu-table-column
           field="role"
           title="标题溢出直接隐藏 xxxxxxxxxxxxxxxxxxxxxxxxxxx"
           show-header-overflow="ellipsis"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="date"
           title="Date"
           show-header-overflow
           show-overflow
           show-footer-overflow
-        ></vxe-table-column>
-        <vxe-table-column title="基本信息">
-          <vxe-table-column field="rate" show-header-overflow="title">
+        ></vcu-table-column>
+        <vcu-table-column title="基本信息">
+          <vcu-table-column field="rate" show-header-overflow="title">
             <template v-slot:header>
               <span>标题溢出显示原生 title xxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
             </template>
-          </vxe-table-column>
-          <vxe-table-column title="详细信息">
-            <vxe-table-column
+          </vcu-table-column>
+          <vcu-table-column title="详细信息">
+            <vcu-table-column
               type="html"
               field="address"
               title="标题溢出显示tooltip内容内容内容内容内容内容"
               width="160"
               show-header-overflow
               show-overflow
-            ></vxe-table-column>
-          </vxe-table-column>
-        </vxe-table-column>
-      </vxe-table>
+            ></vcu-table-column>
+          </vcu-table-column>
+        </vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

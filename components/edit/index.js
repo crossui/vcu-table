@@ -1,10 +1,10 @@
 import Table from '../table'
 import mixin from './src/mixin'
-import VXETable from '../v-x-e-table'
+import VCUTable from '../v-c-u-table'
 
 export const Edit = {
   install () {
-    VXETable.reg('edit')
+    VCUTable.reg('edit')
     Table.mixins.push(mixin)
   }
 }

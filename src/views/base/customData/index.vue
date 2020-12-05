@@ -6,23 +6,23 @@
           支持多种数据格式：默认标准结构、深层结构、二维数组
         </div>
       </a-alert>
-      <vxe-table :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column
           field="content"
           title="Html"
           type="html"
           show-overflow
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="role"
           title="Role"
           show-overflow
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -33,23 +33,23 @@
           >
         </div>
       </a-alert>
-      <vxe-table :data="tableData1">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="userInfo.name" title="Name"></vxe-table-column>
-        <vxe-table-column field="other[0].sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="userInfo.age" title="Age"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table :data="tableData1">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="userInfo.name" title="Name"></vcu-table-column>
+        <vcu-table-column field="other[0].sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="userInfo.age" title="Age"></vcu-table-column>
+        <vcu-table-column
           field="other[1].more.content"
           title="Html"
           type="html"
           show-overflow
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="role"
           title="Role"
           show-overflow
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -60,23 +60,23 @@
           >
         </div>
       </a-alert>
-      <vxe-table row-id="0" :data="tableData2">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="1" title="Name"></vxe-table-column>
-        <vxe-table-column field="2" title="Sex"></vxe-table-column>
-        <vxe-table-column field="3" title="Age"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table row-id="0" :data="tableData2">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="1" title="Name"></vcu-table-column>
+        <vcu-table-column field="2" title="Sex"></vcu-table-column>
+        <vcu-table-column field="3" title="Age"></vcu-table-column>
+        <vcu-table-column
           field="4"
           title="Html"
           type="html"
           show-overflow
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="5"
           title="Role"
           show-overflow
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

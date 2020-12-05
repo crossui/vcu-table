@@ -26,7 +26,7 @@ function updateTipStyle (_vm) {
 }
 
 export default {
-  name: 'VxeTooltip',
+  name: 'VcuTooltip',
   mixins: [vSize],
   props: {
     value: Boolean,
@@ -118,7 +118,7 @@ export default {
       }
     }
     return h('div', {
-      class: ['vxe-table--tooltip-wrapper', `theme--${theme}`, `placement--${tipStore.placement}`, {
+      class: ['vcu-table--tooltip-wrapper', `theme--${theme}`, `placement--${tipStore.placement}`, {
         [`size--${vSize}`]: vSize,
         'is--enterable': enterable,
         'is--visible': visible,
@@ -130,10 +130,10 @@ export default {
       on
     }, [
       h('div', {
-        class: 'vxe-table--tooltip-content'
+        class: 'vcu-table--tooltip-content'
       }, this.$slots.content || message),
       h('div', {
-        class: 'vxe-table--tooltip-arrow',
+        class: 'vcu-table--tooltip-arrow',
         style: tipStore.arrowStyle
       })
     ].concat(this.$slots.default))

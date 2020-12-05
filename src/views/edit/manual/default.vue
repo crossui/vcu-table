@@ -25,26 +25,26 @@
         <div><span class="red-text">（此方式不推荐使用）</span></div>
       </div>
     </a-alert>
-    <vxe-table
+    <vcu-table
       ref="xTable"
       :data="tableData"
       :edit-config="{ trigger: 'manual', mode: 'row' }"
     >
-      <vxe-table-column type="seq" width="60"></vxe-table-column>
-      <vxe-table-column
+      <vcu-table-column type="seq" width="60"></vcu-table-column>
+      <vcu-table-column
         field="name"
         title="Name"
         :edit-render="{
           name: 'input',
           autoselect: true,
         }"
-      ></vxe-table-column>
-      <vxe-table-column
+      ></vcu-table-column>
+      <vcu-table-column
         field="sex"
         title="Sex"
         :edit-render="{ name: 'select', options: sexList }"
-      ></vxe-table-column>
-      <vxe-table-column
+      ></vcu-table-column>
+      <vcu-table-column
         field="age"
         title="Age"
         :edit-render="{
@@ -52,15 +52,15 @@
           immediate: true,
           attrs: { type: 'number' },
         }"
-      ></vxe-table-column>
-      <vxe-table-column
+      ></vcu-table-column>
+      <vcu-table-column
         field="address"
         title="Address"
         :edit-render="{
           name: 'textarea',
         }"
-      ></vxe-table-column>
-      <vxe-table-column title="Action">
+      ></vcu-table-column>
+      <vcu-table-column title="Action">
         <template v-slot="{ row }">
           <template v-if="$refs.xTable.isActiveByRow(row)">
             <a-button-group size="small">
@@ -72,8 +72,8 @@
             <a-button size="small" @click="editRowEvent(row)">编辑</a-button>
           </template>
         </template>
-      </vxe-table-column>
-    </vxe-table>
+      </vcu-table-column>
+    </vcu-table>
   </div>
 </template>
 <script>

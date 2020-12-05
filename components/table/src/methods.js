@@ -1,7 +1,7 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
 import Cell from '../../cell'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
 const { getRowid, getRowkey, setCellValue, getCellLabel, hasChildrenList, getColumnList } = UtilTools
@@ -10,8 +10,8 @@ const { browse, calcHeight, hasClass, addClass, removeClass, getEventTargetNode 
 const isWebkit = browse['-webkit'] && !browse.edge
 const debounceScrollYDuration = browse.msie ? 40 : 20
 
-const resizableStorageKey = 'VXE_TABLE_CUSTOM_COLUMN_WIDTH'
-const visibleStorageKey = 'VXE_TABLE_CUSTOM_COLUMN_VISIBLE'
+const resizableStorageKey = 'VCU_TABLE_CUSTOM_COLUMN_WIDTH'
+const visibleStorageKey = 'VCU_TABLE_CUSTOM_COLUMN_VISIBLE'
 
 /**
  * 生成行的唯一主键
@@ -143,7 +143,7 @@ function setMerges(_vm, merges, mList, rowList) {
   if (merges) {
     const { treeConfig, visibleColumn } = _vm
     if (treeConfig) {
-      throw new Error(UtilTools.getLog('vxe.error.noTree', ['merge-footer-items']))
+      throw new Error(UtilTools.getLog('vcu.error.noTree', ['merge-footer-items']))
     }
     if (!XEUtils.isArray(merges)) {
       merges = [merges]
@@ -192,7 +192,7 @@ function removeMerges(_vm, merges, mList, rowList) {
   if (merges) {
     const { treeConfig, visibleColumn } = _vm
     if (treeConfig) {
-      throw new Error(UtilTools.getLog('vxe.error.noTree', ['merge-cells']))
+      throw new Error(UtilTools.getLog('vcu.error.noTree', ['merge-cells']))
     }
     if (!XEUtils.isArray(merges)) {
       merges = [merges]
@@ -251,10 +251,10 @@ const Methods = {
     this.clearRowExpand()
     this.clearTreeExpand()
     this.clearTreeExpandReserve()
-    if (VXETable._edit) {
+    if (VCUTable._edit) {
       this.clearActived()
     }
-    if (VXETable._filter) {
+    if (VCUTable._filter) {
       this.clearFilter()
     }
     if (this.keyboardConfig || this.mouseConfig) {
@@ -316,13 +316,13 @@ const Methods = {
     this.scrollYLoad = scrollYLoad
     if (scrollYLoad) {
       if (!(this.height || this.maxHeight)) {
-        UtilTools.error('vxe.error.reqProp', ['height | max-height'])
+        UtilTools.error('vcu.error.reqProp', ['height | max-height'])
       }
       if (!this.showOverflow) {
-        UtilTools.warn('vxe.error.reqProp', ['show-overflow'])
+        UtilTools.warn('vcu.error.reqProp', ['show-overflow'])
       }
       if (this.spanMethod) {
-        UtilTools.warn('vxe.error.scrollErrProp', ['span-method'])
+        UtilTools.warn('vcu.error.scrollErrProp', ['span-method'])
       }
     }
     this.clearMergeCells()
@@ -392,7 +392,7 @@ const Methods = {
       }
       this.tableData = tableData.slice(0)
     } else {
-      UtilTools.warn('vxe.error.reqProp', ['keep-source'])
+      UtilTools.warn('vcu.error.reqProp', ['keep-source'])
     }
     return this.$nextTick()
   },
@@ -411,7 +411,7 @@ const Methods = {
               slots[name] = $scopedSlots[func]
             } else {
               slots[name] = null
-              UtilTools.error('vxe.error.notSlot', [func])
+              UtilTools.error('vcu.error.notSlot', [func])
             }
           }
         })
@@ -446,7 +446,7 @@ const Methods = {
     this.clearMergeFooterItems()
     this.handleTableData(true)
     if ((this.scrollXLoad || this.scrollYLoad) && this.expandColumn) {
-      UtilTools.warn('vxe.error.scrollErrProp', ['column.type=expand'])
+      UtilTools.warn('vcu.error.scrollErrProp', ['column.type=expand'])
     }
     this.$nextTick(() => {
       if (this.$toolbar) {
@@ -537,7 +537,7 @@ const Methods = {
       const rest = { column, colid, index, items, parent }
       if (property) {
         if (fullColumnFieldData[property]) {
-          UtilTools.warn('vxe.error.fieldRepet', ['field', property])
+          UtilTools.warn('vcu.error.fieldRepet', ['field', property])
         }
         fullColumnFieldData[property] = rest
       }
@@ -550,7 +550,7 @@ const Methods = {
         expandColumn = column
       }
       if (fullColumnIdData[colid]) {
-        UtilTools.error('vxe.error.fieldRepet', ['colId', colid])
+        UtilTools.error('vcu.error.fieldRepet', ['colId', colid])
       }
       fullColumnIdData[colid] = rest
       fullColumnMap.set(column, rest)
@@ -565,10 +565,10 @@ const Methods = {
       tableFullColumn.forEach(handleFunc)
     }
     if (expandColumn && hasFixed) {
-      UtilTools.warn('vxe.error.errConflicts', ['column.fixed', 'column.type=expand'])
+      UtilTools.warn('vcu.error.errConflicts', ['column.fixed', 'column.type=expand'])
     }
     if (expandColumn && this.mouseOpts.area) {
-      UtilTools.error('vxe.error.errConflicts', ['mouse-config.area', 'column.type=expand'])
+      UtilTools.error('vcu.error.errConflicts', ['mouse-config.area', 'column.type=expand'])
     }
     this.isGroup = isGroup
     this.treeNodeColumn = treeNodeColumn
@@ -727,7 +727,7 @@ const Methods = {
       }
       return this.reloadData(tableSourceData)
     } else {
-      UtilTools.warn('vxe.error.reqProp', ['keep-source'])
+      UtilTools.warn('vcu.error.reqProp', ['keep-source'])
     }
     return this.$nextTick()
   },
@@ -901,7 +901,7 @@ const Methods = {
             const { filterRender, property } = column
             let { filterMethod } = column
             const allFilterMethod = filterOpts.filterMethod
-            const compConf = filterRender ? VXETable.renderer.get(filterRender.name) : null
+            const compConf = filterRender ? VCUTable.renderer.get(filterRender.name) : null
             if (!filterMethod && compConf && compConf.renderFilter) {
               filterMethod = compConf.filterMethod
             }
@@ -1043,7 +1043,7 @@ const Methods = {
     if (customConfig && (isResizable || isVisible)) {
       const customMap = {}
       if (!id) {
-        UtilTools.error('vxe.error.reqProp', ['id'])
+        UtilTools.error('vcu.error.reqProp', ['id'])
         return
       }
       if (isResizable) {
@@ -1106,7 +1106,7 @@ const Methods = {
       const colHides = []
       const colShows = []
       if (!id) {
-        UtilTools.error('vxe.error.reqProp', ['id'])
+        UtilTools.error('vcu.error.reqProp', ['id'])
         return
       }
       XEUtils.eachTree(collectColumn, column => {
@@ -1137,7 +1137,7 @@ const Methods = {
       const columnWidthStorageMap = getCustomStorageMap(resizableStorageKey)
       let columnWidthStorage
       if (!id) {
-        UtilTools.error('vxe.error.reqProp', ['id'])
+        UtilTools.error('vcu.error.reqProp', ['id'])
         return
       }
       if (!isReset) {
@@ -1176,7 +1176,7 @@ const Methods = {
           column.fixed = parent.fixed
         }
         if (parent && column.fixed !== parent.fixed) {
-          UtilTools.error('vxe.error.groupFixed')
+          UtilTools.error('vcu.error.groupFixed')
         }
         if (isColGroup) {
           column.visible = !!XEUtils.findTree(column.children, subColumn => hasChildrenList(subColumn) ? null : subColumn.visible)
@@ -1221,20 +1221,20 @@ const Methods = {
     Object.assign(columnStore, { leftList, centerList, rightList })
     if (scrollXLoad && isGroup) {
       scrollXLoad = false
-      UtilTools.warn('vxe.error.scrollXNotGroup')
+      UtilTools.warn('vcu.error.scrollXNotGroup')
     }
     if (scrollXLoad) {
       if (this.showHeader && !this.showHeaderOverflow) {
-        UtilTools.warn('vxe.error.reqProp', ['show-header-overflow'])
+        UtilTools.warn('vcu.error.reqProp', ['show-header-overflow'])
       }
       if (this.showFooter && !this.showFooterOverflow) {
-        UtilTools.warn('vxe.error.reqProp', ['show-footer-overflow'])
+        UtilTools.warn('vcu.error.reqProp', ['show-footer-overflow'])
       }
       if (this.spanMethod) {
-        UtilTools.warn('vxe.error.scrollErrProp', ['span-method'])
+        UtilTools.warn('vcu.error.scrollErrProp', ['span-method'])
       }
       if (this.footerSpanMethod) {
-        UtilTools.warn('vxe.error.scrollErrProp', ['footer-span-method'])
+        UtilTools.warn('vcu.error.scrollErrProp', ['footer-span-method'])
       }
       const { visibleSize } = computeVirtualX(this)
       scrollXStore.startIndex = 0
@@ -1512,7 +1512,7 @@ const Methods = {
             tableElem.style.width = tWidth ? `${tWidth + scrollbarWidth}px` : ''
             // 修复 IE 中高度无法自适应问题
             if (browse.msie) {
-              XEUtils.arrayEach(tableElem.querySelectorAll('.vxe-resizable'), resizeElem => {
+              XEUtils.arrayEach(tableElem.querySelectorAll('.vcu-resizable'), resizeElem => {
                 resizeElem.style.height = `${resizeElem.parentNode.offsetHeight}px`
               })
             }
@@ -1654,7 +1654,7 @@ const Methods = {
               if (listElem) {
                 XEUtils.arrayEach(listElem.querySelectorAll(`.${column.id}`), elem => {
                   const colspan = parseInt(elem.getAttribute('colspan') || 1)
-                  const cellElem = elem.querySelector('.vxe-cell')
+                  const cellElem = elem.querySelector('.vcu-cell')
                   let colWidth = column.renderWidth
                   if (cellElem) {
                     if (colspan > 1) {
@@ -1699,7 +1699,7 @@ const Methods = {
     }
   },
   preventEvent(evnt, type, args, next, end) {
-    const evntList = VXETable.interceptor.get(type)
+    const evntList = VCUTable.interceptor.get(type)
     let rest
     if (!evntList.some(func => func(Object.assign({ $grid: this.$xegrid, $table: this, $event: evnt }, args)) === false)) {
       if (next) {
@@ -1719,12 +1719,12 @@ const Methods = {
     const { actived } = editStore
     const { ctxWrapper, filterWrapper, validTip } = $refs
     if (filterWrapper) {
-      if (getEventTargetNode(evnt, $el, 'vxe-cell--filter').flag) {
+      if (getEventTargetNode(evnt, $el, 'vcu-cell--filter').flag) {
         // 如果点击了筛选按钮
       } else if (getEventTargetNode(evnt, filterWrapper.$el).flag) {
         // 如果点击筛选容器
       } else {
-        if (!getEventTargetNode(evnt, document.body, 'vxe-table--ignore-clear').flag) {
+        if (!getEventTargetNode(evnt, document.body, 'vcu-table--ignore-clear').flag) {
           this.preventEvent(evnt, 'event.clearFilter', filterStore.args, this.closeFilter)
         }
       }
@@ -1736,13 +1736,13 @@ const Methods = {
           // 如果是激活状态，且点击了校验提示框
         } else if (!this.lastCallTime || this.lastCallTime + 50 < Date.now()) {
           // 如果是激活状态，且点击了下拉选项
-          if (!getEventTargetNode(evnt, document.body, 'vxe-table--ignore-clear').flag) {
+          if (!getEventTargetNode(evnt, document.body, 'vcu-table--ignore-clear').flag) {
             // 如果手动调用了激活单元格，避免触发源被移除后导致重复关闭
             this.preventEvent(evnt, 'event.clearActived', actived.args, () => {
               let isClear
 
               if (editOpts.mode === 'row') {
-                const rowNode = getEventTargetNode(evnt, $el, 'vxe-body--row')
+                const rowNode = getEventTargetNode(evnt, $el, 'vcu-body--row')
                 // row 方式，如果点击了不同行
                 isClear = rowNode.flag ? getRowNode(rowNode.targetElem).item !== actived.args.row : false
               } else {
@@ -1752,16 +1752,16 @@ const Methods = {
 
               // 如果点击表头行，则清除激活状态
               if (!isClear) {
-                isClear = getEventTargetNode(evnt, $el, 'vxe-header--row').flag
+                isClear = getEventTargetNode(evnt, $el, 'vcu-header--row').flag
               }
               // 如果点击表尾行，则清除激活状态
               if (!isClear) {
-                isClear = getEventTargetNode(evnt, $el, 'vxe-footer--row').flag
+                isClear = getEventTargetNode(evnt, $el, 'vcu-footer--row').flag
               }
               // 如果固定了高度且点击了行之外的空白处，则清除激活状态
               if (!isClear && this.height && !this.overflowY) {
                 const bodyWrapperElem = evnt.target
-                if (hasClass(bodyWrapperElem, 'vxe-table--body-wrapper')) {
+                if (hasClass(bodyWrapperElem, 'vcu-table--body-wrapper')) {
                   isClear = evnt.offsetY < bodyWrapperElem.clientHeight
                 }
               }
@@ -1786,7 +1786,7 @@ const Methods = {
     } else if (mouseConfig) {
       if (!getEventTargetNode(evnt, $el).flag && (!ctxWrapper || !getEventTargetNode(evnt, ctxWrapper.$el).flag)) {
         this.clearSelected()
-        if (!getEventTargetNode(evnt, document.body, 'vxe-table--ignore-areas-clear').flag) {
+        if (!getEventTargetNode(evnt, document.body, 'vcu-table--ignore-areas-clear').flag) {
           this.preventEvent(evnt, 'event.clearAreas', {}, () => {
             this.clearCellAreas()
             this.clearCopyCellArea()
@@ -2088,12 +2088,12 @@ const Methods = {
       let overflowElem
       let tipElem
       if (column.treeNode) {
-        overflowElem = cell.querySelector('.vxe-tree-cell')
+        overflowElem = cell.querySelector('.vcu-tree-cell')
         if (column.type === 'html') {
-          tipElem = cell.querySelector('.vxe-cell--html')
+          tipElem = cell.querySelector('.vcu-cell--html')
         }
       } else {
-        tipElem = cell.querySelector(column.type === 'html' ? '.vxe-cell--html' : '.vxe-cell--label')
+        tipElem = cell.querySelector(column.type === 'html' ? '.vcu-cell--html' : '.vcu-cell--label')
       }
       this.handleTooltip(evnt, cell, overflowElem || cell.children[0], tipElem, params)
     }
@@ -2107,7 +2107,7 @@ const Methods = {
     const cell = evnt.currentTarget
     this.handleTargetEnterEvent()
     if (tooltipStore.column !== column || !tooltipStore.visible) {
-      this.handleTooltip(evnt, cell, cell.querySelector('.vxe-cell--item') || cell.children[0], null, params)
+      this.handleTooltip(evnt, cell, cell.querySelector('.vcu-cell--item') || cell.children[0], null, params)
     }
   },
   /**
@@ -2702,7 +2702,7 @@ const Methods = {
     this.hoverRow = row
   },
   clearHoverRow() {
-    XEUtils.arrayEach(this.$el.querySelectorAll('.vxe-body--row.row--hover'), elem => removeClass(elem, 'row--hover'))
+    XEUtils.arrayEach(this.$el.querySelectorAll('.vcu-body--row.row--hover'), elem => removeClass(elem, 'row--hover'))
     this.hoverRow = null
   },
   triggerHeaderCellClickEvent(evnt, params) {
@@ -2710,8 +2710,8 @@ const Methods = {
     const { column } = params
     const cell = evnt.currentTarget
     const triggerResizable = _lastResizeTime && _lastResizeTime > Date.now() - 300
-    const triggerSort = getEventTargetNode(evnt, cell, 'vxe-cell--sort').flag
-    const triggerFilter = getEventTargetNode(evnt, cell, 'vxe-cell--filter').flag
+    const triggerSort = getEventTargetNode(evnt, cell, 'vcu-cell--sort').flag
+    const triggerFilter = getEventTargetNode(evnt, cell, 'vcu-cell--filter').flag
     if (sortOpts.trigger === 'cell' && !(triggerResizable || triggerSort || triggerFilter)) {
       this.triggerSortEvent(evnt, column, getNextSortOrder(this, column))
     }
@@ -2745,7 +2745,7 @@ const Methods = {
     return this.$nextTick()
   },
   checkValidate(type) {
-    if (VXETable._valid) {
+    if (VCUTable._valid) {
       return this.triggerValidate(type)
     }
     return this.$nextTick()
@@ -2777,10 +2777,10 @@ const Methods = {
     const isCheckboxType = type === 'checkbox'
     const isExpandType = type === 'expand'
     const cell = evnt.currentTarget
-    const triggerRadio = isRadioType && getEventTargetNode(evnt, cell, 'vxe-cell--radio').flag
-    const triggerCheckbox = isCheckboxType && getEventTargetNode(evnt, cell, 'vxe-cell--checkbox').flag
-    const triggerTreeNode = treeNode && getEventTargetNode(evnt, cell, 'vxe-tree--btn-wrapper').flag
-    const triggerExpandNode = isExpandType && getEventTargetNode(evnt, cell, 'vxe-table--expanded').flag
+    const triggerRadio = isRadioType && getEventTargetNode(evnt, cell, 'vcu-cell--radio').flag
+    const triggerCheckbox = isCheckboxType && getEventTargetNode(evnt, cell, 'vcu-cell--checkbox').flag
+    const triggerTreeNode = treeNode && getEventTargetNode(evnt, cell, 'vcu-tree--btn-wrapper').flag
+    const triggerExpandNode = isExpandType && getEventTargetNode(evnt, cell, 'vcu-table--expanded').flag
     params = Object.assign({ cell, triggerRadio, triggerCheckbox, triggerTreeNode, triggerExpandNode }, params)
     // 如果是展开行
     if (!triggerExpandNode && (expandOpts.trigger === 'row' || (isExpandType && expandOpts.trigger === 'cell'))) {
@@ -3467,9 +3467,9 @@ const Methods = {
     if (tableBodyElem) {
       const tableHeaderElem = tableHeader ? tableHeader.$el : null
       const tableFooterElem = tableFooter ? tableFooter.$el : null
-      const headerElem = tableHeaderElem ? tableHeaderElem.querySelector('.vxe-table--header') : null
-      const bodyElem = tableBodyElem.querySelector('.vxe-table--body')
-      const footerElem = tableFooterElem ? tableFooterElem.querySelector('.vxe-table--footer') : null
+      const headerElem = tableHeaderElem ? tableHeaderElem.querySelector('.vcu-table--header') : null
+      const bodyElem = tableBodyElem.querySelector('.vcu-table--body')
+      const footerElem = tableFooterElem ? tableFooterElem.querySelector('.vcu-table--footer') : null
       const leftSpaceWidth = visibleColumn.slice(0, scrollXStore.startIndex).reduce((previous, column) => previous + column.renderWidth, 0)
       let marginLeft = ''
       if (scrollXLoad) {
@@ -3677,7 +3677,7 @@ const Methods = {
    */
   setMergeCells(merges) {
     if (this.spanMethod) {
-      UtilTools.error('vxe.error.errConflicts', ['merge-cells', 'span-method'])
+      UtilTools.error('vcu.error.errConflicts', ['merge-cells', 'span-method'])
     }
     setMerges(this, merges, this.mergeList, this.afterFullData)
     return this.$nextTick().then(() => this.updateCellAreas())
@@ -3688,7 +3688,7 @@ const Methods = {
    */
   removeMergeCells(merges) {
     if (this.spanMethod) {
-      UtilTools.error('vxe.error.errConflicts', ['merge-cells', 'span-method'])
+      UtilTools.error('vcu.error.errConflicts', ['merge-cells', 'span-method'])
     }
     const rest = removeMerges(this, merges, this.mergeList, this.afterFullData)
     return this.$nextTick().then(() => {
@@ -3714,14 +3714,14 @@ const Methods = {
   },
   setMergeFooterItems(merges) {
     if (this.footerSpanMethod) {
-      UtilTools.error('vxe.error.errConflicts', ['merge-footer-items', 'footer-span-method'])
+      UtilTools.error('vcu.error.errConflicts', ['merge-footer-items', 'footer-span-method'])
     }
     setMerges(this, merges, this.mergeFooterList, null)
     return this.$nextTick().then(() => this.updateCellAreas())
   },
   removeMergeFooterItems(merges) {
     if (this.footerSpanMethod) {
-      UtilTools.error('vxe.error.errConflicts', ['merge-footer-items', 'footer-span-method'])
+      UtilTools.error('vcu.error.errConflicts', ['merge-footer-items', 'footer-span-method'])
     }
     const rest = removeMerges(this, merges, this.mergeFooterList, null)
     return this.$nextTick().then(() => {
@@ -3776,7 +3776,7 @@ const Methods = {
     const rowid = getRowid(this, row)
     const bodyElem = $refs[`${column.fixed || 'table'}Body`] || $refs.tableBody
     if (bodyElem && bodyElem.$el) {
-      return bodyElem.$el.querySelector(`.vxe-body--row[data-rowid="${rowid}"] .${column.id}`)
+      return bodyElem.$el.querySelector(`.vcu-body--row[data-rowid="${rowid}"] .${column.id}`)
     }
     return null
   },
@@ -3786,7 +3786,7 @@ const Methods = {
       $toolbar.syncUpdate({ collectColumn: this.collectColumn, $table: this })
       this.$toolbar = $toolbar
     } else {
-      UtilTools.error('vxe.error.barUnableLink')
+      UtilTools.error('vcu.error.barUnableLink')
     }
   }
   /*************************

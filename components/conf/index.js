@@ -1,4 +1,4 @@
-const iconPrefix = 'vxe-icon--'
+const iconPrefix = 'vcu-icon--'
 const GlobalConfig = {
   size: null, // 全局尺寸
   zIndex: 100, // 全局 zIndex 起始值，如果项目的的 z-index 样式值过大时就需要跟随设置更大，避免被遮挡
@@ -276,7 +276,7 @@ const GlobalConfig = {
     showTitleOverflow: true,
     animat: true,
     // storage: false,
-    storageKey: 'VXE_MODAL_POSITION'
+    storageKey: 'VCU_MODAL_POSITION'
   },
   list: {
     // size: null,

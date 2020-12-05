@@ -2,13 +2,13 @@
   <a-card title="手动触发">
     <div class="mb-30">
       <div class="mb-5"></div>
-      <vxe-table
+      <vcu-table
         ref="xTable"
         :data="tableData"
         :edit-config="{ trigger: 'manual', mode: 'row' }"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name" :edit-render="{}">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name" :edit-render="{}">
           <template v-slot:edit="scope">
             <a-input
               size="small"
@@ -16,11 +16,11 @@
               @input="$refs.xTable.updateStatus(scope)"
             ></a-input>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="Address"></vxe-table-column>
-        <vxe-table-column title="Action">
+        </vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="Address"></vcu-table-column>
+        <vcu-table-column title="Action">
           <template v-slot="{ row }">
             <template v-if="$refs.xTable.isActiveByRow(row)">
               <a-button-group size="small">
@@ -32,8 +32,8 @@
               <a-button size="small" @click="editRowEvent(row)">编辑</a-button>
             </template>
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

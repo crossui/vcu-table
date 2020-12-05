@@ -1,10 +1,10 @@
-import VxeTooltip from './src/tooltip'
-import VXETable from '../v-x-e-table'
+import VcuTooltip from './src/tooltip'
+import VCUTable from '../v-c-u-table'
 
-VxeTooltip.install = function (Vue) {
-  VXETable._tooltip = 1
-  Vue.component(VxeTooltip.name, VxeTooltip)
+VcuTooltip.install = function (Vue) {
+  VCUTable._tooltip = 1
+  Vue.component(VcuTooltip.name, VcuTooltip)
 }
 
-export const Tooltip = VxeTooltip
-export default VxeTooltip
+export const Tooltip = VcuTooltip
+export default VcuTooltip

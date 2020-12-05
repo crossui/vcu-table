@@ -1,6 +1,6 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
 const cellType = 'body'
@@ -51,10 +51,10 @@ function renderLine(h, _vm, $xetable, rowLevel, items, params) {
   if (treeConfig && treeNode && treeOpts.line) {
     return [
       h('div', {
-        class: 'vxe-tree--line-wrapper'
+        class: 'vcu-tree--line-wrapper'
       }, [
         h('div', {
-          class: 'vxe-tree--line',
+          class: 'vcu-tree--line',
           style: {
             height: `${calcTreeLine(params, items)}px`,
             left: `${(rowLevel * treeOpts.indent) + (rowLevel ? 2 - getOffsetSize($xetable) : 0) + 16}px`
@@ -236,7 +236,7 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
   if (allColumnOverflow && fixedHiddenColumn) {
     tdVNs.push(
       h('div', {
-        class: ['vxe-cell', {
+        class: ['vcu-cell', {
           'c--title': showTitle,
           'c--tooltip': showTooltip,
           'c--ellipsis': showEllipsis
@@ -248,7 +248,7 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
     tdVNs.push(
       ...renderLine(h, _vm, $xetable, rowLevel, items, params),
       h('div', {
-        class: ['vxe-cell', {
+        class: ['vcu-cell', {
           'c--title': showTitle,
           'c--tooltip': showTooltip,
           'c--ellipsis': showEllipsis
@@ -261,20 +261,20 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
     if (hasDefaultTip && hasValidError) {
       tdVNs.push(
         h('div', {
-          class: 'vxe-cell--valid',
+          class: 'vcu-cell--valid',
           style: validStore.rule && validStore.rule.maxWidth ? {
             width: `${validStore.rule.maxWidth}px`
           } : null
         }, [
           h('span', {
-            class: 'vxe-cell--valid-msg'
+            class: 'vcu-cell--valid-msg'
           }, validStore.content)
         ])
       )
     }
   }
   return h('td', {
-    class: ['vxe-body--column', column.id, {
+    class: ['vcu-body--column', column.id, {
       [`col--${cellAlign}`]: cellAlign,
       [`col--${type}`]: type,
       'col--last': $columnIndex === columns.length - 1,
@@ -343,7 +343,7 @@ function renderRows(h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tabl
     const params = { $table: $xetable, $seq, seq, rowid, fixed: fixedType, type: cellType, level: rowLevel, row, rowIndex, $rowIndex }
     rows.push(
       h('tr', {
-        class: ['vxe-body--row', {
+        class: ['vcu-body--row', {
           'row--stripe': stripe && ($xetable._getRowIndex(row) + 1) % 2 === 0,
           'is--new': editStore.insertList.indexOf(row) > -1,
           'row--radio': radioOpts.highlight && $xetable.selectRow === row,
@@ -372,13 +372,13 @@ function renderRows(h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tabl
       const expandParams = { $table: $xetable, $seq, seq, column: expandColumn, fixed: fixedType, type: cellType, level: rowLevel, row, rowIndex, $rowIndex }
       rows.push(
         h('tr', {
-          class: 'vxe-body--expanded-row',
+          class: 'vcu-body--expanded-row',
           key: `expand_${rowid}`,
           style: rowStyle ? (XEUtils.isFunction(rowStyle) ? rowStyle(expandParams) : rowStyle) : null,
           on: trOn
         }, [
           h('td', {
-            class: ['vxe-body--expanded-column', {
+            class: ['vcu-body--expanded-column', {
               'fixed--hidden': fixedType,
               'col--ellipsis': hasEllipsis
             }],
@@ -387,7 +387,7 @@ function renderRows(h, _vm, $xetable, $seq, rowLevel, fixedType, tableData, tabl
             }
           }, [
             h('div', {
-              class: 'vxe-body--expanded-cell',
+              class: 'vcu-body--expanded-cell',
               style: cellStyle
             }, [
               expandColumn.renderData(h, expandParams)
@@ -437,7 +437,7 @@ function syncBodyScroll(scrollTop, elem1, elem2) {
 }
 
 export default {
-  name: 'VxeTableBody',
+  name: 'VcuTableBody',
   props: {
     tableData: Array,
     tableColumn: Array,
@@ -480,37 +480,37 @@ export default {
     if ($scopedSlots.empty) {
       emptyContent = $scopedSlots.empty.call(this, { $table: $xetable }, h)
     } else {
-      const compConf = emptyRender ? VXETable.renderer.get(emptyOpts.name) : null
+      const compConf = emptyRender ? VCUTable.renderer.get(emptyOpts.name) : null
       if (compConf && compConf.renderEmpty) {
         emptyContent = compConf.renderEmpty.call(this, h, emptyOpts, { $table: $xetable }, { $table: $xetable })
       } else {
-        //emptyContent = $xetable.emptyText || GlobalConfig.i18n('vxe.table.emptyText')
+        //emptyContent = $xetable.emptyText || GlobalConfig.i18n('vcu.table.emptyText')
         emptyContent = [
           h('div', {
-            class: 'vxe-table--empty-img'
+            class: 'vcu-table--empty-img'
           }),
           h('div', {
-            class: 'vxe-table--empty-text'
-          }, this.emptyText || GlobalConfig.i18n('vxe.table.emptyText'))
+            class: 'vcu-table--empty-text'
+          }, this.emptyText || GlobalConfig.i18n('vcu.table.emptyText'))
         ]
       }
     }
     return h('div', {
-      class: ['vxe-table--body-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
+      class: ['vcu-table--body-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
       attrs: {
         'data-tid': tId
       }
     }, [
       fixedType ? _e() : h('div', {
-        class: 'vxe-body--x-space',
+        class: 'vcu-body--x-space',
         ref: 'xSpace'
       }),
       h('div', {
-        class: 'vxe-body--y-space',
+        class: 'vcu-body--y-space',
         ref: 'ySpace'
       }),
       h('table', {
-        class: 'vxe-table--body',
+        class: 'vcu-table--body',
         attrs: {
           'data-tid': tId,
           cellspacing: 0,
@@ -540,16 +540,16 @@ export default {
         }, renderRows(h, this, $xetable, '', 0, fixedType, tableData, tableColumn))
       ]),
       h('div', {
-        staticClass: 'vxe-table--checkbox-range'
+        staticClass: 'vcu-table--checkbox-range'
       }),
       mouseConfig && mouseOpts.area ? h('div', {
-        staticClass: 'vxe-table--cell-area'
+        staticClass: 'vcu-table--cell-area'
       }, [
         h('span', {
-          staticClass: 'vxe-table--cell-main-area'
+          staticClass: 'vcu-table--cell-main-area'
         }, mouseOpts.extension ? [
           h('span', {
-            staticClass: 'vxe-table--cell-main-area-btn',
+            staticClass: 'vcu-table--cell-main-area-btn',
             on: {
               mousedown(evnt) {
                 $xetable.triggerCellExtendMousedownEvent(evnt, { $table: $xetable, fixed: fixedType, type: cellType })
@@ -558,24 +558,24 @@ export default {
           })
         ] : null),
         h('span', {
-          staticClass: 'vxe-table--cell-copy-area'
+          staticClass: 'vcu-table--cell-copy-area'
         }),
         h('span', {
-          staticClass: 'vxe-table--cell-extend-area'
+          staticClass: 'vcu-table--cell-extend-area'
         }),
         h('span', {
-          staticClass: 'vxe-table--cell-multi-area'
+          staticClass: 'vcu-table--cell-multi-area'
         }),
         h('span', {
-          staticClass: 'vxe-table--cell-active-area'
+          staticClass: 'vcu-table--cell-active-area'
         })
       ]) : null,
       !fixedType ? h('div', {
-        class: 'vxe-table--empty-block',
+        class: 'vcu-table--empty-block',
         ref: 'emptyBlock'
       }, [
         h('div', {
-          class: 'vxe-table--empty-content'
+          class: 'vcu-table--empty-content'
         }, emptyContent)
       ]) : null
     ])

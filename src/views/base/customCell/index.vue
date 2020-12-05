@@ -44,16 +44,16 @@
         <a-button @click="$refs.xTable1.resetColumn()">重置</a-button>
       </a-button-group>
 
-      <vxe-table ref="xTable1" :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table ref="xTable1" :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           :visible="false"
-        ></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -74,12 +74,12 @@
           >
         </template>
       </div>
-      <vxe-table ref="xTable2" :data="tableData">
-        <vxe-table-column type="seq" width="60" title="Seq"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+      <vcu-table ref="xTable2" :data="tableData">
+        <vcu-table-column type="seq" width="60" title="Seq"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -95,11 +95,11 @@
           }}</a-checkbox>
         </template>
       </div>
-      <vxe-table
+      <vcu-table
         ref="xTable3"
         :data="tableData"
         :columns="tableColumn1"
-      ></vxe-table>
+      ></vcu-table>
     </div>
 
     <div class="mb-30">
@@ -137,12 +137,12 @@
           </template>
         </template>
       </div>
-      <vxe-table
+      <vcu-table
         ref="xTable4"
         border
         :data="tableDataGroup"
         :columns="tableColumnGroup"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

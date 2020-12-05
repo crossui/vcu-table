@@ -15,14 +15,14 @@
         <a-button @click="clearRadioRowEevnt">取消选中</a-button>
         <a-button @click="getRadioEvent1">获取选中</a-button>
       </a-button-group>
-      <vxe-table
+      <vcu-table
         ref="xTable1"
         :data="tableData"
         :radio-config="{ highlight: true }"
         @radio-change="radioChangeEvent"
         border
       >
-        <vxe-table-column type="radio" width="60" align="center">
+        <vcu-table-column type="radio" width="60" align="center">
           <template v-slot:header>
             <a-button
               type="link"
@@ -32,12 +32,12 @@
               >取消</a-button
             >
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -48,22 +48,22 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable2"
         :data="tableData"
         :radio-config="{ checkMethod: checkRadioMethod }"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="radio"
           width="60"
           align="center"
-        ></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -74,21 +74,21 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable3"
         :data="tableData"
         :radio-config="{ labelField: 'name' }"
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="radio"
           field="name"
           title="name"
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -99,7 +99,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable4"
         :data="tableData"
         :radio-config="{ labelField: 'name', trigger: 'row' }"
@@ -107,15 +107,15 @@
         highlight-current-row
         border
       >
-        <vxe-table-column
+        <vcu-table-column
           type="radio"
           field="name"
           title="name"
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

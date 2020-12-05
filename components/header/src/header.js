@@ -5,7 +5,7 @@ import { convertToRows } from './util'
 const cellType = 'header'
 
 export default {
-  name: 'VxeTableHeader',
+  name: 'VcuTableHeader',
   props: {
     tableData: Array,
     tableColumn: Array,
@@ -49,17 +49,17 @@ export default {
       }
     }
     return h('div', {
-      class: ['vxe-table--header-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
+      class: ['vcu-table--header-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
       attrs: {
         'data-tid': tId
       }
     }, [
       fixedType ? _e() : h('div', {
-        class: 'vxe-body--x-space',
+        class: 'vcu-body--x-space',
         ref: 'xSpace'
       }),
       h('table', {
-        class: 'vxe-table--header',
+        class: 'vcu-table--header',
         attrs: {
           'data-tid': tId,
           cellspacing: 0,
@@ -94,7 +94,7 @@ export default {
           ref: 'thead'
         }, headerColumn.map((cols, $rowIndex) => {
           return h('tr', {
-            class: ['vxe-header--row', headerRowClassName ? XEUtils.isFunction(headerRowClassName) ? headerRowClassName({ $table: $xetable, $rowIndex, fixed: fixedType, type: cellType }) : headerRowClassName : ''],
+            class: ['vcu-header--row', headerRowClassName ? XEUtils.isFunction(headerRowClassName) ? headerRowClassName({ $table: $xetable, $rowIndex, fixed: fixedType, type: cellType }) : headerRowClassName : ''],
             style: headerRowStyle ? (XEUtils.isFunction(headerRowStyle) ? headerRowStyle({ $table: $xetable, $rowIndex, fixed: fixedType, type: cellType }) : headerRowStyle) : null
           }, cols.map((column, $columnIndex) => {
             const { type, showHeaderOverflow, headerAlign, align, headerClassName } = column
@@ -127,7 +127,7 @@ export default {
               thOns.mousedown = evnt => $xetable.triggerHeaderCellMousedownEvent(evnt, params)
             }
             return h('th', {
-              class: ['vxe-header--column', column.id, {
+              class: ['vcu-header--column', column.id, {
                 [`col--${headAlign}`]: headAlign,
                 [`col--${type}`]: type,
                 'col--last': $columnIndex === cols.length - 1,
@@ -150,7 +150,7 @@ export default {
               key: columnKey || isColGroup ? column.id : $columnIndex
             }, [
               h('div', {
-                class: ['vxe-cell', {
+                class: ['vcu-cell', {
                   'c--title': showTitle,
                   'c--tooltip': showTooltip,
                   'c--ellipsis': showEllipsis
@@ -160,7 +160,7 @@ export default {
                * 列宽拖动
                */
               !fixedHiddenColumn && !isColGroup && (XEUtils.isBoolean(column.resizable) ? column.resizable : resizable) ? h('div', {
-                class: ['vxe-resizable', {
+                class: ['vcu-resizable', {
                   'is--line': !border || border === 'none'
                 }],
                 on: {
@@ -179,7 +179,7 @@ export default {
        * 其他
        */
       h('div', {
-        class: 'vxe-table--header-border-line',
+        class: 'vcu-table--header-border-line',
         ref: 'repair'
       })
     ])

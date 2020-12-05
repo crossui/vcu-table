@@ -1,17 +1,17 @@
 /**Variable**/
 
-.vxe-table {
-  .vxe-table--header-wrapper {
-    .vxe-table--header-border-line {
+.vcu-table {
+  .vcu-table--header-wrapper {
+    .vcu-table--header-border-line {
       position: absolute;
       left: 0;
       bottom: 0;
       height: 0;
-      border-bottom: 1px solid $vxe-table-border-color;
+      border-bottom: 1px solid @vcu-table-border-color;
     }
   }
   /*排序*/
-  .vxe-cell--sort {
+  .vcu-cell--sort {
     width: 1.5em;
     height: 1.5em;
     vertical-align: middle;
@@ -19,57 +19,57 @@
     display: inline-block;
     position: relative;
   }
-  .vxe-sort--asc-btn,
-  .vxe-sort--desc-btn {
+  .vcu-sort--asc-btn,
+  .vcu-sort--desc-btn {
     position: absolute;
     left: 0.35em;
-    color: $vxe-table-column-icon-border-color;
+    color: @vcu-table-column-icon-border-color;
     width: 1em;
     text-align: center;
     cursor: pointer;
     &:hover {
-      color: $vxe-table-font-color;
+      color: @vcu-table-font-color;
     }
     &.sort--active {
-      color: $vxe-primary-color;
+      color: @vcu-primary-color;
     }
   }
-  .vxe-sort--asc-btn {
+  .vcu-sort--asc-btn {
     top: -0.04em;
   }
-  .vxe-sort--desc-btn {
+  .vcu-sort--desc-btn {
     bottom: -0.04em;
   }
 }
 
-.vxe-header--column {
+.vcu-header--column {
   position: relative;
-  font-weight: $vxe-table-header-font-weight;
+  font-weight: @vcu-table-header-font-weight;
   /* user-select: none; */
   &.col--ellipsis {
-    & > .vxe-cell {
+    & > .vcu-cell {
       display: flex;
       align-items: center;
-      .vxe-cell--title {
+      .vcu-cell--title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
       & > i,
       & > span {
-        &:not(.vxe-cell--title) {
+        &:not(.vcu-cell--title) {
           flex-shrink: 0;
         }
       }
     }
   }
-  .vxe-cell--required-icon {
+  .vcu-cell--required-icon {
     display: inline-block;
-    color: $vxe-table-validate-error-color;
+    color: @vcu-table-validate-error-color;
     width: 0.8em;
     height: 1em;
     line-height: 1em;
-    font-family: $vxe-icon-font-family;
+    font-family: @vcu-icon-font-family;
     font-weight: normal;
     position: relative;
     &:before {
@@ -79,26 +79,26 @@
       top: 0.2em;
     }
   }
-  .vxe-cell--required-icon,
-  .vxe-cell--edit-icon,
-  .vxe-cell-help-icon,
-  .vxe-cell--title {
+  .vcu-cell--required-icon,
+  .vcu-cell--edit-icon,
+  .vcu-cell-help-icon,
+  .vcu-cell--title {
     vertical-align: middle;
   }
-  .vxe-cell--required-icon {
+  .vcu-cell--required-icon {
     margin-right: 0.1em;
   }
-  .vxe-cell--edit-icon,
-  .vxe-cell-help-icon {
+  .vcu-cell--edit-icon,
+  .vcu-cell-help-icon {
     margin-right: 0.2em;
   }
-  .vxe-cell-help-icon {
+  .vcu-cell-help-icon {
     cursor: help;
   }
-  .vxe-cell--title {
+  .vcu-cell--title {
     line-height: 1.5;
   }
-  .vxe-resizable {
+  .vcu-resizable {
     position: absolute;
     right: -7px;
     bottom: 0;
@@ -117,7 +117,7 @@
       &:before {
         width: 1px;
         height: 50%;
-        background-color: $vxe-table-resizable-color;
+        background-color: @vcu-table-resizable-color;
       }
       &:after {
         width: 0;
@@ -127,9 +127,9 @@
   }
 }
 
-.vxe-table--fixed-right-wrapper {
-  .vxe-header--column {
-    .vxe-resizable {
+.vcu-table--fixed-right-wrapper {
+  .vcu-header--column {
+    .vcu-resizable {
       right: auto;
       left: -7px;
     }

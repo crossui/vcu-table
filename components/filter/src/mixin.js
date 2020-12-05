@@ -1,6 +1,6 @@
 import XEUtils from 'xe-utils/ctor'
 import { UtilTools, DomTools } from '../../tools'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 
 export default {
   methods: {
@@ -145,7 +145,7 @@ export default {
             item.checked = false
             item.data = XEUtils.clone(item.resetValue, true)
           })
-          const compConf = filterRender ? VXETable.renderer.get(filterRender.name) : null
+          const compConf = filterRender ? VCUTable.renderer.get(filterRender.name) : null
           if (compConf && compConf.filterResetMethod) {
             compConf.filterResetMethod({ options: filters, column, $table: this })
           }

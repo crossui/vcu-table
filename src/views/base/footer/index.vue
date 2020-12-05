@@ -14,17 +14,17 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         :footer-method="footerMethod"
         :data="tableData"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -38,17 +38,17 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         :footer-method="footerMethod1"
         :data="tableData"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -70,7 +70,7 @@
         "
         >显示/隐藏表尾</a-button
       >
-      <vxe-table
+      <vcu-table
         border
         :show-footer="showFooter"
         :footer-method="footerMethod1"
@@ -78,7 +78,7 @@
         :data="tableData"
         :footer-cell-class-name="footerCellClassName"
       >
-      </vxe-table>
+      </vcu-table>
     </div>
   </a-card>
 </template>

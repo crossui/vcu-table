@@ -13,7 +13,7 @@
         </div>
       </div>
     </a-alert>
-    <vxe-table
+    <vcu-table
       border
       :loading="loading"
       :columns="tableColumn"
@@ -31,7 +31,7 @@
           @change="onPageChange"
         />
       </template>
-    </vxe-table>
+    </vcu-table>
   </a-card>
 </template>
 <script>

@@ -13,13 +13,13 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable"
         :data="tableData"
         :edit-config="{ trigger: 'dblclick', mode: 'row' }"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           :edit-render="{ autofocus: '.my-input' }"
@@ -32,8 +32,8 @@
               class="my-input"
             ></a-input>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="sex" title="Sex" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column field="sex" title="Sex" :edit-render="{}">
           <template v-slot:edit="scope">
             <a-select
               size="small"
@@ -52,8 +52,8 @@
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
           }}</template>
-        </vxe-table-column>
-        <vxe-table-column field="age" title="Age" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column field="age" title="Age" :edit-render="{}">
           <template v-slot:edit="{ row }">
             <a-input-number
               size="small"
@@ -63,8 +63,8 @@
               style="width: 100%"
             ></a-input-number>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="address" title="Address" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column field="address" title="Address" :edit-render="{}">
           <template v-slot:edit="scope">
             <autoTypewrit
               size="small"
@@ -74,8 +74,8 @@
               backfillKey="inHospDeptName"
             ></autoTypewrit>
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

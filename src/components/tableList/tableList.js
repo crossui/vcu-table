@@ -1,4 +1,4 @@
-import './index.scss';
+import './index.less';
 import request from "@/utils/request.js";
 
 import columnSelection from "./columnSelection.js";

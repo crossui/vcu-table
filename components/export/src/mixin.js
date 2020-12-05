@@ -1,12 +1,12 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
 const { formatText } = UtilTools
 
 // 默认导出或打印的 HTML 样式
-const defaultHtmlStyle = 'body{margin:0}body *{-webkit-box-sizing:border-box;box-sizing:border-box}.vxe-table{border:0;border-collapse:separate;text-align:left;font-size:14px;border-spacing:0}.vxe-table:not(.is--print){table-layout:fixed}.vxe-table.is--print{width:100%}.vxe-table.border--default,.vxe-table.border--full,.vxe-table.border--outer{border-top:1px solid #e8eaec}.vxe-table.border--default,.vxe-table.border--full,.vxe-table.border--outer{border-left:1px solid #e8eaec}.vxe-table.border--outer,.vxe-table.border--default th,.vxe-table.border--default td,.vxe-table.border--full th,.vxe-table.border--full td,.vxe-table.border--outer th,.vxe-table.border--inner th,.vxe-table.border--inner td{border-bottom:1px solid #e8eaec}.vxe-table.border--default,.vxe-table.border--outer,.vxe-table.border--full th,.vxe-table.border--full td{border-right:1px solid #e8eaec}.vxe-table.border--default th,.vxe-table.border--full th,.vxe-table.border--outer th{background-color:#f8f8f9}.vxe-table td>div,.vxe-table th>div{padding:.5em .4em}.col--center{text-align:center}.col--right{text-align:right}.vxe-table:not(.is--print) .col--ellipsis>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}.vxe-table--tree-node{text-align:left}.vxe-table--tree-node-wrapper{position:relative}.vxe-table--tree-icon-wrapper{position:absolute;top:50%;width:1em;height:1em;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer}.vxe-table--tree-icon{position:absolute;left:0;top:.3em;width:0;height:0;border-style:solid;border-width:.5em;border-top-color:#939599;border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent}.vxe-table--tree-cell{display:block;padding-left:1.5em}.vxe-table input[type="checkbox"]{margin:0}.vxe-table input[type="checkbox"],.vxe-table input[type="radio"],.vxe-table input[type="checkbox"]+span,.vxe-table input[type="radio"]+span{vertical-align:middle;padding-left: 0.4em}'
+const defaultHtmlStyle = 'body{margin:0}body *{-webkit-box-sizing:border-box;box-sizing:border-box}.vcu-table{border:0;border-collapse:separate;text-align:left;font-size:14px;border-spacing:0}.vcu-table:not(.is--print){table-layout:fixed}.vcu-table.is--print{width:100%}.vcu-table.border--default,.vcu-table.border--full,.vcu-table.border--outer{border-top:1px solid #e8eaec}.vcu-table.border--default,.vcu-table.border--full,.vcu-table.border--outer{border-left:1px solid #e8eaec}.vcu-table.border--outer,.vcu-table.border--default th,.vcu-table.border--default td,.vcu-table.border--full th,.vcu-table.border--full td,.vcu-table.border--outer th,.vcu-table.border--inner th,.vcu-table.border--inner td{border-bottom:1px solid #e8eaec}.vcu-table.border--default,.vcu-table.border--outer,.vcu-table.border--full th,.vcu-table.border--full td{border-right:1px solid #e8eaec}.vcu-table.border--default th,.vcu-table.border--full th,.vcu-table.border--outer th{background-color:#f8f8f9}.vcu-table td>div,.vcu-table th>div{padding:.5em .4em}.col--center{text-align:center}.col--right{text-align:right}.vcu-table:not(.is--print) .col--ellipsis>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}.vcu-table--tree-node{text-align:left}.vcu-table--tree-node-wrapper{position:relative}.vcu-table--tree-icon-wrapper{position:absolute;top:50%;width:1em;height:1em;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer}.vcu-table--tree-icon{position:absolute;left:0;top:.3em;width:0;height:0;border-style:solid;border-width:.5em;border-top-color:#939599;border-right-color:transparent;border-bottom-color:transparent;border-left-color:transparent}.vcu-table--tree-cell{display:block;padding-left:1.5em}.vcu-table input[type="checkbox"]{margin:0}.vcu-table input[type="checkbox"],.vcu-table input[type="radio"],.vcu-table input[type="checkbox"]+span,.vcu-table input[type="radio"]+span{vertical-align:middle;padding-left: 0.4em}'
 
 let htmlCellElem
 
@@ -19,7 +19,7 @@ let printFrame
 
 function createFrame () {
   const frame = document.createElement('iframe')
-  frame.className = 'vxe-table--print-frame'
+  frame.className = 'vcu-table--print-frame'
   return frame
 }
 
@@ -73,7 +73,7 @@ function getLabelData ($xetable, opts, columns, datas) {
         const renderOpts = column.editRender || column.cellRender
         let exportLabelMethod = column.exportMethod
         if (!exportLabelMethod && renderOpts && renderOpts.name) {
-          const compConf = VXETable.renderer.get(renderOpts.name)
+          const compConf = VCUTable.renderer.get(renderOpts.name)
           if (compConf) {
             exportLabelMethod = compConf.exportMethod || compConf.cellExportMethod
           }
@@ -120,7 +120,7 @@ function getLabelData ($xetable, opts, columns, datas) {
       const renderOpts = column.editRender || column.cellRender
       let exportLabelMethod = column.exportMethod
       if (!exportLabelMethod && renderOpts && renderOpts.name) {
-        const compConf = VXETable.renderer.get(renderOpts.name)
+        const compConf = VCUTable.renderer.get(renderOpts.name)
         if (compConf) {
           exportLabelMethod = compConf.exportMethod || compConf.cellExportMethod
         }
@@ -181,7 +181,7 @@ function getFooterCellValue ($xetable, opts, items, column) {
   const renderOpts = column.editRender || column.cellRender
   let exportLabelMethod = column.footerExportMethod
   if (!exportLabelMethod && renderOpts && renderOpts.name) {
-    const compConf = VXETable.renderer.get(renderOpts.name)
+    const compConf = VCUTable.renderer.get(renderOpts.name)
     if (compConf) {
       exportLabelMethod = compConf.footerExportMethod || compConf.footerCellExportMethod
     }
@@ -286,7 +286,7 @@ function toHtml ($xetable, opts, columns, datas) {
   const { print: isPrint, isHeader, isFooter } = opts
   const allCls = 'check-all'
   const clss = [
-    'vxe-table',
+    'vcu-table',
     `border--${toTableBorder(border)}`,
     isPrint ? 'is--print' : '',
     isHeader ? 'show--head' : ''
@@ -323,15 +323,15 @@ function toHtml ($xetable, opts, columns, datas) {
           if (column.treeNode) {
             let treeIcon = ''
             if (item._hasChild) {
-              treeIcon = '<i class="vxe-table--tree-icon"></i>'
+              treeIcon = '<i class="vcu-table--tree-icon"></i>'
             }
-            classNames.push('vxe-table--tree-node')
+            classNames.push('vcu-table--tree-node')
             if (column.type === 'radio') {
-              return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vxe-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vxe-table--tree-icon-wrapper">${treeIcon}</div><div class="vxe-table--tree-cell"><input type="radio" name="radio_${id}" ${item._radioDisabled ? 'disabled ' : ''}${cellValue === true || cellValue === 'true' ? 'checked' : ''}><span>${item._radioLabel}</span></div></div></div></td>`
+              return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vcu-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vcu-table--tree-icon-wrapper">${treeIcon}</div><div class="vcu-table--tree-cell"><input type="radio" name="radio_${id}" ${item._radioDisabled ? 'disabled ' : ''}${cellValue === true || cellValue === 'true' ? 'checked' : ''}><span>${item._radioLabel}</span></div></div></div></td>`
             } else if (column.type === 'checkbox') {
-              return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vxe-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vxe-table--tree-icon-wrapper">${treeIcon}</div><div class="vxe-table--tree-cell"><input type="checkbox" ${item._checkboxDisabled ? 'disabled ' : ''}${cellValue === true || cellValue === 'true' ? 'checked' : ''}><span>${item._checkboxLabel}</span></div></div></div></td>`
+              return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vcu-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vcu-table--tree-icon-wrapper">${treeIcon}</div><div class="vcu-table--tree-cell"><input type="checkbox" ${item._checkboxDisabled ? 'disabled ' : ''}${cellValue === true || cellValue === 'true' ? 'checked' : ''}><span>${item._checkboxLabel}</span></div></div></div></td>`
             }
-            return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vxe-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vxe-table--tree-icon-wrapper">${treeIcon}</div><div class="vxe-table--tree-cell">${cellValue}</div></div></div></td>`
+            return `<td class="${classNames.join(' ')}" title="${cellValue}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><div class="vcu-table--tree-node-wrapper" style="padding-left: ${item._level * treeOpts.indent}px"><div class="vcu-table--tree-icon-wrapper">${treeIcon}</div><div class="vcu-table--tree-cell">${cellValue}</div></div></div></td>`
           }
           if (column.type === 'radio') {
             return `<td class="${classNames.join(' ')}"><div ${isPrint ? '' : `style="width: ${column.renderWidth}px"`}><input type="radio" name="radio_${id}" ${item._radioDisabled ? 'disabled ' : ''}${cellValue === true || cellValue === 'true' ? 'checked' : ''}><span>${item._radioLabel}</span></div></td>`
@@ -458,10 +458,10 @@ function downloadFile ($xetable, opts, content) {
       document.body.removeChild(linkElem)
     }
     if (opts.message !== false) {
-      //VXETable.modal.message({ message: GlobalConfig.i18n('vxe.table.expSuccess'), status: 'success' })
+      //VCUTable.modal.message({ message: GlobalConfig.i18n('vcu.table.expSuccess'), status: 'success' })
     }
   } else {
-    UtilTools.error('vxe.error.notExp')
+    UtilTools.error('vcu.error.notExp')
   }
 }
 
@@ -644,10 +644,10 @@ function handleImport ($xetable, content, opts) {
         }
       })
     if (opts.message !== false) {
-      //VXETable.modal.message({ message: XEUtils.template(GlobalConfig.i18n('vxe.table.impSuccess'), [rows.length]), status: 'success' })
+      //VCUTable.modal.message({ message: XEUtils.template(GlobalConfig.i18n('vcu.table.impSuccess'), [rows.length]), status: 'success' })
     }
   } else if (opts.message !== false) {
-    //VXETable.modal.message({ message: GlobalConfig.i18n('vxe.error.impFields'), status: 'error' })
+    //VCUTable.modal.message({ message: GlobalConfig.i18n('vcu.error.impFields'), status: 'error' })
   }
   if (_importResolve) {
     _importResolve(status)
@@ -749,13 +749,13 @@ export default {
         columns: expColumns
       })
       if (!opts.filename) {
-        opts.filename = XEUtils.template(GlobalConfig.i18n(opts.original ? 'vxe.table.expOriginFilename' : 'vxe.table.expFilename'), [XEUtils.toDateString(Date.now(), 'yyyyMMddHHmmss')])
+        opts.filename = XEUtils.template(GlobalConfig.i18n(opts.original ? 'vcu.table.expOriginFilename' : 'vcu.table.expFilename'), [XEUtils.toDateString(Date.now(), 'yyyyMMddHHmmss')])
       }
       if (!opts.sheetName) {
         opts.sheetName = document.title
       }
-      if (VXETable.exportTypes.indexOf(opts.type) === -1) {
-        throw new Error(UtilTools.getLog('vxe.error.notType', [opts.type]))
+      if (VCUTable.exportTypes.indexOf(opts.type) === -1) {
+        throw new Error(UtilTools.getLog('vcu.error.notType', [opts.type]))
       }
       if (!opts.data) {
         opts.data = tableFullData
@@ -799,7 +799,7 @@ export default {
       if (window.FileReader) {
         const { type, filename } = UtilTools.parseFile(file)
         const options = Object.assign({ mode: 'insert' }, opts, { type, filename })
-        const types = options.types || VXETable.importTypes
+        const types = options.types || VCUTable.importTypes
         if (types.indexOf(type) > -1) {
           if (options.remote) {
             const params = { file, options, $table: this }
@@ -811,7 +811,7 @@ export default {
           this.preventEvent(null, 'event.import', { file, options, columns: this.tableFullColumn }, () => {
             const reader = new FileReader()
             reader.onerror = () => {
-              UtilTools.error('vxe.error.notType', [type])
+              UtilTools.error('vcu.error.notType', [type])
             }
             reader.onload = e => {
               handleImport(this, e.target.result.trim(), options)
@@ -819,10 +819,10 @@ export default {
             reader.readAsText(file, 'UTF-8')
           })
         } else {
-          UtilTools.error('vxe.error.notType', [type])
+          UtilTools.error('vcu.error.notType', [type])
         }
       } else {
-        UtilTools.error('vxe.error.notExp')
+        UtilTools.error('vcu.error.notExp')
       }
       return Promise.resolve()
     },
@@ -844,13 +844,13 @@ export default {
       if (!fileForm) {
         fileForm = document.createElement('form')
         fileInput = document.createElement('input')
-        fileForm.className = 'vxe-table--file-form'
+        fileForm.className = 'vcu-table--file-form'
         fileInput.name = 'file'
         fileInput.type = 'file'
         fileForm.appendChild(fileInput)
         document.body.appendChild(fileForm)
       }
-      const types = options.types || VXETable.importTypes
+      const types = options.types || VCUTable.importTypes
       if (options.multiple) {
         fileInput.multiple = 'multiple'
       }
@@ -861,7 +861,7 @@ export default {
           this._fileResolve(evnt)
         } else {
           if (options.message !== false) {
-            //VXETable.modal.message({ message: XEUtils.template(GlobalConfig.i18n('vxe.error.notType'), [type]), status: 'error' })
+            //VCUTable.modal.message({ message: XEUtils.template(GlobalConfig.i18n('vcu.error.notType'), [type]), status: 'error' })
           }
           this._fileReject(evnt)
         }
@@ -896,28 +896,28 @@ export default {
     },
     /* _openImport (options) {
       const defOpts = Object.assign({ mode: 'insert', message: true }, options, this.importOpts)
-      const types = defOpts.types || VXETable.exportTypes
+      const types = defOpts.types || VCUTable.exportTypes
       const isTree = !!this.getTreeStatus()
       if (isTree) {
         if (defOpts.message) {
-          //VXETable.modal.message({ message: GlobalConfig.i18n('vxe.error.treeNotImp'), status: 'error' })
+          //VCUTable.modal.message({ message: GlobalConfig.i18n('vcu.error.treeNotImp'), status: 'error' })
         }
         return
       }
       if (!this.importConfig) {
-        UtilTools.error('vxe.error.reqProp', ['import-config'])
+        UtilTools.error('vcu.error.reqProp', ['import-config'])
       }
       // 处理类型
       const typeList = types.map(value => {
         return {
           value,
-          label: `vxe.export.types.${value}`
+          label: `vcu.export.types.${value}`
         }
       })
       const modeList = defOpts.modes.map(value => {
         return {
           value,
-          label: `vxe.import.modes.${value}`
+          label: `vcu.import.modes.${value}`
         }
       })
       Object.assign(this.importStore, {
@@ -936,23 +936,23 @@ export default {
       const selectRecords = this.getCheckboxRecords()
       const hasFooter = !!footerData.length
       const defOpts = Object.assign({ message: true, isHeader: true }, exportOpts, options)
-      const types = defOpts.types || VXETable.exportTypes
+      const types = defOpts.types || VCUTable.exportTypes
       const checkMethod = customOpts.checkMethod
       const exportColumns = collectColumn.slice(0)
       if (!exportConfig) {
-        UtilTools.error('vxe.error.reqProp', ['export-config'])
+        UtilTools.error('vcu.error.reqProp', ['export-config'])
       }
       // 处理类型
       const typeList = types.map(value => {
         return {
           value,
-          label: `vxe.export.types.${value}`
+          label: `vcu.export.types.${value}`
         }
       })
       const modeList = defOpts.modes.map(value => {
         return {
           value,
-          label: `vxe.export.modes.${value}`
+          label: `vcu.export.modes.${value}`
         }
       })
       // 默认选中

@@ -1,6 +1,6 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
 function renderHelpIcon (h, params) {
@@ -8,7 +8,7 @@ function renderHelpIcon (h, params) {
   const { titleHelp } = column
   return titleHelp ? [
     h('i', {
-      class: ['vxe-cell-help-icon', titleHelp.icon || GlobalConfig.icon.TABLE_HELP],
+      class: ['vcu-cell-help-icon', titleHelp.icon || GlobalConfig.icon.TABLE_HELP],
       on: {
         mouseenter (evnt) {
           $table.triggerHeaderHelpEvent(evnt, params)
@@ -54,7 +54,7 @@ function renderTitleContent (h, params, content) {
   }
   return [
     h('span', {
-      class: 'vxe-cell--title',
+      class: 'vcu-cell--title',
       on: ons
     }, content)
   ]
@@ -68,7 +68,7 @@ function getFooterContent (h, params) {
     return slots.footer.call($table, params, h)
   }
   if (renderOpts) {
-    const compConf = VXETable.renderer.get(renderOpts.name)
+    const compConf = VCUTable.renderer.get(renderOpts.name)
     if (compConf && compConf.renderFooter) {
       return compConf.renderFooter.call($table, h, renderOpts, params, { $grid: $table.$xegrid, $table })
     }
@@ -142,7 +142,7 @@ export const Cell = {
       return renderTitleContent(h, params, slots.header.call($table, params, h))
     }
     if (renderOpts) {
-      const compConf = VXETable.renderer.get(renderOpts.name)
+      const compConf = VCUTable.renderer.get(renderOpts.name)
       if (compConf && compConf.renderHeader) {
         return renderTitleContent(h, params, compConf.renderHeader.call($table, h, renderOpts, params, { $grid: $table.$xegrid, $table }))
       }
@@ -161,14 +161,14 @@ export const Cell = {
     }
     if (renderOpts) {
       const funName = editRender ? 'renderCell' : 'renderDefault'
-      const compConf = VXETable.renderer.get(renderOpts.name)
+      const compConf = VCUTable.renderer.get(renderOpts.name)
       if (compConf && compConf[funName]) {
         return compConf[funName].call($table, h, renderOpts, Object.assign({ $type: editRender ? 'edit' : 'cell' }, params), { $grid: $table.$xegrid, $table })
       }
     }
     return [
       h('span', {
-        class: 'vxe-cell--label'
+        class: 'vcu-cell--label'
       }, [getDefaultCellLabel(params)])
     ]
   },
@@ -178,7 +178,7 @@ export const Cell = {
   renderDefaultFooter (h, params) {
     return [
       h('span', {
-        class: 'vxe-cell--item'
+        class: 'vcu-cell--item'
       }, getFooterContent(h, params))
     ]
   },
@@ -212,7 +212,7 @@ export const Cell = {
     }
     return [
       h('div', {
-        class: ['vxe-cell--tree-node', {
+        class: ['vcu-cell--tree-node', {
           'is--active': isAceived
         }],
         style: {
@@ -221,16 +221,16 @@ export const Cell = {
       }, [
         showIcon && ((rowChilds && rowChilds.length) || hasLazyChilds) ? [
           h('div', {
-            class: 'vxe-tree--btn-wrapper',
+            class: 'vcu-tree--btn-wrapper',
             on
           }, [
             h('i', {
-              class: ['vxe-tree--node-btn', isLazyLoaded ? (iconLoaded || GlobalConfig.icon.TABLE_TREE_LOADED) : (isAceived ? (iconOpen || GlobalConfig.icon.TABLE_TREE_OPEN) : (iconClose || GlobalConfig.icon.TABLE_TREE_CLOSE))]
+              class: ['vcu-tree--node-btn', isLazyLoaded ? (iconLoaded || GlobalConfig.icon.TABLE_TREE_LOADED) : (isAceived ? (iconOpen || GlobalConfig.icon.TABLE_TREE_OPEN) : (iconClose || GlobalConfig.icon.TABLE_TREE_CLOSE))]
             })
           ])
         ] : null,
         h('div', {
-          class: 'vxe-tree-cell'
+          class: 'vcu-tree-cell'
         }, cellVNodes)
       ])
     ]
@@ -267,7 +267,7 @@ export const Cell = {
     const { slots } = column
     return renderTitleContent(h, params, slots && slots.header ? slots.header.call($table, params, h) : [
       h('span', {
-        class: 'vxe-radio--label'
+        class: 'vcu-radio--label'
       }, UtilTools.formatText(column.getTitle(), 1))
     ])
   },
@@ -294,21 +294,21 @@ export const Cell = {
     }
     return [
       h('span', {
-        class: ['vxe-cell--radio', {
+        class: ['vcu-cell--radio', {
           'is--checked': isChecked,
           'is--disabled': isDisabled
         }],
         on
       }, [
         h('span', {
-          class: 'vxe-radio--icon vxe-radio--checked-icon'
+          class: 'vcu-radio--icon vcu-radio--checked-icon'
         }),
         h('span', {
-          class: 'vxe-radio--icon vxe-radio--unchecked-icon'
+          class: 'vcu-radio--icon vcu-radio--unchecked-icon'
         })
       ].concat(slots && slots.default ? slots.default.call($table, params, h) : (labelField ? [
         h('span', {
-          class: 'vxe-radio--label'
+          class: 'vcu-radio--label'
         }, XEUtils.get(row, labelField))
       ] : [])))
     ]
@@ -331,7 +331,7 @@ export const Cell = {
     if (checkboxOpts.checkStrictly ? !checkboxOpts.showHeader : checkboxOpts.showHeader === false) {
       return renderTitleContent(h, params, slots && slots.header ? slots.header.call($table, params, h) : [
         h('span', {
-          class: 'vxe-checkbox--label'
+          class: 'vcu-checkbox--label'
         }, headerTitle)
       ])
     }
@@ -347,28 +347,28 @@ export const Cell = {
     }
     return renderTitleContent(h, params, [
       h('span', {
-        class: ['vxe-cell--checkbox', {
+        class: ['vcu-cell--checkbox', {
           'is--checked': isChecked,
           'is--disabled': isAllCheckboxDisabled,
           'is--indeterminate': isIndeterminate
         }],
         attrs: {
-          title: GlobalConfig.i18n('vxe.table.allTitle')
+          title: GlobalConfig.i18n('vcu.table.allTitle')
         },
         on
       }, [
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--checked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--checked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--unchecked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--unchecked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--indeterminate-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--indeterminate-icon'
         })
       ].concat(slots && slots.header ? slots.header.call($table, params, h) : (headerTitle ? [
         h('span', {
-          class: 'vxe-checkbox--label'
+          class: 'vcu-checkbox--label'
         }, headerTitle)
       ] : [])))
     ])
@@ -400,7 +400,7 @@ export const Cell = {
     }
     return [
       h('span', {
-        class: ['vxe-cell--checkbox', {
+        class: ['vcu-cell--checkbox', {
           'is--checked': isChecked,
           'is--disabled': isDisabled,
           'is--indeterminate': indeterminate
@@ -408,17 +408,17 @@ export const Cell = {
         on
       }, [
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--checked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--checked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--unchecked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--unchecked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--indeterminate-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--indeterminate-icon'
         })
       ].concat(slots && slots.default ? slots.default.call($table, params, h) : (labelField ? [
         h('span', {
-          class: 'vxe-checkbox--label'
+          class: 'vcu-checkbox--label'
         }, XEUtils.get(row, labelField))
       ] : [])))
     ]
@@ -453,7 +453,7 @@ export const Cell = {
     }
     return [
       h('span', {
-        class: ['vxe-cell--checkbox', {
+        class: ['vcu-cell--checkbox', {
           'is--checked': isChecked,
           'is--disabled': isDisabled,
           'is--indeterminate': halfField && !isChecked ? row[halfField] : indeterminate
@@ -461,17 +461,17 @@ export const Cell = {
         on
       }, [
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--checked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--checked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--unchecked-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--unchecked-icon'
         }),
         h('span', {
-          class: 'vxe-checkbox--icon vxe-checkbox--indeterminate-icon'
+          class: 'vcu-checkbox--icon vcu-checkbox--indeterminate-icon'
         })
       ].concat(slots && slots.default ? slots.default.call($table, params, h) : (labelField ? [
         h('span', {
-          class: 'vxe-checkbox--label'
+          class: 'vcu-checkbox--label'
         }, XEUtils.get(row, labelField))
       ] : [])))
     ]
@@ -501,7 +501,7 @@ export const Cell = {
     }
     return [
       showIcon && (!visibleMethod || visibleMethod(params)) ? h('span', {
-        class: ['vxe-table--expanded', {
+        class: ['vcu-table--expanded', {
           'is--active': isAceived
         }],
         on: {
@@ -511,11 +511,11 @@ export const Cell = {
         }
       }, [
         h('i', {
-          class: ['vxe-table--expand-btn', isLazyLoaded ? (iconLoaded || GlobalConfig.icon.TABLE_EXPAND_LOADED) : (isAceived ? (iconOpen || GlobalConfig.icon.TABLE_EXPAND_OPEN) : (iconClose || GlobalConfig.icon.TABLE_EXPAND_CLOSE))]
+          class: ['vcu-table--expand-btn', isLazyLoaded ? (iconLoaded || GlobalConfig.icon.TABLE_EXPAND_LOADED) : (isAceived ? (iconOpen || GlobalConfig.icon.TABLE_EXPAND_OPEN) : (iconClose || GlobalConfig.icon.TABLE_EXPAND_CLOSE))]
         })
       ]) : null,
       (slots && slots.default) || labelField ? h('span', {
-        class: 'vxe-table--expand-label'
+        class: 'vcu-table--expand-label'
       }, slots.default ? slots.default.call($table, params, h) : XEUtils.get(row, labelField)) : null
     ]
   },
@@ -526,7 +526,7 @@ export const Cell = {
       return slots.content.call($table, params, h)
     }
     if (contentRender) {
-      const compConf = VXETable.renderer.get(contentRender.name)
+      const compConf = VCUTable.renderer.get(contentRender.name)
       if (compConf && compConf.renderExpand) {
         return compConf.renderExpand.call($table, h, contentRender, params, { $grid: $table.$xegrid, $table })
       }
@@ -545,7 +545,7 @@ export const Cell = {
     }
     return [
       h('span', {
-        class: 'vxe-cell--html',
+        class: 'vcu-cell--html',
         domProps: {
           innerHTML: getDefaultCellLabel(params)
         }
@@ -576,14 +576,14 @@ export const Cell = {
     const { showIcon, iconAsc, iconDesc } = $table.sortOpts
     return showIcon ? [
       h('span', {
-        class: 'vxe-cell--sort'
+        class: 'vcu-cell--sort'
       }, [
         h('i', {
-          class: ['vxe-sort--asc-btn', iconAsc || GlobalConfig.icon.TABLE_SORT_ASC, {
+          class: ['vcu-sort--asc-btn', iconAsc || GlobalConfig.icon.TABLE_SORT_ASC, {
             'sort--active': column.order === 'asc'
           }],
           attrs: {
-            title: GlobalConfig.i18n('vxe.table.sortAsc')
+            title: GlobalConfig.i18n('vcu.table.sortAsc')
           },
           on: {
             click (evnt) {
@@ -592,11 +592,11 @@ export const Cell = {
           }
         }),
         h('i', {
-          class: ['vxe-sort--desc-btn', iconDesc || GlobalConfig.icon.TABLE_SORT_DESC, {
+          class: ['vcu-sort--desc-btn', iconDesc || GlobalConfig.icon.TABLE_SORT_DESC, {
             'sort--active': column.order === 'desc'
           }],
           attrs: {
-            title: GlobalConfig.i18n('vxe.table.sortDesc')
+            title: GlobalConfig.i18n('vcu.table.sortDesc')
           },
           on: {
             click (evnt) {
@@ -620,14 +620,14 @@ export const Cell = {
     const { showIcon, iconNone, iconMatch } = filterOpts
     return showIcon ? [
       h('span', {
-        class: ['vxe-cell--filter', {
+        class: ['vcu-cell--filter', {
           'is--active': filterStore.visible && filterStore.column === column
         }]
       }, [
         h('i', {
-          class: ['vxe-filter--btn', hasFilter ? (iconMatch || GlobalConfig.icon.TABLE_FILTER_MATCH) : (iconNone || GlobalConfig.icon.TABLE_FILTER_NONE)],
+          class: ['vcu-filter--btn', hasFilter ? (iconMatch || GlobalConfig.icon.TABLE_FILTER_MATCH) : (iconNone || GlobalConfig.icon.TABLE_FILTER_NONE)],
           attrs: {
-            title: GlobalConfig.i18n('vxe.table.filter')
+            title: GlobalConfig.i18n('vcu.table.filter')
           },
           on: {
             click (evnt) {
@@ -655,10 +655,10 @@ export const Cell = {
     }
     return [
       isRequired && editOpts.showAsterisk ? h('i', {
-        class: 'vxe-cell--required-icon'
+        class: 'vcu-cell--required-icon'
       }) : null,
       editOpts.showIcon ? h('i', {
-        class: ['vxe-cell--edit-icon', editOpts.icon || GlobalConfig.icon.TABLE_EDIT]
+        class: ['vcu-cell--edit-icon', editOpts.icon || GlobalConfig.icon.TABLE_EDIT]
       }) : null
     ].concat(Cell.renderDefaultHeader(h, params))
       .concat(sortable || remoteSort ? Cell.renderSortIcon(h, params) : [])
@@ -685,7 +685,7 @@ export const Cell = {
   runRenderer (h, params, _vm, isEdit) {
     const { $table, column } = params
     const { slots, editRender, formatter } = column
-    const compConf = VXETable.renderer.get(editRender.name)
+    const compConf = VCUTable.renderer.get(editRender.name)
     if (isEdit) {
       if (slots && slots.edit) {
         return slots.edit.call($table, params, h)
@@ -698,7 +698,7 @@ export const Cell = {
     if (formatter) {
       return [
         h('span', {
-          class: 'vxe-cell--label'
+          class: 'vcu-cell--label'
         }, [getDefaultCellLabel(params)])
       ]
     }

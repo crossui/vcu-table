@@ -1,8 +1,8 @@
-import VxeTableFooter from './src/footer'
+import VcuTableFooter from './src/footer'
 
-VxeTableFooter.install = function (Vue) {
-  Vue.component(VxeTableFooter.name, VxeTableFooter)
+VcuTableFooter.install = function (Vue) {
+  Vue.component(VcuTableFooter.name, VcuTableFooter)
 }
 
-export const Footer = VxeTableFooter
-export default VxeTableFooter
+export const Footer = VcuTableFooter
+export default VcuTableFooter

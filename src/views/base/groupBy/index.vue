@@ -10,22 +10,22 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         resizable
         tree-config
         ref="xTable"
         :loading="loading"
         :data="tableData"
       >
-        <vxe-table-column
+        <vcu-table-column
           field="name"
           title="Name"
           tree-node
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="date14" title="Date"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="date14" title="Date"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

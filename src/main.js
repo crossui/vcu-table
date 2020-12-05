@@ -9,8 +9,8 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 Vue.use(Antd);
 
-import VXETable from "../components/vxe-table.js";
-Vue.use(VXETable);
+import VCUTable from "../components/vcu-table.js";
+Vue.use(VCUTable);
 
 
 import Uicomponents from '@/components';

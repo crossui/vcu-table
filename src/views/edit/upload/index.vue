@@ -19,7 +19,7 @@
         <a-button @click="getInsertEvent">保存</a-button>
       </a-button-group>
 
-      <vxe-table
+      <vcu-table
         ref="xTable"
         :data="tableData"
         :edit-config="{
@@ -27,9 +27,9 @@
           mode: 'row',
         }"
       >
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           :edit-render="{ autofocus: '.my-input' }"
@@ -42,11 +42,11 @@
               class="my-input"
             ></a-input>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="type" title="Type"></vxe-table-column>
-        <vxe-table-column field="size" title="Size"></vxe-table-column>
-        <vxe-table-column field="date" title="Date"></vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+        <vcu-table-column field="type" title="Type"></vcu-table-column>
+        <vcu-table-column field="size" title="Size"></vcu-table-column>
+        <vcu-table-column field="date" title="Date"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

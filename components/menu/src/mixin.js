@@ -1,6 +1,6 @@
 import XEUtils from 'xe-utils/ctor'
 import { UtilTools, DomTools } from '../../tools'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 
 export default {
   methods: {
@@ -84,7 +84,7 @@ export default {
         // 分别匹配表尾、内容、表尾的快捷菜单
         for (let index = 0; index < layoutList.length; index++) {
           const layout = layoutList[index]
-          const columnTargetNode = DomTools.getEventTargetNode(evnt, this.$el, `vxe-${layout}--column`, target => {
+          const columnTargetNode = DomTools.getEventTargetNode(evnt, this.$el, `vcu-${layout}--column`, target => {
             // target=td|th，直接向上找 table 去匹配即可
             return target.parentNode.parentNode.parentNode.getAttribute('data-tid') === tId
           })
@@ -103,7 +103,7 @@ export default {
             this.openContextMenu(evnt, layout, params)
             this.emitEvent(`${typePrefix}cell-context-menu`, params, evnt)
             return
-          } else if (DomTools.getEventTargetNode(evnt, this.$el, `vxe-table--${layout}-wrapper`, target => target.getAttribute('data-tid') === tId).flag) {
+          } else if (DomTools.getEventTargetNode(evnt, this.$el, `vcu-table--${layout}-wrapper`, target => target.getAttribute('data-tid') === tId).flag) {
             if (ctxMenuOpts.trigger === 'cell') {
               evnt.preventDefault()
             } else {
@@ -238,7 +238,7 @@ export default {
      */
     ctxMenuLinkEvent (evnt, menu) {
       if (!menu.disabled && (!menu.children || !menu.children.length)) {
-        const ctxMenuMethod = VXETable.menus.get(menu.code)
+        const ctxMenuMethod = VCUTable.menus.get(menu.code)
         const params = Object.assign({ menu, $grid: this.$xegrid, $table: this, $event: evnt }, this.ctxMenuStore.args)
         if (ctxMenuMethod) {
           ctxMenuMethod.call(this, params, evnt)

@@ -1,5 +1,5 @@
 import XEUtils from 'xe-utils/ctor'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
 export default {
@@ -49,11 +49,11 @@ export default {
           })
         } else {
           if (treeConfig) {
-            throw new Error(UtilTools.getLog('vxe.error.noTree', ['insert']))
+            throw new Error(UtilTools.getLog('vcu.error.noTree', ['insert']))
           }
           const afIndex = afterFullData.indexOf(row)
           if (afIndex === -1) {
-            throw new Error(UtilTools.error('vxe.error.unableInsert'))
+            throw new Error(UtilTools.error('vcu.error.unableInsert'))
           }
           afterFullData.splice(afIndex, 0, ...newRecords)
           tableFullData.splice(tableFullData.indexOf(row), 0, ...newRecords)
@@ -333,12 +333,12 @@ export default {
       actived.args = null
       actived.row = null
       actived.column = null
-      return (VXETable._valid ? this.clearValidate() : this.$nextTick()).then(this.recalculate)
+      return (VCUTable._valid ? this.clearValidate() : this.$nextTick()).then(this.recalculate)
     },
     _getActiveRecord () {
       const { $el, editStore, afterFullData } = this
       const { args, row } = editStore.actived
-      if (args && afterFullData.indexOf(row) > -1 && $el.querySelectorAll('.vxe-body--column.col--actived').length) {
+      if (args && afterFullData.indexOf(row) > -1 && $el.querySelectorAll('.vcu-body--column.col--actived').length) {
         return Object.assign({}, args)
       }
       return null
@@ -357,7 +357,7 @@ export default {
       const { row, column, cell } = params
       const { editRender } = column
       if (editRender) {
-        const compRender = VXETable.renderer.get(editRender.name)
+        const compRender = VCUTable.renderer.get(editRender.name)
         const { autofocus, autoselect } = editRender
         let inputElem
         // 如果指定了聚焦 class

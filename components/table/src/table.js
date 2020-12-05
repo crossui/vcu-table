@@ -1,7 +1,7 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
-import VXETable from '../../v-x-e-table'
-import VxeTableBody from '../../body'
+import VCUTable from '../../v-c-u-table'
+import VcuTableBody from '../../body'
 import vSize from '../../mixins/size'
 import { UtilTools, DomTools, GlobalEvent, ResizeEvent } from '../../tools'
 import methods from './methods'
@@ -22,7 +22,7 @@ function renderFixed(h, $xetable, fixedType) {
   const tableChilds = []
   if (showHeader) {
     tableChilds.push(
-      h('vxe-table-header', {
+      h('vcu-table-header', {
         props: {
           fixedType,
           tableData,
@@ -36,7 +36,7 @@ function renderFixed(h, $xetable, fixedType) {
     )
   }
   tableChilds.push(
-    h('vxe-table-body', {
+    h('vcu-table-body', {
       props: {
         fixedType,
         tableData,
@@ -49,7 +49,7 @@ function renderFixed(h, $xetable, fixedType) {
   )
   if (showFooter) {
     tableChilds.push(
-      h('vxe-table-footer', {
+      h('vcu-table-footer', {
         props: {
           footerData,
           tableColumn,
@@ -62,13 +62,13 @@ function renderFixed(h, $xetable, fixedType) {
     )
   }
   return h('div', {
-    class: `vxe-table--fixed-${fixedType}-wrapper`,
+    class: `vcu-table--fixed-${fixedType}-wrapper`,
     ref: `${fixedType}Container`
   }, tableChilds)
 }
 
 export default {
-  name: 'VxeTable',
+  name: 'VcuTable',
   mixins: [vSize],
   props: {
     /** 基本属性 */
@@ -222,7 +222,7 @@ export default {
     params: Object
   },
   components: {
-    VxeTableBody
+    VcuTableBody
   },
   provide() {
     return {
@@ -465,7 +465,7 @@ export default {
       return Object.assign({}, this.keyboardConfig)
     },
     hasTip() {
-      return VXETable._tooltip
+      return VCUTable._tooltip
     },
     headerCtxMenu() {
       const headerOpts = this.ctxMenuOpts.header
@@ -565,7 +565,7 @@ export default {
           this.handleDefaults()
         }
         if ((this.scrollXLoad || this.scrollYLoad) && this.expandColumn) {
-          UtilTools.warn('vxe.error.scrollErrProp', ['column.type=expand'])
+          UtilTools.warn('vcu.error.scrollErrProp', ['column.type=expand'])
         }
       })
     },
@@ -658,43 +658,43 @@ export default {
       fullColumnFieldData: {}
     })
     if (!this.rowId && (this.checkboxOpts.reserve || this.checkboxOpts.checkRowKeys || this.radioOpts.reserve || this.radioOpts.checkRowKey || this.expandOpts.expandRowKeys || this.treeOpts.expandRowKeys)) {
-      UtilTools.warn('vxe.error.reqProp', ['row-id'])
+      UtilTools.warn('vcu.error.reqProp', ['row-id'])
     }
     if (this.editConfig && editOpts.showStatus && !this.keepSource) {
-      UtilTools.warn('vxe.error.reqProp', ['keep-source'])
+      UtilTools.warn('vcu.error.reqProp', ['keep-source'])
     }
     if (treeConfig && treeOpts.line && (!this.rowKey || !showOverflow)) {
-      UtilTools.warn('vxe.error.reqProp', ['row-key | show-overflow'])
+      UtilTools.warn('vcu.error.reqProp', ['row-key | show-overflow'])
     }
     if (treeConfig && this.stripe) {
-      UtilTools.warn('vxe.error.noTree', ['stripe'])
+      UtilTools.warn('vcu.error.noTree', ['stripe'])
     }
     const customOpts = this.customOpts
     if (!this.id && this.customConfig && (customOpts.storage === true || (customOpts.storage && customOpts.storage.resizable) || (customOpts.storage && customOpts.storage.visible))) {
-      UtilTools.error('vxe.error.reqProp', ['id'])
+      UtilTools.error('vcu.error.reqProp', ['id'])
     }
     if (this.treeConfig && this.checkboxOpts.range) {
-      UtilTools.error('vxe.error.noTree', ['checkbox-config.range'])
+      UtilTools.error('vcu.error.noTree', ['checkbox-config.range'])
     }
     if (this.mouseOpts.area && !this.handleUpdateCellAreas) {
-      return UtilTools.error('vxe.error.notProp', ['mouse-config.area'])
+      return UtilTools.error('vcu.error.notProp', ['mouse-config.area'])
     }
     if (this.treeConfig && this.mouseOpts.area) {
-      UtilTools.error('vxe.error.noTree', ['mouse-config.area'])
+      UtilTools.error('vcu.error.noTree', ['mouse-config.area'])
     }
     // 检查是否有安装需要的模块
     let errorModuleName
-    if (!VXETable._edit && this.editConfig) {
+    if (!VCUTable._edit && this.editConfig) {
       errorModuleName = 'Edit'
-    } else if (!VXETable._valid && this.editRules) {
+    } else if (!VCUTable._valid && this.editRules) {
       errorModuleName = 'Validator'
-    } else if (!VXETable._keyboard && (this.keyboardConfig || this.mouseConfig)) {
+    } else if (!VCUTable._keyboard && (this.keyboardConfig || this.mouseConfig)) {
       errorModuleName = 'Keyboard'
-    } else if (!VXETable._export && (this.importConfig || this.exportConfig)) {
+    } else if (!VCUTable._export && (this.importConfig || this.exportConfig)) {
       errorModuleName = 'Export'
     }
     if (errorModuleName) {
-      throw new Error(UtilTools.getLog('vxe.error.reqModule', [errorModuleName]))
+      throw new Error(UtilTools.getLog('vcu.error.reqModule', [errorModuleName]))
     }
     Object.assign(scrollYStore, {
       startIndex: 0,
@@ -823,18 +823,18 @@ export default {
     if ($scopedSlots.empty) {
       emptyContent = $scopedSlots.empty.call(this, { $table: this }, h)
     } else {
-      const compConf = emptyRender ? VXETable.renderer.get(emptyOpts.name) : null
+      const compConf = emptyRender ? VCUTable.renderer.get(emptyOpts.name) : null
       if (compConf) {
         emptyContent = compConf.renderEmpty.call(this, h, emptyOpts, { $table: this }, { $table: this })
       } else {
-        //emptyContent = this.emptyText || GlobalConfig.i18n('vxe.table.emptyText')
+        //emptyContent = this.emptyText || GlobalConfig.i18n('vcu.table.emptyText')
         emptyContent = [
           h('div', {
-            class: 'vxe-table--empty-img'
+            class: 'vcu-table--empty-img'
           }),
           h('div', {
-            class: 'vxe-table--empty-text'
-          }, this.emptyText || GlobalConfig.i18n('vxe.table.emptyText'))
+            class: 'vcu-table--empty-text'
+          }, this.emptyText || GlobalConfig.i18n('vcu.table.emptyText'))
         ]
       }
     }
@@ -849,7 +849,7 @@ export default {
     // 头部
     if (showHeader) {
       tableChilds.push(
-        h('vxe-table-header', {
+        h('vcu-table-header', {
           ref: 'tableHeader',
           props: {
             tableData,
@@ -862,7 +862,7 @@ export default {
     }
     // 主体
     tableChilds.push(
-      h('vxe-table-body', {
+      h('vcu-table-body', {
         ref: 'tableBody',
         props: {
           tableData,
@@ -874,7 +874,7 @@ export default {
     // 表尾
     if (showFooter) {
       tableChilds.push(
-        h('vxe-table-footer', {
+        h('vcu-table-footer', {
           props: {
             footerData,
             tableColumn,
@@ -897,7 +897,7 @@ export default {
     // 部件 - 筛选
     if (initStore.filter) {
       tableComps.push(
-        h('vxe-table-filter', {
+        h('vcu-table-filter', {
           props: {
             filterStore
           },
@@ -908,7 +908,7 @@ export default {
     // 部件 - 导入
     if (initStore.import && this.importConfig) {
       tableComps.push(
-        h('vxe-import-panel', {
+        h('vcu-import-panel', {
           props: {
             defaultOptions: this.importParams,
             storeData: this.importStore
@@ -919,7 +919,7 @@ export default {
     // 部件 - 导出
     if (initStore.export && this.exportConfig) {
       tableComps.push(
-        h('vxe-export-panel', {
+        h('vcu-export-panel', {
           props: {
             defaultOptions: this.exportParams,
             storeData: this.exportStore
@@ -930,7 +930,7 @@ export default {
     // 部件 - 快捷菜单
     if (ctxMenuStore.visible && this.isCtxMenu) {
       tableComps.push(
-        h('vxe-table-context-menu', {
+        h('vcu-table-context-menu', {
           props: {
             ctxMenuStore,
             ctxMenuOpts
@@ -942,16 +942,16 @@ export default {
     // 部件 - 校验提示
     if (hasTip && this.editRules && (validOpts.message === 'default' ? !height : validOpts.message === 'tooltip')) {
       tableComps.push(
-        h('vxe-tooltip', {
-          class: 'vxe-table--valid-error',
+        h('vcu-tooltip', {
+          class: 'vcu-table--valid-error',
           props: validOpts.message === 'tooltip' || tableData.length === 1 ? vaildTipOpts : null,
           ref: 'validTip'
         })
       )
     }
     return h('div', {
-      class: ['vxe-table', `tid_${tId}`, vSize ? `size--${vSize}` : '', `border--${tableBorder}`, {
-        'vxe-editable': !!editConfig,
+      class: ['vcu-table', `tid_${tId}`, vSize ? `size--${vSize}` : '', `border--${tableBorder}`, {
+        'vcu-editable': !!editConfig,
         'show--head': showHeader,
         'show--foot': showFooter,
         'is--group': isGroup,
@@ -982,37 +982,37 @@ export default {
        * 隐藏列
        */
       h('div', {
-        class: 'vxe-table-slots',
+        class: 'vcu-table-slots',
         ref: 'hideColumn'
       }, this.$slots.default),
       h('div', {
-        class: 'vxe-table--main-wrapper'
+        class: 'vcu-table--main-wrapper'
       }, tableChilds),
       h('div', {
-        class: 'vxe-table--fixed-wrapper'
+        class: 'vcu-table--fixed-wrapper'
       }, fixedChilds),
       /**
        * 空数据
        */
       h('div', {
         ref: 'emptyPlaceholder',
-        class: 'vxe-table--empty-placeholder'
+        class: 'vcu-table--empty-placeholder'
       }, [
         h('div', {
-          class: 'vxe-table--empty-content'
+          class: 'vcu-table--empty-content'
         }, emptyContent)
       ]),
       /**
        * 边框线
        */
       h('div', {
-        class: 'vxe-table--border-line'
+        class: 'vcu-table--border-line'
       }),
       /**
        * 列宽线
        */
       h('div', {
-        class: 'vxe-table--resizable-bar',
+        class: 'vcu-table--resizable-bar',
         style: overflowX ? {
           'padding-bottom': `${scrollbarHeight}px`
         } : null,
@@ -1022,31 +1022,31 @@ export default {
        * 加载中
        */
       h('div', {
-        class: ['vxe-table--loading vxe-loading', {
+        class: ['vcu-table--loading vcu-loading', {
           'is--visible': isCloak || loading
         }]
       }, [
         h('div', {
-          class: 'vxe-loading--spinner'
+          class: 'vcu-loading--spinner'
         }, [
           h('i', {
-            class: 'vxe-loading--item'
+            class: 'vcu-loading--item'
           }),
           h('i', {
-            class: 'vxe-loading--item'
+            class: 'vcu-loading--item'
           }),
           h('i', {
-            class: 'vxe-loading--item'
+            class: 'vcu-loading--item'
           }),
           h('i', {
-            class: 'vxe-loading--item'
+            class: 'vcu-loading--item'
           })
         ])
       ]),
       /**
        * 工具提示
        */
-      hasTip ? h('vxe-tooltip', {
+      hasTip ? h('vcu-tooltip', {
         ref: 'tooltip',
         props: tooltipOpts,
         on: tooltipOpts.enterable ? {
@@ -1055,7 +1055,7 @@ export default {
       }) : null,
       //分页
       pagination ? h("div", {
-        class: ["vxe-pagination", `vxe-pagination-${paginationAlign}`]
+        class: ["vcu-pagination", `vcu-pagination-${paginationAlign}`]
       }, pagination) : null
     ].concat(tableComps))
   },

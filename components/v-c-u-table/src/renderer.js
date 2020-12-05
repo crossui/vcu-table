@@ -23,11 +23,11 @@ function getFormatDate (value, props, defaultFormat) {
 }
 
 function getLabelFormatDate (value, props) {
-  return getFormatDate(value, props, GlobalConfig.i18n(`vxe.input.date.labelFormat.${props.type}`))
+  return getFormatDate(value, props, GlobalConfig.i18n(`vcu.input.date.labelFormat.${props.type}`))
 }
 
 function getDefaultComponentName ({ name }) {
-  return `vxe-${name.replace('$', '')}`
+  return `vcu-${name.replace('$', '')}`
 }
 
 function handleConfirmFilter (params, checked, option) {
@@ -182,7 +182,7 @@ function nativeEditRender (h, renderOpts, params) {
   const cellValue = isSyncCell(renderOpts, params) ? UtilTools.getCellValue(row, column) : column.model.value
   return [
     h(name, {
-      class: `vxe-default-${name}`,
+      class: `vcu-default-${name}`,
       attrs,
       domProps: {
         value: cellValue
@@ -206,7 +206,7 @@ function defaultEditRender (h, renderOpts, params) {
 
 function defaultButtonEditRender (h, renderOpts, params) {
   return [
-    h('vxe-button', {
+    h('vcu-button', {
       props: getCellEditFilterProps(renderOpts, params),
       on: getOns(renderOpts, params),
       nativeOn: getNativeOns(renderOpts, params)
@@ -264,7 +264,7 @@ function nativeFilterRender (h, renderOpts, params) {
   return column.filters.map((option, oIndex) => {
     return h(name, {
       key: oIndex,
-      class: `vxe-default-${name}`,
+      class: `vcu-default-${name}`,
       attrs,
       domProps: {
         value: option.data
@@ -296,7 +296,7 @@ function handleFilterMethod ({ option, row, column }) {
 function nativeSelectEditRender (h, renderOpts, params) {
   return [
     h('select', {
-      class: 'vxe-default-select',
+      class: 'vcu-default-select',
       attrs: getNativeAttrs(renderOpts),
       on: getNativeEditOns(renderOpts, params)
     },
@@ -353,7 +353,7 @@ function nativeItemRender (h, renderOpts, params) {
   const itemValue = XEUtils.get(data, property)
   return [
     h(name, {
-      class: `vxe-default-${name}`,
+      class: `vcu-default-${name}`,
       attrs,
       domProps: attrs && name === 'input' && (attrs.type === 'submit' || attrs.type === 'reset') ? null : {
         value: itemValue
@@ -377,7 +377,7 @@ function defaultItemRender (h, renderOpts, params) {
 
 function defaultButtonItemRender (h, renderOpts, params) {
   return [
-    h('vxe-button', {
+    h('vcu-button', {
       props: getItemProps(renderOpts, params),
       on: getOns(renderOpts, params),
       nativeOn: getNativeOns(renderOpts, params)
@@ -477,7 +477,7 @@ const renderMap = {
       return column.filters.map((option, oIndex) => {
         return h('select', {
           key: oIndex,
-          class: 'vxe-default-select',
+          class: 'vcu-default-select',
           attrs: getNativeAttrs(renderOpts),
           on: getNativeFilterOns(renderOpts, params, option)
         },
@@ -488,7 +488,7 @@ const renderMap = {
     renderItem (h, renderOpts, params) {
       return [
         h('select', {
-          class: 'vxe-default-select',
+          class: 'vcu-default-select',
           attrs: getNativeAttrs(renderOpts),
           on: getNativeItemOns(renderOpts, params)
         },
@@ -498,7 +498,7 @@ const renderMap = {
     cellExportMethod: handleExportSelectMethod
   },
   /* $input: {
-    autofocus: '.vxe-input--inner',
+    autofocus: '.vcu-input--inner',
     renderEdit: defaultEditRender,
     renderCell (h, renderOpts, params) {
       const { props = {} } = renderOpts
@@ -526,7 +526,7 @@ const renderMap = {
     renderItem: defaultItemRender
   },
   $textarea: {
-    autofocus: '.vxe-textarea--inner',
+    autofocus: '.vcu-textarea--inner',
     renderItem: defaultItemRender
   },
   $button: {
@@ -538,7 +538,7 @@ const renderMap = {
     renderItem: defaultButtonsItemRender
   },
   $select: {
-    autofocus: '.vxe-input--inner',
+    autofocus: '.vcu-input--inner',
     renderEdit: defaultSelectEditRender,
     renderDefault: defaultSelectEditRender,
     renderCell (h, renderOpts, params) {
@@ -574,15 +574,15 @@ const renderMap = {
     cellExportMethod: handleExportSelectMethod
   },
   $radio: {
-    autofocus: '.vxe-radio--input',
+    autofocus: '.vcu-radio--input',
     renderItem: defaultFormItemRadioAndCheckboxRender
   },
   $checkbox: {
-    autofocus: '.vxe-checkbox--input',
+    autofocus: '.vcu-checkbox--input',
     renderItem: defaultFormItemRadioAndCheckboxRender
   },
   $switch: {
-    autofocus: '.vxe-switch--button',
+    autofocus: '.vcu-switch--button',
     renderEdit: defaultEditRender,
     renderDefault: defaultEditRender,
     renderItem: defaultItemRender

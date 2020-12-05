@@ -1,20 +1,20 @@
-import VxeTable from './src/table'
-import VXETable from '../v-x-e-table'
+import VcuTable from './src/table'
+import VCUTable from '../v-c-u-table'
 
-VxeTable.install = function (Vue) {
-  if (typeof window !== 'undefined' && window.VXETableMixin) {
-    VxeTable.mixins.push(window.VXETableMixin)
-    delete window.VXETableMixin
+VcuTable.install = function (Vue) {
+  if (typeof window !== 'undefined' && window.VCUTableMixin) {
+    VcuTable.mixins.push(window.VCUTableMixin)
+    delete window.VCUTableMixin
   }
-  VXETable.Vue = Vue
-  VXETable.Table = VxeTable
-  if (!Vue.prototype.$vxe) {
-    Vue.prototype.$vxe = { t: VXETable.t }
+  VCUTable.Vue = Vue
+  VCUTable.Table = VcuTable
+  if (!Vue.prototype.$vcu) {
+    Vue.prototype.$vcu = { t: VCUTable.t }
   } else {
-    Vue.prototype.$vxe.t = VXETable.t
+    Vue.prototype.$vcu.t = VCUTable.t
   }
-  Vue.component(VxeTable.name, VxeTable)
+  Vue.component(VcuTable.name, VcuTable)
 }
 
-export const Table = VxeTable
-export default VxeTable
+export const Table = VcuTable
+export default VcuTable

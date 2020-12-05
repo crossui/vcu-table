@@ -14,11 +14,11 @@ function use (Plugin, options) {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   if (Plugin && Plugin.install) {
     if (installedPlugins.indexOf(Plugin) === -1) {
-      Plugin.install(VXETable, options)
+      Plugin.install(VCUTable, options)
       installedPlugins.push(Plugin)
     }
   }
-  return VXETable
+  return VCUTable
 }
 
 /**
@@ -26,13 +26,13 @@ function use (Plugin, options) {
  */
 function reg (key) {
   /* eslint-disable @typescript-eslint/no-use-before-define */
-  if (VXETable.Table) {
-    UtilTools.error('vxe.error.useErr', [key])
+  if (VCUTable.Table) {
+    UtilTools.error('vcu.error.useErr', [key])
   }
-  VXETable[`_${key}`] = 1
+  VCUTable[`_${key}`] = 1
 }
 
-export const VXETable = {
+export const VCUTable = {
   t: key => GlobalConfig.i18n(key),
   v: 'v3',
   reg,
@@ -49,29 +49,29 @@ export const VXETable = {
 /**
  * 获取当前的 zIndex
  */
-Object.defineProperty(VXETable, 'zIndex', { get: UtilTools.getLastZIndex })
+Object.defineProperty(VCUTable, 'zIndex', { get: UtilTools.getLastZIndex })
 
 /**
  * 获取下一个 zIndex
  */
-Object.defineProperty(VXETable, 'nextZIndex', { get: UtilTools.nextZIndex })
+Object.defineProperty(VCUTable, 'nextZIndex', { get: UtilTools.nextZIndex })
 
 /**
  * 获取所有导出类型
  */
-Object.defineProperty(VXETable, 'exportTypes', {
+Object.defineProperty(VCUTable, 'exportTypes', {
   get () {
-    return Object.keys(VXETable.types)
+    return Object.keys(VCUTable.types)
   }
 })
 
 /**
  * 获取所有导入类型
  */
-Object.defineProperty(VXETable, 'importTypes', {
+Object.defineProperty(VCUTable, 'importTypes', {
   get () {
     const rest = []
-    XEUtils.each(VXETable.types, (flag, type) => {
+    XEUtils.each(VCUTable.types, (flag, type) => {
       if (flag) {
         rest.push(type)
       }
@@ -80,4 +80,4 @@ Object.defineProperty(VXETable, 'importTypes', {
   }
 })
 
-export default VXETable
+export default VCUTable

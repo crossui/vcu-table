@@ -6,12 +6,12 @@
           设置 <span class="blue-text">show-header=false</span> 隐藏头部
         </div>
       </a-alert>
-      <vxe-table :data="tableData" :show-header="false">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :data="tableData" :show-header="false">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -20,46 +20,46 @@
           分组表头
         </div>
       </a-alert>
-      <vxe-table border resizable :data="tableData">
-        <vxe-table-column title="基本信息" fixed="left">
-          <vxe-table-column
+      <vcu-table border resizable :data="tableData">
+        <vcu-table-column title="基本信息" fixed="left">
+          <vcu-table-column
             type="seq"
             width="160"
-          ></vxe-table-column>
-          <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column
             field="name"
             title="Name"
             width="200"
-          ></vxe-table-column>
-        </vxe-table-column>
-        <vxe-table-column title="更多信息">
-          <vxe-table-column
+          ></vcu-table-column>
+        </vcu-table-column>
+        <vcu-table-column title="更多信息">
+          <vcu-table-column
             field="role"
             title="Role"
-          ></vxe-table-column>
-          <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column
             field="age"
             title="Age"
-          ></vxe-table-column>
-          <vxe-table-column title="详细信息">
-            <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column title="详细信息">
+            <vcu-table-column
               field="sex"
               title="Sex"
-            ></vxe-table-column>
-            <vxe-table-column
+            ></vcu-table-column>
+            <vcu-table-column
               field="date"
               title="Date"
               show-overflow
-            ></vxe-table-column>
-          </vxe-table-column>
-        </vxe-table-column>
-        <vxe-table-column
+            ></vcu-table-column>
+          </vcu-table-column>
+        </vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           width="200"
           show-overflow
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -68,14 +68,14 @@
           分组表头(数据源形式)
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         stripe
         resizable
         height="300"
         :columns="tableColumnGroup"
         :data="tableDataGroup"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

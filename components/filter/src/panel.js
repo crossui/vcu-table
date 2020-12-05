@@ -1,9 +1,9 @@
 import GlobalConfig from '../../conf'
-import VXETable from '../../v-x-e-table'
+import VCUTable from '../../v-c-u-table'
 import { UtilTools } from '../../tools'
 
 export default {
-  name: 'VxeTableFilter',
+  name: 'VcuTableFilter',
   props: {
     filterStore: Object
   },
@@ -17,9 +17,9 @@ export default {
     const { $parent: $xetable, filterStore } = this
     const { column } = filterStore
     const filterRender = column ? column.filterRender : null
-    const compConf = filterRender ? VXETable.renderer.get(filterRender.name) : null
+    const compConf = filterRender ? VCUTable.renderer.get(filterRender.name) : null
     return h('div', {
-      class: ['vxe-table--filter-wrapper', 'filter--prevent-default', compConf && compConf.className ? compConf.className : '', {
+      class: ['vcu-table--filter-wrapper', 'filter--prevent-default', compConf && compConf.className ? compConf.className : '', {
         't--animat': $xetable.animat,
         'is--multiple': filterStore.multiple,
         'filter--active': filterStore.visible
@@ -35,27 +35,27 @@ export default {
       if (slots && slots.filter) {
         return [
           h('div', {
-            class: 'vxe-table--filter-template'
+            class: 'vcu-table--filter-template'
           }, slots.filter.call($xetable, Object.assign({ $panel: this, context: this }, args), h))
         ]
       } else if (compConf && compConf.renderFilter) {
         return [
           h('div', {
-            class: 'vxe-table--filter-template'
+            class: 'vcu-table--filter-template'
           }, compConf.renderFilter.call($xetable, h, filterRender, Object.assign({ $panel: this, context: this }, args), this))
         ]
       }
       return [
         h('ul', {
-          class: 'vxe-table--filter-header'
+          class: 'vcu-table--filter-header'
         }, [
           h('li', {
-            class: ['vxe-table--filter-option', {
+            class: ['vcu-table--filter-option', {
               'is--checked': multiple ? filterStore.isAllSelected : !filterStore.options.some(item => item._checked),
               'is--indeterminate': multiple && filterStore.isIndeterminate
             }],
             attrs: {
-              title: GlobalConfig.i18n(multiple ? 'vxe.table.allTitle' : 'vxe.table.allFilter')
+              title: GlobalConfig.i18n(multiple ? 'vcu.table.allTitle' : 'vcu.table.allFilter')
             },
             on: {
               click: evnt => {
@@ -64,25 +64,25 @@ export default {
             }
           }, (multiple ? [
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--checked-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--checked-icon'
             }),
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--unchecked-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--unchecked-icon'
             }),
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--indeterminate-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--indeterminate-icon'
             })
           ] : []).concat([
             h('span', {
-              class: 'vxe-checkbox--label'
-            }, GlobalConfig.i18n('vxe.table.allFilter'))
+              class: 'vcu-checkbox--label'
+            }, GlobalConfig.i18n('vcu.table.allFilter'))
           ]))
         ]),
         h('ul', {
-          class: 'vxe-table--filter-body'
+          class: 'vcu-table--filter-body'
         }, filterStore.options.map(item => {
           return h('li', {
-            class: ['vxe-table--filter-option', {
+            class: ['vcu-table--filter-option', {
               'is--checked': item._checked
             }],
             attrs: {
@@ -95,17 +95,17 @@ export default {
             }
           }, (multiple ? [
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--checked-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--checked-icon'
             }),
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--unchecked-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--unchecked-icon'
             }),
             h('span', {
-              class: 'vxe-checkbox--icon vxe-checkbox--indeterminate-icon'
+              class: 'vcu-checkbox--icon vcu-checkbox--indeterminate-icon'
             })
           ] : []).concat([
             h('span', {
-              class: 'vxe-checkbox--label'
+              class: 'vcu-checkbox--label'
             }, UtilTools.formatText(item.label, 1))
           ]))
         }))
@@ -115,11 +115,11 @@ export default {
       const { hasCheckOption, filterStore } = this
       const { column, multiple } = filterStore
       const filterRender = column.filterRender
-      const compConf = filterRender ? VXETable.renderer.get(filterRender.name) : null
+      const compConf = filterRender ? VCUTable.renderer.get(filterRender.name) : null
       const isDisabled = !hasCheckOption && !filterStore.isAllSelected && !filterStore.isIndeterminate
       return multiple && (!compConf || compConf.isFooter !== false) ? [
         h('div', {
-          class: 'vxe-table--filter-footer'
+          class: 'vcu-table--filter-footer'
         }, [
           h('button', {
             class: {
@@ -131,12 +131,12 @@ export default {
             on: {
               click: this.confirmFilter
             }
-          }, GlobalConfig.i18n('vxe.table.confirmFilter')),
+          }, GlobalConfig.i18n('vcu.table.confirmFilter')),
           h('button', {
             on: {
               click: this.resetFilter
             }
-          }, GlobalConfig.i18n('vxe.table.resetFilter'))
+          }, GlobalConfig.i18n('vcu.table.resetFilter'))
         ])
       ] : []
     },

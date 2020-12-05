@@ -9,7 +9,7 @@
       <div class="mb-5">
         <a-button icon="plus" @click="insertEvent">新增</a-button>
       </div>
-      <vxe-table
+      <vcu-table
         border
         resizable
         row-key
@@ -20,28 +20,28 @@
         :data="tableData"
         @cell-dblclick="cellDBLClickEvent"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           :formatter="formatterSex"
-        ></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           show-overflow
-        ></vxe-table-column>
-        <vxe-table-column title="操作" width="100" show-overflow>
+        ></vcu-table-column>
+        <vcu-table-column title="操作" width="100" show-overflow>
           <template v-slot="{ row }">
             <a-button-group size="small">
               <a-button icon="edit" @click="editEvent(row)"></a-button>
               <a-button icon="delete" @click="removeEvent(row)"></a-button>
             </a-button-group>
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
 
     <a-modal

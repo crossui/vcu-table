@@ -12,7 +12,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable"
         :data="tableData"
         :edit-config="{
@@ -22,9 +22,9 @@
         show-footer
         :footer-method="footerMethod"
       >
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="书名"
           :edit-render="{ autofocus: '.my-input' }"
@@ -37,8 +37,8 @@
               class="my-input"
             ></a-input>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="amount" title="单价" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column field="amount" title="单价" :edit-render="{}">
           <template v-slot:edit="scope">
             <a-input-number
               size="small"
@@ -46,8 +46,8 @@
               style="width: 100%"
             ></a-input-number>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="number" title="数量" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column field="number" title="数量" :edit-render="{}">
           <template v-slot:edit="{ row }">
             <a-input-number
               size="small"
@@ -55,13 +55,13 @@
               style="width: 100%"
             ></a-input-number>
           </template>
-        </vxe-table-column>
-        <vxe-table-column title="总价" :edit-render="{}">
+        </vcu-table-column>
+        <vcu-table-column title="总价" :edit-render="{}">
           <template v-slot="{ row }">
             <span>{{ countAmount(row) }} 元</span>
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

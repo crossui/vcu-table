@@ -84,7 +84,7 @@ Object.keys(props).forEach(name => {
 })
 
 export default {
-  name: 'VxeTableColumn',
+  name: 'VcuTableColumn',
   props,
   provide () {
     return {
@@ -106,7 +106,7 @@ export default {
   mounted () {
     UtilTools.assemColumn(this)
     if (this.type === 'expand' && !this.$scopedSlots.content && this.$scopedSlots.default) {
-      UtilTools.warn('vxe.error.expandContent')
+      UtilTools.warn('vcu.error.expandContent')
     }
   },
   destroyed () {

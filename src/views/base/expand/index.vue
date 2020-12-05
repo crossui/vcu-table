@@ -39,20 +39,20 @@
         >
       </a-button-group>
 
-      <vxe-table
+      <vcu-table
         ref="xTable"
         border
         :data="tableData"
         @toggle-row-expand="toggleExpandChangeEvent"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="expand" width="60">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column type="expand" width="60">
           <template v-slot:content="{ row, rowIndex }">
             <template v-if="rowIndex === 1">
-              <vxe-table border :data="tableData">
-                <vxe-table-column field="role" title="Role"></vxe-table-column>
-                <vxe-table-column field="age" title="Age"></vxe-table-column>
-              </vxe-table>
+              <vcu-table border :data="tableData">
+                <vcu-table-column field="role" title="Role"></vcu-table-column>
+                <vcu-table-column field="age" title="Age"></vcu-table-column>
+              </vcu-table>
             </template>
             <template v-else>
               <ul>
@@ -75,11 +75,11 @@
               </ul>
             </template>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -108,7 +108,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         ref="xTable1"
         border
         :expand-config="{
@@ -119,17 +119,17 @@
         }"
         :data="tableData"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="expand" title="Name">
-          <template v-slot="{ row, rowIndex }">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column type="expand" title="Name">
+          <template v-slot="{ row }">
             <span>{{ row.name }}</span>
           </template>
           <template v-slot:content="{ row, rowIndex }">
             <template v-if="rowIndex === 1">
-              <vxe-table border :data="tableData">
-                <vxe-table-column field="role" title="Role"></vxe-table-column>
-                <vxe-table-column field="age" title="Age"></vxe-table-column>
-              </vxe-table>
+              <vcu-table border :data="tableData">
+                <vcu-table-column field="role" title="Role"></vcu-table-column>
+                <vcu-table-column field="age" title="Age"></vcu-table-column>
+              </vcu-table>
             </template>
             <template v-else>
               <ul>
@@ -152,10 +152,10 @@
               </ul>
             </template>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -174,7 +174,7 @@
         </div>
       </a-alert>
 
-      <vxe-table
+      <vcu-table
         border
         ref="xTable2"
         :data="tableData1"
@@ -184,8 +184,8 @@
           loadMethod: loadContentMethod,
         }"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="expand" width="80">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column type="expand" width="80">
           <template v-slot:content="{ row }">
             <ul>
               <li v-for="(item, index) in row.detailList" :key="index">
@@ -195,11 +195,11 @@
               </li>
             </ul>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

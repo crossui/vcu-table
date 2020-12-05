@@ -24,7 +24,7 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         show-footer
         :footer-method="footerMethod"
@@ -34,11 +34,11 @@
         :footer-row-class-name="footerRowClassName"
         :data="tableData"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -49,17 +49,17 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         :data="tableData"
         :cell-class-name="cellClassName2"
         @cell-click="cellClickEvent"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -74,18 +74,18 @@
           <div class="red-text">注：当自定义样式之后可能会覆盖表格的样式，比如选中行..等，记得自行处理好相关样式</div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         border
         :data="tableData"
         :header-cell-style="headerCellStyle"
         :row-style="rowStyle"
         :cell-style="cellStyle"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>
@@ -100,7 +100,7 @@ export default {
           role: "Develop",
           sex: "Man",
           age: 28,
-          address: "vxe-table 好好学习天天向上",
+          address: "vcu-table 好好学习天天向上",
         },
         {
           id: 10002,

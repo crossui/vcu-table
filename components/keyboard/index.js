@@ -1,10 +1,10 @@
 import Table from '../table'
 import mixin from './src/mixin'
-import VXETable from '../v-x-e-table'
+import VCUTable from '../v-c-u-table'
 
 export const Keyboard = {
   install () {
-    VXETable.reg('keyboard')
+    VCUTable.reg('keyboard')
     Table.mixins.push(mixin)
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <a-card title="反转表格">
-    <vxe-table
+    <vcu-table
       border
       class="reverse-table"
       :show-header="false"
       :columns="tableColumn"
       :data="tableData"
-    ></vxe-table>
+    ></vcu-table>
   </a-card>
 </template>
 <script>
@@ -192,7 +192,7 @@ export default {
 };
 </script>
 <style>
-.reverse-table .vxe-body--row .vxe-body--column:first-child {
+.reverse-table .vcu-body--row .vcu-body--column:first-child {
   background-color: #f8f8f9;
 }
 </style>

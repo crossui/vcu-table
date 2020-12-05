@@ -1,8 +1,8 @@
-import VxeTableBody from './src/body'
+import VcuTableBody from './src/body'
 
-VxeTableBody.install = function (Vue) {
-  Vue.component(VxeTableBody.name, VxeTableBody)
+VcuTableBody.install = function (Vue) {
+  Vue.component(VcuTableBody.name, VcuTableBody)
 }
 
-export const Body = VxeTableBody
-export default VxeTableBody
+export const Body = VcuTableBody
+export default VcuTableBody

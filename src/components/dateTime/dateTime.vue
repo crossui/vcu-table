@@ -346,6 +346,6 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./index.scss";
+<style lang="less">
+@import "./index.less";
 </style>

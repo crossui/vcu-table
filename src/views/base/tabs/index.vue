@@ -25,13 +25,13 @@
 
     <a-tabs default-active-key="1">
       <a-tab-pane key="1" tab="Tab 1"
-        ><vxe-table :columns="tableColumn" :data="tableData"></vxe-table
+        ><vcu-table :columns="tableColumn" :data="tableData"></vcu-table
       ></a-tab-pane>
       <a-tab-pane key="2" tab="Tab 2" force-render>
-        <vxe-table :columns="tableColumn" :data="tableData"></vxe-table>
+        <vcu-table :columns="tableColumn" :data="tableData"></vcu-table>
       </a-tab-pane>
       <a-tab-pane key="3" tab="Tab 3">
-        <vxe-table :columns="tableColumn" :data="tableData"></vxe-table>
+        <vcu-table :columns="tableColumn" :data="tableData"></vcu-table>
       </a-tab-pane>
     </a-tabs>
   </a-card>

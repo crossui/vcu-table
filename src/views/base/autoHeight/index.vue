@@ -20,7 +20,7 @@
       </div>
     </a-alert>
     <div :style="{ width: tableWidth, height: tableHeight }">
-      <vxe-table
+      <vcu-table
         border
         auto-resize
         show-footer
@@ -28,35 +28,35 @@
         :footer-method="footerMethod"
         :data="tableData"
       >
-        <vxe-table-column type="seq" width="60" fixed="left"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60" fixed="left"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           width="300"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           width="300"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="age"
           title="Age"
           width="300"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="date13"
           title="Date"
           width="300"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           width="200"
           fixed="right"
           show-overflow
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

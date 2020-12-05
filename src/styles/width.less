@@ -1,0 +1,10 @@
+@widthList: 100, 120, 150, 200, 250, 300, 350, 400, 500, 700;
+.width-loop(@counter) when (@counter > 0) {
+  @class: extract(@widthList, @counter);
+  .w-@{class} {
+    width: (1px * extract(@widthList, @counter));
+  }
+  .width-loop((@counter - 1));
+}
+
+.width-loop(10);

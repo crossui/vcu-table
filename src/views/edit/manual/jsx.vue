@@ -6,13 +6,13 @@
         <div>配置 <span class="blue-text"> editRender: { autofocus: "类名" } </span> 指定聚焦组件</div>
       </div>
     </a-alert>
-    <vxe-table
+    <vcu-table
       ref="xTable"
       :columns="tableColumn"
       :data="tableData"
       :edit-config="{ trigger: 'manual', mode: 'row' }"
     >
-    </vxe-table>
+    </vcu-table>
   </div>
 </template>
 <script>

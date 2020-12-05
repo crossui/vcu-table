@@ -6,13 +6,13 @@
           使用 <span class="blue-text"> resizable </span>属性启用列宽拖动功能
         </div>
       </a-alert>
-      <vxe-table :data="tableData" resizable border>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="address" title="address"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :data="tableData" resizable border>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="address" title="address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -21,7 +21,7 @@
           使用 <span class="blue-text"> columns </span>表头数据源的<span class="blue-text"> resizable </span>属性值启用列宽拖动功能
         </div>
       </a-alert>
-      <vxe-table :columns="tableColumn" :data="tableData" border></vxe-table>
+      <vcu-table :columns="tableColumn" :data="tableData" border></vcu-table>
     </div>
 
     <div class="mb-30">
@@ -30,34 +30,34 @@
           左右固定列宽拖动（固定左不允许超过固定右，固定右不允许超过固定左）
         </div>
       </a-alert>
-      <vxe-table :data="tableData" resizable border>
-        <vxe-table-column
+      <vcu-table :data="tableData" resizable border>
+        <vcu-table-column
           type="seq"
           width="160"
           fixed="left"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           width="600"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           width="600"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="age"
           title="Age"
           width="600"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="address"
           title="address"
           width="260"
           fixed="right"
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -66,53 +66,53 @@
           左右固定列的分组表头拖动（只允许列拖动，不允许分组标题拖动）
         </div>
       </a-alert>
-      <vxe-table border resizable :data="tableData">
-        <vxe-table-column title="基本信息" fixed="left">
-          <vxe-table-column
+      <vcu-table border resizable :data="tableData">
+        <vcu-table-column title="基本信息" fixed="left">
+          <vcu-table-column
             type="seq"
             width="160"
             fixed="left"
-          ></vxe-table-column>
-          <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column
             field="name"
             title="Name"
             width="200"
             fixed="left"
-          ></vxe-table-column>
-        </vxe-table-column>
-        <vxe-table-column title="更多信息">
-          <vxe-table-column
+          ></vcu-table-column>
+        </vcu-table-column>
+        <vcu-table-column title="更多信息">
+          <vcu-table-column
             field="role"
             title="Role"
             width="600"
-          ></vxe-table-column>
-          <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column
             field="age"
             title="Age"
             width="600"
-          ></vxe-table-column>
-          <vxe-table-column title="详细信息">
-            <vxe-table-column
+          ></vcu-table-column>
+          <vcu-table-column title="详细信息">
+            <vcu-table-column
               field="sex"
               title="Sex"
               width="600"
-            ></vxe-table-column>
-            <vxe-table-column
+            ></vcu-table-column>
+            <vcu-table-column
               field="date"
               title="Date"
               width="600"
               show-overflow
-            ></vxe-table-column>
-          </vxe-table-column>
-        </vxe-table-column>
-        <vxe-table-column
+            ></vcu-table-column>
+          </vcu-table-column>
+        </vcu-table-column>
+        <vcu-table-column
           field="address"
           title="Address"
           width="200"
           show-overflow
           fixed="right"
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

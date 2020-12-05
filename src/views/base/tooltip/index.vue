@@ -1,40 +1,40 @@
 <template>
   <a-card title="单元格工具提示">
-    <vxe-table
+    <vcu-table
       show-footer
       :footer-method="footerMethod"
       :tooltip-config="{ enabled: true, contentMethod: showTooltipMethod }"
       :data="tableData"
     >
-      <vxe-table-column type="seq" width="60"></vxe-table-column>
-      <vxe-table-column
+      <vcu-table-column type="seq" width="60"></vcu-table-column>
+      <vcu-table-column
         field="name"
         title="名称"
         :title-help="{ message: '自定义帮助提示信息' }"
-      ></vxe-table-column>
-      <vxe-table-column
+      ></vcu-table-column>
+      <vcu-table-column
         field="role"
         title="角色"
         :title-help="{ message: '自定义图标', icon: 'iconfont icon-addteam' }"
-      ></vxe-table-column>
-      <vxe-table-column field="date" title="Date"></vxe-table-column>
-      <vxe-table-column field="rate" title="Rate">
+      ></vcu-table-column>
+      <vcu-table-column field="date" title="Date"></vcu-table-column>
+      <vcu-table-column field="rate" title="Rate">
         <template v-slot:header>
           <span>自定义标题</span>
         </template>
-      </vxe-table-column>
-      <vxe-table-column
+      </vcu-table-column>
+      <vcu-table-column
         field="address"
         title="Address"
         width="160"
-      ></vxe-table-column>
-      <vxe-table-column
+      ></vcu-table-column>
+      <vcu-table-column
         type="html"
         field="content"
         title="Content"
         width="200"
-      ></vxe-table-column>
-    </vxe-table>
+      ></vcu-table-column>
+    </vcu-table>
   </a-card>
 </template>
 <script>

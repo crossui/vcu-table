@@ -11,17 +11,17 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           type="html"
           :formatter="formatName"
-        ></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -32,21 +32,21 @@
           自定义模板；可以实现自定义任意内容及 html 元素
         </div>
       </a-alert>
-      <vxe-table show-footer :data="tableData" :footer-method="footerMethod">
-        <vxe-table-column type="seq" width="60">
+      <vcu-table show-footer :data="tableData" :footer-method="footerMethod">
+        <vcu-table-column type="seq" width="60">
           <template v-slot:header>
             <div class="red-text">序号</div>
           </template>
           <template v-slot:footer>
             <div class="blue-text">合计</div>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="name" title="Name">
+        </vcu-table-column>
+        <vcu-table-column field="name" title="Name">
           <template v-slot="{ row }">
             <a href="">{{ row.name }}</a>
           </template>
-        </vxe-table-column>
-        <vxe-table-column
+        </vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           :filters="[{ data: '' }]"
@@ -62,8 +62,8 @@
               />
             </template>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="age" title="Age">
+        </vcu-table-column>
+        <vcu-table-column field="age" title="Age">
           <template v-slot="{ row, rowIndex }">
             <template v-if="rowIndex === 1">
               <a-switch default-checked />
@@ -75,8 +75,8 @@
               <span v-else class="lime-text">{{ row.age }}</span>
             </template>
           </template>
-        </vxe-table-column>
-        <vxe-table-column field="action" title="action">
+        </vcu-table-column>
+        <vcu-table-column field="action" title="action">
           <template v-slot="{ row, rowIndex }">
             <a-button-group size="small">
               <a-button @click="handleAdd(row, rowIndex)" icon="user-add">
@@ -85,8 +85,8 @@
               </a-button>
             </a-button-group>
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -98,7 +98,7 @@
           ><span class="red-text">（注：返回数组格式）</span>
         </div> </a-alert
       ><!-- show-footer  -->
-      <vxe-table
+      <vcu-table
         show-footer
         :columns="tableColumn"
         :data="tableData"
@@ -113,7 +113,7 @@
         <template v-slot:seq_footer>
           <div class="blue-text">统计</div>
         </template>
-      </vxe-table>
+      </vcu-table>
     </div>
 
   </a-card>

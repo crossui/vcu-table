@@ -14,7 +14,7 @@
         <a-button @click="printSelectEvent">打印选中</a-button>
       </a-button-group>
 
-      <vxe-table
+      <vcu-table
         border
         show-footer
         export-config
@@ -22,7 +22,7 @@
         :footer-method="footerMethod"
         :columns="tableColumn"
         :data="tableData"
-      ></vxe-table>
+      ></vcu-table>
     </div>
   </a-card>
 </template>

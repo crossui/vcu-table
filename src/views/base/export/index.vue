@@ -41,32 +41,32 @@
         <a-button @click="exportCustomEvent">导出自定义</a-button>
       </a-button-group>
 
-      <vxe-table
+      <vcu-table
         highlight-hover-row
         export-config
         border
         ref="xTable1"
         :data="tableData"
       >
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="自动转换"
           cell-type="string"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="amount"
           title="导出数值"
           cell-type="number"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="num"
           title="导出字符串"
           cell-type="string"
           sortable
-        ></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>

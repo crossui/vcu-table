@@ -11,7 +11,7 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         ref="xTable"
         border
         resizable
@@ -25,7 +25,7 @@
         @header-cell-context-menu="headerCellContextMenuEvent"
         @cell-context-menu="cellContextMenuEvent"
         @context-menu-click="contextMenuClickEvent"
-      ></vxe-table>
+      ></vcu-table>
       <a-alert type="success" class="mt-10">
         <div slot="message">
           <div>

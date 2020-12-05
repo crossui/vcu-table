@@ -1,0 +1,10 @@
+@heightList: 100, 120, 150, 200, 250, 300, 350, 400, 500;
+.height-loop(@counter) when (@counter > 0) {
+  @class: extract(@heightList, @counter);
+  .h-@{class}{
+    height:  (1px * extract(@heightList, @counter)); 
+  }
+  .height-loop((@counter - 1));  
+}
+
+.height-loop(9);

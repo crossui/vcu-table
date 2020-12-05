@@ -1,5 +1,5 @@
 export default {
-  vxe: {
+  vcu: {
     error: {
       groupFixed: '如果使用分组表头，固定列必须按组设置',
       groupMouseRange: '分组表头与 "{{0}}" 不能同时使用，这可能會出現错误',
@@ -23,7 +23,7 @@ export default {
       delProp: '参数 "{{0}}" 已废弃，请使用 "{{1}}"',
       delEvent: '事件 "{{0}}" 已废弃，请使用 "{{1}}"',
       removeProp: '参数 "{{0}}" 已废弃，不建议使用，这可能会导致出现错误',
-      errFormat: '全局的格式化内容应该使用 "VXETable.formats" 定义，挂载 "formatter={{0}}" 的方式已不建议使用',
+      errFormat: '全局的格式化内容应该使用 "VCUTable.formats" 定义，挂载 "formatter={{0}}" 的方式已不建议使用',
       notType: '不支持的文件类型 "{{0}}"',
       notExp: '该浏览器不支持导入/导出功能',
       impFields: '导入失败，请检查字段名和数据格式是否正确',

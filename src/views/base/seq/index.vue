@@ -6,16 +6,16 @@
           设置 <span class="blue-text">type=seq</span> 开启序号列
         </div>
       </a-alert>
-      <vxe-table :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="radio" width="60"></vxe-table-column>
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="sex2" title="Sex2"></vxe-table-column>
-        <vxe-table-column field="address" title="Address"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column type="radio" width="60"></vcu-table-column>
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="sex2" title="Sex2"></vcu-table-column>
+        <vcu-table-column field="address" title="Address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -24,16 +24,16 @@
           使用 <span class="blue-text">seq-config={startIndex}</span> 自定义起始序号
         </div>
       </a-alert>
-      <vxe-table :data="tableData" :seq-config="{startIndex: 100}">
-        <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
-        <vxe-table-column type="radio" width="60"></vxe-table-column>
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="sex2" title="Sex2"></vxe-table-column>
-        <vxe-table-column field="address" title="Address"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :data="tableData" :seq-config="{startIndex: 100}">
+        <vcu-table-column type="seq" title="序号" width="60"></vcu-table-column>
+        <vcu-table-column type="radio" width="60"></vcu-table-column>
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="sex2" title="Sex2"></vcu-table-column>
+        <vcu-table-column field="address" title="Address"></vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -42,16 +42,16 @@
           使用 <span class="blue-text">seq-config={seqMethod}</span> 自定义方法
         </div>
       </a-alert>
-      <vxe-table :seq-config="{seqMethod: seqMethod}" :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column type="radio" width="60"></vxe-table-column>
-        <vxe-table-column type="checkbox" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-        <vxe-table-column field="sex" title="Sex"></vxe-table-column>
-        <vxe-table-column field="sex2" title="Sex2"></vxe-table-column>
-        <vxe-table-column field="address" title="Address"></vxe-table-column>
-      </vxe-table>
+      <vcu-table :seq-config="{seqMethod: seqMethod}" :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column type="radio" width="60"></vcu-table-column>
+        <vcu-table-column type="checkbox" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+        <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+        <vcu-table-column field="sex2" title="Sex2"></vcu-table-column>
+        <vcu-table-column field="address" title="Address"></vcu-table-column>
+      </vcu-table>
     </div>
 
   </a-card>

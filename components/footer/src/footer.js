@@ -18,7 +18,7 @@ function mergeFooterMethod (mergeFooterList, _rowIndex, _columnIndex) {
 }
 
 export default {
-  name: 'VxeTableFooter',
+  name: 'VcuTableFooter',
   props: {
     footerData: Array,
     tableColumn: Array,
@@ -68,7 +68,7 @@ export default {
       }
     }
     return h('div', {
-      class: ['vxe-table--footer-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
+      class: ['vcu-table--footer-wrapper', fixedType ? `fixed-${fixedType}--wrapper` : 'body--wrapper'],
       attrs: {
         'data-tid': tId
       },
@@ -77,11 +77,11 @@ export default {
       }
     }, [
       fixedType ? _e() : h('div', {
-        class: 'vxe-body--x-space',
+        class: 'vcu-body--x-space',
         ref: 'xSpace'
       }),
       h('table', {
-        class: 'vxe-table--footer',
+        class: 'vcu-table--footer',
         attrs: {
           'data-tid': tId,
           cellspacing: 0,
@@ -117,7 +117,7 @@ export default {
         }, footerData.map((list, _rowIndex) => {
           const $rowIndex = _rowIndex
           return h('tr', {
-            class: ['vxe-footer--row', footerRowClassName ? XEUtils.isFunction(footerRowClassName) ? footerRowClassName({ $table: $xetable, _rowIndex, $rowIndex, fixed: fixedType, type: cellType }) : footerRowClassName : ''],
+            class: ['vcu-footer--row', footerRowClassName ? XEUtils.isFunction(footerRowClassName) ? footerRowClassName({ $table: $xetable, _rowIndex, $rowIndex, fixed: fixedType, type: cellType }) : footerRowClassName : ''],
             style: footerRowStyle ? (XEUtils.isFunction(footerRowStyle) ? footerRowStyle({ $table: $xetable, _rowIndex, $rowIndex, fixed: fixedType, type: cellType }) : footerRowStyle) : null
           }, tableColumn.map((column, $columnIndex) => {
             const { type, showFooterOverflow, footerAlign, align, footerClassName } = column
@@ -195,7 +195,7 @@ export default {
               }
             }
             return h('td', {
-              class: ['vxe-footer--column', column.id, {
+              class: ['vcu-footer--column', column.id, {
                 [`col--${footAlign}`]: footAlign,
                 [`col--${type}`]: type,
                 'col--last': $columnIndex === tableColumn.length - 1,
@@ -209,7 +209,7 @@ export default {
               key: columnKey ? column.id : $columnIndex
             }, [
               h('div', {
-                class: ['vxe-cell', {
+                class: ['vcu-cell', {
                   'c--title': showTitle,
                   'c--tooltip': showTooltip,
                   'c--ellipsis': showEllipsis

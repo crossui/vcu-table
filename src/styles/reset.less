@@ -1,0 +1,88 @@
+@textColor : red,
+orange,
+green,
+cyan,
+blue,
+purple,
+magenta,
+aqua,
+lime;
+
+.text-color-classes(@i: length(@textColor)) when (@i > 0) {
+    .text-color-classes(@i - 1);
+    @color: extract(@textColor, @i);
+
+    .@{color}-text {
+        color: @color;
+    }
+}
+
+html,
+body {
+    width     : 100%;
+    height    : 100%;
+    background: #f0f0f0;
+    overflow  : hidden;
+}
+
+.clearfix() {
+    zoom: 1;
+
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear     : both;
+        visibility: hidden;
+        font-size : 0;
+        height    : 0;
+    }
+}
+
+.clearfix {
+    .clearfix();
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+.text-center {
+    text-align: center
+}
+
+.notwrap {
+    word-break   : keep-all;
+    white-space  : nowrap;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+}
+
+#app {
+    width : 100%;
+    height: 100%;
+}
+
+.title-style {
+	font-size  : 14px;
+	font-weight: 600;
+	color      : #000;
+	margin     : 0;
+}
+
+.text-color-classes();

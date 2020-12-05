@@ -37,9 +37,9 @@
           </div>
         </div>
       </a-alert>
-      <vxe-table :data="tableData">
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column
+      <vcu-table :data="tableData">
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column
           field="name"
           title="Name"
           sortable
@@ -48,8 +48,8 @@
             { label: 'id大于10003', value: 10003, checked: true },
           ]"
           :filter-method="filterNameMethod"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           :filters="[
@@ -57,8 +57,8 @@
             { label: 'Woman', value: 'Woman' },
           ]"
           :filter-multiple="false"
-        ></vxe-table-column>
-        <vxe-table-column
+        ></vcu-table-column>
+        <vcu-table-column
           field="age"
           title="Age"
           :filters="[{ data: '' }]"
@@ -73,8 +73,8 @@
               @change="$panel.changeOption($event, !!option.data, option)"
             />
           </template>
-        </vxe-table-column>
-      </vxe-table>
+        </vcu-table-column>
+      </vcu-table>
     </div>
 
     <div class="mb-30">
@@ -85,16 +85,16 @@
           局部替换默认的图标，例如第三方图标库：<span class="red-text">inconfont</span>
         </div>
       </a-alert>
-      <vxe-table
+      <vcu-table
         :data="tableData"
         :filter-config="{
           iconNone: 'iconfont icon-filter',
           iconMatch: 'iconfont icon-filter-fill',
         }"
       >
-        <vxe-table-column type="seq" width="60"></vxe-table-column>
-        <vxe-table-column field="name" title="Name"></vxe-table-column>
-        <vxe-table-column
+        <vcu-table-column type="seq" width="60"></vcu-table-column>
+        <vcu-table-column field="name" title="Name"></vcu-table-column>
+        <vcu-table-column
           field="sex"
           title="Sex"
           :filters="[
@@ -102,9 +102,9 @@
             { label: 'Woman', value: 'Woman' },
           ]"
           :filter-multiple="false"
-        ></vxe-table-column>
-        <vxe-table-column field="age" title="Age"></vxe-table-column>
-      </vxe-table>
+        ></vcu-table-column>
+        <vcu-table-column field="age" title="Age"></vcu-table-column>
+      </vcu-table>
     </div>
   </a-card>
 </template>
