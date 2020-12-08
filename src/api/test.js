@@ -47,3 +47,15 @@ export async function getPopupFormData() {
     return false;
   }
 }
+
+export async function getScrollData() {
+  try {
+    const res = await request({
+      url: 'dataq/api/page/scrollDatas',
+      method: 'post'
+    })
+    return res;
+  } catch (err) {
+    return false;
+  }
+}

@@ -429,6 +429,88 @@ export const menuRouter = [
             name: 'upload',
             component: () =>
                 import('@/views/edit/upload/index.vue')
+        }]
+    },
+    {
+        path: '/bigData',
+        meta: {
+            title: '大数据表格'
+        },
+        name: 'bigData',
+        component: Main,
+        children: [{
+            path: 'scroll',
+            meta: {
+                title: '虚拟滚动',
+            },
+            name: 'scroll',
+            component: () =>
+                import('@/views/bigData/scroll/index.vue')
+        }, {
+            path: 'editVild',
+            meta: {
+                title: '可编辑及数据校验',
+            },
+            name: 'editVild',
+            component: () =>
+                import('@/views/bigData/editVild/index.vue')
+        }, {
+            path: 'partialLoad',
+            meta: {
+                title: '局部加载',
+            },
+            name: 'partialLoad',
+            component: () =>
+                import('@/views/bigData/partialLoad/index.vue')
+        }]
+    },
+    {
+        path: '/platform',
+        meta: {
+            title: '通用平台'
+        },
+        name: 'platform',
+        component: Main,
+        children: [{
+            path: 'basics',
+            meta: {
+                title: '基础',
+            },
+            name: 'basics',
+            component: () =>
+                import('@/views/platform/basics/index.vue')
+        }, {
+            path: 'fixed-columns-and-header',
+            meta: {
+                title: '固定头和列',
+            },
+            name: 'fixed-columns-and-header',
+            component: () =>
+                import('@/views/platform/fixed-columns-and-header/index.vue')
+        }, {
+            path: 'pager',
+            meta: {
+                title: '分页',
+            },
+            name: 'pager',
+            component: () =>
+                import('@/views/platform/pager/index.vue')
+        }, {
+            path: 'lazyLoad',
+            meta: {
+                title: '懒加载',
+            },
+            name: 'lazyLoad',
+            component: () =>
+                import('@/views/platform/lazyLoad/index.vue')
+        },  {
+            path: 'template',
+            meta: {
+                title: '自定义模板',
+            },
+            name: 'customTemplate',
+            component: () =>
+                import('@/views/platform/template/index.vue')
         }, {
             path: 'demo',
             meta: {
@@ -436,7 +518,24 @@ export const menuRouter = [
             },
             name: 'demo',
             component: () =>
-                import('@/views/edit/demo/index.vue')
+                import('@/views/platform/demo/index.vue')
+        }]
+    },
+    {
+        path: '/api',
+        meta: {
+            title: 'api文档'
+        },
+        name: 'api',
+        component: Main,
+        children: [{
+            path: 'vcu-table-api',
+            meta: {
+                title: 'vcu-table',
+            },
+            name: 'vcu-table-api',
+            component: () =>
+                import('@/views/api/vcu-table-api/index.vue')
         }]
     },
 ];

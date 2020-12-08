@@ -5,6 +5,7 @@ import VcuTableBody from '../../body'
 import vSize from '../../mixins/size'
 import { UtilTools, DomTools, GlobalEvent, ResizeEvent } from '../../tools'
 import methods from './methods'
+import platformMixins from './platformMixins'
 
 const { browse } = DomTools
 
@@ -69,7 +70,7 @@ function renderFixed(h, $xetable, fixedType) {
 
 export default {
   name: 'VcuTable',
-  mixins: [vSize],
+  mixins: [vSize, platformMixins],
   props: {
     /** 基本属性 */
     id: String,
@@ -238,6 +239,8 @@ export default {
     return {
       tId: `${XEUtils.uniqueId()}`,
       isCloak: false,
+      // 加载状态
+      loadingEd: this.loading,
       // 低性能的静态列
       staticColumns: [],
       // 渲染的列分组
@@ -559,15 +562,10 @@ export default {
       deep: true
     },
     data(value) {
-      this.loadTableData(value).then(() => {
-        if (!this.inited) {
-          this.inited = true
-          this.handleDefaults()
-        }
-        if ((this.scrollXLoad || this.scrollYLoad) && this.expandColumn) {
-          UtilTools.warn('vcu.error.scrollErrProp', ['column.type=expand'])
-        }
-      })
+      this.setDatas(value);
+    },
+    loading(val) {
+      this.loadingEd = val;
     },
     staticColumns(value) {
       this.handleColumn(value)
@@ -779,7 +777,7 @@ export default {
       tableColumn,
       tableGroupColumn,
       isGroup,
-      loading,
+      loadingEd,
       isCloak,
       stripe,
       showHeader,
@@ -967,7 +965,7 @@ export default {
         'is--area': mouseConfig && mouseOpts.area,
         'row--highlight': highlightHoverRow,
         'column--highlight': highlightHoverColumn,
-        'is--loading': isCloak || loading,
+        'is--loading': isCloak || loadingEd,
         'is--empty': !tableData.length,
         'scroll--y': overflowY,
         'scroll--x': overflowX,
@@ -1023,7 +1021,7 @@ export default {
        */
       h('div', {
         class: ['vcu-table--loading vcu-loading', {
-          'is--visible': isCloak || loading
+          'is--visible': isCloak || loadingEd
         }]
       }, [
         h('div', {

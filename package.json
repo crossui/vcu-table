@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name vcuTable components/index.js",
+    "style": "gulp --gulpfile gulp-style.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
@@ -36,6 +38,12 @@
     "es6-promise": "^4.2.8",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-less": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace-pro": "^1.0.1",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "resize-observer-polyfill": "^1.5.1",

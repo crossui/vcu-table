@@ -216,6 +216,18 @@ function removeMerges(_vm, merges, mList, rowList) {
 }
 
 const Methods = {
+  //更新列表数据
+  setDatas(value) {
+    this.loadTableData(value).then(() => {
+      if (!this.inited) {
+        this.inited = true
+        this.handleDefaults()
+      }
+      if ((this.scrollXLoad || this.scrollYLoad) && this.expandColumn) {
+        UtilTools.warn('vcu.error.scrollErrProp', ['column.type=expand'])
+      }
+    })
+  },
   /**
    * 获取父容器元素
    */

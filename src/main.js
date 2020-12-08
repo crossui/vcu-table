@@ -4,13 +4,17 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import _ from "lodash";
+import request from '@/utils/request'
 
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 Vue.use(Antd);
 
-import VCUTable from "../components/vcu-table.js";
+import VCUTable from "../components/index.js";
 Vue.use(VCUTable);
+VCUTable.setup({
+  request: request
+})
 
 
 import Uicomponents from '@/components';
