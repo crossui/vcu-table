@@ -503,7 +503,7 @@ export const menuRouter = [
             name: 'lazyLoad',
             component: () =>
                 import('@/views/platform/lazyLoad/index.vue')
-        },  {
+        }, {
             path: 'template',
             meta: {
                 title: '自定义模板',
@@ -511,6 +511,30 @@ export const menuRouter = [
             name: 'customTemplate',
             component: () =>
                 import('@/views/platform/template/index.vue')
+        }, {
+            path: 'optional',
+            meta: {
+                title: '可选择',
+            },
+            name: 'optional',
+            component: () =>
+                import('@/views/platform/optional/index.vue')
+        }, {
+            path: 'indexs',
+            meta: {
+                title: '索引',
+            },
+            name: 'indexs',
+            component: () =>
+                import('@/views/platform/indexs/index.vue')
+        }, {
+            path: 'filters',
+            meta: {
+                title: '筛选',
+            },
+            name: 'filters',
+            component: () =>
+                import('@/views/platform/filters/index.vue')
         }, {
             path: 'demo',
             meta: {
@@ -536,6 +560,14 @@ export const menuRouter = [
             name: 'vcu-table-api',
             component: () =>
                 import('@/views/api/vcu-table-api/index.vue')
+        },{
+            path: 'vcu-table-column-api',
+            meta: {
+                title: 'vcu-table-column',
+            },
+            name: 'vcu-table-column-api',
+            component: () =>
+                import('@/views/api/vcu-table-column-api/index.vue')
         }]
     },
 ];

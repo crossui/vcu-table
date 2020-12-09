@@ -38,7 +38,9 @@ export default {
       lazyCurrent: 1,
       lazyCount: 0,
       lazyNoCountPage: true,
-      tableBodyDom: null
+      tableBodyDom: null,
+      fullColumns: null,
+      filtersHeaderColumns: null
     }
   },
   computed: {
@@ -56,6 +58,13 @@ export default {
     locking(val) {
       this.lockingEd = val;
     },
+    loadOptions: {
+      handler(newV, oldV) {
+        //console.info(newV)
+      },
+      immediate: true,
+      deep: true
+    }
   },
   created() {
 
@@ -99,6 +108,8 @@ export default {
           ..._data
         });
         let _columns = this.renderColumns(res.data.payload);
+        this.fullColumns = _columns;
+        this.setFiltersHeaderColumns(_columns);
         this.loadColumn(_columns);
         /* let _columns = this.renderColumns(res.data.payload);
         this.tableColumns = [..._columns]
@@ -112,11 +123,18 @@ export default {
     //生成表头数据
     renderColumns(res) {
       let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
-      let customCell = this.platformOptions.customCell ? this.platformOptions.customCell : null
       let columns = res
         .map(item => {
           if (item.hidden == undefined || !item.hidden) {
             item.showOverflow = item.ellipsis ? true : false
+          }
+
+          if (_.isArray(customRender)) {
+            customRender.forEach(itemRender => {
+              if (item.key == itemRender.key || item.field == itemRender.key) {
+                item = XEUtils.merge({}, item, itemRender.params)
+              }
+            })
           }
           return item;
         })
@@ -124,7 +142,97 @@ export default {
           return item != undefined;
         });
 
+
+
+      //checkbox
+      if (this.platformOptions.checkbox) {
+        let isFixed = "";
+        columns.forEach(item => {
+          if (item.fixed == "left") {
+            isFixed = "left"
+          }
+        })
+        let checkboxItem = [{
+          fixed: isFixed,
+          align: "center",
+          type: "checkbox",
+          width: 60
+        }]
+        columns = checkboxItem.concat(columns)
+      }
+
+      //radio
+      if (this.platformOptions.radio) {
+        let isFixed = "";
+        columns.forEach(item => {
+          if (item.fixed == "left") {
+            isFixed = "left"
+          }
+        })
+        let radioItem = [{
+          fixed: isFixed,
+          align: "center",
+          type: "radio",
+          width: 60
+        }]
+        columns = radioItem.concat(columns)
+      }
+
+      //索引
+      if (this.platformOptions.seq) {
+        let isFixed = "";
+        columns.forEach(item => {
+          if (item.fixed == "left") {
+            isFixed = "left"
+          }
+        })
+        let seqItem = [{
+          fixed: isFixed,
+          align: "center",
+          type: "seq",
+          title: this.platformOptions.seq.title ? this.platformOptions.seq.title : "#",
+          width: 60
+        }]
+        columns = seqItem.concat(columns)
+      }
+
       return columns;
+    },
+    //生成表头的筛选菜单项 表头数组
+    setFiltersHeaderColumns(res) {
+      if (this.platformOptions.filters) {
+        this.filtersHeaderColumns = res.map(item => {
+          return item.key
+        });
+      }
+    },
+    //生成表头的筛选菜单项数据
+    handleFiltersHeaderDatas() {
+      if (this.filtersHeaderColumns) {
+        const zipVal = _.map(this.filtersHeaderColumns, (item) => {
+          if (item)
+            return item.filters ? item.filters : [];
+        });
+        let datas = _.zipObject(this.filtersHeaderColumns, zipVal);
+        _(this.afterFullData).forEach((item) => {
+          _.forIn(item, (value, key) => {
+            if (datas[key]) {
+              if (!_.includes(datas[key], value)) datas[key].push(value)
+            }
+          });
+        });
+        this.fullColumns = _.map(this.fullColumns, (item) => {
+          if (datas[item.key]) {
+            const filtersVal = _.map(datas[item.key], (val) => {
+              return { label: val, value: val };
+            });
+            item.filters = filtersVal;
+            item.filterMethod = ({ value, row, column }) => row[item.key].indexOf(value) === 0
+          }
+          return item;
+        });
+        this.loadColumn(this.fullColumns);
+      }
     },
     //获取列表数据
     async getTableListData(isRest, obj) {
@@ -176,9 +284,17 @@ export default {
           }
         }
 
+
+
         setTimeout(() => {
           this.setDatas(resData);
-        }, 20)
+          if (this.platformOptions.filters) this.handleFiltersHeaderDatas();
+          this.$emit("onPageLoad", {
+            datas: this.tableFullData,
+            count: res.data.payload.count,
+            response: res
+          })
+        }, 50)
 
 
         /* if (this.isLazy) {
@@ -206,11 +322,7 @@ export default {
         //this.$emit("onPageLoad", this.isLazy ? this.lazyCurrent : this.pager, this.isLazy ? this.tableDatas : res.data.payload.data, res);
         //console.info(this.tableFullData)
         //console.info(this.tableSynchData)
-        this.$emit("onPageLoad", {
-          datas: this.tableFullData,
-          count: res.data.payload.count,
-          response: res
-        })
+
       } catch (err) { }
       this.loadingEd = false;
     },
