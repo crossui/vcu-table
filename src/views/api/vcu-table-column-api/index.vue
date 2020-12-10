@@ -100,8 +100,6 @@ export default {
       nameFilters: [
         { label: "Props", value: "Props" },
         { label: "Slots", value: "Slots" },
-        { label: "Events", value: "Events" },
-        { label: "Methods", value: "Methods" },
       ],
       headerMenus: [
         [

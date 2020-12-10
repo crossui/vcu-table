@@ -6,7 +6,8 @@ import vSize from '../../mixins/size'
 import { UtilTools, DomTools, GlobalEvent, ResizeEvent } from '../../tools'
 import methods from './methods'
 import platformMixins from './platformMixins'
-
+import columnSelection from "./columnSelection.js";
+import filterConfig from "./filterConfig.js";
 const { browse } = DomTools
 
 /**
@@ -223,7 +224,9 @@ export default {
     params: Object
   },
   components: {
-    VcuTableBody
+    VcuTableBody,
+    columnSelection,
+    filterConfig
   },
   provide() {
     return {

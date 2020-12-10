@@ -536,13 +536,13 @@ export const menuRouter = [
             component: () =>
                 import('@/views/platform/filters/index.vue')
         }, {
-            path: 'demo',
+            path: 'functions',
             meta: {
-                title: '示例',
+                title: '功能操作',
             },
-            name: 'demo',
+            name: 'functions',
             component: () =>
-                import('@/views/platform/demo/index.vue')
+                import('@/views/platform/functions/index.vue')
         }]
     },
     {
