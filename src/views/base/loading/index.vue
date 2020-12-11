@@ -53,7 +53,7 @@ export default {
           address: "Shanghai",
         },
       ];
-      this.loading = false;
+      //this.loading = false;
     }, 3000);
   },
 };

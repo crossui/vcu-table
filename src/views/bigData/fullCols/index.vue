@@ -1,5 +1,6 @@
 <template>
   <a-card title="复杂渲染">
+    <a-button @click="init()" class="mb-5">加载数据</a-button>
     <div class="mb-30">
       <a-button-group class="mb-5">
         <a-button @click="$refs.xTable1.setAllCheckboxRow(true)">
@@ -63,7 +64,6 @@ export default {
     };
   },
   mounted() {
-    this.init();
   },
   methods: {
     async init() {

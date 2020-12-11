@@ -1,5 +1,6 @@
 <template>
   <a-card title="局部加载">
+    <a-button @click="init()" class="mb-5">加载数据</a-button>
     <div class="mb-30">
       <div class="mb-5">
         <a-button-group>
@@ -71,7 +72,6 @@ export default {
     };
   },
   mounted() {
-    this.init();
   },
   methods: {
     async init() {

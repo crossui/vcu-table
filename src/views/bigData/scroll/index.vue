@@ -1,5 +1,6 @@
 <template>
   <a-card title="虚拟滚动">
+    <a-button @click="init()" class="mb-5">加载数据</a-button>
     <div class="mb-30">
       <a-alert type="info" class="mb-10">
         <div slot="message">
@@ -95,9 +96,7 @@ export default {
       tableData: [],
     };
   },
-  mounted() {
-    this.init();
-  },
+  mounted() {},
   methods: {
     async init() {
       this.loading = true;

@@ -205,6 +205,12 @@ export default {
           break;
       }
     },
+    insertEvent(row, column) {
+      let xTable = this.$refs.xTable;
+      xTable
+        .insertAt(null, row)
+        .then(({ row }) => xTable.setActiveCell(row, column.property));
+    },
     findList() {
       this.loading = true;
       this.tableData = [];
