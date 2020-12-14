@@ -40,7 +40,8 @@ export default {
       lazyNoCountPage: true,
       tableBodyDom: null,
       fullColumns: null,
-      filtersHeaderColumns: null
+      filtersHeaderColumns: null,
+      loadDataRes: null
     }
   },
   computed: {
@@ -268,6 +269,9 @@ export default {
           url: this.platformOptions.pageUrl,
           ..._data
         });
+        
+        this.loadDataRes = res;
+
         let resData = res.data.payload.data
         if (this.isLazy) {
           if (isRest && isRest == true) {

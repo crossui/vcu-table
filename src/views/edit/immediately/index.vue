@@ -56,7 +56,7 @@
             ></a-input-number>
           </template>
         </vcu-table-column>
-        <vcu-table-column title="总价" :edit-render="{}">
+        <vcu-table-column title="总价">
           <template v-slot="{ row }">
             <span>{{ countAmount(row) }} 元</span>
           </template>

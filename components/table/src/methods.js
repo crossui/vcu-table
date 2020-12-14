@@ -3641,9 +3641,9 @@ const Methods = {
    * 更新表尾合计
    */
   updateFooter() {
-    const { showFooter, visibleColumn, footerMethod } = this
+    const { showFooter, visibleColumn, footerMethod, loadDataRes } = this
     if (showFooter && footerMethod) {
-      this.footerData = visibleColumn.length ? footerMethod({ columns: visibleColumn, data: this.afterFullData, $table: this, $grid: this.$xegrid }) : []
+      this.footerData = visibleColumn.length ? footerMethod({ columns: visibleColumn, data: this.afterFullData, $table: this, $grid: this.$xegrid, response: loadDataRes }) : []
     }
     return this.$nextTick()
   },

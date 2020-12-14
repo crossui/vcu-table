@@ -543,6 +543,14 @@ export const menuRouter = [
             name: 'functions',
             component: () =>
                 import('@/views/platform/functions/index.vue')
+        }, {
+            path: 'total',
+            meta: {
+                title: '合计',
+            },
+            name: 'total',
+            component: () =>
+                import('@/views/platform/total/index.vue')
         }]
     },
     {
