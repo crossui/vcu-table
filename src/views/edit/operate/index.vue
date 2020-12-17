@@ -43,6 +43,7 @@
         ref="xTable"
         class="my_table_insert"
         keep-source
+        @cell-click="cellClickEvent"
         :data="tableData"
         :edit-config="{
           trigger: 'click',
@@ -213,6 +214,9 @@ export default {
           _this.$refs.xTable.revertData();
         },
       });
+    },
+    cellClickEvent({ row, rowIndex, $rowIndex, column, columnIndex }) {
+      console.info(row, rowIndex, $rowIndex, column, columnIndex);
     },
   },
 };

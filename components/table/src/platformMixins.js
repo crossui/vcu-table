@@ -1,9 +1,12 @@
 import XEUtils from 'xe-utils'
 import GlobalConfig from '../../conf'
-import VCUTable from '../../v-c-u-table'
 
 export default {
   props: {
+    customModalShow: {
+      type: Boolean,
+      default: false
+    },
     lazyNoCount: {
       type: Boolean,
       default: false
@@ -29,9 +32,6 @@ export default {
       default: "POST"
     },
   },
-  components: {
-
-  },
   data() {
     return {
       lockingEd: this.locking,
@@ -41,7 +41,8 @@ export default {
       tableBodyDom: null,
       fullColumns: null,
       filtersHeaderColumns: null,
-      loadDataRes: null
+      loadDataRes: null,
+      columnSelectionVisible: false
     }
   },
   computed: {
@@ -87,12 +88,8 @@ export default {
 
       /* 懒加载 */
       if (this.isLazy) {
-        if (this.height) {
-          this.tableBodyDom = this.$refs.tableBody.$el;
-          this.tableBodyDom.addEventListener("scroll", this._scrollHandler, false)
-        } else {
-          console.error("props is height cannot be empty!!!")
-        }
+        this.tableBodyDom = this.$refs.tableBody.$el;
+        this.tableBodyDom.addEventListener("scroll", this._scrollHandler, false)
       }
 
       this.loadingEd = false;
@@ -112,11 +109,12 @@ export default {
         this.fullColumns = _columns;
         this.setFiltersHeaderColumns(_columns);
         this.loadColumn(_columns);
+        this.$emit("onHeaderLoad", _columns);
         /* let _columns = this.renderColumns(res.data.payload);
         this.tableColumns = [..._columns]
         this.setFiltersHeaderColumns(_columns);
         this.columnSelectionFull = [...res.data.payload]
-        this.$emit("onHeaderLoad", this.tableColumns); */
+         */
       } catch (err) {
         console.err("request not define!!!")
       }
@@ -127,17 +125,16 @@ export default {
       let columns = res
         .map(item => {
           if (item.hidden == undefined || !item.hidden) {
-            item.showOverflow = item.ellipsis ? true : false
+            item.showOverflow = item.ellipsis ? true : false;
+            if (_.isArray(customRender)) {
+              customRender.forEach(itemRender => {
+                if (item.key == itemRender.key || item.field == itemRender.key) {
+                  item = XEUtils.merge({}, item, itemRender.params)
+                }
+              })
+            }
+            return item;
           }
-
-          if (_.isArray(customRender)) {
-            customRender.forEach(itemRender => {
-              if (item.key == itemRender.key || item.field == itemRender.key) {
-                item = XEUtils.merge({}, item, itemRender.params)
-              }
-            })
-          }
-          return item;
         })
         .filter(item => {
           return item != undefined;
@@ -269,7 +266,7 @@ export default {
           url: this.platformOptions.pageUrl,
           ..._data
         });
-        
+
         this.loadDataRes = res;
 
         let resData = res.data.payload.data
@@ -348,6 +345,15 @@ export default {
         this.$emit("onLazyCheng", this.lazyCurrent);
       }
     },
+    showColumnModal(){
+      if(this.customModalShow){
+        this.columnSelectionVisible = true;
+        this.$nextTick(() => {
+            this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this })
+        })
+      }
+      
+    }
   },
   activated() {
 

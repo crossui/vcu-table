@@ -3,14 +3,23 @@
     <div class="mb-30">
       <a-alert type="info" class="mb-10">
         <div slot="message">
-          用户手动选中时会触发事件
-          <span class="blue-text">checkbox-change</span>还通过
-          <span class="blue-text">highlight</span> 设置高亮选中行
+          <div>
+            用户手动选中时会触发事件
+            <span class="blue-text">checkbox-change</span>还通过
+            <span class="blue-text">highlight</span> 设置高亮选中行
+          </div>
+          <div> <span class="blue-text"> checkbox-change-get-keys </span> 事件，返回被选中的数据索引值</div>
         </div>
       </a-alert>
       <a-button-group class="mb-10">
         <a-button @click="$refs.xTable1.setCheckboxRow(tableData[1], true)"
           >设置第二行选中</a-button
+        >
+        <a-button
+          @click="
+            $refs.xTable1.setCheckboxRow([tableData[2], tableData[3]], true)
+          "
+          >设置第三、四行选中</a-button
         >
         <a-button @click="$refs.xTable1.setAllCheckboxRow(true)"
           >设置所有行选中</a-button
@@ -23,6 +32,7 @@
         :data="tableData"
         :checkbox-config="{ highlight: true }"
         @checkbox-change="checkboxChangeEvent"
+        @checkbox-change-get-keys="checkboxChangeGetKeys"
         border
       >
         <vcu-table-column
@@ -151,8 +161,11 @@
           <div class="red-text">注：默认行为只会在 reload 之后触发一次</div>
         </div>
       </a-alert>
-
+      <div class="mb-5">
+        <a-button @click="handleUpdateCheckbox">更新默认选中</a-button>
+      </div>
       <vcu-table
+        ref="xTableUpdate"
         :data="tableData"
         row-id="id"
         :checkbox-config="{ checkRowKeys: defaultSelecteRows }"
@@ -169,17 +182,27 @@
     <div class="mb-30">
       <a-alert type="info" class="mb-10">
         <div slot="message">
-          多选可和单选同时使用
+          <div>多选可和单选同时使用</div>
+          <div>
+            通过
+            <span class="blue-text"> checkStrictly </span>
+            设置父子节点不互相关联，启用后 showHeader 默认为 false
+          </div>
         </div>
       </a-alert>
 
       <vcu-table
         :data="tableData"
         border
-        :radio-config="{labelField: 'name'}"
+        :checkbox-config="{ checkStrictly: true }"
+        :radio-config="{ labelField: 'name' }"
       >
         <vcu-table-column type="checkbox" width="60"></vcu-table-column>
-        <vcu-table-column type="radio" field="name" title="name"></vcu-table-column>
+        <vcu-table-column
+          type="radio"
+          field="name"
+          title="name"
+        ></vcu-table-column>
         <vcu-table-column field="sex" title="Sex"></vcu-table-column>
         <vcu-table-column field="age" title="Age"></vcu-table-column>
         <vcu-table-column field="address" title="address"></vcu-table-column>
@@ -232,6 +255,9 @@ export default {
     checkboxChangeEvent({ row }) {
       console.log("单选事件");
     },
+    checkboxChangeGetKeys({ selectedRowKeys }) {
+      console.log(selectedRowKeys);
+    },
     clearCheckboxRowEevnt() {
       console.info(222);
       this.$refs.xTable1.clearCheckboxRow();
@@ -244,6 +270,12 @@ export default {
     },
     checCheckboxkMethod(row) {
       return row.age < 12;
+    },
+    handleUpdateCheckbox() {
+      this.$refs.xTableUpdate.setCheckboxRow(
+        [this.tableData[1], this.tableData[2]],
+        false
+      );
     },
   },
 };

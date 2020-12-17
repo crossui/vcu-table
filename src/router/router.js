@@ -13,6 +13,14 @@ export const menuRouter = [
         name: 'base',
         component: Main,
         children: [{
+            path: 'demo',
+            meta: {
+                title: 'test',
+            },
+            name: 'demo',
+            component: () =>
+                import('@/views/base/demo/index.vue')
+        },{
             path: 'index',
             meta: {
                 title: '基础',
@@ -536,14 +544,6 @@ export const menuRouter = [
             component: () =>
                 import('@/views/platform/filters/index.vue')
         }, {
-            path: 'functions',
-            meta: {
-                title: '功能操作',
-            },
-            name: 'functions',
-            component: () =>
-                import('@/views/platform/functions/index.vue')
-        }, {
             path: 'total',
             meta: {
                 title: '合计',
@@ -551,6 +551,22 @@ export const menuRouter = [
             name: 'total',
             component: () =>
                 import('@/views/platform/total/index.vue')
+        }, {
+            path: 'headerGroup',
+            meta: {
+                title: '分组表头',
+            },
+            name: 'headerGroup',
+            component: () =>
+                import('@/views/platform/headerGroup/index.vue')
+        }, {
+            path: 'functions',
+            meta: {
+                title: '功能操作',
+            },
+            name: 'functions',
+            component: () =>
+                import('@/views/platform/functions/index.vue')
         }]
     },
     {
@@ -568,7 +584,7 @@ export const menuRouter = [
             name: 'vcu-table-api',
             component: () =>
                 import('@/views/api/vcu-table-api/index.vue')
-        },{
+        }, {
             path: 'vcu-table-column-api',
             meta: {
                 title: 'vcu-table-column',

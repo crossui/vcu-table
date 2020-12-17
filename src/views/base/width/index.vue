@@ -24,16 +24,40 @@
     </div>
 
     <div class="mb-30">
-      <a-alert message="设置固定和最小宽，实现等比例放大" type="info" class="mb-10" />
+      <a-alert
+        message="设置固定和最小宽，实现等比例放大"
+        type="info"
+        class="mb-10"
+      />
       <vcu-table :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
         <vcu-table-column type="checkbox" width="60"></vcu-table-column>
-        <vcu-table-column field="name" title="Name" min-width="200"></vcu-table-column>
-        <vcu-table-column field="age" title="Age" min-width="200"></vcu-table-column>
-        <vcu-table-column field="sex" title="Sex" min-width="200"></vcu-table-column>
-        <vcu-table-column field="sex2" title="Sex2" min-width="200"></vcu-table-column>
-        <vcu-table-column field="address" title="Address" min-width="200"></vcu-table-column>
+        <vcu-table-column
+          field="name"
+          title="Name"
+          min-width="200"
+        ></vcu-table-column>
+        <vcu-table-column
+          field="age"
+          title="Age"
+          min-width="200"
+        ></vcu-table-column>
+        <vcu-table-column
+          field="sex"
+          title="Sex"
+          min-width="200"
+        ></vcu-table-column>
+        <vcu-table-column
+          field="sex2"
+          title="Sex2"
+          min-width="200"
+        ></vcu-table-column>
+        <vcu-table-column
+          field="address"
+          title="Address"
+          min-width="200"
+        ></vcu-table-column>
       </vcu-table>
     </div>
 
@@ -51,6 +75,7 @@
       </vcu-table>
     </div>
 
+    
   </a-card>
 </template>
 <script>

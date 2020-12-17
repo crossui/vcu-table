@@ -868,6 +868,7 @@ const Methods = {
     const { tableFullData, treeConfig, treeOpts, checkboxOpts } = this
     const { checkField: property } = checkboxOpts
     let rowList = []
+    let rowIndexs = []
     if (property) {
       if (treeConfig) {
         rowList = XEUtils.filterTree(tableFullData, row => XEUtils.get(row, property), treeOpts)
@@ -877,11 +878,20 @@ const Methods = {
     } else {
       const { selection } = this
       if (treeConfig) {
-        rowList = XEUtils.filterTree(tableFullData, row => selection.indexOf(row) > -1, treeOpts)
+        rowList = XEUtils.filterTree(tableFullData, (row, index) => {
+          let isSelect = selection.indexOf(row) > -1
+          if (isSelect) rowIndexs.push(index)
+          return isSelect
+        }, treeOpts)
       } else {
-        rowList = tableFullData.filter(row => selection.indexOf(row) > -1)
+        rowList = tableFullData.filter((row, index) => {
+          let isSelect = selection.indexOf(row) > -1
+          if (isSelect) rowIndexs.push(index)
+          return isSelect
+        })
       }
     }
+    this.emitEvent('checkbox-change-get-keys', { selectedRowKeys: rowIndexs });
     return rowList
   },
   /**

@@ -777,6 +777,7 @@ export default {
       $scopedSlots,
       tId,
       tableData,
+      columns,
       tableColumn,
       tableGroupColumn,
       isGroup,
@@ -813,7 +814,8 @@ export default {
       hasTip,
       emptyRender,
       emptyOpts,
-      paginationAlign
+      paginationAlign,
+      customModalShow
     } = this
     const tableChilds = []
     const fixedChilds = []
@@ -950,6 +952,27 @@ export default {
         })
       )
     }
+
+
+    /* // 收集的列配置（带分组）
+      collectColumn: [],
+      // 完整所有列（不带分组）
+      tableFullColumn: [],
+      // 渲染所有列
+      visibleColumn: [], */
+    /* 列选择 */
+    const columnSelectionProps = {
+      ref: 'columnSelectionModal',
+      props: {
+        columns: this.collectColumn,
+        //tableColumns: this.visibleColumn,
+        size: vSize
+      },
+      on: {
+        //onChangeColumns: handleChangeColumns
+      }
+    }
+
     return h('div', {
       class: ['vcu-table', `tid_${tId}`, vSize ? `size--${vSize}` : '', `border--${tableBorder}`, {
         'vcu-editable': !!editConfig,
@@ -1057,7 +1080,9 @@ export default {
       //分页
       pagination ? h("div", {
         class: ["vcu-pagination", `vcu-pagination-${paginationAlign}`]
-      }, pagination) : null
+      }, pagination) : null,
+      //列选择窗口
+      customModalShow ? <columnSelection v-model={this.columnSelectionVisible} {...columnSelectionProps}></columnSelection> : null
     ].concat(tableComps))
   },
   methods

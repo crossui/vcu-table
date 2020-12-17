@@ -2209,71 +2209,7 @@ const apis = [
             defVal: '0',
             list: []
           }
-          // {
-          //   name: 'rHeight',
-          //   desc: '指定行高',
-          //   version: '',
-          //   type: 'number',
-          //   enum: '',
-          //   defVal: '默认自动计算',
-          //   list: []
-          // },
-          // {
-          //   name: 'adaptive',
-          //   desc: '自动适配最优的渲染方式',
-          //   version: '',
-          //   type: 'boolean',
-          //   enum: '',
-          //   defVal: 'true',
-          //   list: []
-          // }
         ]
-      // },
-      // {
-      //   name: 'rHeights',
-      //   desc: '重写表格默认高度,必须和 scss 中的变量一致（用于重写表格默认行高的场景，谨慎使用，99%场景不需要更改）',
-      //   version: '',
-      //   type: 'any',
-      //   enum: '',
-      //   defVal: '',
-      //   list: [
-      //     {
-      //       name: 'default',
-      //       desc: '表格 default size',
-      //       version: '',
-      //       type: 'number',
-      //       enum: '',
-      //       defVal: '48',
-      //       list: []
-      //     },
-      //     {
-      //       name: 'medium',
-      //       desc: '表格 medium size',
-      //       version: '',
-      //       type: 'number',
-      //       enum: '',
-      //       defVal: '44',
-      //       list: []
-      //     },
-      //     {
-      //       name: 'small',
-      //       desc: '表格 small size',
-      //       version: '',
-      //       type: 'number',
-      //       enum: '',
-      //       defVal: '40',
-      //       list: []
-      //     },
-      //     {
-      //       name: 'mini',
-      //       desc: '表格 mini size',
-      //       version: '',
-      //       type: 'number',
-      //       enum: '',
-      //       defVal: '36',
-      //       list: []
-      //     }
-      //   ]
       },
       {
         name: 'params',
@@ -2283,7 +2219,154 @@ const apis = [
         enum: '',
         defVal: '',
         list: []
+      },
+      /* 通用平台 */
+      {
+        name: '通用平台',
+        descKey: '',
+        version: '',
+        type: 'any',
+        enum: '',
+        defVal: '',
+        list: [{
+          name: 'lazyNoCount',
+          descKey: '开启isLazy通用查询不分页场景',
+          version: '',
+          type: 'Boolean',
+          enum: '',
+          defVal: 'false',
+          list: []
+        },
+        {
+          name: 'lazyLimit',
+          descKey: '开启isLazy设置每次加载多少条数据',
+          version: '',
+          type: 'Number',
+          enum: '',
+          defVal: '10',
+          list: []
+        },
+        {
+          name: 'isLazy',
+          descKey: '是否滚动加载数据（一定要设置height）',
+          version: '',
+          type: 'Boolean',
+          enum: '',
+          defVal: 'false',
+          list: []
+        },
+        {
+          name: 'ajaxType',
+          descKey: '接口请求方式',
+          version: '',
+          type: 'String',
+          enum: '',
+          defVal: 'POST',
+          list: []
+        },
+        {
+          name: 'loadOptions',
+          desc: '通用平台请求参数配置',
+          version: '',
+          type: '',
+          enum: '',
+          defVal: '',
+          list: [
+            {
+              name: 'headUrl',
+              desc: '通用平台表头请求地址',
+              version: '',
+              type: 'String',
+              enum: '',
+              defVal: '',
+              list: []
+            },
+            {
+              name: 'pageUrl',
+              desc: '通用平台表内容请求地址',
+              version: '',
+              type: 'String',
+              enum: '',
+              defVal: '',
+              list: []
+            },
+            {
+              name: 'headerFormData',
+              desc: '通用平台表头请求入参',
+              version: '',
+              type: 'String',
+              enum: '',
+              defVal: '',
+              list: []
+            },
+            {
+              name: 'pageFormData',
+              desc: '通用平台表内容请求入参',
+              version: '',
+              type: 'String',
+              enum: '',
+              defVal: '',
+              list: []
+            },
+            {
+              name: 'customRender',
+              desc: '生成复杂数据',
+              version: '',
+              type: 'Object',
+              enum: '',
+              defVal: '',
+              list: [
+                {
+                  name: 'key',
+                  desc: '表格列key',
+                  version: '',
+                  type: 'String',
+                  enum: '',
+                  defVal: '',
+                  list: []
+                },
+                {
+                  name: 'params',
+                  desc: '所有vcu-table-column参数',
+                  version: '',
+                  type: 'Object',
+                  enum: '',
+                  defVal: '',
+                  list: []
+                },
+                {
+                  name: 'checkbox',
+                  desc: '是否开启多选框',
+                  version: '',
+                  type: 'boolean',
+                  enum: '',
+                  defVal: 'false',
+                  list: []
+                },
+                {
+                  name: 'radio',
+                  desc: '是否开启单选框',
+                  version: '',
+                  type: 'boolean',
+                  enum: '',
+                  defVal: 'false',
+                  list: []
+                },
+                {
+                  name: 'seq',
+                  desc: '是否开启索引',
+                  version: '',
+                  type: 'boolean',
+                  enum: '',
+                  defVal: 'false',
+                  list: []
+                }
+              ]
+            }
+          ]
+        }]
       }
+
     ]
   },
   {
@@ -2347,6 +2430,15 @@ const apis = [
         type: '',
         enum: '',
         defVal: '{ records, reserves, indeterminates, checked, row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, $event }',
+        list: []
+      },
+      {
+        name: 'checkbox-change-get-keys',
+        descKey: '只对 type=checkbox 有效，返回被选中的数据索引值',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: '{ selectedRowKeys, $event }',
         list: []
       },
       {
@@ -2590,6 +2682,33 @@ const apis = [
         type: '',
         enum: '',
         defVal: '{ type, $event}',
+        list: []
+      },
+      {
+        name: 'onLazyCheng',
+        desc: '开启懒加载后，滚动到底部触发',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: 'lazyCurrent',
+        list: []
+      },
+      {
+        name: 'onHeaderLoad',
+        desc: '加载表头数据后触发',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: 'columns',
+        list: []
+      },
+      {
+        name: 'onPageLoad',
+        desc: '加载表内容数据后触发',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: '{datas，count，response}',
         list: []
       }
     ]

@@ -151,8 +151,8 @@ export default {
     headerCellContextMenuEvent({ column }) {
       console.log(`右键列 ${column.title}`);
     },
-    cellClickEvent({ column }) {
-      console.log(`单元格点击${column.title}`);
+    cellClickEvent({ row, rowIndex, column }) {
+      console.log(`单元格点击${column.title},${rowIndex}`);
     },
     cellDBLClickEvent({ column }) {
       console.log(`单元格双击${column.title}`);
