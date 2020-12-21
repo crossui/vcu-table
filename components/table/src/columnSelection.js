@@ -120,6 +120,7 @@ export default {
       visible,
       handleCancel,
       handleSubmit,
+      resetCustomEvent,
       size
     } = this;
 
@@ -143,6 +144,9 @@ export default {
 
     return (<a-modal {...modalProps}>
       <div class="clearfix" slot="footer">
+        <div class="fl">
+          <a-button key="reset" size={size} onClick={resetCustomEvent}>还原</a-button>
+        </div>
         <div class="fr">
           <a-button key="back" size={size} onClick={handleCancel}>取消</a-button>
           <a-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</a-button>
@@ -163,7 +167,7 @@ export default {
     },
     handleSubmit() {
       this.handleCustoms()
-      /* this.$emit("onChangeColumns", this.columns) */
+      this.$emit("onChangeColumns", this.columns)
       this.handleCancel()
     },
     handleCancel(e) {
@@ -180,7 +184,7 @@ export default {
       this.checkCustomStatus()
     },
 
-    allCustomEvent () {
+    allCustomEvent() {
       const { $xetable, columns, customStore } = this
       const checkMethod = $xetable.customOpts.checkMethod
       const isAll = !customStore.isAll
@@ -215,6 +219,20 @@ export default {
       const checkMethod = $xetable.customOpts.checkMethod
       this.customStore.isAll = columns.every(column => (checkMethod ? !checkMethod({ column }) : false) || column.visible)
       this.customStore.isIndeterminate = !this.customStore.isAll && columns.some(column => (!checkMethod || checkMethod({ column })) && (column.visible || column.halfVisible))
+    },
+    resetCustomEvent() {
+      const { $xetable, columns } = this
+      const checkMethod = $xetable.customOpts.checkMethod
+      XEUtils.eachTree(columns, column => {
+        if (!checkMethod || checkMethod({ column })) {
+          column.visible = column.defaultVisible
+          column.halfVisible = false
+        }
+        column.resizeWidth = 0
+      })
+      $xetable.saveCustomResizable(true)
+      this.handleCustoms()
+      this.handleCancel()
     }
   }
 };

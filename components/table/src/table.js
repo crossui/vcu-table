@@ -7,7 +7,7 @@ import { UtilTools, DomTools, GlobalEvent, ResizeEvent } from '../../tools'
 import methods from './methods'
 import platformMixins from './platformMixins'
 import columnSelection from "./columnSelection.js";
-import filterConfig from "./filterConfig.js";
+import filterModal from "./filterModal.js";
 const { browse } = DomTools
 
 /**
@@ -226,7 +226,7 @@ export default {
   components: {
     VcuTableBody,
     columnSelection,
-    filterConfig
+    filterModal
   },
   provide() {
     return {
@@ -815,7 +815,11 @@ export default {
       emptyRender,
       emptyOpts,
       paginationAlign,
-      customModalShow
+      customModalShow,
+      filterModalShow,
+      filterFormDatas,
+      handleSubmitFilter,
+      handleReductionFilter
     } = this
     const tableChilds = []
     const fixedChilds = []
@@ -954,22 +958,25 @@ export default {
     }
 
 
-    /* // 收集的列配置（带分组）
-      collectColumn: [],
-      // 完整所有列（不带分组）
-      tableFullColumn: [],
-      // 渲染所有列
-      visibleColumn: [], */
     /* 列选择 */
     const columnSelectionProps = {
       ref: 'columnSelectionModal',
       props: {
         columns: this.collectColumn,
-        //tableColumns: this.visibleColumn,
         size: vSize
+      }
+    }
+
+    /* 过滤 */
+    const filterModalProps = {
+      ref: 'filterModalDom',
+      props: {
+        size: vSize,
+        filterFormData: filterFormDatas
       },
       on: {
-        //onChangeColumns: handleChangeColumns
+        onSubmit: handleSubmitFilter,
+        onReduction: handleReductionFilter
       }
     }
 
@@ -1082,7 +1089,9 @@ export default {
         class: ["vcu-pagination", `vcu-pagination-${paginationAlign}`]
       }, pagination) : null,
       //列选择窗口
-      customModalShow ? <columnSelection v-model={this.columnSelectionVisible} {...columnSelectionProps}></columnSelection> : null
+      customModalShow ? <columnSelection v-model={this.columnSelectionVisible} {...columnSelectionProps}></columnSelection> : null,
+      //过滤窗口
+      filterModalShow ? <filterModal v-model={this.filterModalVisible} {...filterModalProps}></filterModal> : null
     ].concat(tableComps))
   },
   methods

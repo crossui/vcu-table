@@ -1,5 +1,13 @@
 <template>
-  <a-card title="test">
+  <a-card title="列工具">
+    <a-alert type="info" class="mb-10">
+      <div slot="message">
+        <div>
+          设置 <span class="blue-text">customModalShow</span> 开启列工具
+        </div>
+      </div>
+    </a-alert>
+
     <div class="mb-30">
       <a-button @click="$refs.xTable1.showColumnModal()" class="mb-5">
         列选择
@@ -49,12 +57,53 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
+
+    <div class="mb-30">
+      <a-button @click="$refs.xTable3.showColumnModal()" class="mb-5">
+        列选择
+      </a-button>
+      <vcu-table
+        ref="xTable3"
+        :data="tableData"
+        customModalShow
+        :columns="tableColumn"
+      ></vcu-table>
+    </div>
+
+    <div class="mb-30">
+      <a-button @click="$refs.xTable4.showColumnModal()" class="mb-5">
+        列选择
+      </a-button>
+      <vcu-table
+        ref="xTable4"
+        border
+        :data="tableDataGroup"
+        customModalShow
+        :columns="tableColumnGroup"
+      ></vcu-table>
+    </div>
+
+    <div class="mb-30">
+      <a-button @click="$refs.xTable5.showColumnModal()" class="mb-5">
+        列选择
+      </a-button>
+      <vcu-table
+        ref="xTable5"
+        border
+        customModalShow
+        :loadOptions="options"
+      ></vcu-table>
+    </div>
   </a-card>
 </template>
 <script>
 export default {
   data() {
     return {
+      options: {
+        headUrl: "dataq/api/bigDataHeader",
+        pageUrl: "dataq/api/bigDataPage",
+      },
       tableColumn: [
         { type: "seq", width: 50 },
         { field: "name", title: "Name" },

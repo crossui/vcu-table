@@ -3,6 +3,18 @@ import GlobalConfig from '../../conf'
 
 export default {
   props: {
+    exportExcelUrl: {
+      type: String,
+      default: ""
+    },
+    filterFormData: {
+      type: Object,
+      default: () => { }
+    },
+    filterModalShow: {
+      type: Boolean,
+      default: false
+    },
     customModalShow: {
       type: Boolean,
       default: false
@@ -42,7 +54,9 @@ export default {
       fullColumns: null,
       filtersHeaderColumns: null,
       loadDataRes: null,
-      columnSelectionVisible: false
+      columnSelectionVisible: false,
+      filterModalVisible: false,
+      filterParameter: null,
     }
   },
   computed: {
@@ -55,6 +69,34 @@ export default {
       };
       return _.merge({}, option, this.loadOptions);
     },
+    filterFormDatas() {
+      let option = {
+        filterFindUrl: "",
+        filterFindUrlPrefix: {
+          find: "dataq/filter/find/",
+          save: "dataq/filter/save/",
+          delete: "dataq/filter/delete/"
+        },
+        filterSaveFormData: {
+          module: (new Date()).getTime(),
+          window: (new Date()).getTime(),
+          deptNo: this.$store.state.user && this.$store.state.user.organizationEntity ? this.$store.state.user.organizationEntity.user.dlbmbh : "",
+          staffNo: this.$store.state.user && this.$store.state.user.organizationEntity ? this.$store.state.user.organizationEntity.user.ygbh00 : ""
+        },
+        filterFindFormData: {
+          deptNo: this.$store.state.user && this.$store.state.user.organizationEntity ? this.$store.state.user.organizationEntity.user.dlbmbh : ""
+        },
+        operationUrl: "dataq/api/dict",
+        operationFormData: {
+          zdmc: "运算符"
+        },
+        relationUrl: "dataq/api/dict",
+        relationFormData: {
+          zdmc: "关系符"
+        }
+      }
+      return _.merge({}, option, this.filterFormData);
+    }
   },
   watch: {
     locking(val) {
@@ -235,22 +277,17 @@ export default {
     //获取列表数据
     async getTableListData(isRest, obj) {
       this.loadingEd = true;
-      /* let options = { clearFilterData: false }
+      let options = { clearFilterData: false }
       options = _.merge({}, options, obj);
-      let params = {
-        page: this.isLazy ? isRest && isRest == true ? this.lazyCurrent = 1 : this.lazyCurrent : this.pager.current,
-        limit: this.isLazy ? this.lazyLimit : this.pager.pageSize
-      };
       //查询重置过滤条件
       if (options.clearFilterData) this.filterParameter = null;
+
+      let params = {}
       //过滤条件
       if (this.filterParameter != null) {
         params.filterParameter = JSON.stringify(this.filterParameter)
       }
-      if (!this.isLazy && this.pagination && isRest && isRest == true) {
-        params.page = this.pager.current = 1
-      } */
-      let params = {}
+      //懒加载
       if (this.isLazy) {
         params = {
           page: isRest && isRest == true ? this.lazyCurrent = 1 : this.lazyCurrent,
@@ -285,8 +322,6 @@ export default {
           }
         }
 
-
-
         setTimeout(() => {
           this.setDatas(resData);
           if (this.platformOptions.filters) this.handleFiltersHeaderDatas();
@@ -296,33 +331,6 @@ export default {
             response: res
           })
         }, 50)
-
-
-        /* if (this.isLazy) {
-          if (isRest && isRest == true) {
-            this.$refs.tableListDom[0].$el.getElementsByClassName('ant-table-body')[0].scrollTop = 0
-            this.lazyCurrent = 1;
-            this.tableDatas = resData;
-            if (this.filtersHeader) this.handleFiltersHeaderDatas(resData, true);
-          } else {
-            this.tableDatas = _.concat(this.tableDatas, resData);
-            if (this.filtersHeader) this.handleFiltersHeaderDatas(this.tableDatas, false);
-          }
-          if (this.lazyNoCount) {
-            this.lazyNoCountPage = resData.length ? true : false;
-          } else {
-            this.lazyCount = res.data.payload.count;
-          }
-        } else {
-          this.tableDatas = resData;
-          if (this.pagination !== false) {
-            this.pager.total = res.data.payload.count;
-          }
-          if (this.filtersHeader) this.handleFiltersHeaderDatas(resData, true);
-        } */
-        //this.$emit("onPageLoad", this.isLazy ? this.lazyCurrent : this.pager, this.isLazy ? this.tableDatas : res.data.payload.data, res);
-        //console.info(this.tableFullData)
-        //console.info(this.tableSynchData)
 
       } catch (err) { }
       this.loadingEd = false;
@@ -345,15 +353,99 @@ export default {
         this.$emit("onLazyCheng", this.lazyCurrent);
       }
     },
-    showColumnModal(){
-      if(this.customModalShow){
+    //显示列选择窗口
+    showColumnModal() {
+      if (this.customModalShow) {
         this.columnSelectionVisible = true;
         this.$nextTick(() => {
-            this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this })
+          this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this })
         })
       }
-      
-    }
+    },
+    //显示过滤窗口
+    showFilterModal() {
+      if (this.filterModalShow) {
+        this.filterModalVisible = true;
+        this.$nextTick(() => {
+          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.collectColumn, $table: this })
+        })
+      }
+    },
+    //过滤确认
+    handleSubmitFilter(res) {
+      this.filterParameter = res
+      this.getTableListData(true)
+    },
+    //过滤还原
+    handleReductionFilter() {
+      this.filterParameter = null
+      this.getTableListData(true)
+    },
+    //还原
+    operateRestore() {
+      this.resetColumn()
+      this.handleReductionFilter()
+    },
+    //清空表格数据
+    emptyTableLists() {
+      this.setDatas([]);
+      if (this.isLazy) {
+        this.lazyCurrent = 1;
+      }
+      this.$emit("onPageLoad", 1, [], null);
+    },
+    //导出Excel
+    async exportExcel() {
+      if (this.exportExcelUrl == "") {
+        console.error('参数：exportExcelUrl; 导出接口地址不能为空！！！')
+      } else {
+        let params = _.merge({}, this.platformOptions.pageFormData);
+        try {
+          let _title = []
+          this.collectColumn.forEach(item => {
+            if (item.property != "action" && item.visible ) {
+              _title.push({
+                "titleName": item.title,
+                "titleKey": item.property
+              })
+            }
+          })
+          console.info(_title)
+          _title = JSON.stringify(_title)
+          let _data = { data: params, title: _title };
+
+          let res = await GlobalConfig.request({
+            responseType: 'blob',
+            method: "POST",
+            url: this.exportExcelUrl,
+            ..._data
+          });
+          if (res) {
+            let filename = this.util.formatDate(new Date(), "yyyyMMdd") + '.xls';
+            if (res.headers["content-disposition"]) {
+              let _name = res.headers["content-disposition"].split("filename=");
+              filename = decodeURIComponent(_name[1]);
+            }
+            const blob = new Blob([res.data], { type: 'application/vnd.ms-excel' })
+            const link = document.createElement('a')
+            const href = window.URL.createObjectURL(blob)
+            link.href = href
+            link.download = filename
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link) // 下载完成移除元素
+            window.URL.revokeObjectURL(href) // 释放掉blob对象
+            this.$emit("onExportBack", true)
+          } else {
+            this.$message.error("导出失败！！！")
+            this.$emit("onExportBack", false)
+          }
+        } catch (err) {
+          this.$emit("onExportBack", false)
+          this.$message.error("导出失败！！！")
+        }
+      }
+    },
   },
   activated() {
 

@@ -1,25 +1,13 @@
-import request from "@/utils/request.js";
+import GlobalConfig from '../../conf'
 export default {
   props: {
     value: {
       type: Boolean,
       default: true
     },
-    tableColumns: {
-      type: Array,
-      default: () => []
-    },
     size: {
       type: String,
       default: "default"
-    },
-    operationList: {
-      type: Array,
-      default: () => []
-    },
-    relationList: {
-      type: Array,
-      default: () => []
     },
     filterFormData: {
       type: Object,
@@ -62,8 +50,11 @@ export default {
       tplNameVisible: false,
       tplName: "",
       delectLoading: false,
-      saveLoading: false
-
+      saveLoading: false,
+      tableColumns:[],
+      operationList: [],
+      relationList: [],
+      $xetable: null
     };
   },
   render() {
@@ -138,8 +129,8 @@ export default {
             <a-button key="submit" type="primary" size={size} onClick={handleSubmit} loading={this.submitLoading}>确定</a-button>
           </div>
         </div>
-        <div class="filter-content">
-          <div class="filter-content-header">
+        <div class="vcu-filter-content">
+          <div class="vcu-filter-content-header">
             <span class="mr-10">自定义过滤模板:</span>
             <a-select {...filterTplSlectProps} v-model={this.findSelectId} >
               {selectOptions.map(item => {
@@ -153,7 +144,7 @@ export default {
             <a-button size={size} class="mr-10" onClick={handleSaveTpl} loading={this.saveLoading} icon="save"></a-button>
             <a-button size={size} class="mr-10" onClick={handleDelectTpl} loading={this.delectLoading} icon="delete"></a-button>
           </div>
-          <div class="filter-content-col">
+          <div class="vcu-filter-content-col">
             <a-row type="flex" gutter={5}>
               <a-col span={6}>
                 列名:
@@ -171,65 +162,63 @@ export default {
               </a-col>
             </a-row >
           </div>
-          <scrollbar class="filter-content-container">
-            <div class="container-warp">
-              {filterLists.map((item, index) => {
-                return (
-                  <a-row type="flex" gutter={5} class="mb-5">
-                    <a-col span={6}>
-                      <a-select size={size} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
-                        {tableColumns.map(cloumnsItem => {
-                          return (
-                            <a-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
-                              {cloumnsItem.title}
-                            </a-select-option>
-                          )
-                        })}
-                      </a-select>
-                    </a-col>
-                    <a-col span={4}>
-                      <a-select size={size} v-model={item.operationVal} class="mr-10" style="width: 100%">
-                        {operationList.map(operationItem => {
-                          return (
-                            <a-select-option value={operationItem.key} key={operationItem.key}>
-                              {operationItem.title}
-                            </a-select-option>
-                          )
-                        })}
-                      </a-select>
-                    </a-col>
-                    <a-col span={8}>
-                      <a-input size={size} v-model={item.fieldValue} />
-                    </a-col>
-                    <a-col span={3}>
-                      <a-select size={size} v-model={item.relationVal} class="mr-10" style="width: 100%">
-                        {relationList.map(relationItem => {
-                          return (
-                            <a-select-option value={relationItem.key} key={relationItem.key}>
-                              {relationItem.title}
-                            </a-select-option>
-                          )
-                        })}
-                      </a-select>
-                    </a-col>
-                    <a-col span={3}>
-                      {
-                        index == 0
-                          ?
-                          <a-button size={size} icon="plus" onClick={() => this.handleAddItem(index)} />
-                          :
-                          <div>
-                            <a-button size={size} icon="plus" class="mr-5" onClick={() => this.handleAddItem(index)} />
-                            <a-button size={size} icon="close" onClick={() => this.handleRemoveItem(index)} />
-                          </div>
-                      }
-                    </a-col>
-                  </a-row >
-                )
-              })}
-            </div>
+          <div class="vcu-container-warp">
+            {filterLists.map((item, index) => {
+              return (
+                <a-row type="flex" gutter={5} class="mb-5">
+                  <a-col span={6}>
+                    <a-select size={size} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
+                      {tableColumns.map(cloumnsItem => {
+                        return (
+                          <a-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
+                            {cloumnsItem.title}
+                          </a-select-option>
+                        )
+                      })}
+                    </a-select>
+                  </a-col>
+                  <a-col span={4}>
+                    <a-select size={size} v-model={item.operationVal} class="mr-10" style="width: 100%">
+                      {operationList.map(operationItem => {
+                        return (
+                          <a-select-option value={operationItem.key} key={operationItem.key}>
+                            {operationItem.title}
+                          </a-select-option>
+                        )
+                      })}
+                    </a-select>
+                  </a-col>
+                  <a-col span={8}>
+                    <a-input size={size} v-model={item.fieldValue} />
+                  </a-col>
+                  <a-col span={3}>
+                    <a-select size={size} v-model={item.relationVal} class="mr-10" style="width: 100%">
+                      {relationList.map(relationItem => {
+                        return (
+                          <a-select-option value={relationItem.key} key={relationItem.key}>
+                            {relationItem.title}
+                          </a-select-option>
+                        )
+                      })}
+                    </a-select>
+                  </a-col>
+                  <a-col span={3}>
+                    {
+                      index == 0
+                        ?
+                        <a-button size={size} icon="plus" onClick={() => this.handleAddItem(index)} />
+                        :
+                        <div>
+                          <a-button size={size} icon="plus" class="mr-5" onClick={() => this.handleAddItem(index)} />
+                          <a-button size={size} icon="close" onClick={() => this.handleRemoveItem(index)} />
+                        </div>
+                    }
+                  </a-col>
+                </a-row >
+              )
+            })}
+          </div>
 
-          </scrollbar>
         </div >
       </a-modal>
       <a-modal {...tplNameModalProps}>
@@ -241,6 +230,30 @@ export default {
 
   },
   methods: {
+    syncUpdate(params) {
+      const { collectColumn, $table } = params
+      this.$xetable = $table
+      this.tableColumns = collectColumn
+    },
+    //加载过滤字典
+    async getFilterDict() {
+      //获取运算符字典
+      let operationdata = { zdmc: this.filterFormDatas.operationFormData.zdmc }
+      let operationListsRes = await this.requestFilterDict("POST", this.filterFormDatas.operationUrl, operationdata)
+      this.operationList = operationListsRes ? operationListsRes : []
+      //获取关系符字典
+      let relationdata = { zdmc: this.filterFormDatas.relationFormData.zdmc }
+      let relationListsRes = await this.requestFilterDict("POST", this.filterFormDatas.relationUrl, relationdata)
+      this.relationList = relationListsRes ? relationListsRes : []
+    },
+    async requestFilterDict(method, url, data) {
+      try {
+        let res = await GlobalConfig.request({ method, url, data });
+        return res.data.payload;
+      } catch (err) {
+        return [];
+      }
+    },
     async init() {
       if (!this.filterFormDatas.filterFindUrl || this.filterFormDatas.filterFindUrl == "") {
         console.error("prpos: filterFormDatas.filterFindUrl 不能为空")
@@ -249,6 +262,9 @@ export default {
       if (!this.filterFormDatas.filterFindFormData.deptNo || this.filterFormDatas.filterFindFormData.deptNo == "") {
         console.error("prpos: filterFormDatas.filterFindFormData.deptNo 不能为空")
         return;
+      }
+      if (this.operationList.length == 0 || this.relationList.length == 0) {
+        this.getFilterDict()
       }
       let res = await this.getFilterDatas()
       let resList = res.data.payload
@@ -272,7 +288,7 @@ export default {
     async getFilterDatas() {
       let finddata = { data: this.filterFormDatas.filterFindFormData }
       try {
-        let res = await request({
+        let res = await GlobalConfig.request({
           method: "POST",
           url: `${this.filterFormDatas.filterFindUrlPrefix.find}${this.filterFormDatas.filterFindUrl}`,
           ...finddata
@@ -288,8 +304,8 @@ export default {
       if (data.templateDetailList && data.templateDetailList.length) {
         data.templateDetailList.forEach(item => {
           let detailValue = ""
-          this.tableColumns.forEach(columnsItem=>{
-            if(columnsItem.key == item.detailValue) detailValue = columnsItem.filter_name && columnsItem.filter_name != "" ? columnsItem.filter_name : columnsItem.ora_name;
+          this.tableColumns.forEach(columnsItem => {
+            if (columnsItem.key == item.detailValue) detailValue = columnsItem.filter_name && columnsItem.filter_name != "" ? columnsItem.filter_name : columnsItem.ora_name;
           })
           list.push({
             detailValue: detailValue,
@@ -481,7 +497,7 @@ export default {
 
       this.submitLoading = true;
       try {
-        let res = await request({
+        let res = await GlobalConfig.request({
           method: "POST",
           url: `${this.filterFormDatas.filterFindUrlPrefix.save}${this.filterFormDatas.filterFindUrl}`,
           data: { ...data }
@@ -534,7 +550,7 @@ export default {
     async delectTplSubmit() {
       this.delectLoading = true
       try {
-        let res = await request({
+        let res = await GlobalConfig.request({
           method: "POST",
           url: `${this.filterFormDatas.filterFindUrlPrefix.delete}${this.filterFormDatas.filterFindUrl}`,
           data: { templateId: this.findSelectId }

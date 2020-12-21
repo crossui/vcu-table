@@ -1430,6 +1430,7 @@
   position  : relative;
   max-height: 400px;
   overflow-y: auto;
+
   .vcu-custom--header {
     border-bottom: 1px solid #e1e1e1;
   }
@@ -1485,5 +1486,24 @@
         background-color: @vcu-table-row-hover-background-color;
       }
     }
+  }
+}
+
+
+.vcu-filter-content {
+  &-header {
+    padding      : 10px 15px;
+    border-bottom: 1px dashed #e1e1e1;
+  }
+
+  .vcu-container-warp {
+    height    : 200px;
+    padding   : 5px 15px;
+    width     : 100%;
+    overflow-x: hidden;
+  }
+
+  &-col {
+    padding: 5px 15px;
   }
 }

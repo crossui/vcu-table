@@ -13,14 +13,6 @@ export const menuRouter = [
         name: 'base',
         component: Main,
         children: [{
-            path: 'demo',
-            meta: {
-                title: 'test',
-            },
-            name: 'demo',
-            component: () =>
-                import('@/views/base/demo/index.vue')
-        },{
             path: 'index',
             meta: {
                 title: '基础',
@@ -140,6 +132,14 @@ export const menuRouter = [
             name: 'customCell',
             component: () =>
                 import('@/views/base/customCell/index.vue')
+        }, {
+            path: 'customToolbar',
+            meta: {
+                title: '列工具',
+            },
+            name: 'customToolbar',
+            component: () =>
+                import('@/views/base/customToolbar/index.vue')
         }, {
             path: 'maxHeight',
             meta: {
