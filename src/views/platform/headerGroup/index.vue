@@ -1,6 +1,11 @@
 <template>
   <a-card title="分组表头">
     <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          <div>手动设置分组表头</div>
+        </div>
+      </a-alert>
       <vcu-table
         ref="xTable"
         border
@@ -12,6 +17,23 @@
         height="300"
         @onHeaderLoad="onHeaderLoad"
       >
+      </vcu-table>
+    </div>
+
+    <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          <div>
+            自动设置分组表头，配置通用平台
+            <span class="blue-text"> 父列key值 </span>
+            字段
+          </div>
+        </div>
+      </a-alert>
+      <vcu-table ref="xTable1" border :loadOptions="options1">
+        <template v-slot:XMMC00_default> 111111 </template>
+        <template v-slot:GJBM00_default> 22222 </template>
+        <template v-slot:XMSL00_default> 333333 </template>
       </vcu-table>
     </div>
   </a-card>
@@ -66,6 +88,38 @@ export default {
         pageUrl: "dataq/api/page/getApproveArrearageList",
       },
       tableColumn: [],
+      options1: {
+        seq: true,
+        checkbox: true,
+        headUrl: "dataq/api/header/headerGroups",
+        pageUrl: "dataq/api/page/headerGroups",
+        customRender: [
+          {
+            key: "XMMC00",
+            params: {
+              slots: {
+                default: "XMMC00_default",
+              },
+            },
+          },
+          {
+            key: "GJBM00",
+            params: {
+              slots: {
+                default: "GJBM00_default",
+              },
+            },
+          },
+          {
+            key: "XMSL00",
+            params: {
+              slots: {
+                default: "XMSL00_default",
+              },
+            },
+          },
+        ],
+      },
     };
   },
   mounted() {},

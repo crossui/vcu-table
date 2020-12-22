@@ -20,6 +20,7 @@ request.interceptors.request.use(config => {
 	//根据项目要求设置token
 	config.data = qs.stringify({
 		...config.data,
+		token: "b8b4d461b06646cbaf4e6e23f0108ab8"
 	});
 	return config
 }, error => {
@@ -36,6 +37,7 @@ request.interceptors.response.use(async (response) => {
 			title: '错误提示',
 			content: data.title,
 		})
+		return false
 	}
 }, (error) => {
 	// 请求错误需要自行处理

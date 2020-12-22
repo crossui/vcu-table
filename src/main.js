@@ -3,7 +3,6 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import _ from "lodash";
 import request from '@/utils/request'
 
 import Antd from 'ant-design-vue';

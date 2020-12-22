@@ -440,6 +440,71 @@ export const menuRouter = [
         }]
     },
     {
+        path: '/tree',
+        meta: {
+            title: '树形表格'
+        },
+        name: 'tree',
+        component: Main,
+        children: [{
+            path: 'base',
+            meta: {
+                title: '基础',
+            },
+            name: 'tree-base',
+            component: () =>
+                import('@/views/tree/base/index.vue')
+        }, {
+            path: 'line',
+            meta: {
+                title: '连接线',
+            },
+            name: 'line',
+            component: () =>
+                import('@/views/tree/line/index.vue')
+        }, {
+            path: 'normal',
+            meta: {
+                title: '普通树',
+            },
+            name: 'normal',
+            component: () =>
+                import('@/views/tree/normal/index.vue')
+        }, {
+            path: 'accordion',
+            meta: {
+                title: '手风琴效果',
+            },
+            name: 'accordion',
+            component: () =>
+                import('@/views/tree/accordion/index.vue')
+        }, {
+            path: 'filter',
+            meta: {
+                title: '深层查找',
+            },
+            name: 'tree-filter',
+            component: () =>
+                import('@/views/tree/filter/index.vue')
+        }, {
+            path: 'template',
+            meta: {
+                title: '自定义模板',
+            },
+            name: 'tree-template',
+            component: () =>
+                import('@/views/tree/template/index.vue')
+        },{
+            path: 'lazy',
+            meta: {
+                title: '懒加载',
+            },
+            name: 'tree-lazy',
+            component: () =>
+                import('@/views/tree/lazy/index.vue')
+        },]
+    },
+    {
         path: '/bigData',
         meta: {
             title: '大数据表格'

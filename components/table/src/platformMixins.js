@@ -164,26 +164,30 @@ export default {
     //生成表头数据
     renderColumns(res) {
       let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
-      let columns = res
-        .map(item => {
+
+      const recursionColumns = (res) => {
+        let _column = res.map(item => {
           if (item.hidden == undefined || !item.hidden) {
             item.showOverflow = item.ellipsis ? true : false;
-            if (_.isArray(customRender)) {
+            if (XEUtils.isArray(customRender)) {
               customRender.forEach(itemRender => {
                 if (item.key == itemRender.key || item.field == itemRender.key) {
                   item = XEUtils.merge({}, item, itemRender.params)
                 }
               })
+              if (item.children && item.children.length) {
+                item.children = recursionColumns(item.children, customRender)
+              }
             }
             return item;
           }
         })
-        .filter(item => {
-          return item != undefined;
-        });
-
-
-
+          .filter(item => {
+            return item != undefined;
+          });
+        return _column;
+      }
+      let columns = recursionColumns(res);
       //checkbox
       if (this.platformOptions.checkbox) {
         let isFixed = "";
@@ -403,22 +407,19 @@ export default {
         try {
           let _title = []
           this.collectColumn.forEach(item => {
-            if (item.property != "action" && item.visible ) {
+            if (item.property != "action" && item.visible) {
               _title.push({
                 "titleName": item.title,
                 "titleKey": item.property
               })
             }
           })
-          console.info(_title)
-          _title = JSON.stringify(_title)
-          let _data = { data: params, title: _title };
-
+          params.title = JSON.stringify(_title)
           let res = await GlobalConfig.request({
             responseType: 'blob',
             method: "POST",
             url: this.exportExcelUrl,
-            ..._data
+            data: params
           });
           if (res) {
             let filename = this.util.formatDate(new Date(), "yyyyMMdd") + '.xls';
