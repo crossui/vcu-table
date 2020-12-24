@@ -13,6 +13,8 @@
       </a-alert>
       <vcu-table
         ref="xTree"
+        show-overflow
+        row-key
         row-id="id"
         :tree-config="{
           children: 'children',
@@ -45,6 +47,8 @@
       </a-alert>
       <vcu-table
         ref="xTree1"
+        show-overflow
+        row-key
         row-id="id"
         :tree-config="{
           children: 'children',

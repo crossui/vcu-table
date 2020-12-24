@@ -11,6 +11,9 @@
       </a-alert>
       <div class="mb-5">
         <a-button @click="$refs.xTable.getTableListData(true)">重置数据</a-button>
+        <a-button @click="$refs.xTable.scrollToRow($refs.xTable.getData(30))">
+          指定行
+        </a-button>
       </div>
       <vcu-table
         ref="xTable"
@@ -30,6 +33,7 @@ export default {
       options: {
         headUrl: "dataq/api/header/getApproveArrearageList",
         pageUrl: "dataq/api/page/getApproveArrearageList",
+        seq: true
       },
     };
   },

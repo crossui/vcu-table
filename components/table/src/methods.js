@@ -858,7 +858,7 @@ const Methods = {
    * 获取数据，和 data 的行为一致，也可以指定索引获取数据
    */
   getData(rowIndex) {
-    const tableSynchData = this.data || this.tableSynchData
+    const tableSynchData = this.data || this.tableFullData  //this.tableSynchData
     return arguments.length ? tableSynchData[rowIndex] : tableSynchData.slice(0)
   },
   /**
@@ -1197,7 +1197,7 @@ const Methods = {
         if (parent && parent.fixed) {
           column.fixed = parent.fixed
         }
-        if (parent && column.fixed !== parent.fixed) {
+        if (parent && column.fixed != "" && column.fixed !== parent.fixed) {
           UtilTools.error('vcu.error.groupFixed')
         }
         if (isColGroup) {
@@ -3621,6 +3621,23 @@ const Methods = {
       }
     }
     return this.$nextTick()
+  },
+  /**
+  * 如果有滚动条，则滚动到对应值的那一行
+  */
+  scrollToCondition(condition) {
+    const { tableFullData } = this;
+    let row = null;
+    if (XEUtils.isFunction(condition)) {
+      XEUtils.arrayEach(tableFullData, (item, key) => {
+        if (condition(item)) {
+          row = item;
+        }
+      })
+      if (row) {
+        this.scrollToRow(row);
+      }
+    }
   },
   /**
    * 手动清除滚动相关信息，还原到初始状态

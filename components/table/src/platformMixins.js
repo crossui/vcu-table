@@ -152,11 +152,6 @@ export default {
         this.setFiltersHeaderColumns(_columns);
         this.loadColumn(_columns);
         this.$emit("onHeaderLoad", _columns);
-        /* let _columns = this.renderColumns(res.data.payload);
-        this.tableColumns = [..._columns]
-        this.setFiltersHeaderColumns(_columns);
-        this.columnSelectionFull = [...res.data.payload]
-         */
       } catch (err) {
         console.err("request not define!!!")
       }

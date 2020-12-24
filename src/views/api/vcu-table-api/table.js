@@ -4064,6 +4064,15 @@ const apis = [
         defVal: 'column: ColumnConfig',
         list: []
       },
+      {
+        name: 'scrollToCondition(functions)',
+        desc: '如果有滚动条，则滚动到对应值的那一行',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: '',
+        list: []
+      },
       // {
       //   name: 'scrollToTreeRow(row)',
       //   desc: '对于树形结构中，可以直接滚动到指定深层节点中（对于某些特定的场景可能会用到，比如定位到某一节点）',

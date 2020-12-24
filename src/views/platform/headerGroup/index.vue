@@ -93,6 +93,7 @@ export default {
         checkbox: true,
         headUrl: "dataq/api/header/headerGroups",
         pageUrl: "dataq/api/page/headerGroups",
+        filters: true,
         customRender: [
           {
             key: "XMMC00",

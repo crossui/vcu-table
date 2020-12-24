@@ -332,6 +332,22 @@ export const menuRouter = [
             name: 'print',
             component: () =>
                 import('@/views/base/print/index.vue')
+        }, {
+            path: 'sortableRow',
+            meta: {
+                title: '行拖拽',
+            },
+            name: 'sortableRow',
+            component: () =>
+                import('@/views/base/sortableRow/index.vue')
+        }, {
+            path: 'sortableColumn',
+            meta: {
+                title: '列拖拽',
+            },
+            name: 'sortableColumn',
+            component: () =>
+                import('@/views/base/sortableColumn/index.vue')
         }]
     },
     {
@@ -494,7 +510,7 @@ export const menuRouter = [
             name: 'tree-template',
             component: () =>
                 import('@/views/tree/template/index.vue')
-        },{
+        }, {
             path: 'lazy',
             meta: {
                 title: '懒加载',
@@ -632,6 +648,38 @@ export const menuRouter = [
             name: 'functions',
             component: () =>
                 import('@/views/platform/functions/index.vue')
+        }, {
+            path: 'events',
+            meta: {
+                title: '事件',
+            },
+            name: 'events',
+            component: () =>
+                import('@/views/platform/events/index.vue')
+        }, {
+            path: 'edits',
+            meta: {
+                title: '可编辑',
+            },
+            name: 'edits',
+            component: () =>
+                import('@/views/platform/edits/index.vue')
+        }, {
+            path: 'location',
+            meta: {
+                title: '精确定位',
+            },
+            name: 'location',
+            component: () =>
+                import('@/views/platform/location/index.vue')
+        }, {
+            path: 'test',
+            meta: {
+                title: '测试',
+            },
+            name: 'test',
+            component: () =>
+                import('@/views/platform/test/index.vue')
         }]
     },
     {
