@@ -112,7 +112,7 @@ export default {
       options: {
         headUrl: "dataq/api/header/headerGroups1",
         pageUrl: "dataq/api/page/headerGroups1",
-        //filters: true,
+        filters: true,
       },
     };
   },

@@ -147,14 +147,18 @@ export default {
           url: this.platformOptions.headUrl,
           ..._data
         });
-        let _columns = this.renderColumns(res.data.payload);
-        this.fullColumns = _columns;
-        this.setFiltersHeaderColumns(_columns);
-        this.loadColumn(_columns);
+        let _columns = this.setHeaderColumns(res.data.payload);
         this.$emit("onHeaderLoad", _columns);
       } catch (err) {
         console.err("request not define!!!")
       }
+    },
+    setHeaderColumns(res){
+      let _columns = this.renderColumns(res);
+      this.fullColumns = _columns;
+      this.setFiltersHeaderColumns(_columns);
+      this.loadColumn(_columns);
+      return _columns;
     },
     //生成表头数据
     renderColumns(res) {
@@ -240,9 +244,16 @@ export default {
     //生成表头的筛选菜单项 表头数组
     setFiltersHeaderColumns(res) {
       if (this.platformOptions.filters) {
-        this.filtersHeaderColumns = res.map(item => {
-          return item.key
-        });
+        const recursionFilterColumns = (list) => {
+          return list.map(item => {
+            if (item.children && item.children.length) {
+              return recursionFilterColumns(item.children)
+            } else {
+              return item.key
+            }
+          });
+        }
+        this.filtersHeaderColumns = _.flattenDeep(recursionFilterColumns(res));
       }
     },
     //生成表头的筛选菜单项数据
@@ -260,16 +271,26 @@ export default {
             }
           });
         });
-        this.fullColumns = _.map(this.fullColumns, (item) => {
-          if (datas[item.key]) {
-            const filtersVal = _.map(datas[item.key], (val) => {
-              return { label: val, value: val };
-            });
-            item.filters = filtersVal;
-            item.filterMethod = ({ value, row, column }) => row[item.key].indexOf(value) === 0
-          }
-          return item;
-        });
+        const recursionFilterTableColumns = (list) => {
+          return _.map(list, (item) => {
+            let _item = { ...item };
+            if (item.children && item.children.length) {
+              _item.children = recursionFilterTableColumns(item.children)
+            } else {
+              if (datas[item.key]) {
+                const filtersVal = _.map(datas[item.key], (val) => {
+                  return { label: val, value: val };
+                });
+                _item.filters = filtersVal;
+                _item.filterMethod = ({ value, row, column }) => {
+                  return row[item.key].toString().indexOf(value.toString()) === 0
+                }
+              }
+            }
+            return _item;
+          });
+        }
+        this.fullColumns = recursionFilterTableColumns(this.fullColumns);
         this.loadColumn(this.fullColumns);
       }
     },
