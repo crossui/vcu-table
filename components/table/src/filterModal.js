@@ -1,3 +1,4 @@
+import XEUtils from 'xe-utils'
 import GlobalConfig from '../../conf'
 export default {
   props: {
@@ -51,7 +52,7 @@ export default {
       tplName: "",
       delectLoading: false,
       saveLoading: false,
-      tableColumns:[],
+      tableColumns: [],
       operationList: [],
       relationList: [],
       $xetable: null
@@ -233,7 +234,9 @@ export default {
     syncUpdate(params) {
       const { collectColumn, $table } = params
       this.$xetable = $table
-      this.tableColumns = collectColumn
+      let _columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
+      _columns = XEUtils.filterTree(_columns, item => !item.children)
+      this.tableColumns = _columns
     },
     //加载过滤字典
     async getFilterDict() {

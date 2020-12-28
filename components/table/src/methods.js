@@ -2920,8 +2920,15 @@ const Methods = {
           })
           column.order = order
           // 如果是服务端排序，则跳过本地排序处理
-          if (!isRemote) {
+          if (!isRemote && this.platformOptions.pageUrl == "") {
             this.handleTableData(true)
+          }
+          // 通用平台 
+          else if (this.platformOptions.pageUrl != "") {
+            const currColumns = XEUtils.filterTree(this.fullColumns, item => item.field === field)[0];
+            const key = currColumns.filter_name && currColumns.filter_name != "" ? currColumns.filter_name : currColumns.ora_name;
+            this.platformOptions.pageFormData.orderBy = `${key} ${order}`;
+            this.getTableListData(true);
           }
         }
         return this.$nextTick().then(this.updateStyle)
@@ -2936,6 +2943,11 @@ const Methods = {
     this.tableFullColumn.forEach(column => {
       column.order = null
     })
+    // 通用平台 
+    if (this.platformOptions.pageUrl != "") {
+      this.platformOptions.pageFormData.orderBy = undefined;
+      this.getTableListData(true);
+    }
     return this.handleTableData(true)
   },
   getSortColumn() {

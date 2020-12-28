@@ -162,7 +162,7 @@ export default {
     syncUpdate(params) {
       const { collectColumn, $table } = params
       this.$xetable = $table
-      this.columns = collectColumn
+      this.columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
       this.checkCustomStatus()
     },
     handleSubmit() {

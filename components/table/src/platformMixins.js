@@ -153,7 +153,7 @@ export default {
         console.err("request not define!!!")
       }
     },
-    setHeaderColumns(res){
+    setHeaderColumns(res) {
       let _columns = this.renderColumns(res);
       this.fullColumns = _columns;
       this.setFiltersHeaderColumns(_columns);
@@ -283,7 +283,13 @@ export default {
                 });
                 _item.filters = filtersVal;
                 _item.filterMethod = ({ value, row, column }) => {
-                  return row[item.key].toString().indexOf(value.toString()) === 0
+                  if (value == "") {
+                    return row[item.key] == ""
+                  }
+                  else {
+                    return row[item.key].toString().indexOf(value.toString()) === 0
+                  }
+
                 }
               }
             }
@@ -387,7 +393,7 @@ export default {
       if (this.filterModalShow) {
         this.filterModalVisible = true;
         this.$nextTick(() => {
-          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.collectColumn, $table: this })
+          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.fullColumns, $table: this })
         })
       }
     },

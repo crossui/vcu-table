@@ -4,122 +4,76 @@
       <vcu-table
         ref="xTable"
         border
+        keep-source
+        show-footer
+        resizable
+        :edit-config="{
+          trigger: 'click',
+          mode: 'cell',
+          showStatus: true,
+          autoClear: false,
+        }"
+        :footer-method="footerMethod"
         :loadOptions="options"
-        :columns="tableColumn"
-        :data="tableData"
-        @onHeaderLoad="onHeaderLoad"
+        :edit-rules="validRules"
       >
+        <template v-slot:GJBM00="scope">
+          <a-input
+            size="small"
+            class="GJBM00"
+            v-model="scope.row.GJBM00"
+          ></a-input>
+        </template>
       </vcu-table>
     </div>
   </a-card>
 </template>
 <script>
-const renderColumns = (res) => {
-  let seq = {
-    title: "序号",
-    fixed: "left",
-    align: "center",
-    type: "seq",
-    width: 60,
-  };
-
-  let columns1 = {
-    title: "西药",
-    align: "center",
-    children: [],
-  };
-  let columns2 = {
-    title: "中成药",
-    align: "center",
-    children: [],
-  };
-  let columns3 = {
-    title: "中草药",
-    align: "center",
-    children: [],
-  };
-  let columns4 = {
-    title: "物资",
-    align: "center",
-    children: [],
-  };
-  let columns5 = {
-    title: "合计",
-    align: "center",
-    children: [],
-  };
-  let columns = res
-    .map((item) => {
-      if (item.hidden == undefined || !item.hidden) {
-        let _title = item.title.split("|");
-        if (_title.length > 1) {
-          item.title = _title[1];
-        }
-        if (
-          item.key == "XYGJJE" ||
-          item.key == "XYLSJE" ||
-          item.key == "C_XYCJ"
-        ) {
-          columns1.children.push(item);
-        } else if (
-          item.key == "CYGJJE" ||
-          item.key == "CYLSJE" ||
-          item.key == "C_CYCJ"
-        ) {
-          columns2.children.push(item);
-        } else if (
-          item.key == "ZYGJJE" ||
-          item.key == "ZYLSJE" ||
-          item.key == "C_ZYCJ"
-        ) {
-          columns3.children.push(item);
-        } else if (
-          item.key == "YXGJJE" ||
-          item.key == "YXLSJE" ||
-          item.key == "C_YXCJ"
-        ) {
-          columns4.children.push(item);
-        } else if (
-          item.key == "C_GJHJ" ||
-          item.key == "C_LSHJ" ||
-          item.key == "C_CJHJ"
-        ) {
-          columns5.children.push(item);
-        } else {
-          return item;
-        }
-      }
-    })
-    .filter((item) => {
-      return item != undefined;
-    });
-  let _columns = [
-    seq,
-    ...columns,
-    columns1,
-    columns2,
-    columns3,
-    columns4,
-    columns5,
-  ];
-  return _columns;
-};
+import XEUtils from "xe-utils";
 export default {
   data() {
     return {
-      tableColumn: [],
-      tableData: [],
+      validRules: {
+        GJBM00: [{ required: true, message: "国家编码必须填写" }],
+      },
       options: {
-        headUrl: "dataq/api/header/headerGroups1",
-        pageUrl: "dataq/api/page/headerGroups1",
+        headUrl: "dataq/api/header/headerGroups",
+        pageUrl: "dataq/api/page/headerGroups",
+        seq: true,
         filters: true,
+        pageFormData: {
+          RKDH00: "R10643",
+        },
+        customRender: [
+          {
+            key: "GJBM00",
+            params: {
+              editRender: {
+                enabled: true,
+                autofocus: ".GJBM00",
+              },
+              slots: {
+                edit: "GJBM00",
+              },
+            },
+          },
+        ],
       },
     };
   },
   mounted() {},
   methods: {
-    onHeaderLoad(columns) {
-      this.tableColumn = renderColumns(columns);
+    footerMethod({ columns, data, response }) {
+      const stats = response && response.data.payload.stats;
+      const footerData = [
+        columns.map((column, columnIndex) => {
+          if (XEUtils.has(stats, column.property)) {
+            return stats[column.property];
+          }
+          return null;
+        }),
+      ];
+      return footerData;
     },
   },
 };
