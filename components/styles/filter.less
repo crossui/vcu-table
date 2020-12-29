@@ -66,7 +66,8 @@
     padding-top: 0.2em;
   }
   .vcu-table--filter-body {
-    max-height: 240px;
+    /* max-height: 100px; */
+    overflow-y: auto;
     padding-bottom: 0.2em;
   }
   & > ul {
@@ -85,7 +86,7 @@
   }
   .vcu-table--filter-footer {
     border-top: 1px solid @vcu-table-popup-border-color;
-    padding: 0.6em;
+    padding: 0.3em 0.6em;
     user-select: none;
     button {
       background-color: transparent;

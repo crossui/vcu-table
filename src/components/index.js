@@ -4,6 +4,7 @@ import DateTime from './dateTime';
 import AutoTypewrit from './autoTypewrit';
 import TableList from './tableList';
 import DraggableResizable from './draggableResizable';
+import { Splitpanes, Pane } from './splitpanes';
 
 
 const components = {
@@ -12,6 +13,8 @@ const components = {
     DateTime,
     AutoTypewrit,
     TableList,
+    Splitpanes,
+    Pane,
     DraggableResizable
 }
 

@@ -954,13 +954,13 @@ export default {
     }
     // 部件 - 校验提示
     if (hasTip && this.editRules && (validOpts.message === 'default' ? !height : validOpts.message === 'tooltip')) {
-      tableComps.push(
+      /* tableComps.push(
         h('vcu-tooltip', {
           class: 'vcu-table--valid-error',
-          props: validOpts.message === 'tooltip' || tableData.length === 1 ? vaildTipOpts : null,
+          props: validOpts.message === 'tooltip' || tableData.length === 1 ? vaildTipOpts : {},
           ref: 'validTip'
         })
-      )
+      ) */
     }
 
 
@@ -987,6 +987,7 @@ export default {
     }
 
     return h('div', {
+      ref: "vcuTableWrap",
       class: ['vcu-table', `tid_${tId}`, vSize ? `size--${vSize}` : '', `border--${tableBorder}`, {
         'vcu-editable': !!editConfig,
         'show--head': showHeader,

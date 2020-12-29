@@ -104,7 +104,7 @@ export default {
     },
     loadOptions: {
       handler(newV, oldV) {
-        //console.info(newV)
+        //this.columns && this.setHeaderColumns(this.columns)
       },
       immediate: true,
       deep: true
@@ -168,15 +168,15 @@ export default {
         let _column = res.map(item => {
           if (item.hidden == undefined || !item.hidden) {
             item.showOverflow = item.ellipsis ? true : false;
+            if (item.children && item.children.length) {
+              item.children = recursionColumns(item.children)
+            }
             if (XEUtils.isArray(customRender)) {
               customRender.forEach(itemRender => {
                 if (item.key == itemRender.key || item.field == itemRender.key) {
                   item = XEUtils.merge({}, item, itemRender.params)
                 }
               })
-              if (item.children && item.children.length) {
-                item.children = recursionColumns(item.children, customRender)
-              }
             }
             return item;
           }
@@ -186,6 +186,7 @@ export default {
           });
         return _column;
       }
+
       let columns = recursionColumns(res);
       //checkbox
       if (this.platformOptions.checkbox) {
@@ -238,7 +239,6 @@ export default {
         }]
         columns = seqItem.concat(columns)
       }
-
       return columns;
     },
     //生成表头的筛选菜单项 表头数组
@@ -271,6 +271,7 @@ export default {
             }
           });
         });
+        let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
         const recursionFilterTableColumns = (list) => {
           return _.map(list, (item) => {
             let _item = { ...item };
@@ -278,18 +279,17 @@ export default {
               _item.children = recursionFilterTableColumns(item.children)
             } else {
               if (datas[item.key]) {
-                const filtersVal = _.map(datas[item.key], (val) => {
-                  return { label: val, value: val };
-                });
-                _item.filters = filtersVal;
-                _item.filterMethod = ({ value, row, column }) => {
-                  if (value == "") {
-                    return row[item.key] == ""
+                let isExist = XEUtils.isArray(customRender) ? XEUtils.filter(customRender, n => {
+                  return n.key == item.key && n.params && n.params.filters != undefined && n.params.filters.length > 0 && n.params.filterMethod
+                }) : false;
+                if (!(isExist && isExist.length)) {
+                  const filtersVal = _.map(datas[item.key], (val) => {
+                    return { label: val, value: val };
+                  });
+                  _item.filters = filtersVal;
+                  _item.filterMethod = ({ value, row, column }) => {
+                    return row[item.key] === value;
                   }
-                  else {
-                    return row[item.key].toString().indexOf(value.toString()) === 0
-                  }
-
                 }
               }
             }

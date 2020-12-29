@@ -8,12 +8,12 @@ export default {
     filterStore: Object
   },
   computed: {
-    hasCheckOption () {
+    hasCheckOption() {
       const { filterStore } = this
       return filterStore && filterStore.options.some(option => option.checked)
     }
   },
-  render (h) {
+  render(h) {
     const { $parent: $xetable, filterStore } = this
     const { column } = filterStore
     const filterRender = column ? column.filterRender : null
@@ -28,7 +28,7 @@ export default {
     }, filterStore.visible ? this.renderOptions(h, filterRender, compConf).concat(this.renderFooter(h)) : [])
   },
   methods: {
-    renderOptions (h, filterRender, compConf) {
+    renderOptions(h, filterRender, compConf) {
       const { $parent: $xetable, filterStore } = this
       const { args, column, multiple } = filterStore
       const { slots } = column
@@ -79,7 +79,10 @@ export default {
           ]))
         ]),
         h('ul', {
-          class: 'vcu-table--filter-body'
+          class: 'vcu-table--filter-body',
+          style: {
+            maxHeight: `${$xetable.tableHeight - 65 < 50 ? 60 : $xetable.tableHeight - 65}px`
+          }
         }, filterStore.options.map(item => {
           return h('li', {
             class: ['vcu-table--filter-option', {
@@ -111,7 +114,7 @@ export default {
         }))
       ]
     },
-    renderFooter (h) {
+    renderFooter(h) {
       const { hasCheckOption, filterStore } = this
       const { column, multiple } = filterStore
       const filterRender = column.filterRender
@@ -141,7 +144,7 @@ export default {
       ] : []
     },
     // 全部筛选事件
-    filterCheckAllEvent (evnt, value) {
+    filterCheckAllEvent(evnt, value) {
       const filterStore = this.filterStore
       filterStore.options.forEach(option => {
         option._checked = value
@@ -155,7 +158,7 @@ export default {
      * Publish methods
      *************************/
     // （单选）筛选发生改变
-    changeRadioOption (evnt, checked, item) {
+    changeRadioOption(evnt, checked, item) {
       const { $parent: $xetable, filterStore } = this
       filterStore.options.forEach(option => {
         option._checked = false
@@ -165,12 +168,12 @@ export default {
       this.confirmFilter(evnt)
     },
     // （多选）筛选发生改变
-    changeMultipleOption (evnt, checked, item) {
+    changeMultipleOption(evnt, checked, item) {
       const { $parent: $xetable } = this
       item._checked = checked
       $xetable.checkFilterOptions()
     },
-    changeAllOption (evnt, checked) {
+    changeAllOption(evnt, checked) {
       if (this.filterStore.multiple) {
         this.filterCheckAllEvent(evnt, checked)
       } else {
@@ -178,7 +181,7 @@ export default {
       }
     },
     // 筛选发生改变
-    changeOption (evnt, checked, item) {
+    changeOption(evnt, checked, item) {
       if (this.filterStore.multiple) {
         this.changeMultipleOption(evnt, checked, item)
       } else {
@@ -186,7 +189,7 @@ export default {
       }
     },
     // 确认筛选
-    confirmFilter (evnt) {
+    confirmFilter(evnt) {
       const { $parent: $xetable, filterStore } = this
       filterStore.options.forEach(option => {
         option.checked = option._checked
@@ -194,7 +197,7 @@ export default {
       $xetable.confirmFilterEvent(evnt)
     },
     // 重置筛选
-    resetFilter (evnt) {
+    resetFilter(evnt) {
       const { $parent: $xetable } = this
       $xetable.resetFilterEvent(evnt)
     }
