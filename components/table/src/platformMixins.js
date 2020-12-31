@@ -163,7 +163,6 @@ export default {
     //生成表头数据
     renderColumns(res) {
       let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
-
       const recursionColumns = (res) => {
         let _column = res.map(item => {
           if (item.hidden == undefined || !item.hidden) {

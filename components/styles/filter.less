@@ -3,24 +3,28 @@
 
 /*筛选*/
 .vcu-cell--filter {
-  padding: 0 0.1em 0 0.25em;
-  text-align: center;
+  padding       : 0 0.1em 0 0.25em;
+  text-align    : center;
   vertical-align: middle;
-  display: inline-block;
-  line-height: 0;
+  display       : inline-block;
+  line-height   : 0;
+
   &.is--active {
     .vcu-filter--btn {
       color: @vcu-table-font-color;
     }
   }
+
   .vcu-filter--btn {
-    color: @vcu-table-column-icon-border-color;
+    color : @vcu-table-column-icon-border-color;
     cursor: pointer;
+
     &:hover {
       color: @vcu-table-font-color;
     }
   }
 }
+
 .filter--active {
   .vcu-cell--filter {
     .vcu-filter--btn {
@@ -31,77 +35,93 @@
 
 /*筛选容器*/
 .vcu-table--filter-wrapper {
-  display: none;
-  position: absolute;
-  min-width: 100px;
-  border-radius: @vcu-border-radius;
+  display         : none;
+  position        : absolute;
+  min-width       : 100px;
+  border-radius   : @vcu-border-radius;
   background-color: @vcu-table-filter-panel-background-color;
-  border: 1px solid @vcu-table-popup-border-color;
-  box-shadow: 0 1px 6px rgba(0,0,0,.2);
-  z-index: 10;
+  border          : 1px solid @vcu-table-popup-border-color;
+  box-shadow      : 0 0px 10px rgba(0, 0, 0, .5);
+  z-index         : 10;
+
   &:not(.is--multiple) {
     text-align: center;
   }
+
   &.filter--active {
     display: block;
   }
+
   .vcu-table--filter-header,
   .vcu-table--filter-body {
-    & > li {
-      overflow: hidden;
+    &>li {
+      overflow     : hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 360px;
-      padding: 0.25em 0.8em;
-      cursor: pointer;
+      white-space  : nowrap;
+      max-width    : 360px;
+      padding      : 0.25em 0.8em;
+      cursor       : pointer;
+
       &.is--checked {
         color: @vcu-primary-color;
       }
+
       &:hover {
         background-color: @vcu-table-row-hover-background-color;
       }
     }
   }
+
   .vcu-table--filter-header {
     padding-top: 0.2em;
   }
+
   .vcu-table--filter-body {
     /* max-height: 100px; */
-    overflow-y: auto;
+    overflow-y    : auto;
     padding-bottom: 0.2em;
   }
-  & > ul {
+
+  &>ul {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
-    overflow: auto;
-    user-select: none;
+    padding        : 0;
+    margin         : 0;
+    overflow       : auto;
+    user-select    : none;
   }
+
   &.is--multiple {
-    & > ul {
-      & > li {
+    &>ul {
+      &>li {
         padding: 0.25em 0.8em 0.25em 2.3em;
       }
     }
   }
+
   .vcu-table--filter-footer {
-    border-top: 1px solid @vcu-table-popup-border-color;
-    padding: 0.3em 0.6em;
+    border-top : 1px solid @vcu-table-popup-border-color;
+    padding    : 0.3em 0.6em;
     user-select: none;
+
     button {
       background-color: transparent;
-      padding: 0 0.4em;
-      border: 0;
-      color: @vcu-table-font-color;
-      cursor: pointer;
+      padding         : 0 0.4em;
+      border          : 0;
+      color           : @vcu-primary-color;
+      font-weight     : bold;
+      margin-right    : 5px;
+      cursor          : pointer;
+
       &:focus {
         outline: none;
       }
+
       &:hover {
         color: @vcu-primary-color;
       }
+
       &.is--disabled {
-        color: @vcu-disabled-color;
+        color : @vcu-disabled-color;
         cursor: not-allowed;
       }
     }
@@ -110,35 +130,39 @@
 
 .vcu-table--filter-option {
   .XECheckbox;
+
   .vcu-checkbox--icon {
     left: 0.6em;
-    top: 0.38em;
+    top : 0.38em;
   }
 }
 
 .vcu-table {
   .vcu-table--filter-option {
-    & > .vcu-checkbox--icon {
+    &>.vcu-checkbox--icon {
       font-size: @vcu-checkbox-font-size-default;
     }
   }
+
   &.size--large {
     .vcu-table--filter-option {
-      & > .vcu-checkbox--icon {
+      &>.vcu-checkbox--icon {
         font-size: @vcu-checkbox-font-size-large;
       }
     }
   }
+
   &.size--small {
     .vcu-table--filter-option {
-      & > .vcu-checkbox--icon {
+      &>.vcu-checkbox--icon {
         font-size: @vcu-checkbox-font-size-small;
       }
     }
   }
+
   &.size--mini {
     .vcu-table--filter-option {
-      & > .vcu-checkbox--icon {
+      &>.vcu-checkbox--icon {
         font-size: @vcu-checkbox-font-size-mini;
       }
     }

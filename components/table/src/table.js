@@ -557,18 +557,14 @@ export default {
     }
   },
   watch: {
-    columns: {
-      handler(value, oldValue) {
-        value && this.$nextTick(() => {
-          if (this.platformOptions.filters) {
-            this.setHeaderColumns(value)
-          } else {
-            this.loadColumn(value)
-          }
-        })
-      },
-      immediate: true,
-      deep: true
+    columns(value) {
+      if (value && value.length) {
+        if (this.platformOptions.filters) {
+          this.setHeaderColumns(value)
+        } else {
+          this.loadColumn(value)
+        }
+      }
     },
     data(value) {
       this.setDatas(value);

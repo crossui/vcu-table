@@ -1,133 +1,99 @@
 <template>
   <a-card title="分组表头">
-    <div class="mb-30">
-      <a-alert type="info" class="mb-10">
-        <div slot="message">
-          <div>手动设置分组表头</div>
-        </div>
-      </a-alert>
-      <vcu-table
-        ref="xTable"
-        border
-        show-footer
-        :footer-method="footerMethod"
-        :loadOptions="options"
-        :columns="tableColumn"
-        isLazy
-        height="300"
-        @onHeaderLoad="onHeaderLoad"
-      >
-      </vcu-table>
-    </div>
-
-    <div class="mb-30">
-      <a-alert type="info" class="mb-10">
-        <div slot="message">
-          <div>
-            自动设置分组表头，配置通用平台
-            <span class="blue-text"> 父列key值 </span>
-            字段
-          </div>
-        </div>
-      </a-alert>
-      <vcu-table ref="xTable1" border :loadOptions="options1">
-        <template v-slot:XMMC00_default> 111111 </template>
-        <template v-slot:GJBM00_default> 22222 </template>
-        <template v-slot:XMSL00_default> 333333 </template>
-      </vcu-table>
-    </div>
+    <vcu-table
+      ref="xTable1"
+      border
+      :loadOptions="options1"
+      :edit-config="{ trigger: 'manual', mode: 'row', autoClear: false }"
+      :row-class-name="boeMainTableRowClassName"
+      @cell-click="boeMainTableCelClick"
+    ></vcu-table>
   </a-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
 
-const renderColumns = (res) => {
-  let seq = {
-    title: "序号",
-    fixed: "left",
-    align: "center",
-    type: "seq",
-    width: 60,
-  };
-  let userColumns = {
-    title: "用户信息",
-    fixed: "left",
-    align: "center",
-    children: [],
-  };
-  let dateColumns = {
-    title: "时间",
-    fixed: "right",
-    align: "center",
-    children: [],
-  };
-  let columns = res
-    .map((item) => {
-      if (item.hidden == undefined || !item.hidden) {
-        if (item.key == "pName" || item.key == "pSex" || item.key == "pAge") {
-          userColumns.children.push(item);
-        } else if (item.key == "admissDate" || item.key == "outHospDate") {
-          dateColumns.children.push(item);
-        } else {
-          return item;
-        }
-      }
-    })
-    .filter((item) => {
-      return item != undefined;
-    });
-  let _columns = [seq, userColumns, ...columns, dateColumns];
-  return _columns;
-};
-
+import autoTypewrit from "@/components/autoTypewrit";
 export default {
+  components: {
+    autoTypewrit,
+  },
   data() {
     return {
-      options: {
-        headUrl: "dataq/api/header/getApproveArrearageList",
-        pageUrl: "dataq/api/page/getApproveArrearageList",
-        seq: true
+      currIndex: 0,
+      autoTypewritLoadOptions: {
+        headUrl:
+          "http://10.16.0.78:8033/mock/9cf15880587211ea804331cf8/dataq/api/header",
+        listUrl:
+          "http://10.16.0.78:8033/mock/9cf15880587211ea804331cf8/dataq/api/page",
       },
-      tableColumn: [],
       options1: {
         seq: true,
         checkbox: true,
-        headUrl: "dataq/api/header/headerGroups",
-        pageUrl: "dataq/api/page/headerGroups",
+        headUrl:
+          "http://10.16.0.78:8033/mock/9cf15880587211ea804331cf8/dataq/api/header/headerGroups",
+        pageUrl:
+          "http://10.16.0.78:8033/mock/9cf15880587211ea804331cf8/dataq/api/page/headerGroups",
         filters: true,
         customRender: [
           {
-            key: "XMMC00",
+            key: "GJBM00",
             params: {
+              editRender: true,
               slots: {
-                default: "XMMC00_default",
+                edit: ({ row }) => {
+                  return [
+                    <a-input v-model={row.GJBM00} size="small"></a-input>,
+                  ];
+                },
               },
             },
           },
           {
-            key: "GJBM00",
+            key: "XMGG00",
             params: {
+              editRender: true,
               slots: {
-                default: "GJBM00_default",
+                edit: ({ row }) => {
+                  return [
+                    <autoTypewrit
+                      size="small"
+                      v-model={row.XMGG00}
+                      loadOptions={this.autoTypewritLoadOptions}
+                      transfer
+                      backfillKey="inHospDeptName"
+                    ></autoTypewrit>,
+                  ];
+                },
               },
             },
           },
           {
             key: "XMSL00",
             params: {
+              editRender: true,
               slots: {
-                default: "XMSL00_default",
+                edit: ({ row }) => {
+                  return [
+                    <a-input-number
+                      v-model={row.inputCode}
+                      size="small"
+                    ></a-input-number>,
+                  ];
+                },
               },
             },
           },
           {
-            key: "XMDJ00",
+            key: "KFKSMC",
             params: {
-              filters: [{ label: "包含 1", value: "1" }],
-              filterMethod: ({ value, row, column }) => {
-                return (
-                  XEUtils.toString(row.XMDJ00).toLowerCase().indexOf(value) > -1
-                );
+              editRender: true,
+              slots: {
+                edit: ({ row }) => {
+                  return [
+                    <a-input v-model={row.KFKSMC} size="small"></a-input>,
+                  ];
+                },
               },
             },
           },
@@ -135,27 +101,16 @@ export default {
       },
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-    onHeaderLoad(columns) {
-      this.tableColumn = renderColumns(columns);
+    boeMainTableRowClassName({ rowIndex }) {
+      if (rowIndex == this.currIndex) {
+        return "bg-blue";
+      }
     },
-    footerMethod({ columns, data, response }) {
-      const stats = response && response.data.payload.stats;
-      const footerData = [
-        columns.map((column, columnIndex) => {
-          if (columnIndex == 1) {
-            return data.length;
-          }
-
-          if (XEUtils.has(stats, column.property)) {
-            return stats[column.property];
-          }
-          return null;
-        }),
-      ];
-      return footerData;
+    boeMainTableCelClick({ rowIndex, $rowIndex, row, seq }) {
+      this.currIndex = rowIndex;
+      this.$refs.xTable1.setActiveRow(row);
     },
   },
 };
