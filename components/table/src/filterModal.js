@@ -236,6 +236,7 @@ export default {
       this.$xetable = $table
       let _columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
       _columns = XEUtils.filterTree(_columns, item => !item.children)
+      
       this.tableColumns = _columns
     },
     //加载过滤字典

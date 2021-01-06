@@ -28,5 +28,17 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  watch: {
+    $route: {
+      handler: (val, oldVal) => {
+        window.history.pushState('forward', null, document.URL);
+      },
+      deep: true
+    }
+  },
 }).$mount('#app')
+
+window.onpopstate = () => {
+  window.history.forward(1);
+}

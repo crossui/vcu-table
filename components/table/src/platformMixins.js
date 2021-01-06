@@ -7,6 +7,10 @@ export default {
       type: String,
       default: ""
     },
+    filterOldColumns: {
+      type: Boolean,
+      default: false
+    },
     filterFormData: {
       type: Object,
       default: () => { }
@@ -57,6 +61,8 @@ export default {
       columnSelectionVisible: false,
       filterModalVisible: false,
       filterParameter: null,
+      filterColumns: null,
+      resetFilters: true
     }
   },
   computed: {
@@ -147,14 +153,17 @@ export default {
           url: this.platformOptions.headUrl,
           ..._data
         });
-        let _columns = this.setHeaderColumns(res.data.payload);
-        this.$emit("onHeaderLoad", _columns);
+        if (this.filterModalShow && this.filterOldColumns) {
+          this.filterColumns = res.data.payload;
+        }
+        this.$emit("onHeaderLoad", this.setHeaderColumns(res.data.payload));
       } catch (err) {
         console.err("request not define!!!")
       }
     },
     setHeaderColumns(res) {
-      let _columns = this.renderColumns(res);
+      const _res = XEUtils.clone(res, true);
+      let _columns = this.renderColumns(_res);
       this.fullColumns = _columns;
       this.setFiltersHeaderColumns(_columns);
       this.loadColumn(_columns);
@@ -166,7 +175,10 @@ export default {
       const recursionColumns = (res) => {
         let _column = res.map(item => {
           if (item.hidden == undefined || !item.hidden) {
-            item.showOverflow = item.ellipsis ? true : false;
+            let ellipsis = item.ellipsis ? true : false;
+            item.showOverflow = ellipsis;
+            item.showHeaderOverflow = ellipsis;
+            item.showFooterOverflow = ellipsis;
             if (item.children && item.children.length) {
               item.children = recursionColumns(item.children)
             }
@@ -308,16 +320,14 @@ export default {
       if (options.clearFilterData) this.filterParameter = null;
 
       let params = {}
+      //懒加载
+      if (this.isLazy) {
+        params.page = isRest && isRest == true ? this.lazyCurrent = 1 : this.lazyCurrent;
+        params.limit = this.lazyLimit;
+      }
       //过滤条件
       if (this.filterParameter != null) {
         params.filterParameter = JSON.stringify(this.filterParameter)
-      }
-      //懒加载
-      if (this.isLazy) {
-        params = {
-          page: isRest && isRest == true ? this.lazyCurrent = 1 : this.lazyCurrent,
-          limit: this.lazyLimit
-        }
       }
       params = _.merge({}, params, this.platformOptions.pageFormData);
       try {
@@ -349,7 +359,7 @@ export default {
 
         setTimeout(() => {
           this.setDatas(resData);
-          if (this.platformOptions.filters) this.handleFiltersHeaderDatas();
+          if (this.platformOptions.filters && this.resetFilters) this.handleFiltersHeaderDatas();
           this.$emit("onPageLoad", {
             datas: this.tableFullData,
             count: res.data.payload.count,
@@ -392,9 +402,13 @@ export default {
       if (this.filterModalShow) {
         this.filterModalVisible = true;
         this.$nextTick(() => {
-          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.fullColumns, $table: this })
+          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.filterOldColumns ? this.filterColumns : this.fullColumns, $table: this })
         })
       }
+    },
+    handleFilterRemote(res, type) {
+      this.resetFilters = type;
+      this.handleSubmitFilter(res)
     },
     //过滤确认
     handleSubmitFilter(res) {

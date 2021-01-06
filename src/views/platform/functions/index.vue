@@ -34,7 +34,7 @@
       <vcu-table
         ref="xTable1"
         border
-        :loadOptions="options2"
+        :loadOptions="options1"
         customModalShow
         filterModalShow
         :filterFormData="filterFormData"
@@ -42,11 +42,121 @@
       >
       </vcu-table>
     </div>
+
+    <div class="mb-30">
+      <div class="mb-5">
+        <a-button-group>
+          <a-button @click="$refs.xTable2.showColumnModal()">列选择</a-button>
+          <a-button @click="$refs.xTable2.showFilterModal()">过 滤</a-button>
+          <a-button @click="$refs.xTable2.operateRestore()">还 原</a-button>
+          <a-button @click="$refs.xTable2.exportExcel()">导 出</a-button>
+          <a-button @click="$refs.xTable2.emptyTableLists()">清空数据</a-button>
+        </a-button-group>
+      </div>
+      <vcu-table
+        ref="xTable2"
+        border
+        :columns="tableColumn"
+        :loadOptions="options2"
+        customModalShow
+        filterModalShow
+        filterOldColumns
+        :filterFormData="filterFormData"
+        :exportExcelUrl="exportExcelUrl"
+        @onHeaderLoad="onHeaderLoad"
+      ></vcu-table>
+    </div>
   </a-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
-
+const renderColumns = (res) => {
+  let seq = {
+    title: "序号",
+    fixed: "left",
+    align: "center",
+    type: "seq",
+    width: 60,
+  };
+  let columns1 = {
+    title: "西药",
+    align: "center",
+    children: [],
+  };
+  let columns2 = {
+    title: "中成药",
+    align: "center",
+    children: [],
+  };
+  let columns3 = {
+    title: "中草药",
+    align: "center",
+    children: [],
+  };
+  let columns4 = {
+    title: "物资",
+    align: "center",
+    children: [],
+  };
+  let columns5 = {
+    title: "合计",
+    align: "center",
+    children: [],
+  };
+  let columns = res
+    .map((item) => {
+      if (item.hidden == undefined || !item.hidden) {
+        let title = item.title.split("|");
+        item.title = title.length > 1 ? title[1] : item.title;
+        if (
+          item.key == "C_XYCJ" ||
+          item.key == "XYLSJE" ||
+          item.key == "XYGJJE"
+        ) {
+          columns1.children.push(item);
+        } else if (
+          item.key == "C_CYCJ" ||
+          item.key == "CYLSJE" ||
+          item.key == "CYGJJE"
+        ) {
+          columns2.children.push(item);
+        } else if (
+          item.key == "C_ZYCJ" ||
+          item.key == "ZYLSJE" ||
+          item.key == "ZYGJJE"
+        ) {
+          columns3.children.push(item);
+        } else if (
+          item.key == "C_YXCJ" ||
+          item.key == "YXLSJE" ||
+          item.key == "YXGJJE"
+        ) {
+          columns4.children.push(item);
+        } else if (
+          item.key == "C_CJHJ" ||
+          item.key == "C_LSHJ" ||
+          item.key == "C_GJHJ"
+        ) {
+          columns5.children.push(item);
+        } else {
+          return item;
+        }
+      }
+    })
+    .filter((item) => {
+      return item != undefined;
+    });
+  let _columns = [
+    seq,
+    ...columns,
+    columns1,
+    columns2,
+    columns3,
+    columns4,
+    columns5,
+  ];
+  return _columns;
+};
 export default {
   data() {
     return {
@@ -67,9 +177,7 @@ export default {
         radio: true,
         checkbox: true,
       },
-
-      tableColumn2: [],
-      options2: {
+      options1: {
         headUrl: "dataq/api/header/headerGroups",
         pageUrl: "dataq/api/page/headerGroups",
         seq: true,
@@ -77,10 +185,20 @@ export default {
         checkbox: true,
         filters: true,
       },
+      tableColumn: [],
+      options2: {
+        headUrl: "/dataq/api/header/headerGroups1",
+        pageUrl: "/dataq/api/page/headerGroups1",
+        filters: true,
+      },
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    onHeaderLoad(columns) {
+      this.tableColumn = renderColumns(columns);
+    },
+  },
 };
 </script>
 

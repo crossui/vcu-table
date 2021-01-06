@@ -383,262 +383,289 @@ const printAPI = exportDataAPI.filter(item => !['filename', 'type', 'types', 'do
   }
 ])
 
-const platformProps = [{
-  name: 'lazyNoCount',
-  descKey: '开启isLazy通用查询不分页场景',
-  version: '',
-  type: 'Boolean',
-  enum: '',
-  defVal: 'false',
-  list: []
-},
-{
-  name: 'lazyLimit',
-  descKey: '开启isLazy设置每次加载多少条数据',
-  version: '',
-  type: 'Number',
-  enum: '',
-  defVal: '10',
-  list: []
-},
-{
-  name: 'isLazy',
-  descKey: '是否滚动加载数据（一定要设置height）',
-  version: '',
-  type: 'Boolean',
-  enum: '',
-  defVal: 'false',
-  list: []
-},
-{
-  name: 'ajaxType',
-  descKey: '接口请求方式',
-  version: '',
-  type: 'String',
-  enum: '',
-  defVal: 'POST',
-  list: []
-},
-{
-  name: 'loadOptions',
-  desc: '通用平台请求参数配置',
-  version: '',
-  type: '',
-  enum: '',
-  defVal: '',
-  list: [
-    {
-      name: 'headUrl',
-      desc: '通用平台表头请求地址',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: '',
-      list: []
-    },
-    {
-      name: 'pageUrl',
-      desc: '通用平台表内容请求地址',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: '',
-      list: []
-    },
-    {
-      name: 'headerFormData',
-      desc: '通用平台表头请求入参',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: '',
-      list: []
-    },
-    {
-      name: 'pageFormData',
-      desc: '通用平台表内容请求入参',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: '',
-      list: []
-    },
-    {
-      name: 'customRender',
-      desc: '生成复杂数据',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '',
-      list: [
-        {
-          name: 'key',
-          desc: '表格列key',
-          version: '',
-          type: 'String',
-          enum: '',
-          defVal: '',
-          list: []
-        },
-        {
-          name: 'params',
-          desc: '所有vcu-table-column参数',
-          version: '',
-          type: 'Object',
-          enum: '',
-          defVal: '',
-          list: []
-        },
-        {
-          name: 'checkbox',
-          desc: '是否开启多选框',
-          version: '',
-          type: 'boolean',
-          enum: '',
-          defVal: 'false',
-          list: []
-        },
-        {
-          name: 'radio',
-          desc: '是否开启单选框',
-          version: '',
-          type: 'boolean',
-          enum: '',
-          defVal: 'false',
-          list: []
-        },
-        {
-          name: 'seq',
-          desc: '是否开启索引',
-          version: '',
-          type: 'boolean',
-          enum: '',
-          defVal: 'false',
-          list: []
-        }
-      ]
-    }
-  ]
-},
-{
-  name: 'filterModalShow',
-  descKey: '允许显示过滤弹窗',
-  version: '',
-  type: 'boolean',
-  enum: '',
-  defVal: 'false',
-  list: []
-},
-{
-  name: 'filterFormData',
-  descKey: '过滤设置数据',
-  version: '',
-  type: 'Object',
-  enum: '',
-  defVal: '',
-  list: [
-    {
-      name: 'filterFindUrl',
-      descKey: '过滤数据请示地址',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: '',
-      list: []
-    },
-    {
-      name: 'filterFindUrlPrefix',
-      descKey: '过滤数据请示地址前缀',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '',
-      list: [
-        {
-          name: 'find',
-          descKey: '查找地址',
-          version: '',
-          type: 'String',
-          enum: '',
-          defVal: 'dataq/filter/find/',
-          list: []
-        },
-        {
-          name: 'save',
-          descKey: '保存地址',
-          version: '',
-          type: 'String',
-          enum: '',
-          defVal: 'dataq/filter/save/',
-          list: []
-        },
-        {
-          name: 'delete',
-          descKey: '删除地址',
-          version: '',
-          type: 'String',
-          enum: '',
-          defVal: 'dataq/filter/delete/',
-          list: []
-        }
-      ]
-    },
-    {
-      name: 'filterSaveFormData',
-      descKey: '数据保存入参',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '参考旧表格',
-      list: []
-    },
-    {
-      name: 'filterFindFormData',
-      descKey: '数据查找入参',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '参考旧表格',
-      list: []
-    },
-    {
-      name: 'operationUrl',
-      descKey: '运算符字典地址',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: 'dataq/api/dict',
-      list: []
-    },
-    {
-      name: 'operationFormData',
-      descKey: '运算符字典入参',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '{zdmc: "运算符"}',
-      list: []
-    },
-    {
-      name: 'relationUrl',
-      descKey: '关系符字典地址',
-      version: '',
-      type: 'String',
-      enum: '',
-      defVal: 'dataq/api/dict',
-      list: []
-    },
-    {
-      name: 'relationFormData',
-      descKey: '关系符字典入参',
-      version: '',
-      type: 'Object',
-      enum: '',
-      defVal: '{zdmc: "关系符"}',
-      list: []
-    },
-  ]
-}]
+const platformProps = [
+  {
+    name: 'locking',
+    descKey: '初始是否锁定加载表格内容数据',
+    version: '',
+    type: 'Boolean',
+    enum: '',
+    defVal: 'false',
+    list: []
+  }, {
+    name: 'lazyNoCount',
+    descKey: '开启isLazy通用查询不分页场景',
+    version: '',
+    type: 'Boolean',
+    enum: '',
+    defVal: 'false',
+    list: []
+  },
+  {
+    name: 'lazyLimit',
+    descKey: '开启isLazy设置每次加载多少条数据',
+    version: '',
+    type: 'Number',
+    enum: '',
+    defVal: '10',
+    list: []
+  },
+  {
+    name: 'isLazy',
+    descKey: '是否滚动加载数据（一定要设置height）',
+    version: '',
+    type: 'Boolean',
+    enum: '',
+    defVal: 'false',
+    list: []
+  },
+  {
+    name: 'ajaxType',
+    descKey: '接口请求方式',
+    version: '',
+    type: 'String',
+    enum: '',
+    defVal: 'POST',
+    list: []
+  },
+  {
+    name: 'exportExcelUrl',
+    descKey: '导出excel文件接口地址',
+    version: '',
+    type: 'String',
+    enum: '',
+    defVal: '',
+    list: []
+  },
+  {
+    name: 'loadOptions',
+    desc: '通用平台请求参数配置',
+    version: '',
+    type: '',
+    enum: '',
+    defVal: '',
+    list: [
+      {
+        name: 'headUrl',
+        desc: '通用平台表头请求地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: '',
+        list: []
+      },
+      {
+        name: 'pageUrl',
+        desc: '通用平台表内容请求地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: '',
+        list: []
+      },
+      {
+        name: 'headerFormData',
+        desc: '通用平台表头请求入参',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: '',
+        list: []
+      },
+      {
+        name: 'pageFormData',
+        desc: '通用平台表内容请求入参',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: '',
+        list: []
+      },
+      {
+        name: 'customRender',
+        desc: '生成复杂数据',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '',
+        list: [
+          {
+            name: 'key',
+            desc: '表格列key',
+            version: '',
+            type: 'String',
+            enum: '',
+            defVal: '',
+            list: []
+          },
+          {
+            name: 'params',
+            desc: '所有vcu-table-column参数',
+            version: '',
+            type: 'Object',
+            enum: '',
+            defVal: '',
+            list: []
+          },
+          {
+            name: 'checkbox',
+            desc: '是否开启多选框',
+            version: '',
+            type: 'boolean',
+            enum: '',
+            defVal: 'false',
+            list: []
+          },
+          {
+            name: 'radio',
+            desc: '是否开启单选框',
+            version: '',
+            type: 'boolean',
+            enum: '',
+            defVal: 'false',
+            list: []
+          },
+          {
+            name: 'seq',
+            desc: '是否开启索引',
+            version: '',
+            type: 'boolean',
+            enum: '',
+            defVal: 'false',
+            list: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'filterModalShow',
+    descKey: '允许显示过滤弹窗',
+    version: '',
+    type: 'boolean',
+    enum: '',
+    defVal: 'false',
+    list: []
+  },
+  {
+    name: 'filterOldColumns',
+    descKey: '过滤下拉列数据是否使用旧数据',
+    version: '',
+    type: 'boolean',
+    enum: '',
+    defVal: 'false',
+    list: []
+  },
+  {
+    name: 'filterFormData',
+    descKey: '过滤设置数据',
+    version: '',
+    type: 'Object',
+    enum: '',
+    defVal: '',
+    list: [
+      {
+        name: 'filterFindUrl',
+        descKey: '过滤数据请示地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: '',
+        list: []
+      },
+      {
+        name: 'filterFindUrlPrefix',
+        descKey: '过滤数据请示地址前缀',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '',
+        list: [
+          {
+            name: 'find',
+            descKey: '查找地址',
+            version: '',
+            type: 'String',
+            enum: '',
+            defVal: 'dataq/filter/find/',
+            list: []
+          },
+          {
+            name: 'save',
+            descKey: '保存地址',
+            version: '',
+            type: 'String',
+            enum: '',
+            defVal: 'dataq/filter/save/',
+            list: []
+          },
+          {
+            name: 'delete',
+            descKey: '删除地址',
+            version: '',
+            type: 'String',
+            enum: '',
+            defVal: 'dataq/filter/delete/',
+            list: []
+          }
+        ]
+      },
+      {
+        name: 'filterSaveFormData',
+        descKey: '数据保存入参',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '参考旧表格',
+        list: []
+      },
+      {
+        name: 'filterFindFormData',
+        descKey: '数据查找入参',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '参考旧表格',
+        list: []
+      },
+      {
+        name: 'operationUrl',
+        descKey: '运算符字典地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: 'dataq/api/dict',
+        list: []
+      },
+      {
+        name: 'operationFormData',
+        descKey: '运算符字典入参',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '{zdmc: "运算符"}',
+        list: []
+      },
+      {
+        name: 'relationUrl',
+        descKey: '关系符字典地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: 'dataq/api/dict',
+        list: []
+      },
+      {
+        name: 'relationFormData',
+        descKey: '关系符字典入参',
+        version: '',
+        type: 'Object',
+        enum: '',
+        defVal: '{zdmc: "关系符"}',
+        list: []
+      },
+    ]
+  }]
 
 const platformEvents = [
   {
@@ -728,6 +755,15 @@ const platformMethods = [
   {
     name: 'emptyTableLists',
     descKey: '清空表格列表数据',
+    version: '',
+    type: '',
+    enum: '',
+    defVal: '',
+    list: []
+  },
+  {
+    name: 'handleFilterRemote',
+    descKey: '远程获取通用平台筛选表格列表数据',
     version: '',
     type: '',
     enum: '',

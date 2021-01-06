@@ -9,13 +9,13 @@ export default {
      * @param {ColumnInfo} column 列
      * @param {Array} options 选项
      */
-    _setFilter (column, options) {
+    _setFilter(column, options) {
       if (column.filters && options) {
         column.filters = UtilTools.getFilters(options)
       }
       return this.$nextTick()
     },
-    checkFilterOptions () {
+    checkFilterOptions() {
       const { filterStore } = this
       filterStore.isAllSelected = filterStore.options.every(item => item._checked)
       filterStore.isIndeterminate = !filterStore.isAllSelected && filterStore.options.some(item => item._checked)
@@ -29,7 +29,7 @@ export default {
      * @param {ColumnInfo} column 列配置
      * @param {Object} params 参数
      */
-    triggerFilterEvent (evnt, column, params) {
+    triggerFilterEvent(evnt, column, params) {
       const { $refs, filterStore } = this
       if (filterStore.column === column && filterStore.visible) {
         filterStore.visible = false
@@ -89,8 +89,8 @@ export default {
      * 当筛选面板中的确定按钮被按下时触发
      * @param {Event} evnt 事件
      */
-    confirmFilterEvent (evnt) {
-      const { visibleColumn, filterStore, remoteFilter, filterOpts, scrollXLoad, scrollYLoad } = this
+    confirmFilterEvent(evnt) {
+      const { visibleColumn, filterStore, filterOpts, scrollXLoad, scrollYLoad, filterOldColumns, filterColumns } = this
       const { column } = filterStore
       const { property } = column
       const values = []
@@ -103,7 +103,7 @@ export default {
       })
       filterStore.visible = false
       // 如果是服务端筛选，则跳过本地筛选处理
-      if (!(filterOpts.remote || remoteFilter)) {
+      if (!filterOpts.remote) {
         this.handleTableData(true)
         this.checkSelectionStatus()
       }
@@ -122,7 +122,7 @@ export default {
           filterList.push({ column, property, values: valueList, datas: dataList })
         }
       })
-      this.emitEvent('filter-change', { column, property, values, datas, filters: filterList }, evnt)
+      this.emitEvent('filter-change', { column, filterOldColumns, filterColumns, property, values, datas, filters: filterList }, evnt)
       this.updateFooter()
       if (scrollXLoad || scrollYLoad) {
         this.clearScroll()
@@ -136,7 +136,7 @@ export default {
         this.updateCellAreas()
       })
     },
-    handleClearFilter (column) {
+    handleClearFilter(column) {
       if (column) {
         const { filters, filterRender } = column
         if (filters) {
@@ -157,7 +157,7 @@ export default {
      * 当筛选面板中的重置按钮被按下时触发
      * @param {Event} evnt 事件
      */
-    resetFilterEvent (evnt) {
+    resetFilterEvent(evnt) {
       this.handleClearFilter(this.filterStore.column)
       this.confirmFilterEvent(evnt)
     },
@@ -166,7 +166,7 @@ export default {
      * 如果为空则清空所有列的筛选条件
      * @param {String} column 列
      */
-    _clearFilter (column) {
+    _clearFilter(column) {
       if (arguments.length && XEUtils.isString(column)) {
         column = this.getColumnByField(column)
       }

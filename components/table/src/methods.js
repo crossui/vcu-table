@@ -429,7 +429,6 @@ const Methods = {
         })
       }
     })
-
     const collectColumn = XEUtils.mapTree(columns, column => Cell.createColumn(this, column))
     this.handleColumn(collectColumn)
     return this.$nextTick()
