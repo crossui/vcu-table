@@ -3606,8 +3606,8 @@ const apis = [
         list: []
       },
       {
-        name: 'setActiveRow(row)',
-        desc: '用于 edit-config，激活行编辑，如果是 mode=cell 则默认激活第一个单元格',
+        name: 'setActiveRow(row,opts)',
+        desc: '用于 edit-config，激活行编辑，如果是 mode=cell 则默认激活第一个单元格, opts 其他参数 { noScrollColumn: true }',
         version: '',
         type: 'Promise',
         enum: '',

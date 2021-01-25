@@ -2346,6 +2346,11 @@ const Methods = {
     const { checkMethod } = this.checkboxOpts
     if (!checkMethod || checkMethod({ row: params.row })) {
       this.handleSelectRow(params, value)
+      this.$nextTick(() => {
+        if (this.checkboxOpts.checkField) {
+          this.updateData()
+        }
+      })
       this.emitEvent('checkbox-change', Object.assign({ records: this.getCheckboxRecords(), reserves: this.getCheckboxReserveRecords(), indeterminates: this.getCheckboxIndeterminateRecords(), checked: value }, params), evnt)
     }
   },

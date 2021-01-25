@@ -69,7 +69,7 @@
         :footer-method="footerMethod"
         :scroll-x="{ gt: 10 }"
         :scroll-y="{ gt: 100 }"
-        :checkbox-config="{ checkField: 'checked' }"
+        :checkbox-config="{ checkField: 'checked', highlight: true }"
       >
       </vcu-table>
     </div>

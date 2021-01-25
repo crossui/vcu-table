@@ -2,6 +2,14 @@
   <a-card title="精确定位">
     <div class="mb-30">
       <div class="mb-5">
+        <a-button
+          type="primary"
+          @click="$refs.xTable.scrollToColumn($refs.xTable.getColumns(15))"
+        >
+          滚动第 15 列
+        </a-button>
+      </div>
+      <div class="mb-5">
         <a-input-number v-model="value" :min="1" />
         <a-button type="primary" @click="gotoRow" class="ml-10">
           指定行
@@ -28,7 +36,6 @@
       >
       </vcu-table>
     </div>
-
   </a-card>
 </template>
 <script>

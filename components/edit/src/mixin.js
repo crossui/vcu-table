@@ -9,7 +9,7 @@ export default {
      *
      * @param {*} records
      */
-    _insert (records) {
+    _insert(records) {
       return this.insertAt(records)
     },
     /**
@@ -20,7 +20,7 @@ export default {
      * @param {Object/Array} records 新的数据
      * @param {Row} row 指定行
      */
-    _insertAt (records, row) {
+    _insertAt(records, row) {
       const { mergeList, afterFullData, editStore, sYOpts, scrollYLoad, tableFullData, treeConfig } = this
       if (!XEUtils.isArray(records)) {
         records = [records]
@@ -91,7 +91,7 @@ export default {
      * 如果传 rows 则删除多行
      * 如果为空则删除所有
      */
-    _remove (rows) {
+    _remove(rows) {
       const { afterFullData, tableFullData, treeConfig, mergeList, editStore, checkboxOpts, selection, isInsertByRow, sYOpts, scrollYLoad } = this
       const { actived, removeList, insertList } = editStore
       const { checkField: property } = checkboxOpts
@@ -171,7 +171,7 @@ export default {
     /**
      * 删除复选框选中的数据
      */
-    _removeCheckboxRow () {
+    _removeCheckboxRow() {
       return this.remove(this.getCheckboxRecords()).then(params => {
         this.clearCheckboxRow()
         return params
@@ -180,7 +180,7 @@ export default {
     /**
      * 删除单选框选中的数据
      */
-    _removeRadioRow () {
+    _removeRadioRow() {
       const radioRecord = this.getRadioRecord()
       return this.remove(radioRecord || []).then(params => {
         this.clearRadioRow()
@@ -190,7 +190,7 @@ export default {
     /**
      * 删除当前行选中的数据
      */
-    _removeCurrentRow () {
+    _removeCurrentRow() {
       const currentRecord = this.getCurrentRecord()
       return this.remove(currentRecord || []).then(params => {
         this.clearCurrentRow()
@@ -200,7 +200,7 @@ export default {
     /**
      * 获取表格数据集，包含新增、删除、修改
      */
-    _getRecordset () {
+    _getRecordset() {
       return {
         insertRecords: this.getInsertRecords(),
         removeRecords: this.getRemoveRecords(),
@@ -210,7 +210,7 @@ export default {
     /**
      * 获取新增的临时数据
      */
-    _getInsertRecords () {
+    _getInsertRecords() {
       const insertList = this.editStore.insertList
       const insertRecords = []
       if (insertList.length) {
@@ -225,7 +225,7 @@ export default {
     /**
      * 获取已删除的数据
      */
-    _getRemoveRecords () {
+    _getRemoveRecords() {
       return this.editStore.removeList
     },
     /**
@@ -233,7 +233,7 @@ export default {
      * 只精准匹配 row 的更改
      * 如果是树表格，子节点更改状态不会影响父节点的更新状态
      */
-    _getUpdateRecords () {
+    _getUpdateRecords() {
       const { keepSource, tableFullData, isUpdateByRow, treeConfig, treeOpts } = this
       if (keepSource) {
         if (treeConfig) {
@@ -246,7 +246,7 @@ export default {
     /**
      * 处理激活编辑
      */
-    handleActived (params, evnt) {
+    handleActived(params, evnt) {
       const { editStore, editOpts, tableColumn } = this
       const { mode, activeMethod } = editOpts
       const { actived } = editStore
@@ -299,14 +299,14 @@ export default {
       }
       return this.$nextTick()
     },
-    _getColumnModel (row, column) {
+    _getColumnModel(row, column) {
       const { model, editRender } = column
       if (editRender) {
         model.value = UtilTools.getCellValue(row, column)
         model.update = false
       }
     },
-    _setColumnModel (row, column) {
+    _setColumnModel(row, column) {
       const { model, editRender } = column
       if (editRender && model.update) {
         UtilTools.setCellValue(row, column, model.value)
@@ -317,7 +317,7 @@ export default {
     /**
      * 清除激活的编辑
      */
-    _clearActived (evnt) {
+    _clearActived(evnt) {
       const { tableColumn, editStore, editOpts } = this
       const { actived } = editStore
       const { args, row, column } = actived
@@ -335,7 +335,7 @@ export default {
       actived.column = null
       return (VCUTable._valid ? this.clearValidate() : this.$nextTick()).then(this.recalculate)
     },
-    _getActiveRecord () {
+    _getActiveRecord() {
       const { $el, editStore, afterFullData } = this
       const { args, row } = editStore.actived
       if (args && afterFullData.indexOf(row) > -1 && $el.querySelectorAll('.vcu-body--column.col--actived').length) {
@@ -347,16 +347,17 @@ export default {
      * 判断行是否为激活编辑状态
      * @param {Row} row 行对象
      */
-    _isActiveByRow (row) {
+    _isActiveByRow(row) {
       return this.editStore.actived.row === row
     },
     /**
      * 处理聚焦
      */
-    handleFocus (params) {
-      const { row, column, cell } = params
+    handleFocus(params) {
+      const { row, column, cell, opts } = params
       const { editRender } = column
       if (editRender) {
+
         const compRender = VCUTable.renderer.get(editRender.name)
         const { autofocus, autoselect } = editRender
         let inputElem
@@ -382,27 +383,27 @@ export default {
           }
         } else {
           // 显示到可视区中
-          this.scrollToRow(row, column)
+          this.scrollToRow(row, opts && opts.noScrollColumn ? null : column)
         }
       }
     },
     /**
      * 激活行编辑
      */
-    _setActiveRow (row) {
-      return this.setActiveCell(row, XEUtils.find(this.visibleColumn, column => column.editRender).property)
+    _setActiveRow(row, opts) {
+      return this.setActiveCell(row, XEUtils.find(this.visibleColumn, column => column.editRender).property, opts)
     },
     /**
      * 激活单元格编辑
      */
-    _setActiveCell (row, field) {
+    _setActiveCell(row, field, opts) {
       return this.scrollToRow(row, true).then(() => {
         if (row && field) {
           const column = XEUtils.find(this.visibleColumn, column => column.property === field)
           if (column && column.editRender) {
             const cell = this.getCell(row, column)
             if (cell) {
-              this.handleActived({ row, rowIndex: this.getRowIndex(row), column, columnIndex: this.getColumnIndex(column), cell, $table: this })
+              this.handleActived({ row, rowIndex: this.getRowIndex(row), column, opts, columnIndex: this.getColumnIndex(column), cell, $table: this })
               this.lastCallTime = Date.now()
             }
           }
@@ -413,7 +414,7 @@ export default {
     /**
      * 只对 trigger=dblclick 有效，选中单元格
      */
-    _setSelectCell (row, field) {
+    _setSelectCell(row, field) {
       const { tableData, editOpts, visibleColumn } = this
       if (row && field && editOpts.trigger !== 'manual') {
         const column = XEUtils.find(visibleColumn, column => column.property === field)
@@ -429,7 +430,7 @@ export default {
     /**
      * 处理选中源
      */
-    handleSelected (params, evnt) {
+    handleSelected(params, evnt) {
       const { mouseConfig, mouseOpts, editOpts, editStore } = this
       const { actived, selected } = editStore
       const { row, column } = params
@@ -457,7 +458,7 @@ export default {
     /**
      * 获取选中的单元格
      */
-    _getSelectedCell () {
+    _getSelectedCell() {
       const { args, column } = this.editStore.selected
       if (args && column) {
         return Object.assign({}, args)
@@ -467,7 +468,7 @@ export default {
     /**
      * 清除所选中源状态
      */
-    _clearSelected () {
+    _clearSelected() {
       const { selected } = this.editStore
       selected.row = null
       selected.column = null
@@ -475,19 +476,19 @@ export default {
       this.reColSdCls()
       return this.$nextTick()
     },
-    reColTitleSdCls () {
+    reColTitleSdCls() {
       const headerElem = this.elemStore['main-header-list']
       if (headerElem) {
         XEUtils.arrayEach(headerElem.querySelectorAll('.col--title-selected'), elem => DomTools.removeClass(elem, 'col--title-selected'))
       }
     },
-    reColSdCls () {
+    reColSdCls() {
       const cell = this.$el.querySelector('.col--selected')
       if (cell) {
         DomTools.removeClass(cell, 'col--selected')
       }
     },
-    addColSdCls () {
+    addColSdCls() {
       const { selected } = this.editStore
       const { row, column } = selected
       this.reColSdCls()
