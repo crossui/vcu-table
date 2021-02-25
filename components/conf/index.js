@@ -5,7 +5,7 @@ const GlobalConfig = {
   version: 0,
   resizeInterval: 500,
   emptyCell: '　',
-  request:null,
+  request: null,
   table: {
     fit: true,
     showHeader: true,

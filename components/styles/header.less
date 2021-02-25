@@ -3,124 +3,155 @@
 .vcu-table {
   .vcu-table--header-wrapper {
     .vcu-table--header-border-line {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 0;
+      position     : absolute;
+      left         : 0;
+      bottom       : 0;
+      height       : 0;
       border-bottom: 1px solid @vcu-table-border-color;
     }
   }
+
   /*排序*/
   .vcu-cell--sort {
-    width: 1.5em;
-    height: 1.5em;
+    width         : 1.5em;
+    height        : 1.5em;
     vertical-align: middle;
-    text-align: center;
-    display: inline-block;
-    position: relative;
+    text-align    : center;
+    display       : none;
+    position      : relative;
   }
+
   .vcu-sort--asc-btn,
   .vcu-sort--desc-btn {
-    position: absolute;
-    left: 0.35em;
-    color: @vcu-table-column-icon-border-color;
-    width: 1em;
+    position  : absolute;
+    left      : 0.35em;
+    color     : @vcu-table-column-icon-border-color;
+    width     : 1em;
     text-align: center;
-    cursor: pointer;
+    cursor    : pointer;
+
     &:hover {
       color: @vcu-table-font-color;
     }
+
     &.sort--active {
       color: @vcu-primary-color;
     }
   }
+
   .vcu-sort--asc-btn {
     top: -0.04em;
   }
+
   .vcu-sort--desc-btn {
     bottom: -0.04em;
   }
 }
 
 .vcu-header--column {
-  position: relative;
+  position   : relative;
   font-weight: @vcu-table-header-font-weight;
+
   /* user-select: none; */
+  &:hover {
+    .vcu-cell--sort {
+      display: inline-block;
+    }
+
+    .vcu-cell--filter {
+      display: inline-block;
+    }
+  }
+
   &.col--ellipsis {
-    & > .vcu-cell {
-      display: flex;
+    &>.vcu-cell {
+      display    : flex;
       align-items: center;
+
       .vcu-cell--title {
-        overflow: hidden;
+        overflow     : hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        white-space  : nowrap;
       }
-      & > i,
-      & > span {
+
+      &>i,
+      &>span {
         &:not(.vcu-cell--title) {
           flex-shrink: 0;
         }
       }
     }
   }
+
   .vcu-cell--required-icon {
-    display: inline-block;
-    color: @vcu-table-validate-error-color;
-    width: 0.8em;
-    height: 1em;
+    display    : inline-block;
+    color      : @vcu-table-validate-error-color;
+    width      : 0.8em;
+    height     : 1em;
     line-height: 1em;
     font-family: @vcu-icon-font-family;
     font-weight: normal;
-    position: relative;
+    position   : relative;
+
     &:before {
-      content: "*";
+      content : "*";
       position: absolute;
-      left: 0;
-      top: 0.2em;
+      left    : 0;
+      top     : 0.2em;
     }
   }
+
   .vcu-cell--required-icon,
   .vcu-cell--edit-icon,
   .vcu-cell-help-icon,
   .vcu-cell--title {
     vertical-align: middle;
   }
+
   .vcu-cell--required-icon {
     margin-right: 0.1em;
   }
+
   .vcu-cell--edit-icon,
   .vcu-cell-help-icon {
     margin-right: 0.2em;
   }
+
   .vcu-cell-help-icon {
     cursor: help;
   }
+
   .vcu-cell--title {
     line-height: 1.5;
   }
+
   .vcu-resizable {
-    position: absolute;
-    right: -7px;
-    bottom: 0;
-    width: 14px;
-    height: 100%;
+    position  : absolute;
+    right     : -7px;
+    bottom    : 0;
+    width     : 14px;
+    height    : 100%;
     text-align: center;
-    z-index: 1;
-    cursor: col-resize;
+    z-index   : 1;
+    cursor    : col-resize;
+
     &.is--line {
+
       &:before,
       &:after {
-        content: "";
-        display: inline-block;
+        content       : "";
+        display       : inline-block;
         vertical-align: middle;
       }
+
       &:before {
-        width: 1px;
-        height: 50%;
+        width           : 1px;
+        height          : 50%;
         background-color: @vcu-table-resizable-color;
       }
+
       &:after {
-        width: 0;
+        width : 0;
         height: 100%;
       }
     }
@@ -131,7 +162,7 @@
   .vcu-header--column {
     .vcu-resizable {
       right: auto;
-      left: -7px;
+      left : -7px;
     }
   }
 }

@@ -190,7 +190,9 @@ export default {
                     </a-select>
                   </a-col>
                   <a-col span={8}>
-                    <a-input size={size} v-model={item.fieldValue} />
+                    {this.componentTypes(item) ? <autoTypewrit size={size}
+                      v-model={item.fieldValue} transfer loadOptions={this.componentTypes(item).loadOptions} backfillKey={this.componentTypes(item).backfillKey}
+                    ></autoTypewrit> : <a-input size={size} v-model={item.fieldValue} />}
                   </a-col>
                   <a-col span={3}>
                     <a-select size={size} v-model={item.relationVal} class="mr-10" style="width: 100%">
@@ -236,7 +238,7 @@ export default {
       this.$xetable = $table
       let _columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
       _columns = XEUtils.filterTree(_columns, item => !item.children)
-      
+
       this.tableColumns = _columns
     },
     //加载过滤字典
@@ -287,6 +289,18 @@ export default {
           this.handleTpLDatas(data)
         }
       }
+    },
+    //生成列值输入框类型（input/autoTypewrit）
+    componentTypes(item) {
+      let type = false;
+      let autoTypewritLists = this.filterFormDatas.autoTypewritLists
+      if (autoTypewritLists && XEUtils.isArray(autoTypewritLists)) {
+        let list = XEUtils.filter(autoTypewritLists, o => item.detailValue == o.key)
+        if (list.length) {
+          type = list[0]
+        }
+      }
+      return type;
     },
     //获取模板数据
     async getFilterDatas() {

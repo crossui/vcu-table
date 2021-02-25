@@ -821,7 +821,8 @@ export default {
       filterModalShow,
       filterFormDatas,
       handleSubmitFilter,
-      handleReductionFilter
+      handleReductionFilter,
+      handleTableWrapMouseleaveEvent
     } = this
     const tableChilds = []
     const fixedChilds = []
@@ -1010,6 +1011,9 @@ export default {
       }],
       attrs: {
         'x-cloak': isCloak
+      },
+      on: {
+        mouseleave: handleTableWrapMouseleaveEvent
       }
     }, [
       /**

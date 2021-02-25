@@ -6,7 +6,7 @@
   padding       : 0 0.1em 0 0.25em;
   text-align    : center;
   vertical-align: middle;
-  display       : inline-block;
+  display       : none;
   line-height   : 0;
 
   &.is--active {
@@ -37,7 +37,7 @@
 .vcu-table--filter-wrapper {
   display         : none;
   position        : absolute;
-  min-width       : 100px;
+  min-width       : 120px;
   border-radius   : @vcu-border-radius;
   background-color: @vcu-table-filter-panel-background-color;
   border          : 1px solid @vcu-table-popup-border-color;
@@ -56,8 +56,8 @@
   .vcu-table--filter-body {
     &>li {
       overflow     : hidden;
-      text-overflow: ellipsis;
-      white-space  : nowrap;
+      /* text-overflow: ellipsis;
+      white-space  : nowrap; */
       max-width    : 360px;
       padding      : 0.25em 0.8em;
       cursor       : pointer;

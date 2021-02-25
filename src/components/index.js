@@ -1,7 +1,7 @@
 import IconFont from './IconFont';
 import Popper from './popper';
 import DateTime from './dateTime';
-import AutoTypewrit from './autoTypewrit';
+import AutoTypewrit from './busines/autoTypewrit';
 import TableList from './tableList';
 import DraggableResizable from './draggableResizable';
 import { Splitpanes, Pane } from './splitpanes';

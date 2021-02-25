@@ -3843,6 +3843,11 @@ const Methods = {
     } else {
       UtilTools.error('vcu.error.barUnableLink')
     }
+  },
+  //鼠标移出table元素时触发
+  handleTableWrapMouseleaveEvent(e) {
+    this.clostTooltip()
+    this.closeMenu()
   }
   /*************************
    * Publish methods

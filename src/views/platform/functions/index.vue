@@ -1,6 +1,17 @@
 <template>
   <a-card title="功能操作">
     <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          <div>
+            开启
+            <span class="blue-text"> filterModalShow，customModalShow </span>
+          </div>
+          <div>
+            配置 <span class="blue-text"> filterFormData，exportExcelUrl </span>
+          </div>
+        </div>
+      </a-alert>
       <div class="mb-5">
         <a-button-group>
           <a-button @click="$refs.xTable.showColumnModal()">列选择</a-button>
@@ -62,6 +73,37 @@
         filterModalShow
         filterOldColumns
         :filterFormData="filterFormData"
+        :exportExcelUrl="exportExcelUrl"
+        @onHeaderLoad="onHeaderLoad"
+      ></vcu-table>
+    </div>
+
+    <div class="mb-30">
+      <a-alert type="info" class="mb-10">
+        <div slot="message">
+          <div>
+            配置 <span class="blue-text"> filterFormData.autoTypewritLists </span> 过滤项中的值组件是输入法字典
+          </div>
+        </div>
+      </a-alert>
+      <div class="mb-5">
+        <a-button-group>
+          <a-button @click="$refs.xTable3.showColumnModal()">列选择</a-button>
+          <a-button @click="$refs.xTable3.showFilterModal()">过 滤</a-button>
+          <a-button @click="$refs.xTable3.operateRestore()">还 原</a-button>
+          <a-button @click="$refs.xTable3.exportExcel()">导 出</a-button>
+          <a-button @click="$refs.xTable3.emptyTableLists()">清空数据</a-button>
+        </a-button-group>
+      </div>
+      <vcu-table
+        ref="xTable3"
+        border
+        :columns="tableColumn"
+        :loadOptions="options2"
+        customModalShow
+        filterModalShow
+        filterOldColumns
+        :filterFormData="filterFormData1"
         :exportExcelUrl="exportExcelUrl"
         @onHeaderLoad="onHeaderLoad"
       ></vcu-table>
@@ -169,6 +211,34 @@ export default {
         filterFindFormData: {
           deptNo: "14",
         },
+      },
+      filterFormData1: {
+        filterFindUrl: "getInHospPatientList4cy",
+        operationUrl: "dataq/api/dict/operation", //正式环境不需要
+        relationUrl: "dataq/api/dict/relation", //正式环境不需要
+        filterFindFormData: {
+          deptNo: "14",
+        },
+        autoTypewritLists: [
+          {
+            key: "XMMC00",
+            loadOptions: {
+              listUrl: "dataq/api/page/getApproveArrearageList",
+              headUrl: "dataq/api/header/getApproveArrearageList",
+            },
+            modalWidth: "800px",
+            backfillKey: "pName",
+          },
+          {
+            key: "XYLSJE",
+            loadOptions: {
+              listUrl: "dataq/api/page",
+              headUrl: "dataq/api/header",
+            },
+            modalWidth: "600px",
+            backfillKey: "inHospDeptName",
+          },
+        ],
       },
       options: {
         headUrl: "dataq/api/header/getInHospPatientList",
