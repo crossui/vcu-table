@@ -203,7 +203,7 @@ export default {
   data() {
     return {
       exportExcelUrl:
-        "http://10.16.0.78:8089/dataq/export/getInHospPatientList",
+        "http://10.16.241.78:8089/dataq/export/getInHospPatientList",
       filterFormData: {
         filterFindUrl: "getInHospPatientList4cy",
         operationUrl: "dataq/api/dict/operation", //正式环境不需要

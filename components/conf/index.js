@@ -114,7 +114,8 @@ const GlobalConfig = {
     size: null,
     trigger: 'hover',
     theme: 'dark',
-    leaveDelay: 300
+    leaveDelay: 300,
+    visible: true
   },
 
   i18n: key => key

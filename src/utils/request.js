@@ -13,7 +13,7 @@ const request = axios.create({
 // config 代表发起请求的参数的实体
 request.interceptors.request.use(config => {
 	//设置接口前缀
-	config.baseURL = "http://10.16.0.78:8033/mock/9cf15880587211ea804331cf8/";
+	config.baseURL = "http://10.16.241.78:8033/mock/9cf15880587211ea804331cf8/";
 
 	//设置提交方式
 	config.headers['Content-Type'] = "application/x-www-form-urlencoded;charset=UTF-8";

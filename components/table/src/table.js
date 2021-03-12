@@ -557,6 +557,10 @@ export default {
     }
   },
   watch: {
+    $route(to) {
+      this.clostTooltip()
+      this.closeMenu()
+    },
     columns(value) {
       if (value && value.length) {
         if (this.platformOptions.filters) {

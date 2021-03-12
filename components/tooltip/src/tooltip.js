@@ -3,7 +3,7 @@ import GlobalConfig from '../../conf'
 import vSize from '../../mixins/size'
 import { UtilTools, DomTools } from '../../tools'
 
-function updateTipStyle (_vm) {
+function updateTipStyle(_vm) {
   const { $el: wrapperElem, tipTarget, tipStore } = _vm
   const { scrollTop, scrollLeft, visibleWidth } = DomTools.getDomNode()
   const { top, left } = DomTools.getAbsolutePos(tipTarget)
@@ -39,7 +39,7 @@ export default {
     enterable: Boolean,
     leaveDelay: { type: Number, default: GlobalConfig.tooltip.leaveDelay }
   },
-  data () {
+  data() {
     return {
       isUpdate: false,
       isHover: false,
@@ -55,17 +55,17 @@ export default {
     }
   },
   watch: {
-    content (value) {
+    content(value) {
       this.message = value
     },
-    value (value) {
+    value(value) {
       if (!this.isUpdate) {
         this[value ? 'show' : 'close']()
       }
       this.isUpdate = false
     }
   },
-  mounted () {
+  mounted() {
     const { $el, trigger, content, value } = this
     const parentNode = $el.parentNode
     let target
@@ -93,7 +93,7 @@ export default {
       this.show()
     }
   },
-  beforeDestroy () {
+  beforeDestroy() {
     const { $el, target, trigger } = this
     const parentNode = $el.parentNode
     if (parentNode) {
@@ -108,7 +108,7 @@ export default {
       }
     }
   },
-  render (h) {
+  render(h) {
     const { vSize, theme, message, isHover, isArrow, visible, tipStore, enterable } = this
     let on
     if (enterable) {
@@ -139,10 +139,10 @@ export default {
     ].concat(this.$slots.default))
   },
   methods: {
-    show () {
+    show() {
       return this.toVisible(this.target)
     },
-    close () {
+    close() {
       this.tipTarget = null
       Object.assign(this.tipStore, {
         style: {},
@@ -152,7 +152,7 @@ export default {
       this.update(false)
       return this.$nextTick()
     },
-    update (value) {
+    update(value) {
       if (value !== this.visible) {
         this.visible = value
         this.isUpdate = true
@@ -161,12 +161,13 @@ export default {
         }
       }
     },
-    updateZindex () {
+    updateZindex() {
       if (this.tipZindex < UtilTools.getLastZIndex()) {
         this.tipZindex = UtilTools.nextZIndex()
       }
     },
-    toVisible (target, message) {
+    toVisible(target, message) {
+      if (!GlobalConfig.tooltip.visible) return;
       this.targetActive = true
       if (target) {
         const { $el, tipStore, zIndex } = this
@@ -187,7 +188,7 @@ export default {
       }
       return this.$nextTick()
     },
-    updatePlacement () {
+    updatePlacement() {
       return this.$nextTick().then(() => {
         const { $el: wrapperElem, tipTarget } = this
         if (tipTarget && wrapperElem) {
@@ -196,13 +197,13 @@ export default {
         }
       })
     },
-    clickEvent () {
+    clickEvent() {
       this[this.visible ? 'close' : 'show']()
     },
-    targetMouseenterEvent () {
+    targetMouseenterEvent() {
       this.show()
     },
-    targetMouseleaveEvent () {
+    targetMouseleaveEvent() {
       const { trigger, enterable, leaveDelay } = this
       this.targetActive = false
       if (enterable && trigger === 'hover') {
@@ -215,10 +216,10 @@ export default {
         this.close()
       }
     },
-    wrapperMouseenterEvent () {
+    wrapperMouseenterEvent() {
       this.isHover = true
     },
-    wrapperMouseleaveEvent (evnt) {
+    wrapperMouseleaveEvent(evnt) {
       const { $listeners, trigger, enterable, leaveDelay } = this
       this.isHover = false
       if ($listeners.leave) {

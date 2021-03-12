@@ -3,17 +3,17 @@ import GlobalConfig from '../../conf'
 import VCUTable from '../../v-c-u-table'
 import { UtilTools, DomTools } from '../../tools'
 
-function renderHelpIcon (h, params) {
+function renderHelpIcon(h, params) {
   const { $table, column } = params
   const { titleHelp } = column
   return titleHelp ? [
     h('i', {
       class: ['vcu-cell-help-icon', titleHelp.icon || GlobalConfig.icon.TABLE_HELP],
       on: {
-        mouseenter (evnt) {
+        mouseenter(evnt) {
           $table.triggerHeaderHelpEvent(evnt, params)
         },
-        mouseleave (evnt) {
+        mouseleave(evnt) {
           $table.handleTargetLeaveEvent(evnt)
         }
       }
@@ -21,7 +21,7 @@ function renderHelpIcon (h, params) {
   ] : []
 }
 
-function renderTitleContent (h, params, content) {
+function renderTitleContent(h, params, content) {
   const { $table, column } = params
   const { showHeaderOverflow } = column
   const { showHeaderOverflow: allColumnHeaderOverflow, tooltipOpts } = $table
@@ -60,7 +60,7 @@ function renderTitleContent (h, params, content) {
   ]
 }
 
-function getFooterContent (h, params) {
+function getFooterContent(h, params) {
   const { $table, column, _columnIndex, items } = params
   const { slots, editRender, cellRender } = column
   const renderOpts = editRender || cellRender
@@ -76,13 +76,13 @@ function getFooterContent (h, params) {
   return [UtilTools.formatText(items[_columnIndex], 1)]
 }
 
-function getDefaultCellLabel (params) {
+function getDefaultCellLabel(params) {
   const { row, column } = params
   return UtilTools.formatText(UtilTools.getCellLabel(row, column, params), 1)
 }
 
 export const Cell = {
-  createColumn ($xetable, _vm) {
+  createColumn($xetable, _vm) {
     const { type, sortable, remoteSort, filters, editRender, treeNode } = _vm
     const { editConfig, editOpts, checkboxOpts } = $xetable
     const renMaps = {
@@ -134,7 +134,7 @@ export const Cell = {
   /**
    * 单元格
    */
-  renderHeaderTitle (h, params) {
+  renderHeaderTitle(h, params) {
     const { $table, column } = params
     const { slots, editRender, cellRender } = column
     const renderOpts = editRender || cellRender
@@ -149,10 +149,10 @@ export const Cell = {
     }
     return renderTitleContent(h, params, UtilTools.formatText(column.getTitle(), 1))
   },
-  renderDefaultHeader (h, params) {
+  renderDefaultHeader(h, params) {
     return renderHelpIcon(h, params).concat(Cell.renderHeaderTitle(h, params))
   },
-  renderDefaultCell (h, params) {
+  renderDefaultCell(h, params) {
     const { $table, column } = params
     const { slots, editRender, cellRender } = column
     const renderOpts = editRender || cellRender
@@ -172,10 +172,10 @@ export const Cell = {
       }, [getDefaultCellLabel(params)])
     ]
   },
-  renderTreeCell (h, params) {
+  renderTreeCell(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderDefaultCell.call(this, h, params))
   },
-  renderDefaultFooter (h, params) {
+  renderDefaultFooter(h, params) {
     return [
       h('span', {
         class: 'vcu-cell--item'
@@ -186,7 +186,7 @@ export const Cell = {
   /**
    * 树节点
    */
-  renderTreeIcon (h, params, cellVNodes) {
+  renderTreeIcon(h, params, cellVNodes) {
     const { $table, isHidden } = params
     const { treeOpts, treeExpandeds, treeLazyLoadeds } = $table
     const { row, column, level } = params
@@ -239,12 +239,12 @@ export const Cell = {
   /**
    * 索引
    */
-  renderIndexHeader (h, params) {
+  renderIndexHeader(h, params) {
     const { $table, column } = params
     const { slots } = column
     return renderTitleContent(h, params, slots && slots.header ? slots.header.call($table, params, h) : UtilTools.formatText(column.getTitle(), 1))
   },
-  renderIndexCell (h, params) {
+  renderIndexCell(h, params) {
     const { $table, column } = params
     const { seqOpts } = $table
     const { slots } = column
@@ -255,14 +255,14 @@ export const Cell = {
     const seqMethod = seqOpts.seqMethod
     return [UtilTools.formatText(seqMethod ? seqMethod(params) : level ? `${$seq}.${seq}` : (seqOpts.startIndex) + seq, 1)]
   },
-  renderTreeIndexCell (h, params) {
+  renderTreeIndexCell(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderIndexCell(h, params))
   },
 
   /**
    * 单选
    */
-  renderRadioHeader (h, params) {
+  renderRadioHeader(h, params) {
     const { $table, column } = params
     const { slots } = column
     return renderTitleContent(h, params, slots && slots.header ? slots.header.call($table, params, h) : [
@@ -271,7 +271,7 @@ export const Cell = {
       }, UtilTools.formatText(column.getTitle(), 1))
     ])
   },
-  renderRadioCell (h, params) {
+  renderRadioCell(h, params) {
     const { $table, column, isHidden } = params
     const { radioOpts, selectRow } = $table
     const { slots } = column
@@ -282,7 +282,7 @@ export const Cell = {
     let on
     if (!isHidden) {
       on = {
-        click (evnt) {
+        click(evnt) {
           if (!isDisabled) {
             $table.triggerRadioRowEvent(evnt, params)
           }
@@ -313,14 +313,14 @@ export const Cell = {
       ] : [])))
     ]
   },
-  renderTreeRadioCell (h, params) {
+  renderTreeRadioCell(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderRadioCell(h, params))
   },
 
   /**
    * 多选
    */
-  renderSelectionHeader (h, params) {
+  renderSelectionHeader(h, params) {
     const { $table, column, isHidden } = params
     const { isIndeterminate, isAllCheckboxDisabled } = $table
     const { slots } = column
@@ -338,7 +338,7 @@ export const Cell = {
     if (!isHidden) {
       isChecked = isAllCheckboxDisabled ? false : $table.isAllSelected
       on = {
-        click (evnt) {
+        click(evnt) {
           if (!isAllCheckboxDisabled) {
             $table.triggerCheckAllEvent(evnt, !isChecked)
           }
@@ -373,7 +373,7 @@ export const Cell = {
       ] : [])))
     ])
   },
-  renderSelectionCell (h, params) {
+  renderSelectionCell(h, params) {
     const { $table, row, column, isHidden } = params
     const { treeConfig, treeIndeterminates } = $table
     const { labelField, checkMethod } = $table.checkboxOpts
@@ -385,7 +385,7 @@ export const Cell = {
     if (!isHidden) {
       isChecked = $table.selection.indexOf(row) > -1
       on = {
-        click (evnt) {
+        click(evnt) {
           if (!isDisabled) {
             $table.triggerCheckRowEvent(evnt, params, !isChecked)
           }
@@ -423,10 +423,10 @@ export const Cell = {
       ] : [])))
     ]
   },
-  renderTreeSelectionCell (h, params) {
+  renderTreeSelectionCell(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderSelectionCell(h, params))
   },
-  renderSelectionCellByProp (h, params) {
+  renderSelectionCellByProp(h, params) {
     const { $table, row, column, isHidden } = params
     const { treeConfig, treeIndeterminates } = $table
     const { labelField, checkField: property, halfField, checkMethod } = $table.checkboxOpts
@@ -438,7 +438,7 @@ export const Cell = {
     if (!isHidden) {
       isChecked = XEUtils.get(row, property)
       on = {
-        click (evnt) {
+        click(evnt) {
           if (!isDisabled) {
             $table.triggerCheckRowEvent(evnt, params, !isChecked)
           }
@@ -476,14 +476,14 @@ export const Cell = {
       ] : [])))
     ]
   },
-  renderTreeSelectionCellByProp (h, params) {
+  renderTreeSelectionCellByProp(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderSelectionCellByProp(h, params))
   },
 
   /**
    * 展开行
    */
-  renderExpandCell (h, params) {
+  renderExpandCell(h, params) {
     const { $table, isHidden, row, column } = params
     const { expandOpts, rowExpandeds, expandLazyLoadeds } = $table
     const { lazy, labelField, iconLoaded, showIcon, iconOpen, iconClose, visibleMethod } = expandOpts
@@ -505,7 +505,7 @@ export const Cell = {
           'is--active': isAceived
         }],
         on: {
-          click (evnt) {
+          click(evnt) {
             $table.triggerRowExpandEvent(evnt, params)
           }
         }
@@ -519,7 +519,7 @@ export const Cell = {
       }, slots.default ? slots.default.call($table, params, h) : XEUtils.get(row, labelField)) : null
     ]
   },
-  renderExpandData (h, params) {
+  renderExpandData(h, params) {
     const { $table, column } = params
     const { slots, contentRender } = column
     if (slots && slots.content) {
@@ -537,7 +537,7 @@ export const Cell = {
   /**
    * HTML 标签
    */
-  renderHTMLCell (h, params) {
+  renderHTMLCell(h, params) {
     const { $table, column } = params
     const { slots } = column
     if (slots && slots.default) {
@@ -552,14 +552,14 @@ export const Cell = {
       })
     ]
   },
-  renderTreeHTMLCell (h, params) {
+  renderTreeHTMLCell(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderHTMLCell(h, params))
   },
 
   /**
    * 排序和筛选
    */
-  renderSortAndFilterHeader (h, params) {
+  renderSortAndFilterHeader(h, params) {
     return Cell.renderDefaultHeader(h, params)
       .concat(Cell.renderSortIcon(h, params))
       .concat(Cell.renderFilterIcon(h, params))
@@ -568,10 +568,10 @@ export const Cell = {
   /**
    * 排序
    */
-  renderSortHeader (h, params) {
+  renderSortHeader(h, params) {
     return Cell.renderDefaultHeader(h, params).concat(Cell.renderSortIcon(h, params))
   },
-  renderSortIcon (h, params) {
+  renderSortIcon(h, params) {
     const { $table, column } = params
     const { showIcon, iconAsc, iconDesc } = $table.sortOpts
     return showIcon ? [
@@ -586,7 +586,7 @@ export const Cell = {
             title: GlobalConfig.i18n('vcu.table.sortAsc')
           },
           on: {
-            click (evnt) {
+            click(evnt) {
               $table.triggerSortEvent(evnt, column, 'asc')
             }
           }
@@ -599,7 +599,7 @@ export const Cell = {
             title: GlobalConfig.i18n('vcu.table.sortDesc')
           },
           on: {
-            click (evnt) {
+            click(evnt) {
               $table.triggerSortEvent(evnt, column, 'desc')
             }
           }
@@ -611,10 +611,10 @@ export const Cell = {
   /**
    * 筛选
    */
-  renderFilterHeader (h, params) {
+  renderFilterHeader(h, params) {
     return Cell.renderDefaultHeader(h, params).concat(Cell.renderFilterIcon(h, params))
   },
-  renderFilterIcon (h, params) {
+  renderFilterIcon(h, params) {
     const { $table, column, hasFilter } = params
     const { filterStore, filterOpts } = $table
     const { showIcon, iconNone, iconMatch } = filterOpts
@@ -630,7 +630,7 @@ export const Cell = {
             title: GlobalConfig.i18n('vcu.table.filter')
           },
           on: {
-            click (evnt) {
+            click(evnt) {
               $table.triggerFilterEvent(evnt, params.column, params)
             }
           }
@@ -642,7 +642,7 @@ export const Cell = {
   /**
    * 可编辑
    */
-  renderEditHeader (h, params) {
+  renderEditHeader(h, params) {
     const { $table, column } = params
     const { editRules, editOpts } = $table
     const { sortable, remoteSort, filters } = column
@@ -665,24 +665,24 @@ export const Cell = {
       .concat(filters ? Cell.renderFilterIcon(h, params) : [])
   },
   // 行格编辑模式
-  renderRowEdit (h, params) {
+  renderRowEdit(h, params) {
     const { $table } = params
     const { actived } = $table.editStore
     return Cell.runRenderer(h, params, this, actived && actived.row === params.row)
   },
-  renderTreeRowEdit (h, params) {
+  renderTreeRowEdit(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderRowEdit(h, params))
   },
   // 单元格编辑模式
-  renderCellEdit (h, params) {
+  renderCellEdit(h, params) {
     const { $table } = params
     const { actived } = $table.editStore
     return Cell.runRenderer(h, params, this, actived && actived.row === params.row && actived.column === params.column)
   },
-  renderTreeCellEdit (h, params) {
+  renderTreeCellEdit(h, params) {
     return Cell.renderTreeIcon(h, params, Cell.renderCellEdit(h, params))
   },
-  runRenderer (h, params, _vm, isEdit) {
+  runRenderer(h, params, _vm, isEdit) {
     const { $table, column } = params
     const { slots, editRender, formatter } = column
     const compConf = VCUTable.renderer.get(editRender.name)

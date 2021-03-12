@@ -243,14 +243,62 @@ export default {
     },
     //加载过滤字典
     async getFilterDict() {
-      //获取运算符字典
+      /* //获取运算符字典
       let operationdata = { zdmc: this.filterFormDatas.operationFormData.zdmc }
       let operationListsRes = await this.requestFilterDict("POST", this.filterFormDatas.operationUrl, operationdata)
       this.operationList = operationListsRes ? operationListsRes : []
       //获取关系符字典
       let relationdata = { zdmc: this.filterFormDatas.relationFormData.zdmc }
       let relationListsRes = await this.requestFilterDict("POST", this.filterFormDatas.relationUrl, relationdata)
-      this.relationList = relationListsRes ? relationListsRes : []
+      this.relationList = relationListsRes ? relationListsRes : [] */
+
+      //获取运算符字典
+      this.operationList = [{
+        "title": "等于",
+        "key": "1"
+      }, {
+        "title": "不等于",
+        "key": "2"
+      }, {
+        "title": "大于",
+        "key": "3"
+      }, {
+        "title": "大等于",
+        "key": "4"
+      }, {
+        "title": "小于",
+        "key": "5"
+      }, {
+        "title": "小等于",
+        "key": "6"
+      }, {
+        "title": "包含",
+        "key": "7"
+      }, {
+        "title": "不包含",
+        "key": "8"
+      }, {
+        "title": "为空",
+        "key": "9"
+      }, {
+        "title": "不为空",
+        "key": "10"
+      }, {
+        "title": "以..开头",
+        "key": "11"
+      }, {
+        "title": "不以..开头",
+        "key": "12"
+      }, {
+        "title": "以..结尾",
+        "key": "13"
+      }, {
+        "title": "不以..结尾",
+        "key": "14"
+      }];
+
+      //获取关系符字典
+      this.relationList = [{ "title": "并且", "key": "1" }, { "title": "或者", "key": "2" }];
     },
     async requestFilterDict(method, url, data) {
       try {
