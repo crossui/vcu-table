@@ -241,11 +241,12 @@ export default {
             isFixed = "left"
           }
         })
+        let seqTitle = GlobalConfig.table.seqTitle ? GlobalConfig.table.seqTitle : GlobalConfig.i18n('vcu.table.seqTitle');
         let seqItem = [{
           fixed: isFixed,
           align: "center",
           type: "seq",
-          title: this.platformOptions.seq.title ? this.platformOptions.seq.title : "#",
+          title: this.platformOptions.seq.title ? this.platformOptions.seq.title : seqTitle,
           width: 60
         }]
         columns = seqItem.concat(columns)

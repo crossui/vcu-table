@@ -110,7 +110,8 @@ class ColumnInfo {
   }
 
   getTitle() {
-    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? GlobalConfig.i18n('vcu.table.seqTitle') : ''))
+    let seqTitle = GlobalConfig.table.seqTitle ? GlobalConfig.table.seqTitle : GlobalConfig.i18n('vcu.table.seqTitle');
+    return UtilTools.getFuncText(this.title || (this.type === 'seq' ? seqTitle : ''))
   }
 
   getKey() {

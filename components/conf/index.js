@@ -25,6 +25,7 @@ const GlobalConfig = {
     autoResize: true,
     border: false,
     round: false,
+    seqTitle: null,
     emptyRender: {
       name: ''
     },
