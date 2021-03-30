@@ -1,11 +1,11 @@
 <template>
-  <a-card title="尺寸">
+  <v-card title="尺寸">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> size=default</span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table size="default" :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -19,11 +19,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> size=large</span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table size="large" :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -37,11 +37,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> size=small</span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" size="small">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -54,7 +54,7 @@
       </vcu-table>
     </div>
     
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

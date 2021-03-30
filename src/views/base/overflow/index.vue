@@ -1,7 +1,7 @@
 <template>
-  <a-card title="单元格溢出省略号">
+  <v-card title="单元格溢出省略号">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="description">
           <div>
             当内容溢出时显示为省略号，<span class="blue-text"
@@ -22,7 +22,7 @@
             tooltip 显示
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         show-footer
         highlight-hover-row
@@ -65,7 +65,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="description">
           <div>
             通过设置 <span class="blue-text">contentMethod</span>
@@ -78,7 +78,7 @@
             tooltip 中
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -121,7 +121,7 @@
         </vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

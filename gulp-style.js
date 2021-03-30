@@ -12,7 +12,7 @@ gulp.task('css', function () {
         }))
         .pipe(cleanCSS())
         .pipe(rename('vcu-table.css'))
-        .pipe(gulp.dest('./dist/styles'));
+        .pipe(gulp.dest('./dist'));
 });
 
 

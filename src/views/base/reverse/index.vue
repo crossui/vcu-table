@@ -1,5 +1,5 @@
 <template>
-  <a-card title="反转表格">
+  <v-card title="反转表格">
     <vcu-table
       border
       class="reverse-table"
@@ -7,7 +7,7 @@
       :columns="tableColumn"
       :data="tableData"
     ></vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

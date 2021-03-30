@@ -1,7 +1,7 @@
 <template>
-  <a-card title="功能操作">
+  <v-card title="功能操作">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             开启
@@ -11,15 +11,15 @@
             配置 <span class="blue-text"> filterFormData，exportExcelUrl </span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button-group>
-          <a-button @click="$refs.xTable.showColumnModal()">列选择</a-button>
-          <a-button @click="$refs.xTable.showFilterModal()">过 滤</a-button>
-          <a-button @click="$refs.xTable.operateRestore()">还 原</a-button>
-          <a-button @click="$refs.xTable.exportExcel()">导 出</a-button>
-          <a-button @click="$refs.xTable.emptyTableLists()">清空数据</a-button>
-        </a-button-group>
+        <v-button-group>
+          <v-button @click="$refs.xTable.showColumnModal()">列选择</v-button>
+          <v-button @click="$refs.xTable.showFilterModal()">过 滤</v-button>
+          <v-button @click="$refs.xTable.operateRestore()">还 原</v-button>
+          <v-button @click="$refs.xTable.exportExcel()">导 出</v-button>
+          <v-button @click="$refs.xTable.emptyTableLists()">清空数据</v-button>
+        </v-button-group>
       </div>
       <vcu-table
         ref="xTable"
@@ -34,13 +34,13 @@
 
     <div class="mb-30">
       <div class="mb-5">
-        <a-button-group>
-          <a-button @click="$refs.xTable1.showColumnModal()">列选择</a-button>
-          <a-button @click="$refs.xTable1.showFilterModal()">过 滤</a-button>
-          <a-button @click="$refs.xTable1.operateRestore()">还 原</a-button>
-          <a-button @click="$refs.xTable1.exportExcel()">导 出</a-button>
-          <a-button @click="$refs.xTable1.emptyTableLists()">清空数据</a-button>
-        </a-button-group>
+        <v-button-group>
+          <v-button @click="$refs.xTable1.showColumnModal()">列选择</v-button>
+          <v-button @click="$refs.xTable1.showFilterModal()">过 滤</v-button>
+          <v-button @click="$refs.xTable1.operateRestore()">还 原</v-button>
+          <v-button @click="$refs.xTable1.exportExcel()">导 出</v-button>
+          <v-button @click="$refs.xTable1.emptyTableLists()">清空数据</v-button>
+        </v-button-group>
       </div>
       <vcu-table
         ref="xTable1"
@@ -56,13 +56,13 @@
 
     <div class="mb-30">
       <div class="mb-5">
-        <a-button-group>
-          <a-button @click="$refs.xTable2.showColumnModal()">列选择</a-button>
-          <a-button @click="$refs.xTable2.showFilterModal()">过 滤</a-button>
-          <a-button @click="$refs.xTable2.operateRestore()">还 原</a-button>
-          <a-button @click="$refs.xTable2.exportExcel()">导 出</a-button>
-          <a-button @click="$refs.xTable2.emptyTableLists()">清空数据</a-button>
-        </a-button-group>
+        <v-button-group>
+          <v-button @click="$refs.xTable2.showColumnModal()">列选择</v-button>
+          <v-button @click="$refs.xTable2.showFilterModal()">过 滤</v-button>
+          <v-button @click="$refs.xTable2.operateRestore()">还 原</v-button>
+          <v-button @click="$refs.xTable2.exportExcel()">导 出</v-button>
+          <v-button @click="$refs.xTable2.emptyTableLists()">清空数据</v-button>
+        </v-button-group>
       </div>
       <vcu-table
         ref="xTable2"
@@ -79,21 +79,21 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置 <span class="blue-text"> filterFormData.autoTypewritLists </span> 过滤项中的值组件是输入法字典
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button-group>
-          <a-button @click="$refs.xTable3.showColumnModal()">列选择</a-button>
-          <a-button @click="$refs.xTable3.showFilterModal()">过 滤</a-button>
-          <a-button @click="$refs.xTable3.operateRestore()">还 原</a-button>
-          <a-button @click="$refs.xTable3.exportExcel()">导 出</a-button>
-          <a-button @click="$refs.xTable3.emptyTableLists()">清空数据</a-button>
-        </a-button-group>
+        <v-button-group>
+          <v-button @click="$refs.xTable3.showColumnModal()">列选择</v-button>
+          <v-button @click="$refs.xTable3.showFilterModal()">过 滤</v-button>
+          <v-button @click="$refs.xTable3.operateRestore()">还 原</v-button>
+          <v-button @click="$refs.xTable3.exportExcel()">导 出</v-button>
+          <v-button @click="$refs.xTable3.emptyTableLists()">清空数据</v-button>
+        </v-button-group>
       </div>
       <vcu-table
         ref="xTable3"
@@ -108,7 +108,7 @@
         @onHeaderLoad="onHeaderLoad"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

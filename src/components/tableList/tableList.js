@@ -459,12 +459,12 @@ export default {
           <div class="fl">
             {_.isFunction(operateLeftBeforeSlot) ? operateLeftBeforeSlot() : null}
             {$scopedSlots.operateLeftBefore ? $scopedSlots.operateLeftBefore() : null}
-            {operateShow ? <div class="fl"><a-button-group size={size}>
-              {operateOption.columnSelection.show ? <a-button onClick={this.onShowColumnSelection}>列选择</a-button> : null}
-              {operateOption.filter.show ? <a-button onClick={this.filters}>过滤</a-button> : null}
-              {operateOption.restore.show ? <a-button onClick={this.operateRestore}>还原</a-button> : null}
-              {operateOption.export.show ? <a-button disabled={this.exportBtnDisabled} loading={this.exportBtnLoading} onClick={this.exportExcel}>导出</a-button> : null}
-            </a-button-group></div> : null}
+            {operateShow ? <div class="fl"><v-button-group size={size}>
+              {operateOption.columnSelection.show ? <v-button onClick={this.onShowColumnSelection}>列选择</v-button> : null}
+              {operateOption.filter.show ? <v-button onClick={this.filters}>过滤</v-button> : null}
+              {operateOption.restore.show ? <v-button onClick={this.operateRestore}>还原</v-button> : null}
+              {operateOption.export.show ? <v-button disabled={this.exportBtnDisabled} loading={this.exportBtnLoading} onClick={this.exportExcel}>导出</v-button> : null}
+            </v-button-group></div> : null}
             {_.isFunction(operateLeftAfterSlot) ? operateLeftAfterSlot() : null}
             {$scopedSlots.operateLeftAfter ? $scopedSlots.operateLeftAfter() : null}
           </div>
@@ -495,25 +495,25 @@ export default {
     let isShowHandleSlot = operateShow || operateLeftBeforeSlot || operateLeftAfterSlot || operateRightSlot || $scopedSlots.operateLeftBefore || $scopedSlots.operateLeftAfter || $scopedSlots.operateRight
     return (
       <div ref="tablelistWrap" {...wrapProps}>
-        <a-spin size={size} spinning={loading}>
+        <v-spin size={size} spinning={loading}>
           {isShowHandleSlot && operatePosition == "top" ? operateRender() : null}
           <div style={{ width: tableWidth }}>
-            <a-table
+            <v-table
               {...tableProps}
               {...{ ...tableDirectives }}
             >
               {this.footerTotal ? <template slot="footer">
-                <a-table
+                <v-table
                   {...footerTableProps}
-                ></a-table>
+                ></v-table>
               </template> : ""}
 
-            </a-table>
+            </v-table>
           </div>
           {$scopedSlots.tips ? $scopedSlots.tips() : null}
           {_.isFunction(tipsSlot) ? tipsSlot() : null}
           {isShowHandleSlot && operatePosition == "bottom" ? operateRender() : null}
-        </a-spin>
+        </v-spin>
         {isShowHandleSlot && operateOption.columnSelection.show || isManualControl ? <columnSelection v-model={this.columnSelectionVisible} {...columnSelectionProps}></columnSelection> : null}
         {isShowHandleSlot && operateOption.filter.show || isManualControl ? <filterConfig v-model={this.filterVisible} {...filterConfigProps}></filterConfig> : null}
       </div >
@@ -744,7 +744,7 @@ export default {
         let resData = res.data.payload.data
         if (this.isLazy) {
           if (isRest && isRest == true) {
-            this.$refs.tableListDom[0].$el.getElementsByClassName('ant-table-body')[0].scrollTop = 0
+            this.$refs.tableListDom[0].$el.getElementsByClassName('vcu-table-body')[0].scrollTop = 0
             this.lazyCurrent = 1;
             this.tableDatas = resData;
             if (this.filtersHeader) this.handleFiltersHeaderDatas(resData, true);
@@ -855,7 +855,7 @@ export default {
         return (
           <th
             {...restProps}
-            v-ant-ref={r => (thDom = r)}
+            v-vcu-ref={r => (thDom = r)}
             width={col.width}
             class="resize-table-th"
           >

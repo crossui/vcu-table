@@ -1,7 +1,7 @@
 <template>
-  <a-card title="数据校验">
+  <v-card title="数据校验">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过调用
@@ -10,14 +10,14 @@
             校验规则配置，如果第一个参数为 true 则全量校验
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
-      <a-button-group class="mb-5">
-        <a-button @click="validEvent">校验</a-button>
-        <a-button @click="fullValidEvent">完整校验</a-button>
-        <a-button @click="validAllEvent">全量校验</a-button>
-        <a-button @click="selectValidEvent">选中校验</a-button>
-      </a-button-group>
+      <v-button-group class="mb-5">
+        <v-button @click="validEvent">校验</v-button>
+        <v-button @click="fullValidEvent">完整校验</v-button>
+        <v-button @click="validAllEvent">全量校验</v-button>
+        <v-button @click="selectValidEvent">选中校验</v-button>
+      </v-button-group>
 
       <vcu-table
         ref="xTable"
@@ -36,29 +36,29 @@
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="sex" title="Sex" :edit-render="{}">
           <template v-slot:edit="scope">
-            <a-select
+            <v-select
               size="small"
               v-model="scope.row.sex"
               @change="$refs.xTable.updateStatus(scope)"
               style="width: 100%"
             >
-              <a-select-option
+              <v-select-option
                 v-for="item in sexList"
                 :key="item.value"
                 :value="item.value"
-                >{{ item.label }}</a-select-option
+                >{{ item.label }}</v-select-option
               >
-            </a-select>
+            </v-select>
           </template>
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
@@ -66,13 +66,13 @@
         </vcu-table-column>
         <vcu-table-column field="age" title="Age" :edit-render="{}">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.age"
               :max="105"
               :min="1"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column field="address" title="Address" :edit-render="{}">
@@ -88,7 +88,7 @@
         </vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

@@ -1,6 +1,6 @@
 <template>
-  <a-card title="vcu-table-column 文档">
-    <a-input-search
+  <v-card title="vcu-table-column 文档">
+    <v-input-search
       enter-button
       allowClear
       v-model="filterName"
@@ -86,7 +86,7 @@
         <span class="red">找不对应 API，请输入正确的关键字！</span>
       </template>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

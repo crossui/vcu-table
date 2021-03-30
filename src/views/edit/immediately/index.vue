@@ -1,7 +1,7 @@
 <template>
-  <a-card title="实时更新数据">
+  <v-card title="实时更新数据">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过 <span class="blue-text"> slot </span> 插槽（实时） 或者
@@ -10,7 +10,7 @@
             <span class="blue-text">immediate</span> 启用实时运算
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable"
@@ -30,30 +30,30 @@
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="amount" title="单价" :edit-render="{}">
           <template v-slot:edit="scope">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="scope.row.amount"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column field="number" title="数量" :edit-render="{}">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.number"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column title="总价">
@@ -63,7 +63,7 @@
         </vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

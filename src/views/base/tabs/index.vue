@@ -1,6 +1,6 @@
 <template>
-  <a-card title="Tab 页签切换">
-    <a-alert type="info" class="mb-10">
+  <v-card title="Tab 页签切换">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>
           Tab
@@ -21,20 +21,20 @@
           自动监听父容器来触发重新计算表格
         </div>
       </div>
-    </a-alert>
+    </v-alert>
 
-    <a-tabs default-active-key="1">
-      <a-tab-pane key="1" tab="Tab 1"
+    <v-tabs default-active-key="1">
+      <v-tab-pane key="1" tab="Tab 1"
         ><vcu-table :columns="tableColumn" :data="tableData"></vcu-table
-      ></a-tab-pane>
-      <a-tab-pane key="2" tab="Tab 2" force-render>
+      ></v-tab-pane>
+      <v-tab-pane key="2" tab="Tab 2" force-render>
         <vcu-table :columns="tableColumn" :data="tableData"></vcu-table>
-      </a-tab-pane>
-      <a-tab-pane key="3" tab="Tab 3">
+      </v-tab-pane>
+      <v-tab-pane key="3" tab="Tab 3">
         <vcu-table :columns="tableColumn" :data="tableData"></vcu-table>
-      </a-tab-pane>
-    </a-tabs>
-  </a-card>
+      </v-tab-pane>
+    </v-tabs>
+  </v-card>
 </template>
 <script>
 export default {

@@ -1,12 +1,12 @@
 <template>
-  <a-card title="可编辑">
+  <v-card title="可编辑">
     <div class="mb-30">
-      <a-button-group class="mb-5">
-        <a-button @click="insertEvent(-1)">新增</a-button>
-        <a-button @click="editEvent">编辑</a-button>
-        <a-button @click="saveEvent">保存</a-button>
-        <a-button @click="revertEvent">还原</a-button>
-      </a-button-group>
+      <v-button-group class="mb-5">
+        <v-button @click="insertEvent(-1)">新增</v-button>
+        <v-button @click="editEvent">编辑</v-button>
+        <v-button @click="saveEvent">保存</v-button>
+        <v-button @click="revertEvent">还原</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable"
         keep-source
@@ -18,7 +18,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {
@@ -37,7 +37,7 @@ export default {
               slots: {
                 edit: ({ row }) => {
                   return [
-                    <a-input
+                    <v-input
                       size="small"
                       class="my-input"
                       v-model={row.hospDepartCode}
@@ -53,7 +53,7 @@ export default {
               editRender: true,
               slots: {
                 edit: ({ row }) => {
-                  return [<a-input size="small" v-model={row.inputCode} />];
+                  return [<v-input size="small" v-model={row.inputCode} />];
                 },
               },
             },
@@ -65,7 +65,7 @@ export default {
               slots: {
                 edit: ({ row }) => {
                   return [
-                    <a-input size="small" v-model={row.inHospWardName} />,
+                    <v-input size="small" v-model={row.inHospWardName} />,
                   ];
                 },
               },

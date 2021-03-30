@@ -1,12 +1,12 @@
 <template>
-  <a-card title="加载效果">
+  <v-card title="加载效果">
     <vcu-table :loading="loading" :data="tableData">
       <vcu-table-column type="seq" width="60"></vcu-table-column>
       <vcu-table-column field="name" title="Name"></vcu-table-column>
       <vcu-table-column field="sex" title="Sex"></vcu-table-column>
       <vcu-table-column field="age" title="Age"></vcu-table-column>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from "qs";
-import { message, Modal } from 'ant-design-vue';
+import { message, Modal } from 'vcu';
 
 
 // 创建一个AXIOS实例 (请求不同服务器地址或超时时长等等可以创建不同的实例)

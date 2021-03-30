@@ -1,19 +1,19 @@
 <template>
-  <a-card title="懒加载">
+  <v-card title="懒加载">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             开启
             <span class="blue-text"> isLazy </span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button @click="$refs.xTable.getTableListData(true)">重置数据</a-button>
-        <a-button @click="$refs.xTable.scrollToRow($refs.xTable.getData(30))">
+        <v-button @click="$refs.xTable.getTableListData(true)">重置数据</v-button>
+        <v-button @click="$refs.xTable.scrollToRow($refs.xTable.getData(30))">
           指定行
-        </a-button>
+        </v-button>
       </div>
       <vcu-table
         ref="xTable"
@@ -24,7 +24,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

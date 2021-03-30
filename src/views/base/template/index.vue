@@ -1,7 +1,7 @@
 <template>
-  <a-card title="自定义模板">
+  <v-card title="自定义模板">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           设置 <span class="blue-text">type=html</span> 显示为 HTML
           标签，不支持和其他功能列共存
@@ -10,7 +10,7 @@
             攻击，请确保内容是可信的
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column
@@ -25,13 +25,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用
           <span class="blue-text">slot</span>
           自定义模板；可以实现自定义任意内容及 html 元素
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table show-footer :data="tableData" :footer-method="footerMethod">
         <vcu-table-column type="seq" width="60">
           <template v-slot:header>
@@ -54,7 +54,7 @@
         >
           <template v-slot:filter="{ $panel, column }">
             <template v-for="(option, index) in column.filters">
-              <a-input
+              <v-input
                 class="my-filter"
                 v-model="option.data"
                 :key="index"
@@ -66,10 +66,10 @@
         <vcu-table-column field="age" title="Age">
           <template v-slot="{ row, rowIndex }">
             <template v-if="rowIndex === 1">
-              <a-switch default-checked />
+              <v-switch default-checked />
             </template>
             <template v-else>
-              <span v-if="row.age > 23" class="magenta-text">{{
+              <span v-if="row.age > 23" class="magentv-text">{{
                 row.age
               }}</span>
               <span v-else class="lime-text">{{ row.age }}</span>
@@ -78,25 +78,25 @@
         </vcu-table-column>
         <vcu-table-column field="action" title="action">
           <template v-slot="{ row, rowIndex }">
-            <a-button-group size="small">
-              <a-button @click="handleAdd(row, rowIndex)" icon="user-add">
-              </a-button>
-              <a-button @click="handleDel(row, rowIndex)" icon="user-delete">
-              </a-button>
-            </a-button-group>
+            <v-button-group size="small">
+              <v-button @click="handleAdd(row, rowIndex)" icon="user-add">
+              </v-button>
+              <v-button @click="handleDel(row, rowIndex)" icon="user-delete">
+              </v-button>
+            </v-button-group>
           </template>
         </vcu-table-column>
       </vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           通过<span class="blue-text"> slots </span>
           属性使用自定义插槽来编写模板或<span class="blue-text"> JSX </span
           >渲染函数 或<span class="blue-text"> VNode </span
           ><span class="red-text">（注：返回数组格式）</span>
-        </div> </a-alert
+        </div> </v-alert
       ><!-- show-footer  -->
       <vcu-table
         show-footer
@@ -116,7 +116,7 @@
       </vcu-table>
     </div>
 
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {
@@ -140,7 +140,7 @@ export default {
             filter: ({ column, $panel }) => {
               return column.filters.map((option) => {
                 return (
-                  <a-input
+                  <v-input
                     size="small"
                     v-model={option.data}
                     onChange={(evnt) =>
@@ -172,14 +172,14 @@ export default {
             },
             footer: ({ items, _columnIndex }) => {
               return [
-                <a-button type="primary" size="small">
+                <v-button type="primary" size="small">
                   按钮
-                </a-button>,
+                </v-button>,
               ];
             },
             edit: ({ row }) => {
               return [
-                <a-input size="small" class="my-input" v-model={row.address} />,
+                <v-input size="small" class="my-input" v-model={row.address} />,
               ];
             },
           },

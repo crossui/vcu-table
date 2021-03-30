@@ -1,13 +1,13 @@
 <template>
-  <a-card title="键盘移动高亮行">
+  <v-card title="键盘移动高亮行">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           键盘移动高亮行，设置
           <span class="blue-text">keyboard-config={isArrow: true}</span>
           启用方向键功能
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         highlight-current-row
         :columns="tableColumn"
@@ -15,7 +15,7 @@
         :keyboard-config="{ isArrow: true }"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

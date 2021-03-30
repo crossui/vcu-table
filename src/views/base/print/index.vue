@@ -1,18 +1,18 @@
 <template>
-  <a-card title="打印">
+  <v-card title="打印">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>通过调用 <span class="blue-text">print</span> 函数打印表格</div>
           <div class="red-text">
             （注：打印的页数有限，如果超大数据量请关闭打印功能或者分页打印）
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="printEvent">打印</a-button>
-        <a-button @click="printSelectEvent">打印选中</a-button>
-      </a-button-group>
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="printEvent">打印</v-button>
+        <v-button @click="printSelectEvent">打印选中</v-button>
+      </v-button-group>
 
       <vcu-table
         border
@@ -24,7 +24,7 @@
         :data="tableData"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

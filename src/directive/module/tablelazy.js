@@ -10,7 +10,7 @@ export default {
 }
 const bindEvent = (el, binding, vnode) => {
   const scrollback = binding.value
-  const dom = el.getElementsByClassName('ant-table-body')[0];
+  const dom = el.getElementsByClassName('vcu-table-body')[0];
   el._scrollHandler = () => {
     const scrollDistance = dom.scrollHeight - dom.scrollTop - dom.clientHeight;
     if (scrollDistance <= 0) {  //等于0证明已经到底，可以请求接口
@@ -20,6 +20,6 @@ const bindEvent = (el, binding, vnode) => {
   dom.addEventListener("scroll", el._scrollHandler, false)
 }
 const unbindEvent = (el) => {
-  let dom = el.getElementsByClassName('ant-table-body')[0];
+  let dom = el.getElementsByClassName('vcu-table-body')[0];
   dom.removeEventListener('scroll', el._scrollHandler, false)
 }

@@ -1,6 +1,6 @@
 <template>
-  <a-card title="高亮行">
-    <a-alert type="info" class="mb-10">
+  <v-card title="高亮行">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         列和行选中高亮，通过设置
         <span class="blue-text"
@@ -8,7 +8,7 @@
         </span>
         参数
       </div>
-    </a-alert>
+    </v-alert>
     <vcu-table
       :data="tableData"
       highlight-hover-row
@@ -21,7 +21,7 @@
       <vcu-table-column field="age" title="Age"></vcu-table-column>
       <vcu-table-column field="address" title="address"></vcu-table-column>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

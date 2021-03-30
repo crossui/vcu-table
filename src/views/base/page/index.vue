@@ -1,6 +1,6 @@
 <template>
-  <a-card title="分页">
-    <a-alert type="info" class="mb-10">
+  <v-card title="分页">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>使用插槽 <span class="blue-text">v-slot:pagination</span></div>
         <div>
@@ -8,11 +8,11 @@
           默认"right" 可选值 （left，center，right）
         </div>
         <div>
-          配合<span class="orange-text">antd-vue</span>
+          配合<span class="orange-text">vcu</span>
           <span class="blue-text"> Pagination </span> 分页组件使用
         </div>
       </div>
-    </a-alert>
+    </v-alert>
     <vcu-table
       border
       :loading="loading"
@@ -21,7 +21,7 @@
       paginationAlign="center"
     >
       <template v-slot:pagination>
-        <a-pagination
+        <v-pagination
           v-model="pagination.current"
           :total="pagination.total"
           :defaultPageSize="pagination.pageSize"
@@ -32,7 +32,7 @@
         />
       </template>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test";

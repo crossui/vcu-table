@@ -1794,7 +1794,7 @@ const Methods = {
                 //判断是否在指定类的范围内
                 if (
                   getEventTargetNode(evnt, document.body, 'autoTypewrit-modal').flag ||
-                  getEventTargetNode(evnt, document.body, 'ant-select-dropdown').flag) {
+                  getEventTargetNode(evnt, document.body, 'vcu-select-dropdown').flag) {
                   return
                 }
 

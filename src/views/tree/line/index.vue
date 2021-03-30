@@ -1,7 +1,7 @@
 <template>
-  <a-card title="连接线">
+  <v-card title="连接线">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             树表格，通过配置 <span class="blue-text"> tree-config={line: true} </span> 属性来开启树节点连接线
@@ -10,7 +10,7 @@
             注：连接线只支持基本功能，开启渲染节点线将会影响渲染性能，具体取决于数据量
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTree"
         show-overflow
@@ -36,7 +36,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             自定义图标，通过设置
@@ -44,7 +44,7 @@
             局部替换默认的图标
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTree1"
         show-overflow
@@ -70,7 +70,7 @@
         <vcu-table-column field="date" title="Date"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import datas from "../data.js";

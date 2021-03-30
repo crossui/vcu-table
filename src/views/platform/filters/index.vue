@@ -1,7 +1,7 @@
 <template>
-  <a-card title="筛选">
+  <v-card title="筛选">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -14,14 +14,14 @@
             自定义筛选条件
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table ref="xTable" :loadOptions="options" max-height="200">
       </vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -38,7 +38,7 @@
             请求 （ <span class="blue-text"> type </span> : 是否重置过滤值）
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table
         ref="xTable1"
@@ -50,7 +50,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

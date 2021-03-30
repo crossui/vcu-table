@@ -1,14 +1,14 @@
 <template>
-  <a-card title="行分组">
+  <v-card title="行分组">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             行分组，例如：按日期分组显示
             <span class="red-text">（具体请自行实现，该示例仅供参考）</span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         resizable
@@ -27,7 +27,7 @@
         <vcu-table-column field="date14" title="Date"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test";

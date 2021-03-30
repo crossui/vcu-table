@@ -1,14 +1,14 @@
 <template>
-  <a-card title="响应式宽高">
-    <a-button-group class="mb-10">
-      <a-button @click="tableWidth = '600px'">宽600px</a-button>
-      <a-button @click="tableWidth = '700px'">宽700px</a-button>
-      <a-button @click="tableWidth = '800px'">宽800px</a-button>
-      <a-button @click="tableHeight = '300px'">高300px</a-button>
-      <a-button @click="tableHeight = '500px'">高500px</a-button>
-      <a-button @click="tableHeight = '800px'">高800px</a-button>
-    </a-button-group>
-    <a-alert type="info" class="mb-10">
+  <v-card title="响应式宽高">
+    <v-button-group class="mb-10">
+      <v-button @click="tableWidth = '600px'">宽600px</v-button>
+      <v-button @click="tableWidth = '700px'">宽700px</v-button>
+      <v-button @click="tableWidth = '800px'">宽800px</v-button>
+      <v-button @click="tableHeight = '300px'">高300px</v-button>
+      <v-button @click="tableHeight = '500px'">高500px</v-button>
+      <v-button @click="tableHeight = '800px'">高800px</v-button>
+    </v-button-group>
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         当一个表格需要铺满父容器时，通过设置
         <span class="blue-text">height=auto</span>
@@ -18,7 +18,7 @@
         <span class="blue-text">auto-resize</span
         >（父元素监听），这样就只需要通过样式控制父容器高度就可以实现响应式表格
       </div>
-    </a-alert>
+    </v-alert>
     <div :style="{ width: tableWidth, height: tableHeight }">
       <vcu-table
         border
@@ -58,7 +58,7 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

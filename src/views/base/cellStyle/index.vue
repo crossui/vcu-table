@@ -1,7 +1,7 @@
 <template>
-  <a-card title="单元格样式">
+  <v-card title="单元格样式">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             行的样色、单元格样式，表头的样式、表尾的样式、全部都可以完全自定义，通过设置
@@ -23,7 +23,7 @@
             注：当自定义样式之后可能会覆盖表格的样式，比如选中行..等，记得自行处理好相关样式
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -42,13 +42,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过<span class="blue-text">cell-click</span> 事件点击改变颜色
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         :data="tableData"
@@ -63,7 +63,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             行的动态样色、单元格动态样式，表头的动态样式、表尾的动态样式、全部都可以完全自定义，通过设置
@@ -73,7 +73,7 @@
           </div>
           <div class="red-text">注：当自定义样式之后可能会覆盖表格的样式，比如选中行..等，记得自行处理好相关样式</div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         :data="tableData"
@@ -87,7 +87,7 @@
         <vcu-table-column field="age" title="Age"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

@@ -1,8 +1,8 @@
 <template>
-  <a-card title="虚拟滚动">
-    <a-button @click="init()" class="mb-5">加载数据</a-button>
+  <v-card title="虚拟滚动">
+    <v-button @click="init()" class="mb-5">加载数据</v-button>
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             高性能的虚拟渲染，通过设置
@@ -11,7 +11,7 @@
           </div>
           <div class="red-text">最大可以支撑 5w 列、30w 行</div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTable"
         show-overflow
@@ -25,7 +25,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             手动调优，对于低性能的浏览器可以通过设置
@@ -49,14 +49,14 @@
             checkbox提升勾选后渲染速度
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="$refs.xTable1.setAllCheckboxRow(true)">
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="$refs.xTable1.setAllCheckboxRow(true)">
           所有选中
-        </a-button>
-        <a-button @click="$refs.xTable1.clearCheckboxRow()">清除选中</a-button>
-        <a-button @click="getSelectEvent">获取选中</a-button>
-      </a-button-group>
+        </v-button>
+        <v-button @click="$refs.xTable1.clearCheckboxRow()">清除选中</v-button>
+        <v-button @click="getSelectEvent">获取选中</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable1"
         show-overflow
@@ -73,7 +73,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test.js";

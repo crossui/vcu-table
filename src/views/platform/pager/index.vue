@@ -1,7 +1,7 @@
 <template>
-  <a-card title="分页">
+  <v-card title="分页">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过
@@ -14,7 +14,7 @@
             <span class="blue-text"> getTableListData </span> 方法获取新数据
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table
         ref="xTable"
@@ -23,7 +23,7 @@
         @onPageLoad="onPageLoad"
       >
         <template v-slot:pagination>
-          <a-pagination
+          <v-pagination
             v-model="pagination.current"
             :total="pagination.total"
             :defaultPageSize="pagination.pageSize"
@@ -35,7 +35,7 @@
         </template>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

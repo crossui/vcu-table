@@ -1,7 +1,7 @@
 <template>
-  <a-card title="合并行或列">
+  <v-card title="合并行或列">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             合并列，通过自定义
@@ -17,7 +17,7 @@
             ，不能用于树形结构、展开行、固定列，合并的逻辑都是自行实现的，该示例仅供参考）
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -29,9 +29,9 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">实现横向树列表</div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         :scroll-y="{ gt: -1 }"
@@ -40,37 +40,37 @@
       >
         <vcu-table-column field="name1" title="功能模块">
           <template v-slot="{ row }">
-            <a-checkbox
+            <v-checkbox
               v-model="row.check1"
               @change="check1ChangeEvent(row, row.check1)"
-              >{{ row.name1 }}</a-checkbox
+              >{{ row.name1 }}</v-checkbox
             >
           </template>
         </vcu-table-column>
         <vcu-table-column field="name2" title="详细功能">
           <template v-slot="{ row }">
-            <a-checkbox
+            <v-checkbox
               v-model="row.check2"
               @change="check2ChangeEvent(row, row.check2)"
-              >{{ row.name2 }}</a-checkbox
+              >{{ row.name2 }}</v-checkbox
             >
           </template>
         </vcu-table-column>
         <vcu-table-column field="name3" title="权限类型">
           <template v-slot="{ row }">
-            <a-checkbox
+            <v-checkbox
               v-model="row.check3"
               @change="check3ChangeEvent(row, row.check3)"
-              >{{ row.name3 }}</a-checkbox
+              >{{ row.name3 }}</v-checkbox
             >
           </template>
         </vcu-table-column>
         <vcu-table-column field="name4" title="权限列表">
           <template v-slot="{ row }">
-            <a-checkbox
+            <v-checkbox
               v-model="row.check4"
               @change="check4ChangeEvent(row, row.check4)"
-              >{{ row.name4 }}</a-checkbox
+              >{{ row.name4 }}</v-checkbox
             >
           </template>
         </vcu-table-column>
@@ -78,7 +78,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             表尾合并列，通过自定义
@@ -94,7 +94,7 @@
             不能用于树形结构、展开行、固定列，合并的逻辑都是自行实现的，该示例仅供参考）
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -106,7 +106,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           单元格与表尾单元格合并，可以通过绑定参数
           <span class="blue-text">merge-cells，merge-footer-items</span>
@@ -114,11 +114,11 @@
           <span class="blue-text">setMergeCells、setMergeFooterItems</span>
           来控制单元格的临时合并状态
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="handleCellUpdate">更新单元格合并</a-button>
-        <a-button @click="handleFooterUpdate">更新表尾单元格合并</a-button>
-      </a-button-group>
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="handleCellUpdate">更新单元格合并</v-button>
+        <v-button @click="handleFooterUpdate">更新表尾单元格合并</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable"
         border
@@ -130,7 +130,7 @@
         :merge-footer-items="mergeFooterItems"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

@@ -1,11 +1,11 @@
 <template>
-  <a-card title="边框">
+  <v-card title="边框">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> border=true</span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table border :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -19,11 +19,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> border=outer </span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table border="outer" :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -37,11 +37,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> border=inner </span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" border="inner">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -55,11 +55,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> border=none </span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" border="none">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -73,11 +73,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           设置 <span class="blue-text"> round </span> 外边框圆角
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" border round>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -89,7 +89,7 @@
         <vcu-table-column field="address" title="Address"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

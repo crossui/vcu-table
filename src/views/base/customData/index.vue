@@ -1,11 +1,11 @@
 <template>
-  <a-card title="数据格式与字段">
+  <v-card title="数据格式与字段">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           支持多种数据格式：默认标准结构、深层结构、二维数组
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -26,13 +26,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           深层结构，可用于带有复杂结构的场景<span class="red-text"
             >（缺点深层级数据类型必须先定义，深层结构将影响性能，具体取决于数据量大小）</span
           >
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData1">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="userInfo.name" title="Name"></vcu-table-column>
@@ -53,13 +53,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           二维数组结构，适用场景较少<span class="red-text"
             >（缺点局限性比较大，需要手动指定 row-id 唯一主键）</span
           >
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table row-id="0" :data="tableData2">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="1" title="Name"></vcu-table-column>
@@ -78,7 +78,7 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

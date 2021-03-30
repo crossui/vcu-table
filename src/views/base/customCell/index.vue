@@ -1,7 +1,7 @@
 <template>
-  <a-card title="显示/隐藏列">
+  <v-card title="显示/隐藏列">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过
@@ -21,28 +21,28 @@
             <span class="blue-text">resetColumn</span> 函数重置全部列为可视状态
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-10">
-        <a-button
+      </v-alert>
+      <v-button-group class="mb-10">
+        <v-button
           @click="
             $refs.xTable1.hideColumn($refs.xTable1.getColumnByField('name'))
           "
-          >隐藏name</a-button
+          >隐藏name</v-button
         >
-        <a-button
+        <v-button
           @click="
             $refs.xTable1.showColumn($refs.xTable1.getColumnByField('name'))
           "
-          >显示name</a-button
+          >显示name</v-button
         >
-        <a-button
+        <v-button
           @click="
             $refs.xTable1.showColumn($refs.xTable1.getColumnByField('sex'))
           "
-          >显示sex</a-button
+          >显示sex</v-button
         >
-        <a-button @click="$refs.xTable1.resetColumn()">重置</a-button>
-      </a-button-group>
+        <v-button @click="$refs.xTable1.resetColumn()">重置</v-button>
+      </v-button-group>
 
       <vcu-table ref="xTable1" :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -57,20 +57,20 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           如果是根据服务端数据控制显示/隐藏列，在获取到配置信息后动态更改列的
           <span class="blue-text">visible</span> 属性，然后调用
           <span class="blue-text">refreshColumn</span> 属性列即可
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
         <template v-for="(column, index) in tableColumn">
-          <a-checkbox
+          <v-checkbox
             v-model="column.visible"
             :key="index"
             @change="$refs.xTable2.refreshColumn()"
-            >{{ column.title }}</a-checkbox
+            >{{ column.title }}</v-checkbox
           >
         </template>
       </div>
@@ -83,16 +83,16 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           采用 <span class="blue-text">columns</span> 数据源形式更简单方便
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
         <template v-for="(column, index) in tableColumn1">
-          <a-checkbox v-model="column.visible" :key="index">{{
+          <v-checkbox v-model="column.visible" :key="index">{{
             column.title
-          }}</a-checkbox>
+          }}</v-checkbox>
         </template>
       </div>
       <vcu-table
@@ -103,9 +103,9 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">分组表头</div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
         <template v-for="(column, index) in tableColumnGroup">
           <template v-if="column.children">
@@ -114,26 +114,26 @@
                 <template
                   v-for="(subsubColumn, subsubIndex) in subColumn.children"
                 >
-                  <a-checkbox
+                  <v-checkbox
                     v-model="subsubColumn.visible"
                     :key="'subchildren-' + subsubIndex"
-                    >{{ subsubColumn.title }}</a-checkbox
+                    >{{ subsubColumn.title }}</v-checkbox
                   >
                 </template>
               </template>
               <template v-else>
-                <a-checkbox
+                <v-checkbox
                   v-model="subColumn.visible"
                   :key="'children-' + subIndex"
-                  >{{ subColumn.title }}</a-checkbox
+                  >{{ subColumn.title }}</v-checkbox
                 >
               </template>
             </template>
           </template>
           <template v-else>
-            <a-checkbox v-model="column.visible" :key="index">{{
+            <v-checkbox v-model="column.visible" :key="index">{{
               column.title
-            }}</a-checkbox>
+            }}</v-checkbox>
           </template>
         </template>
       </div>
@@ -144,7 +144,7 @@
         :columns="tableColumnGroup"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

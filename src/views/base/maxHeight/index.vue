@@ -1,12 +1,12 @@
 <template>
-  <a-card title="最大高度">
+  <v-card title="最大高度">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           当一个表格高度需要自适应的时候可以设置为最大高度，通过设置
           <span class="blue-text"> max-height </span>参数
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table :data="tableData" max-height="100">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -17,11 +17,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           也可以设置相对于父容器的百分比
         </div>
-      </a-alert>
+      </v-alert>
       <div style="height: 100px">
         <vcu-table :data="tableData" max-height="100%">
           <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -31,7 +31,7 @@
         </vcu-table>
       </div>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

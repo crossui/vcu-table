@@ -1,5 +1,5 @@
 <template>
-  <a-card title="合计">
+  <v-card title="合计">
     <div class="mb-30">
       <vcu-table
         ref="xTable"
@@ -10,7 +10,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

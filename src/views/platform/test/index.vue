@@ -1,8 +1,8 @@
 <template>
-  <a-card title="基础">
+  <v-card title="基础">
     <vcu-table ref="xTable" :loadOptions="options" max-height="200">
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

@@ -1,7 +1,7 @@
 <template>
-  <a-card title="基础">
+  <v-card title="基础">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             树表格，通过配置
@@ -19,19 +19,19 @@
             注：树结构不支持大量数据，如果数据量超过 2000 条，请谨慎使用！
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="getTreeExpansionEvent">获取已展开</a-button>
-        <a-button
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="getTreeExpansionEvent">获取已展开</v-button>
+        <v-button
           @click="$refs.xTree.setTreeExpand([tableData[2], tableData[3]], true)"
         >
           设置第三、四行展开
-        </a-button>
-        <a-button @click="$refs.xTree.setAllTreeExpand(true)">
+        </v-button>
+        <v-button @click="$refs.xTree.setAllTreeExpand(true)">
           展开所有
-        </a-button>
-        <a-button @click="$refs.xTree.clearTreeExpand()">关闭所有</a-button>
-      </a-button-group>
+        </v-button>
+        <v-button @click="$refs.xTree.clearTreeExpand()">关闭所有</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTree"
         row-id="id"
@@ -54,7 +54,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             默认展开所有树节点，通过
@@ -62,7 +62,7 @@
             设置默认展开所有树节点
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTree1"
         row-id="id"
@@ -83,7 +83,7 @@
         <vcu-table-column field="date" title="Date"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import datas from "../data.js";

@@ -1,11 +1,11 @@
 <template>
-  <a-card title="隐藏、分组头部">
+  <v-card title="隐藏、分组头部">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           设置 <span class="blue-text">show-header=false</span> 隐藏头部
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" :show-header="false">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -15,11 +15,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           分组表头
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table border resizable :data="tableData">
         <vcu-table-column title="基本信息" fixed="left">
           <vcu-table-column
@@ -63,11 +63,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           分组表头(数据源形式)
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         stripe
@@ -77,7 +77,7 @@
         :data="tableDataGroup"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

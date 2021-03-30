@@ -1,7 +1,7 @@
 <template>
-  <a-card title="索引">
+  <v-card title="索引">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -9,24 +9,24 @@
             开启索引
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table ref="xTable" :loadOptions="options" max-height="200">
       </vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
             <span class="blue-text"> loadOptions.seq={title:"序号"} </span> 开启索引并显示标题
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table ref="xTable1" :loadOptions="options1"> </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

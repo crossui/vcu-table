@@ -1,11 +1,11 @@
 <template>
-  <a-card title="事件">
+  <v-card title="事件">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           更多事件请查看基础功能 <span class="blue-text"> 事件绑定 </span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTable"
         isLazy
@@ -16,7 +16,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

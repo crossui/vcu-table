@@ -1,11 +1,11 @@
 <template>
-  <a-card title="列宽拖动">
+  <v-card title="列宽拖动">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> resizable </span>属性启用列宽拖动功能
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" resizable border>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -16,20 +16,20 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text"> columns </span>表头数据源的<span class="blue-text"> resizable </span>属性值启用列宽拖动功能
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :columns="tableColumn" :data="tableData" border></vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           左右固定列宽拖动（固定左不允许超过固定右，固定右不允许超过固定左）
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" resizable border>
         <vcu-table-column
           type="seq"
@@ -61,11 +61,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           左右固定列的分组表头拖动（只允许列拖动，不允许分组标题拖动）
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table border resizable :data="tableData">
         <vcu-table-column title="基本信息" fixed="left">
           <vcu-table-column
@@ -114,7 +114,7 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

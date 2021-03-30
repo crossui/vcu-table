@@ -1,7 +1,7 @@
 <template>
-  <a-card title="手风琴效果">
+  <v-card title="手风琴效果">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             手风琴展开效果，通过配置
@@ -9,7 +9,7 @@
             属性来开启同一级的节点，限制只能展开一个
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTree"
         row-id="id"
@@ -30,7 +30,7 @@
         <vcu-table-column field="date" title="Date" sortable></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import datas from "../data.js";

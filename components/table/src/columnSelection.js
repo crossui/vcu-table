@@ -142,18 +142,18 @@ export default {
     }
 
 
-    return (<a-modal {...modalProps}>
+    return (<v-modal {...modalProps}>
       <div class="clearfix" slot="footer">
         <div class="fl">
-          <a-button key="reset" size={size} onClick={resetCustomEvent}>还原</a-button>
+          <v-button key="reset" size={size} onClick={resetCustomEvent}>还原</v-button>
         </div>
         <div class="fr">
-          <a-button key="back" size={size} onClick={handleCancel}>取消</a-button>
-          <a-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</a-button>
+          <v-button key="back" size={size} onClick={handleCancel}>取消</v-button>
+          <v-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</v-button>
         </div>
       </div>
       {renderCustoms(h, this)}
-    </a-modal>)
+    </v-modal>)
   },
   mounted() {
 

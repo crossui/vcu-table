@@ -86,20 +86,20 @@ export default {
       }
     }
 
-    return (<a-modal {...modalProps}>
+    return (<v-modal {...modalProps}>
       <div class="clearfix" slot="footer">
-        <div class="fl"><a-checkbox {...checkAllProps}>全选</a-checkbox></div>
+        <div class="fl"><v-checkbox {...checkAllProps}>全选</v-checkbox></div>
         <div class="fr">
-          <a-button key="back" size={size} onClick={handleCancel}>取消</a-button>
-          <a-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</a-button>
+          <v-button key="back" size={size} onClick={handleCancel}>取消</v-button>
+          <v-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</v-button>
         </div>
       </div>
-      <a-checkbox-group {...checkGruopProps} v-model={this.checkedList}>
-        <a-row>
-          {columnsList.map((item, index) => { return (<a-col span={8} class="mb-5"><a-checkbox value={item.key}>{item.title}</a-checkbox></a-col>) })}
-        </a-row>
-      </a-checkbox-group>
-    </a-modal>)
+      <v-checkbox-group {...checkGruopProps} v-model={this.checkedList}>
+        <v-row>
+          {columnsList.map((item, index) => { return (<v-col span={8} class="mb-5"><v-checkbox value={item.key}>{item.title}</v-checkbox></v-col>) })}
+        </v-row>
+      </v-checkbox-group>
+    </v-modal>)
   },
   mounted() {
 

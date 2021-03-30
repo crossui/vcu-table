@@ -1,7 +1,7 @@
 <template>
   <div class="dateTime-wrap">
     <div class="dateTime-item">
-      <a-date-picker
+      <v-date-picker
         ref="startDate"
         v-model="datetimeValue.startDate"
         v-if="dateTimeOption.startDate.isShow"
@@ -16,7 +16,7 @@
         :dropdownClassName="dropdownClassName"
         :disabled-date="dateTimeOption.startDate.disabledDate"
       />
-      <a-time-picker
+      <v-time-picker
         ref="startTime"
         v-model="datetimeValue.startTime"
         v-if="dateTimeOption.startTime.isShow"
@@ -36,7 +36,7 @@
       至
     </div>
     <div class="dateTime-item">
-      <a-date-picker
+      <v-date-picker
         ref="endDate"
         v-model="datetimeValue.endDate"
         v-if="dateTimeOption.endDate.isShow"
@@ -51,7 +51,7 @@
         :dropdownClassName="dropdownClassName"
         :disabled-date="dateTimeOption.endDate.disabledDate"
       />
-      <a-time-picker
+      <v-time-picker
         ref="endTime"
         v-model="datetimeValue.endTime"
         v-if="dateTimeOption.endTime.isShow"
@@ -218,7 +218,7 @@ export default {
             let dom = document.getElementsByClassName(
               this.dropdownClassName
             )[0];
-            this.inputDom = dom.getElementsByClassName("ant-calendar-input")[0];
+            this.inputDom = dom.getElementsByClassName("vcu-calendar-input")[0];
             this.inputDom.addEventListener(
               "keyup",
               (e) => {

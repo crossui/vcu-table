@@ -1,11 +1,11 @@
 <template>
   <div class="mb-30">
-    <a-alert type="info" class="mb-10">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>使用 <span class="blue-text"> jsx </span> 方式引入第三方组件</div>
         <div>配置 <span class="blue-text"> editRender: { autofocus: "类名" } </span> 指定聚焦组件</div>
       </div>
-    </a-alert>
+    </v-alert>
     <vcu-table
       ref="xTable"
       :columns="tableColumn"
@@ -32,7 +32,7 @@ export default {
           slots: {
             edit: (scope) => {
               return [
-                <a-input
+                <v-input
                   size="small"
                   class="my-input"
                   v-model={scope.row.name}
@@ -51,19 +51,19 @@ export default {
             },
             edit: (scope) => {
               return [
-                <a-select
+                <v-select
                   size="small"
                   v-model={scope.row.sex}
                   style="width: 100%"
                 >
                   {this.sexList.map((item, index) => {
                     return [
-                      <a-select-option key={item.value} value={item.value}>
+                      <v-select-option key={item.value} value={item.value}>
                         {item.label}
-                      </a-select-option>,
+                      </v-select-option>,
                     ];
                   })}
-                </a-select>,
+                </v-select>,
               ];
             },
           },
@@ -75,13 +75,13 @@ export default {
           slots: {
             edit: ({ row }) => {
               return [
-                <a-input-number
+                <v-input-number
                   size="small"
                   v-model={row.age}
                   max={105}
                   min={1}
                   style="width: 100%"
-                ></a-input-number>,
+                ></v-input-number>,
               ];
             },
           },
@@ -110,33 +110,33 @@ export default {
             default: ({ row }) => {
               if (this.$refs.xTable.isActiveByRow(row)) {
                 return [
-                  <a-button-group size="small">
-                    <a-button
+                  <v-button-group size="small">
+                    <v-button
                       onClick={() => {
                         this.saveRowEvent(row);
                       }}
                     >
                       保存
-                    </a-button>
-                    <a-button
+                    </v-button>
+                    <v-button
                       onClick={() => {
                         this.cancelRowEvent(row);
                       }}
                     >
                       取消
-                    </a-button>
-                  </a-button-group>,
+                    </v-button>
+                  </v-button-group>,
                 ];
               } else {
                 return [
-                  <a-button
+                  <v-button
                     size="small"
                     onClick={() => {
                       this.editRowEvent(row);
                     }}
                   >
                     编辑
-                  </a-button>,
+                  </v-button>,
                 ];
               }
             },

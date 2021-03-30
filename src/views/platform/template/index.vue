@@ -1,14 +1,14 @@
 <template>
-  <a-card title="自定义模板">
+  <v-card title="自定义模板">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             使用
             <span class="blue-text"> slot </span> 方式
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable"
@@ -29,30 +29,30 @@
           <div class="blue-text">{{ row.pName }}</div>
         </template>
         <template v-slot:pName_edit="scope">
-          <a-input
+          <v-input
             size="small"
             v-model="scope.row.pName"
             @input="$refs.xTable.updateStatus(scope)"
-          ></a-input>
+          ></v-input>
         </template>
         <template v-slot:action_default>
-          <a-button-group size="small">
-            <a-button>编辑</a-button>
-            <a-button>删除</a-button>
-          </a-button-group>
+          <v-button-group size="small">
+            <v-button>编辑</v-button>
+            <v-button>删除</v-button>
+          </v-button-group>
         </template>
       </vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             使用
             <span class="blue-text"> jsx </span> 方式
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable1"
@@ -64,7 +64,7 @@
         :edit-config="{ trigger: 'click', mode: 'cell' }"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {
@@ -116,7 +116,7 @@ export default {
                 },
                 edit: ({ row }) => {
                   return [
-                    <a-input
+                    <v-input
                       size="small"
                       class="my-input"
                       v-model={row.pName}
@@ -132,10 +132,10 @@ export default {
               slots: {
                 default: ({ row }) => {
                   return [
-                    <a-button-group size="small">
-                      <a-button>编辑</a-button>
-                      <a-button>删除</a-button>
-                    </a-button-group>,
+                    <v-button-group size="small">
+                      <v-button>编辑</v-button>
+                      <v-button>删除</v-button>
+                    </v-button-group>,
                   ];
                 },
               },

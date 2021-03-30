@@ -1,6 +1,6 @@
 <template>
-  <a-card title="格式化内容">
-    <a-alert type="info" class="mb-10">
+  <v-card title="格式化内容">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         局部自定义 <span class="blue-text">formatter</span> 格式化内容
         <div class="red-text">
@@ -8,7 +8,7 @@
           值发生改变时触发格式化，如果想要多字段关联变化请使用自定义模板
         </div>
       </div>
-    </a-alert>
+    </v-alert>
 
     <vcu-table :data="tableData">
       <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -21,7 +21,7 @@
         :formatter="formatTime"
       ></vcu-table-column>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

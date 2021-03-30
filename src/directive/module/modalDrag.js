@@ -40,11 +40,11 @@ const unbindEvent = (el) => {
 function isAllowDragDom(element) {
   try {
     let isallow = false;
-    if (element.className.indexOf("ant-modal") > -1 || element.className.indexOf("narrow-modal") > -1) {
-      let antModal1 = getParents(element, "ant-modal-content");
-      let antModal2 = getParents(element, "narrow-modal-content");
-      let antModal = antModal1 == null ? antModal2 : antModal1;
-      isallow = antModal;
+    if (element.className.indexOf("vcu-modal") > -1 || element.className.indexOf("narrow-modal") > -1) {
+      let vcuModal1 = getParents(element, "vcu-modal-content");
+      let vcuModal2 = getParents(element, "narrow-modal-content");
+      let vcuModal = vcuModal1 == null ? vcuModal2 : vcuModal1;
+      isallow = vcuModal;
     }
     return isallow;
   } catch (err) {

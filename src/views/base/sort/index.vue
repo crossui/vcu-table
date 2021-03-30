@@ -1,7 +1,7 @@
 <template>
-  <a-card title="排序">
+  <v-card title="排序">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过给需要排序功能的列加上
@@ -18,16 +18,16 @@
             还可以通过调用 <span class="blue-text">sort</span> 方法实现手动排序
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-10">
-        <a-button @click="$refs.xTable1.sort('name', 'asc')"
-          >Name 升序</a-button
+      </v-alert>
+      <v-button-group class="mb-10">
+        <v-button @click="$refs.xTable1.sort('name', 'asc')"
+          >Name 升序</v-button
         >
-        <a-button @click="$refs.xTable1.sort('name', 'desc')"
-          >Name 降序</a-button
+        <v-button @click="$refs.xTable1.sort('name', 'desc')"
+          >Name 降序</v-button
         >
-        <a-button @click="$refs.xTable1.clearSort()">清除排序</a-button>
-      </a-button-group>
+        <v-button @click="$refs.xTable1.clearSort()">清除排序</v-button>
+      </v-button-group>
       <vcu-table ref="xTable1" :data="tableData" border>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="name" title="Name" sortable></vcu-table-column>
@@ -42,13 +42,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           配置
           <span class="blue-text">sort-by</span>
           多个字段排序
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table ref="xTable2" :data="tableData" border>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -73,13 +73,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           配置
           <span class="blue-text">sort-method</span>
           自定义排序
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table ref="xTable3" :data="tableData" border>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -100,7 +100,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           通过 <span class="blue-text">defaultSort</span> 默认排序、<span
             class="blue-text"
@@ -109,7 +109,7 @@
           自定义轮转顺序、通过配置
           <span class="blue-text">trigger</span> 设置触发源
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable4"
@@ -135,11 +135,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           通过 <span class="blue-text">header-cell-click</span> 设置触发源
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable5"
@@ -160,13 +160,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           改变图标，通过设置
           <span class="blue-text">sort-config={iconAsc, iconDesc}</span>
           局部替换默认的图标  <span class="red-text">(注：项目中须自己下载iconfont包)</span>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable6"
@@ -188,7 +188,7 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

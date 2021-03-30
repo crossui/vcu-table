@@ -5,9 +5,9 @@ import router from './router'
 import store from './store'
 import request from '@/utils/request'
 
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
-Vue.use(Antd);
+import VCU from 'vcu';
+import 'vcu/dist/vcu.css';
+Vue.use(VCU);
 
 import VCUTable from "../components/index.js";
 Vue.use(VCUTable);

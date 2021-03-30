@@ -1,7 +1,7 @@
 <template>
-  <a-card title="表尾数据">
+  <v-card title="表尾数据">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过表尾来实现合计功能，设置
@@ -13,7 +13,7 @@
             <span class="red-text">{$grid，$table，columns，data}</span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -28,7 +28,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>结果返回一个二维数组时显示多行表尾数据</div>
           <div>
@@ -37,7 +37,7 @@
             <span class="red-text">updateFooter</span> 方法
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         show-footer
@@ -52,7 +52,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配合
@@ -60,15 +60,15 @@
             自定义不同列颜色
           </div>
         </div>
-      </a-alert>
-      <a-button
+      </v-alert>
+      <v-button
         class="mb-5"
         @click="
           () => {
             showFooter = !showFooter;
           }
         "
-        >显示/隐藏表尾</a-button
+        >显示/隐藏表尾</v-button
       >
       <vcu-table
         border
@@ -80,7 +80,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

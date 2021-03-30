@@ -1,17 +1,17 @@
 <template>
-  <a-card title="列工具">
-    <a-alert type="info" class="mb-10">
+  <v-card title="列工具">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>
           设置 <span class="blue-text">customModalShow</span> 开启列工具
         </div>
       </div>
-    </a-alert>
+    </v-alert>
 
     <div class="mb-30">
-      <a-button @click="$refs.xTable1.showColumnModal()" class="mb-5">
+      <v-button @click="$refs.xTable1.showColumnModal()" class="mb-5">
         列选择
-      </a-button>
+      </v-button>
       <vcu-table ref="xTable1" :data="tableData" customModalShow>
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -25,9 +25,9 @@
     </div>
 
     <div class="mb-30">
-      <a-button @click="$refs.xTable2.showColumnModal()" class="mb-5">
+      <v-button @click="$refs.xTable2.showColumnModal()" class="mb-5">
         列选择
-      </a-button>
+      </v-button>
       <vcu-table ref="xTable2" border :data="tableData" customModalShow>
         <vcu-table-column title="基本信息" fixed="left">
           <vcu-table-column type="seq" width="160"></vcu-table-column>
@@ -59,9 +59,9 @@
     </div>
 
     <div class="mb-30">
-      <a-button @click="$refs.xTable3.showColumnModal()" class="mb-5">
+      <v-button @click="$refs.xTable3.showColumnModal()" class="mb-5">
         列选择
-      </a-button>
+      </v-button>
       <vcu-table
         ref="xTable3"
         :data="tableData"
@@ -71,9 +71,9 @@
     </div>
 
     <div class="mb-30">
-      <a-button @click="$refs.xTable4.showColumnModal()" class="mb-5">
+      <v-button @click="$refs.xTable4.showColumnModal()" class="mb-5">
         列选择
-      </a-button>
+      </v-button>
       <vcu-table
         ref="xTable4"
         border
@@ -84,9 +84,9 @@
     </div>
 
     <div class="mb-30">
-      <a-button @click="$refs.xTable5.showColumnModal()" class="mb-5">
+      <v-button @click="$refs.xTable5.showColumnModal()" class="mb-5">
         列选择
-      </a-button>
+      </v-button>
       <vcu-table
         ref="xTable5"
         border
@@ -94,7 +94,7 @@
         :loadOptions="options"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

@@ -1,14 +1,14 @@
 <template>
-  <a-card title="复杂渲染">
-    <a-button @click="init()" class="mb-5">加载数据</a-button>
+  <v-card title="复杂渲染">
+    <v-button @click="init()" class="mb-5">加载数据</v-button>
     <div class="mb-30">
-      <a-button-group class="mb-5">
-        <a-button @click="$refs.xTable1.setAllCheckboxRow(true)">
+      <v-button-group class="mb-5">
+        <v-button @click="$refs.xTable1.setAllCheckboxRow(true)">
           所有选中
-        </a-button>
-        <a-button @click="$refs.xTable1.clearCheckboxRow()">清除选中</a-button>
-        <a-button @click="getSelectEvent">获取选中</a-button>
-      </a-button-group>
+        </v-button>
+        <v-button @click="$refs.xTable1.clearCheckboxRow()">清除选中</v-button>
+        <v-button @click="getSelectEvent">获取选中</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable1"
         border
@@ -39,7 +39,7 @@
         ></vcu-table-column> -->
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 //

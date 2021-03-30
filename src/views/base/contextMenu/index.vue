@@ -1,7 +1,7 @@
 <template>
-  <a-card title="右键快捷菜单">
+  <v-card title="右键快捷菜单">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             右键快捷菜单配置项
@@ -10,7 +10,7 @@
             >
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTable"
         border
@@ -26,7 +26,7 @@
         @cell-context-menu="cellContextMenuEvent"
         @context-menu-click="contextMenuClickEvent"
       ></vcu-table>
-      <a-alert type="success" class="mt-10">
+      <v-alert type="success" class="mt-10">
         <div slot="message">
           <div>
             <p>| Arrow Up ↑ | 移动到上一个菜单选项 |</p>
@@ -38,9 +38,9 @@
             <p>| Spacebar | 选中当前菜单选项 |</p>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEClipboard from "xe-clipboard";

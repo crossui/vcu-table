@@ -1,6 +1,6 @@
 <template>
   <div class="mb-30">
-    <a-alert type="info" class="mb-10">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>
           设置
@@ -24,7 +24,7 @@
         </div>
         <div><span class="red-text">（此方式不推荐使用）</span></div>
       </div>
-    </a-alert>
+    </v-alert>
     <vcu-table
       ref="xTable"
       :data="tableData"
@@ -63,13 +63,13 @@
       <vcu-table-column title="Action">
         <template v-slot="{ row }">
           <template v-if="$refs.xTable.isActiveByRow(row)">
-            <a-button-group size="small">
-              <a-button @click="saveRowEvent(row)">保存</a-button>
-              <a-button @click="cancelRowEvent(row)">取消</a-button>
-            </a-button-group>
+            <v-button-group size="small">
+              <v-button @click="saveRowEvent(row)">保存</v-button>
+              <v-button @click="cancelRowEvent(row)">取消</v-button>
+            </v-button-group>
           </template>
           <template v-else>
-            <a-button size="small" @click="editRowEvent(row)">编辑</a-button>
+            <v-button size="small" @click="editRowEvent(row)">编辑</v-button>
           </template>
         </template>
       </vcu-table-column>

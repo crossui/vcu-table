@@ -1,6 +1,6 @@
 <template>
   <div class="mb-30">
-    <a-alert type="info" class="mb-10">
+    <v-alert type="info" class="mb-10">
       <div slot="message">
         <div>使用 <span class="blue-text"> slot </span> 方式引入第三方组件</div>
         <div>
@@ -13,7 +13,7 @@
           </span>
         </div>
       </div>
-    </a-alert>
+    </v-alert>
     <vcu-table
       ref="xTable"
       :data="tableData"
@@ -26,28 +26,28 @@
         :edit-render="{ autoselect: true }"
       >
         <template v-slot:edit="scope">
-          <a-input
+          <v-input
             size="small"
             v-model="scope.row.name"
             @input="$refs.xTable.updateStatus(scope)"
-          ></a-input>
+          ></v-input>
         </template>
       </vcu-table-column>
       <vcu-table-column field="sex" title="Sex" :edit-render="{}">
         <template v-slot:edit="scope">
-          <a-select
+          <v-select
             size="small"
             v-model="scope.row.sex"
             @change="$refs.xTable.updateStatus(scope)"
             style="width: 100%"
           >
-            <a-select-option
+            <v-select-option
               v-for="item in sexList"
               :key="item.value"
               :value="item.value"
-              >{{ item.label }}</a-select-option
+              >{{ item.label }}</v-select-option
             >
-          </a-select>
+          </v-select>
         </template>
         <template v-slot="{ row }">{{
           getSelectLabel(row.sex, sexList)
@@ -55,13 +55,13 @@
       </vcu-table-column>
       <vcu-table-column field="age" title="Age" :edit-render="{}">
         <template v-slot:edit="{ row }">
-          <a-input-number
+          <v-input-number
             size="small"
             v-model="row.age"
             :max="105"
             :min="1"
             style="width: 100%"
-          ></a-input-number>
+          ></v-input-number>
         </template>
       </vcu-table-column>
       <vcu-table-column field="address" title="Address" :edit-render="{}">
@@ -78,13 +78,13 @@
       <vcu-table-column title="Action">
         <template v-slot="{ row }">
           <template v-if="$refs.xTable.isActiveByRow(row)">
-            <a-button-group size="small">
-              <a-button @click="saveRowEvent(row)">保存</a-button>
-              <a-button @click="cancelRowEvent(row)">取消</a-button>
-            </a-button-group>
+            <v-button-group size="small">
+              <v-button @click="saveRowEvent(row)">保存</v-button>
+              <v-button @click="cancelRowEvent(row)">取消</v-button>
+            </v-button-group>
           </template>
           <template v-else>
-            <a-button size="small" @click="editRowEvent(row)">编辑</a-button>
+            <v-button size="small" @click="editRowEvent(row)">编辑</v-button>
           </template>
         </template>
       </vcu-table-column>

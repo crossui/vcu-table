@@ -1,7 +1,7 @@
 <template>
-  <a-card title="多选框">
+  <v-card title="多选框">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             用户手动选中时会触发事件
@@ -10,23 +10,23 @@
           </div>
           <div> <span class="blue-text"> checkbox-change-get-keys </span> 事件，返回被选中的数据索引值</div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-10">
-        <a-button @click="$refs.xTable1.setCheckboxRow(tableData[1], true)"
-          >设置第二行选中</a-button
+      </v-alert>
+      <v-button-group class="mb-10">
+        <v-button @click="$refs.xTable1.setCheckboxRow(tableData[1], true)"
+          >设置第二行选中</v-button
         >
-        <a-button
+        <v-button
           @click="
             $refs.xTable1.setCheckboxRow([tableData[2], tableData[3]], true)
           "
-          >设置第三、四行选中</a-button
+          >设置第三、四行选中</v-button
         >
-        <a-button @click="$refs.xTable1.setAllCheckboxRow(true)"
-          >设置所有行选中</a-button
+        <v-button @click="$refs.xTable1.setAllCheckboxRow(true)"
+          >设置所有行选中</v-button
         >
-        <a-button @click="clearCheckboxRowEevnt">取消选中</a-button>
-        <a-button @click="getCheckboxEvent1">获取选中</a-button>
-      </a-button-group>
+        <v-button @click="clearCheckboxRowEevnt">取消选中</v-button>
+        <v-button @click="getCheckboxEvent1">获取选中</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable1"
         :data="tableData"
@@ -48,12 +48,12 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以通过 <span class="blue-text">checkMethod</span> 方法控制 checkbox
           是否允许禁用
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable2"
@@ -74,13 +74,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           还可以通过
           <span class="blue-text">strict</span>
           设置为严格模式，当表格中不存在有效数据时列头复选框为禁用状态
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         :data="tableData"
@@ -100,12 +100,12 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以通过
           <span class="blue-text"> labelField </span> 设置checkbox显示在哪一列
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable3"
@@ -125,13 +125,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以点击某行选中，设置
           <span class="blue-text"> trigger </span> ,
           <span class="blue-text"> highlight-current-row </span> 同时使用
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable4"
@@ -153,16 +153,16 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           默认选中，通过指定
           <span class="blue-text">checkRowKeys</span>
           设置默认选中的行，指定默认值需要有 row-id
           <div class="red-text">注：默认行为只会在 reload 之后触发一次</div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button @click="handleUpdateCheckbox">更新默认选中</a-button>
+        <v-button @click="handleUpdateCheckbox">更新默认选中</v-button>
       </div>
       <vcu-table
         ref="xTableUpdate"
@@ -180,7 +180,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>多选可和单选同时使用</div>
           <div>
@@ -189,7 +189,7 @@
             设置父子节点不互相关联，启用后 showHeader 默认为 false
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         :data="tableData"
@@ -208,7 +208,7 @@
         <vcu-table-column field="address" title="address"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

@@ -13,8 +13,8 @@ const importDirective = Vue => {
     * Action 权限指令
     * 指令用法：
     *  - 在需要控制 action 级别权限的组件上使用 v-action:[method] , 如下：
-    *    <a-button v-action:add >添加用户</a-button>
-    *    <a-button v-action:delete>删除用户</a-button>
+    *    <v-button v-action:add >添加用户</v-button>
+    *    <v-button v-action:delete>删除用户</v-button>
     *    <a v-action:edit @click="edit(record)">修改</a>
     *
     *  - 当前用户没有权限时，组件上使用了该指令则会被隐藏
@@ -30,8 +30,8 @@ const importDirective = Vue => {
    /**
       * form-width (v-form-width)
       * 指令用法：
-      * <a-form v-form-width="{ labelWidth: 90, wrapperWidth: 250 }"></a-form> 
-      * <a-form-item v-form-width="{ labelWidth: 90, wrapperWidth: 250 }"></a-form-item>
+      * <v-form v-form-width="{ labelWidth: 90, wrapperWidth: 250 }"></v-form> 
+      * <v-form-item v-form-width="{ labelWidth: 90, wrapperWidth: 250 }"></v-form-item>
       * @params
       * labelWidth:表单名称宽度
       * wrapperWidth：表单控件宽度
@@ -40,7 +40,7 @@ const importDirective = Vue => {
    /**
       * tableFooterScroll (v-tableFooterScroll)
       * 指令用法：
-      *  - <a-table v-tableFooterScroll :footer="footerFunc" :columns="columns" :dataSource="data" :scroll="{ x: 2300 }"></a-table>
+      *  - <v-table v-tableFooterScroll :footer="footerFunc" :columns="columns" :dataSource="data" :scroll="{ x: 2300 }"></v-table>
       * 
       * 注意footer的宽度应与table宽度保持一致
      */

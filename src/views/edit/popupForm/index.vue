@@ -1,13 +1,13 @@
 <template>
-  <a-card title="弹框编辑">
+  <v-card title="弹框编辑">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>实现弹框表单编辑功能，双击行可以弹出编辑框</div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button icon="plus" @click="insertEvent">新增</a-button>
+        <v-button icon="plus" @click="insertEvent">新增</v-button>
       </div>
       <vcu-table
         border
@@ -35,56 +35,56 @@
         ></vcu-table-column>
         <vcu-table-column title="操作" width="100" show-overflow>
           <template v-slot="{ row }">
-            <a-button-group size="small">
-              <a-button icon="edit" @click="editEvent(row)"></a-button>
-              <a-button icon="delete" @click="removeEvent(row)"></a-button>
-            </a-button-group>
+            <v-button-group size="small">
+              <v-button icon="edit" @click="editEvent(row)"></v-button>
+              <v-button icon="delete" @click="removeEvent(row)"></v-button>
+            </v-button-group>
           </template>
         </vcu-table-column>
       </vcu-table>
     </div>
 
-    <a-modal
+    <v-modal
       :title="selectRow ? '编辑&保存' : '新增&保存'"
       :visible="showEdit"
       :confirm-loading="submitLoading"
       @ok="submitEvent"
       @cancel="handleCancel"
     >
-      <a-form-model
+      <v-form-model
         ref="ruleForm"
         :model="formData"
         :rules="formRules"
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item label="name" prop="name">
-          <a-input v-model="formData.name" placeholder="请输入名称" />
-        </a-form-model-item>
-        <a-form-model-item label="sex" prop="sex">
-          <a-select v-model="formData.sex" placeholder="请选择性别">
-            <a-select-option value="0"> 女 </a-select-option>
-            <a-select-option value="1"> 男 </a-select-option>
-          </a-select>
-        </a-form-model-item>
-        <a-form-model-item label="age" prop="age">
-          <a-input-number
+        <v-form-model-item label="name" prop="name">
+          <v-input v-model="formData.name" placeholder="请输入名称" />
+        </v-form-model-item>
+        <v-form-model-item label="sex" prop="sex">
+          <v-select v-model="formData.sex" placeholder="请选择性别">
+            <v-select-option value="0"> 女 </v-select-option>
+            <v-select-option value="1"> 男 </v-select-option>
+          </v-select>
+        </v-form-model-item>
+        <v-form-model-item label="age" prop="age">
+          <v-input-number
             v-model="formData.age"
             :min="1"
             :max="200"
             style="width: 200px"
           />
-        </a-form-model-item>
-        <a-form-model-item label="address" prop="address">
-          <a-textarea
+        </v-form-model-item>
+        <v-form-model-item label="address" prop="address">
+          <v-textarea
             v-model="formData.address"
             placeholder="请输入地址"
             :auto-size="{ minRows: 3, maxRows: 5 }"
           />
-        </a-form-model-item>
-      </a-form-model>
-    </a-modal>
-  </a-card>
+        </v-form-model-item>
+      </v-form-model>
+    </v-modal>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test";

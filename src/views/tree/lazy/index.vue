@@ -1,7 +1,7 @@
 <template>
-  <a-card title="懒加载">
+  <v-card title="懒加载">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             树表格的懒加载，通过配置 <span class="blue-text"> row-id </span> 和
@@ -17,7 +17,7 @@
             （注：懒加载启用后一次只允许异步加载一层根节点）
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTree"
         row-id="id"
@@ -35,7 +35,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

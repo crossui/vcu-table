@@ -1,5 +1,5 @@
 <template>
-  <a-card title="自动换行">
+  <v-card title="自动换行">
     <vcu-table :data="tableData">
       <vcu-table-column type="seq" width="60"></vcu-table-column>
       <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -7,7 +7,7 @@
       <vcu-table-column field="age" title="Age"></vcu-table-column>
       <vcu-table-column field="address" title="address"></vcu-table-column>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

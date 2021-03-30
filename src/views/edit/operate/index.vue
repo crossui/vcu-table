@@ -1,7 +1,7 @@
 <template>
-  <a-card title="数据操作">
+  <v-card title="数据操作">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             调用
@@ -26,18 +26,18 @@
             >
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="insertEvent()">新增</a-button>
-        <a-button @click="insertEvent(tableData[2])"> 在第3行插入 </a-button>
-        <a-button @click="insertEvent(-1)">在最后行插入</a-button>
-        <a-button @click="removeEvent(tableData[1])">删除第2行</a-button>
-        <a-button @click="$refs.xTable.removeCheckboxRow()">删除选中</a-button>
-        <a-button @click="getSelectionEvent">获取选中</a-button>
-        <a-button @click="getInsertEvent">获取新增</a-button>
-        <a-button @click="saveEvent">保存</a-button>
-        <a-button @click="revertEvent">还原</a-button>
-      </a-button-group>
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="insertEvent()">新增</v-button>
+        <v-button @click="insertEvent(tableData[2])"> 在第3行插入 </v-button>
+        <v-button @click="insertEvent(-1)">在最后行插入</v-button>
+        <v-button @click="removeEvent(tableData[1])">删除第2行</v-button>
+        <v-button @click="$refs.xTable.removeCheckboxRow()">删除选中</v-button>
+        <v-button @click="getSelectionEvent">获取选中</v-button>
+        <v-button @click="getInsertEvent">获取新增</v-button>
+        <v-button @click="saveEvent">保存</v-button>
+        <v-button @click="revertEvent">还原</v-button>
+      </v-button-group>
 
       <vcu-table
         ref="xTable"
@@ -59,29 +59,29 @@
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="sex" title="Sex" :edit-render="{}">
           <template v-slot:edit="scope">
-            <a-select
+            <v-select
               size="small"
               v-model="scope.row.sex"
               @change="$refs.xTable.updateStatus(scope)"
               style="width: 100%"
             >
-              <a-select-option
+              <v-select-option
                 v-for="item in sexList"
                 :key="item.value"
                 :value="item.value"
-                >{{ item.label }}</a-select-option
+                >{{ item.label }}</v-select-option
               >
-            </a-select>
+            </v-select>
           </template>
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
@@ -89,13 +89,13 @@
         </vcu-table-column>
         <vcu-table-column field="age" title="Age" :edit-render="{}">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.age"
               :max="105"
               :min="1"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column field="address" title="Address" :edit-render="{}">
@@ -111,7 +111,7 @@
         </vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

@@ -1,5 +1,5 @@
 <template>
-  <a-card title="自定义模板">
+  <v-card title="自定义模板">
     <div class="mb-30">
       <vcu-table
         ref="xTree"
@@ -11,7 +11,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
@@ -34,7 +34,7 @@ export default {
             },
             edit: (scope) => {
               return [
-                <a-input
+                <v-input
                   size="small"
                   class="my-input"
                   v-model={scope.row.name}

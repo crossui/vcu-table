@@ -1,7 +1,7 @@
 <template>
-  <a-card title="导出">
+  <v-card title="导出">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过调用 <span class="blue-text">exportData</span> 函数指定
@@ -34,12 +34,12 @@
             （注：只支持基本数据结构，目前不支持分组、合并等；树结构和虚拟滚动只允许导出数据源，前端导出的数据量有限，建议使用后端导出）
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="exportDataEvent">默认导出</a-button>
-        <a-button @click="exportSelectEvent">导出选中</a-button>
-        <a-button @click="exportCustomEvent">导出自定义</a-button>
-      </a-button-group>
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="exportDataEvent">默认导出</v-button>
+        <v-button @click="exportSelectEvent">导出选中</v-button>
+        <v-button @click="exportCustomEvent">导出自定义</v-button>
+      </v-button-group>
 
       <vcu-table
         highlight-hover-row
@@ -68,7 +68,7 @@
         ></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

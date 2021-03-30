@@ -1,18 +1,18 @@
 <template>
-  <a-card title="局部加载">
-    <a-button @click="init()" class="mb-5">加载数据</a-button>
+  <v-card title="局部加载">
+    <v-button @click="init()" class="mb-5">加载数据</v-button>
     <div class="mb-30">
       <div class="mb-5">
-        <a-button-group>
-          <a-button @click="loadList(300)">+300条</a-button>
-          <a-button @click="removeList(50)">-50条</a-button>
-          <a-button @click="loadColumns()">+1列</a-button>
-          <a-button @click="removeColumn()">-1列</a-button>
-          <a-button @click="$refs.xTable.scrollTo(1000,8000)">
+        <v-button-group>
+          <v-button @click="loadList(300)">+300条</v-button>
+          <v-button @click="removeList(50)">-50条</v-button>
+          <v-button @click="loadColumns()">+1列</v-button>
+          <v-button @click="removeColumn()">-1列</v-button>
+          <v-button @click="$refs.xTable.scrollTo(1000,8000)">
             x=1000,y=8000
-          </a-button>
-          <a-button @click="$refs.xTable.clearScroll()">清除滚动</a-button>
-        </a-button-group>
+          </v-button>
+          <v-button @click="$refs.xTable.clearScroll()">清除滚动</v-button>
+        </v-button-group>
       </div>
       <vcu-table
         ref="xTable"
@@ -29,7 +29,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test.js";

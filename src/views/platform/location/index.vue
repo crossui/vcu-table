@@ -1,30 +1,30 @@
 <template>
-  <a-card title="精确定位">
+  <v-card title="精确定位">
     <div class="mb-30">
       <div class="mb-5">
-        <a-button
+        <v-button
           type="primary"
           @click="$refs.xTable.scrollToColumn($refs.xTable.getColumns(15))"
         >
           滚动第 15 列
-        </a-button>
+        </v-button>
       </div>
       <div class="mb-5">
-        <a-input-number v-model="value" :min="1" />
-        <a-button type="primary" @click="gotoRow" class="ml-10">
+        <v-input-number v-model="value" :min="1" />
+        <v-button type="primary" @click="gotoRow" class="ml-10">
           指定行
-        </a-button>
+        </v-button>
       </div>
 
       <div class="mb-5">
-        <a-input-search
+        <v-input-search
           addon-before="GUID:"
           v-model="value1"
           style="width: 400px"
           enter-button
           @search="handleCondition"
         >
-        </a-input-search>
+        </v-input-search>
       </div>
 
       <vcu-table
@@ -36,7 +36,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

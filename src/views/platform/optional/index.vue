@@ -1,7 +1,7 @@
 <template>
-  <a-card title="可选择">
+  <v-card title="可选择">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -9,7 +9,7 @@
             开启checkbox
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable"
@@ -24,7 +24,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -35,7 +35,7 @@
             <span class="blue-text"> loadOptions.customRender </span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable1"
@@ -53,7 +53,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -61,7 +61,7 @@
             开启radio
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable2"
@@ -76,7 +76,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             配置
@@ -87,7 +87,7 @@
             <span class="blue-text"> loadOptions.customRender </span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable1"
@@ -102,7 +102,7 @@
         }"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

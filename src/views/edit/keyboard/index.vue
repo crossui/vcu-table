@@ -1,7 +1,7 @@
 <template>
-  <a-card title="键盘导航">
+  <v-card title="键盘导航">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             设置
@@ -27,7 +27,7 @@
           </div>
           <div class="red-text">（注：isEdit 启用任意键覆盖式编辑的）</div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable"
@@ -56,29 +56,29 @@
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="sex" title="Sex" :edit-render="{}">
           <template v-slot:edit="scope">
-            <a-select
+            <v-select
               size="small"
               v-model="scope.row.sex"
               @change="$refs.xTable.updateStatus(scope)"
               style="width: 100%"
             >
-              <a-select-option
+              <v-select-option
                 v-for="item in sexList"
                 :key="item.value"
                 :value="item.value"
-                >{{ item.label }}</a-select-option
+                >{{ item.label }}</v-select-option
               >
-            </a-select>
+            </v-select>
           </template>
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
@@ -86,13 +86,13 @@
         </vcu-table-column>
         <vcu-table-column field="age" title="Age" :edit-render="{}">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.age"
               :max="105"
               :min="1"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column field="address" title="Address" :edit-render="{}">
@@ -141,7 +141,7 @@
         | Esc | 如果存在，取消单元格编辑状态 |
         | * | （isEdit）按下除功能键之外的任意键激活覆盖式单元格编辑 |
     </div> -->
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

@@ -1,7 +1,7 @@
 <template>
-  <a-card title="事件绑定">
+  <v-card title="事件绑定">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           表格事件绑定，通过设置
           <span class="blue-text">
@@ -10,7 +10,7 @@
             cell-mouseenter、 cell-mouseleave、 cell-context-menu、 scroll </span
           >等常用事件
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         resizable
@@ -30,7 +30,7 @@
         @scroll="scrollEvent"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

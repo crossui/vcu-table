@@ -1,9 +1,9 @@
 <template>
-  <a-card title="手动触发">
+  <v-card title="手动触发">
     <defaults />
     <slots />
     <jsxs />
-  </a-card>
+  </v-card>
 </template>
 <script>
 import defaults from "./default";

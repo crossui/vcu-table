@@ -1,5 +1,5 @@
 <template>
-  <a-card title="单元格工具提示">
+  <v-card title="单元格工具提示">
     <vcu-table
       show-footer
       :footer-method="footerMethod"
@@ -35,7 +35,7 @@
         width="200"
       ></vcu-table-column>
     </vcu-table>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

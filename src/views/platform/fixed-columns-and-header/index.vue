@@ -1,7 +1,7 @@
 <template>
-  <a-card title="固定头和列">
+  <v-card title="固定头和列">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通用平台设置
@@ -10,11 +10,11 @@
             开启省略号，
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table ref="xTable" :loadOptions="options"> </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

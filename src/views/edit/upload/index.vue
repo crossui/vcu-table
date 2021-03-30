@@ -1,23 +1,23 @@
 <template>
-  <a-card title="文件上传">
+  <v-card title="文件上传">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             文件上传，可以通过调用
             <span class="blue-text"> readFile </span> 读取本地文件
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
-      <a-button-group class="mb-5">
-        <a-button status="primary" @click="insertEvent()">选择文件</a-button>
-        <a-button status="primary" @click="insertEvent({ multiple: true })">
+      <v-button-group class="mb-5">
+        <v-button status="primary" @click="insertEvent()">选择文件</v-button>
+        <v-button status="primary" @click="insertEvent({ multiple: true })">
           选择多个
-        </a-button>
-        <a-button @click="$refs.xTable.removeCheckboxRow()">删除选中</a-button>
-        <a-button @click="getInsertEvent">保存</a-button>
-      </a-button-group>
+        </v-button>
+        <v-button @click="$refs.xTable.removeCheckboxRow()">删除选中</v-button>
+        <v-button @click="getInsertEvent">保存</v-button>
+      </v-button-group>
 
       <vcu-table
         ref="xTable"
@@ -35,12 +35,12 @@
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="type" title="Type"></vcu-table-column>
@@ -48,7 +48,7 @@
         <vcu-table-column field="date" title="Date"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

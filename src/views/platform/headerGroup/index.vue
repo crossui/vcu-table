@@ -1,11 +1,11 @@
 <template>
-  <a-card title="分组表头">
+  <v-card title="分组表头">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>手动设置分组表头</div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         ref="xTable"
         border
@@ -21,7 +21,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             自动设置分组表头，配置通用平台
@@ -29,14 +29,14 @@
             字段
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table ref="xTable1" border :loadOptions="options1">
         <template v-slot:XMMC00_default> 111111 </template>
         <template v-slot:GJBM00_default> 22222 </template>
         <template v-slot:XMSL00_default> 333333 </template>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

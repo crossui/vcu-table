@@ -1,7 +1,7 @@
 <template>
-  <a-card title="深层查找">
+  <v-card title="深层查找">
     <div class="mb-30">
-      <a-input-search
+      <v-input-search
         v-model="filterName"
         class="mb-5 w-500"
         enter-button
@@ -18,7 +18,7 @@
         <vcu-table-column field="date" title="Date" sortable></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

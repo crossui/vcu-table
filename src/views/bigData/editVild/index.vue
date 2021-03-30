@@ -1,35 +1,35 @@
 <template>
-  <a-card title="可编辑及数据校验">
-    <a-button @click="init()" class="mb-5">加载数据</a-button>
+  <v-card title="可编辑及数据校验">
+    <v-button @click="init()" class="mb-5">加载数据</v-button>
     <div class="mb-30">
 
       <div class="mb-5">
-        <a-dropdown class="mr-10">
-          <a-button icon="down">新增操作</a-button>
-          <a-menu slot="overlay" @click="handleAddClick">
-            <a-menu-item key="1"> 从第一行插入</a-menu-item>
-            <a-menu-item key="2"> 从最后插入</a-menu-item>
-            <a-menu-item key="3"> 插入到 100 行</a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <v-dropdown class="mr-10">
+          <v-button icon="down">新增操作</v-button>
+          <v-menu slot="overlay" @click="handleAddClick">
+            <v-menu-item key="1"> 从第一行插入</v-menu-item>
+            <v-menu-item key="2"> 从最后插入</v-menu-item>
+            <v-menu-item key="3"> 插入到 100 行</v-menu-item>
+          </v-menu>
+        </v-dropdown>
 
-        <a-dropdown class="mr-10">
-          <a-button icon="down">删除操作</a-button>
-          <a-menu slot="overlay" @click="handleRemoveClick">
-            <a-menu-item key="1"> 删除选中</a-menu-item>
-            <a-menu-item key="2"> 删除第一行</a-menu-item>
-            <a-menu-item key="3"> 删除第 100 行</a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <v-dropdown class="mr-10">
+          <v-button icon="down">删除操作</v-button>
+          <v-menu slot="overlay" @click="handleRemoveClick">
+            <v-menu-item key="1"> 删除选中</v-menu-item>
+            <v-menu-item key="2"> 删除第一行</v-menu-item>
+            <v-menu-item key="3"> 删除第 100 行</v-menu-item>
+          </v-menu>
+        </v-dropdown>
 
-        <a-dropdown class="mr-10">
-          <a-button icon="down">校验操作</a-button>
-          <a-menu slot="overlay" @click="handleVildClick">
-            <a-menu-item key="1"> 基本校验</a-menu-item>
-            <a-menu-item key="2"> 完整校验</a-menu-item>
-            <a-menu-item key="3"> 选中校验</a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <v-dropdown class="mr-10">
+          <v-button icon="down">校验操作</v-button>
+          <v-menu slot="overlay" @click="handleVildClick">
+            <v-menu-item key="1"> 基本校验</v-menu-item>
+            <v-menu-item key="2"> 完整校验</v-menu-item>
+            <v-menu-item key="3"> 选中校验</v-menu-item>
+          </v-menu>
+        </v-dropdown>
       </div>
       <vcu-table
         ref="xTable"
@@ -46,7 +46,7 @@
       >
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test.js";
@@ -65,7 +65,7 @@ export default {
           slots: {
             edit: (scope) => {
               return [
-                <a-input
+                <v-input
                   size="small"
                   class="my-input"
                   v-model={scope.row.name}
@@ -85,13 +85,13 @@ export default {
           slots: {
             edit: ({ row }) => {
               return [
-                <a-input-number
+                <v-input-number
                   size="small"
                   v-model={row.age}
                   max={105}
                   min={1}
                   style="width: 100%"
-                ></a-input-number>,
+                ></v-input-number>,
               ];
             },
           },

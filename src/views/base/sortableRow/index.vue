@@ -1,12 +1,12 @@
 <template>
-  <a-card title="行拖拽">
+  <v-card title="行拖拽">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div><span class="blue-text">sortablejs</span> 等库实现行拖动</div>
           <div class="red-text">必须设置 row-key</div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         border
         ref="xTable"
@@ -17,7 +17,7 @@
         class="sortable-row-demo"
       ></vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import Sortable from "sortablejs";

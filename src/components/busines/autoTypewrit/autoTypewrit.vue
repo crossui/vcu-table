@@ -4,7 +4,7 @@
     class="autoTypewrit-wrap"
     v-click-outside="onClickOutside"
   >
-    <a-input
+    <v-input
       ref="autoTypewritIput"
       :disabled="disabled"
       :size="size"
@@ -36,41 +36,41 @@
           v-hotkey="likeKeyMap"
           data-hotkey-enable="true"
         >
-          <a-input
+          <v-input
             ref="modalIputDom"
             size="small"
             v-model="modalInputValue"
             class="condition-input fl w-150"
           />
-          <a-select
+          <v-select
             v-model="inputTypeVal"
             size="small"
             class="condition-select condition-select-one ml-10 fr"
             @change="changeInputType"
             :getPopupContainer="getPopupContainer()"
           >
-            <a-select-option
+            <v-select-option
               v-for="item in iptArray"
               :value="item.value"
               :key="item.value"
-              >{{ item.label }}</a-select-option
+              >{{ item.label }}</v-select-option
             >
-          </a-select>
+          </v-select>
 
-          <a-select
+          <v-select
             v-model="likeTypeVal"
             size="small"
             class="condition-select ml-10 fr"
             @change="changeLikeType"
             :getPopupContainer="getPopupContainer()"
           >
-            <a-select-option
+            <v-select-option
               v-for="item in matchDt"
               :value="item.value"
               :key="item.value"
-              >{{ item.label }}</a-select-option
+              >{{ item.label }}</v-select-option
             >
-          </a-select>
+          </v-select>
         </div>
         <div class="tableView">
           <tableList

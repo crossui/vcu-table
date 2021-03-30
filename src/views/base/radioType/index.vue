@@ -1,20 +1,20 @@
 <template>
-  <a-card title="单选框">
+  <v-card title="单选框">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           单选表格，用户手动选中时会触发事件
           <span class="blue-text">radio-change</span>，还通过
           <span class="blue-text">highlight</span> 设置高亮选中行
         </div>
-      </a-alert>
-      <a-button-group class="mb-10">
-        <a-button @click="$refs.xTable1.setRadioRow(tableData[1])"
-          >设置第二行选中</a-button
+      </v-alert>
+      <v-button-group class="mb-10">
+        <v-button @click="$refs.xTable1.setRadioRow(tableData[1])"
+          >设置第二行选中</v-button
         >
-        <a-button @click="clearRadioRowEevnt">取消选中</a-button>
-        <a-button @click="getRadioEvent1">获取选中</a-button>
-      </a-button-group>
+        <v-button @click="clearRadioRowEevnt">取消选中</v-button>
+        <v-button @click="getRadioEvent1">获取选中</v-button>
+      </v-button-group>
       <vcu-table
         ref="xTable1"
         :data="tableData"
@@ -24,12 +24,12 @@
       >
         <vcu-table-column type="radio" width="60" align="center">
           <template v-slot:header>
-            <a-button
+            <v-button
               type="link"
               size="small"
               @click="clearRadioRowEevnt"
               :disabled="!selectRow"
-              >取消</a-button
+              >取消</v-button
             >
           </template>
         </vcu-table-column>
@@ -41,12 +41,12 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以通过 <span class="blue-text">checkMethod</span> 方法控制 radio
           是否允许禁用
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable2"
@@ -67,12 +67,12 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以通过
           <span class="blue-text"> labelField </span> 设置radio显示在哪一列
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable3"
@@ -92,12 +92,12 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           可以点击某行选中，设置
           <span class="blue-text"> trigger </span> , <span class="blue-text"> highlight-current-row </span> 同时使用
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable4"
@@ -117,7 +117,7 @@
         <vcu-table-column field="address" title="address"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

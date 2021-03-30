@@ -1,31 +1,31 @@
 <template>
-  <a-config-provider :getPopupContainer="getPopupContainer" :locale="zh_CN">
+  <v-config-provider :getPopupContainer="getPopupContainer" :locale="zh_CN">
     <div id="app">
-      <a-layout class="app-main">
-        <a-layout-sider class="sider-wrap">
-          <a-menu mode="inline" theme="dark" @click="handleClickMenu">
+      <v-layout class="app-main">
+        <v-layout-sider class="sider-wrap">
+          <v-menu mode="inline" theme="dark" @click="handleClickMenu">
             <template v-for="item in menuList">
-              <a-sub-menu :key="item.name" v-if="item.children">
+              <v-sub-menu :key="item.name" v-if="item.children">
                 <span slot="title">{{ item.meta.title }}</span>
-                <a-menu-item
+                <v-menu-item
                   :key="subitem.name"
                   v-for="subitem in item.children"
                 >
                   {{ subitem.meta.title }}
-                </a-menu-item>
-              </a-sub-menu>
+                </v-menu-item>
+              </v-sub-menu>
             </template>
-          </a-menu>
-        </a-layout-sider>
-        <a-layout>
-          <a-layout-content><router-view /></a-layout-content>
-        </a-layout>
-      </a-layout>
+          </v-menu>
+        </v-layout-sider>
+        <v-layout>
+          <v-layout-content><router-view /></v-layout-content>
+        </v-layout>
+      </v-layout>
     </div>
-  </a-config-provider>
+  </v-config-provider>
 </template>
 <script>
-import zh_CN from "ant-design-vue/lib/locale-provider/zh_CN";
+import zh_CN from "vcu/dist/locale/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");

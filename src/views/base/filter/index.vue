@@ -1,7 +1,7 @@
 <template>
-  <a-card title="筛选">
+  <v-card title="筛选">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过设置 <span class="blue-text">filters</span> 属性和
@@ -36,7 +36,7 @@
             <span class="orange-text">resetFilter()</span> 清除筛选条件
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column
@@ -65,7 +65,7 @@
           :filter-method="filterAgeMethod"
         >
           <template v-slot:filter="{ $panel, column }">
-            <a-input
+            <v-input
               allowClear
               v-for="(option, index) in column.filters"
               :key="index"
@@ -78,13 +78,13 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           改变图标，通过设置
           <span class="blue-text">filter-config={iconMatch, iconMatch}</span>
           局部替换默认的图标，例如第三方图标库：<span class="red-text">inconfont</span>
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table
         :data="tableData"
         :filter-config="{
@@ -106,7 +106,7 @@
         <vcu-table-column field="age" title="Age"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

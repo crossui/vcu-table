@@ -1,7 +1,7 @@
 <template>
-  <a-card title="基础">
+  <v-card title="基础">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             与通用平台数据交互需要在注册组件同进
@@ -12,29 +12,29 @@
             如果发现表格没有铺满，通用平台上列的宽度最少一列不用设置以便表格表格自动铺满
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5"></div>
       <vcu-table ref="xTable" :loadOptions="options" max-height="200">
       </vcu-table>
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             可以开启
             <span class="blue-text"> locking </span> 初始化不加载列表数据
           </div>
         </div>
-      </a-alert>
+      </v-alert>
       <div class="mb-5">
-        <a-button @click="$refs.xTable1.getTableListData()"
-          >加载列表数据</a-button
+        <v-button @click="$refs.xTable1.getTableListData()"
+          >加载列表数据</v-button
         >
       </div>
       <vcu-table ref="xTable1" :loadOptions="options" locking> </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

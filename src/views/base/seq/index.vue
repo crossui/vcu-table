@@ -1,11 +1,11 @@
 <template>
-  <a-card title="序号">
+  <v-card title="序号">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           设置 <span class="blue-text">type=seq</span> 开启序号列
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -19,11 +19,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text">seq-config={startIndex}</span> 自定义起始序号
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :data="tableData" :seq-config="{startIndex: 100}">
         <vcu-table-column type="seq" title="序号" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -37,11 +37,11 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           使用 <span class="blue-text">seq-config={seqMethod}</span> 自定义方法
         </div>
-      </a-alert>
+      </v-alert>
       <vcu-table :seq-config="{seqMethod: seqMethod}" :data="tableData">
         <vcu-table-column type="seq" width="60"></vcu-table-column>
         <vcu-table-column type="radio" width="60"></vcu-table-column>
@@ -54,7 +54,7 @@
       </vcu-table>
     </div>
 
-  </a-card>
+  </v-card>
 </template>
 <script>
 export default {

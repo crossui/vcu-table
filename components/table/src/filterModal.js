@@ -118,115 +118,115 @@ export default {
       }
     }
     return (<div>
-      <a-modal {...modalProps}>
+      <v-modal {...modalProps}>
         <div class="clearfix" slot="footer">
           <div class="fl">
-            <a-checkbox v-model={this.defaultCondition}>同时设为默认过滤条件</a-checkbox>
-            <a-checkbox v-model={this.isSaveTpl}>同时存为模板</a-checkbox>
+            <v-checkbox v-model={this.defaultCondition}>同时设为默认过滤条件</v-checkbox>
+            <v-checkbox v-model={this.isSaveTpl}>同时存为模板</v-checkbox>
           </div>
           <div class="fr">
-            <a-button key="reduction" size={size} onClick={handleReduction}>还原</a-button>
-            <a-button key="back" size={size} onClick={handleCancel}>取消</a-button>
-            <a-button key="submit" type="primary" size={size} onClick={handleSubmit} loading={this.submitLoading}>确定</a-button>
+            <v-button key="reduction" size={size} onClick={handleReduction}>还原</v-button>
+            <v-button key="back" size={size} onClick={handleCancel}>取消</v-button>
+            <v-button key="submit" type="primary" size={size} onClick={handleSubmit} loading={this.submitLoading}>确定</v-button>
           </div>
         </div>
         <div class="vcu-filter-content">
           <div class="vcu-filter-content-header">
             <span class="mr-10">自定义过滤模板:</span>
-            <a-select {...filterTplSlectProps} v-model={this.findSelectId} >
+            <v-select {...filterTplSlectProps} v-model={this.findSelectId} >
               {selectOptions.map(item => {
                 return (
-                  <a-select-option value={item.templateId}>
+                  <v-select-option value={item.templateId}>
                     {item.templateName}
-                  </a-select-option>
+                  </v-select-option>
                 )
               })}
-            </a-select>
-            <a-button size={size} class="mr-10" onClick={handleSaveTpl} loading={this.saveLoading} icon="save"></a-button>
-            <a-button size={size} class="mr-10" onClick={handleDelectTpl} loading={this.delectLoading} icon="delete"></a-button>
-          </div>
+            </v-select>
+            <v-tooltip title="保存"><v-button size={size} class="mr-10" onClick={handleSaveTpl} loading={this.saveLoading} icon="save"></v-button></v-tooltip>
+            <v-tooltip title="删除"><v-button size={size} class="mr-10" onClick={handleDelectTpl} loading={this.delectLoading} icon="delete"></v-button></v-tooltip>
+           </div>
           <div class="vcu-filter-content-col">
-            <a-row type="flex" gutter={5}>
-              <a-col span={6}>
+            <v-row type="flex" gutter={5}>
+              <v-col span={6}>
                 列名:
-                </a-col>
-              <a-col span={4}>
+                </v-col>
+              <v-col span={4}>
                 运算符:
-              </a-col>
-              <a-col span={8}>
+              </v-col>
+              <v-col span={8}>
                 列值:
-              </a-col>
-              <a-col span={3}>
+              </v-col>
+              <v-col span={3}>
                 关系符:
-                </a-col>
-              <a-col span={3}>
-              </a-col>
-            </a-row >
+                </v-col>
+              <v-col span={3}>
+              </v-col>
+            </v-row >
           </div>
           <div class="vcu-container-warp">
             {filterLists.map((item, index) => {
               return (
-                <a-row type="flex" gutter={5} class="mb-5">
-                  <a-col span={6}>
-                    <a-select size={size} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
+                <v-row type="flex" gutter={5} class="mb-5">
+                  <v-col span={6}>
+                    <v-select size={size} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
                       {tableColumns.map(cloumnsItem => {
                         return (
-                          <a-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
+                          <v-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
                             {cloumnsItem.title}
-                          </a-select-option>
+                          </v-select-option>
                         )
                       })}
-                    </a-select>
-                  </a-col>
-                  <a-col span={4}>
-                    <a-select size={size} v-model={item.operationVal} class="mr-10" style="width: 100%">
+                    </v-select>
+                  </v-col>
+                  <v-col span={4}>
+                    <v-select size={size} v-model={item.operationVal} class="mr-10" style="width: 100%">
                       {operationList.map(operationItem => {
                         return (
-                          <a-select-option value={operationItem.key} key={operationItem.key}>
+                          <v-select-option value={operationItem.key} key={operationItem.key}>
                             {operationItem.title}
-                          </a-select-option>
+                          </v-select-option>
                         )
                       })}
-                    </a-select>
-                  </a-col>
-                  <a-col span={8}>
+                    </v-select>
+                  </v-col>
+                  <v-col span={8}>
                     {this.componentTypes(item) ? <autoTypewrit size={size}
                       v-model={item.fieldValue} transfer loadOptions={this.componentTypes(item).loadOptions} backfillKey={this.componentTypes(item).backfillKey}
-                    ></autoTypewrit> : <a-input size={size} v-model={item.fieldValue} />}
-                  </a-col>
-                  <a-col span={3}>
-                    <a-select size={size} v-model={item.relationVal} class="mr-10" style="width: 100%">
+                    ></autoTypewrit> : <v-input size={size} v-model={item.fieldValue} />}
+                  </v-col>
+                  <v-col span={3}>
+                    <v-select size={size} v-model={item.relationVal} class="mr-10" style="width: 100%">
                       {relationList.map(relationItem => {
                         return (
-                          <a-select-option value={relationItem.key} key={relationItem.key}>
+                          <v-select-option value={relationItem.key} key={relationItem.key}>
                             {relationItem.title}
-                          </a-select-option>
+                          </v-select-option>
                         )
                       })}
-                    </a-select>
-                  </a-col>
-                  <a-col span={3}>
+                    </v-select>
+                  </v-col>
+                  <v-col span={3}>
                     {
                       index == 0
                         ?
-                        <a-button size={size} icon="plus" onClick={() => this.handleAddItem(index)} />
+                        <v-button size={size} icon="plus" onClick={() => this.handleAddItem(index)} />
                         :
                         <div>
-                          <a-button size={size} icon="plus" class="mr-5" onClick={() => this.handleAddItem(index)} />
-                          <a-button size={size} icon="close" onClick={() => this.handleRemoveItem(index)} />
+                          <v-button size={size} icon="plus" class="mr-5" onClick={() => this.handleAddItem(index)} />
+                          <v-button size={size} icon="close" onClick={() => this.handleRemoveItem(index)} />
                         </div>
                     }
-                  </a-col>
-                </a-row >
+                  </v-col>
+                </v-row >
               )
             })}
           </div>
 
         </div >
-      </a-modal>
-      <a-modal {...tplNameModalProps}>
-        <a-input v-model={this.tplName} />
-      </a-modal>
+      </v-modal>
+      <v-modal {...tplNameModalProps}>
+        <v-input v-model={this.tplName} />
+      </v-modal>
     </div >)
   },
   mounted() {

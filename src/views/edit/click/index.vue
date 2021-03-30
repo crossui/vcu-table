@@ -1,7 +1,7 @@
 <template>
-  <a-card title="点击触发">
+  <v-card title="点击触发">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             设置
@@ -13,11 +13,12 @@
           <div class="red-text">
             输入法字典组件 要聚焦配置
             <span class="blue-text">
-              edit-render="{ autofocus: '.auto-typewrit-iput' }
+              edit-render="{ autoselect: true, autofocus: '.auto-typewrit-iput'
+              }
             </span>
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable"
@@ -28,32 +29,32 @@
         <vcu-table-column
           field="name"
           title="Name"
-          :edit-render="{ autofocus: '.my-input' }"
+          :edit-render="{ autoselect: true, autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               @input="$refs.xTable.updateStatus(scope)"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
         <vcu-table-column field="sex" title="Sex" :edit-render="{}">
           <template v-slot:edit="scope">
-            <a-select
+            <v-select
               size="small"
               v-model="scope.row.sex"
               @change="$refs.xTable.updateStatus(scope)"
               style="width: 100%"
             >
-              <a-select-option
+              <v-select-option
                 v-for="item in sexList"
                 :key="item.value"
                 :value="item.value"
-                >{{ item.label }}</a-select-option
+                >{{ item.label }}</v-select-option
               >
-            </a-select>
+            </v-select>
           </template>
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
@@ -61,19 +62,19 @@
         </vcu-table-column>
         <vcu-table-column field="age" title="Age" :edit-render="{}">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.age"
               :max="105"
               :min="1"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column
           field="address"
           title="Address"
-          :edit-render="{}"
+          :edit-render="{ autoselect: true, autofocus: '.auto-typewrit-iput' }"
         >
           <template v-slot:edit="scope">
             <autoTypewrit
@@ -89,7 +90,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             设置
@@ -99,7 +100,7 @@
             启用点击行编辑的功能
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable1"
@@ -110,49 +111,47 @@
         <vcu-table-column
           field="name"
           title="Name"
+          width="360"
           :edit-render="{ autofocus: '.my-input' }"
         >
           <template v-slot:edit="scope">
-            <a-input
+            <v-input
               size="small"
               v-model="scope.row.name"
               class="my-input"
-            ></a-input>
+            ></v-input>
           </template>
         </vcu-table-column>
-        <vcu-table-column field="sex" title="Sex" :edit-render="{}">
+        <vcu-table-column field="sex" title="Sex" :edit-render="{}" width="360">
           <template v-slot:edit="scope">
-            <a-select
-              size="small"
-              v-model="scope.row.sex"
-              style="width: 100%"
-            >
-              <a-select-option
+            <v-select size="small" v-model="scope.row.sex" style="width: 100%">
+              <v-select-option
                 v-for="item in sexList"
                 :key="item.value"
                 :value="item.value"
-                >{{ item.label }}</a-select-option
+                >{{ item.label }}</v-select-option
               >
-            </a-select>
+            </v-select>
           </template>
           <template v-slot="{ row }">{{
             getSelectLabel(row.sex, sexList)
           }}</template>
         </vcu-table-column>
-        <vcu-table-column field="age" title="Age" :edit-render="{}">
+        <vcu-table-column field="age" title="Age" :edit-render="{}" width="360">
           <template v-slot:edit="{ row }">
-            <a-input-number
+            <v-input-number
               size="small"
               v-model="row.age"
               :max="105"
               :min="1"
               style="width: 100%"
-            ></a-input-number>
+            ></v-input-number>
           </template>
         </vcu-table-column>
         <vcu-table-column
           field="address"
           title="Address"
+          width="360"
           :edit-render="{ autofocus: '.auto-typewrit-iput' }"
         >
           <template v-slot:edit="scope">
@@ -167,7 +166,7 @@
         </vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";

@@ -1,7 +1,7 @@
 <template>
-  <a-card title="展开行">
+  <v-card title="展开行">
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             通过设置 <span class="blue-text">expand-config</span> 属性和
@@ -22,22 +22,22 @@
             还可以配置 <span class="blue-text">labelField</span> 列显示属性
           </div>
         </div>
-      </a-alert>
-      <a-button-group class="mb-5">
-        <a-button @click="$refs.xTable.toggleRowExpand(tableData[1])"
-          >切换第二行展开</a-button
+      </v-alert>
+      <v-button-group class="mb-5">
+        <v-button @click="$refs.xTable.toggleRowExpand(tableData[1])"
+          >切换第二行展开</v-button
         >
-        <a-button
+        <v-button
           @click="$refs.xTable.setRowExpand([tableData[2], tableData[3]], true)"
-          >设置第三、四行展开</a-button
+          >设置第三、四行展开</v-button
         >
-        <a-button @click="$refs.xTable.setAllRowExpand(true)"
-          >设置所有行展开</a-button
+        <v-button @click="$refs.xTable.setAllRowExpand(true)"
+          >设置所有行展开</v-button
         >
-        <a-button @click="$refs.xTable.clearRowExpand()"
-          >关闭所有行展开</a-button
+        <v-button @click="$refs.xTable.clearRowExpand()"
+          >关闭所有行展开</v-button
         >
-      </a-button-group>
+      </v-button-group>
 
       <vcu-table
         ref="xTable"
@@ -83,7 +83,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             改变图标，通过设置
@@ -106,7 +106,7 @@
             方法实现权限控制，返回值用来决定是否显示展开按钮
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         ref="xTable1"
@@ -159,7 +159,7 @@
     </div>
 
     <div class="mb-30">
-      <a-alert type="info" class="mb-10">
+      <v-alert type="info" class="mb-10">
         <div slot="message">
           <div>
             展开行的懒加载，通过配置
@@ -172,7 +172,7 @@
             属性来开启同一级的节点，每次只能展开一个
           </div>
         </div>
-      </a-alert>
+      </v-alert>
 
       <vcu-table
         border
@@ -201,7 +201,7 @@
         <vcu-table-column field="age" title="Age"></vcu-table-column>
       </vcu-table>
     </div>
-  </a-card>
+  </v-card>
 </template>
 <script>
 import * as api from "@/api/test";
