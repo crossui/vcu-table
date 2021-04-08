@@ -2662,12 +2662,15 @@ const Methods = {
    * 用于当前行，设置某一行为高亮状态
    * @param {Row} row 行对象
    */
-  setCurrentRow(row) {
+  setCurrentRow(row, change) {
     this.clearCurrentRow()
     this.clearCurrentColumn()
     this.currentRow = row
     if (this.highlightCurrentRow) {
       XEUtils.arrayEach(this.$el.querySelectorAll(`[data-rowid="${getRowid(this, row)}"]`), elem => addClass(elem, 'row--current'))
+    }
+    if (change) {
+      this.emitEvent('current-change', row, null)
     }
     return this.$nextTick()
   },

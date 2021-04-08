@@ -15,7 +15,6 @@ import Keyboard from './keyboard'
 import Validator from './validator'
 import zhCN from './locale/lang/zh-CN'
 
-
 import _ from "lodash";
 
 // 按需加载的组件

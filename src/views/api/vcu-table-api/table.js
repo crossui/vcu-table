@@ -3696,8 +3696,8 @@ const apis = [
         list: []
       },
       {
-        name: 'setCurrentRow(row)',
-        desc: '用于 highlight-current-row，设置某一行为高亮状态',
+        name: 'setCurrentRow(row,change)',
+        desc: '用于 highlight-current-row，设置某一行为高亮状态; 当change为true时触发current-change事件',
         version: '',
         type: 'Promise',
         enum: '',
