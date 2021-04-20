@@ -450,7 +450,7 @@ export default {
       return Object.assign({}, GlobalConfig.table.checkboxConfig, this.checkboxConfig)
     },
     tooltipOpts() {
-      return Object.assign({ leaveDelay: 300 }, GlobalConfig.table.tooltipConfig, this.tooltipConfig)
+      return Object.assign({ leaveDelay: 300, zIndex: this.zIndex }, GlobalConfig.table.tooltipConfig, this.tooltipConfig)
     },
     vaildTipOpts() {
       return Object.assign({ isArrow: false }, this.tooltipOpts)
