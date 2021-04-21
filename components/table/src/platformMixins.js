@@ -451,6 +451,9 @@ export default {
             }
           })
           params.title = JSON.stringify(_title)
+          if (this.filterParameter != null) {
+            params.filterParameter = JSON.stringify(this.filterParameter)
+          }
           let res = await GlobalConfig.request({
             responseType: 'blob',
             method: "POST",

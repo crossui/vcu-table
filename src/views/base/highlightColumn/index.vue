@@ -3,22 +3,39 @@
     <v-alert type="info" class="mb-10">
       <div slot="message">
         列和行选中高亮，通过设置
-        <span class="blue-text"
-          >highlight-hover-row、
-          highlight-current-row、
-          highlight-hover-column、
-          highlight-current-column</span
+        <span class="blue-text">
+          highlight-hover-column、 highlight-current-column</span
         >
         参数
       </div>
     </v-alert>
     <vcu-table
       :data="tableData"
-      highlight-hover-row
-      highlight-current-row
       highlight-hover-column
       highlight-current-column
       border
+    >
+      <vcu-table-column type="seq" width="60"></vcu-table-column>
+      <vcu-table-column field="name" title="Name"></vcu-table-column>
+      <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+      <vcu-table-column field="age" title="Age"></vcu-table-column>
+      <vcu-table-column field="address" title="address"></vcu-table-column>
+    </vcu-table>
+
+    <v-alert type="info" class="mb-10">
+      <div slot="message">
+        通过设置
+        <span class="blue-text">currentColumnClassName</span>
+        参数, 改变默认CLASSNAME
+      </div>
+    </v-alert>
+    <vcu-table
+      :data="tableData"
+      highlight-hover-column
+      highlight-current-column
+      border
+      hoverColumnClassName="col-hover-new"
+      currentColumnClassName="col-current-new"
     >
       <vcu-table-column type="seq" width="60"></vcu-table-column>
       <vcu-table-column field="name" title="Name"></vcu-table-column>
@@ -70,4 +87,27 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+/deep/ .vcu-table {
+  .vcu-header--column,
+  .vcu-body--column,
+  .vcu-footer--column {
+    &.col-current-new {
+      background: olive;
+      color: #fff;
+    }
+  }
+
+  &.column--highlight {
+    .vcu-header--column {
+      &.col-hover-new:not(.col--seq) {
+        &:hover {
+          background: red;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+</style>
 

@@ -21,6 +21,28 @@
       <vcu-table-column field="age" title="Age"></vcu-table-column>
       <vcu-table-column field="address" title="address"></vcu-table-column>
     </vcu-table>
+
+    <v-alert type="info" class="mtb-10">
+      <div slot="message">
+        通过设置
+        <span class="blue-text">hoverRowClassName、 currentRowClassName </span>
+        参数, 改变默认的CLASSNAME
+      </div>
+    </v-alert>
+    <vcu-table
+      :data="tableData"
+      highlight-hover-row
+      highlight-current-row
+      border
+      hoverRowClassName="row-hover-new"
+      currentRowClassName="row-current-new"
+    >
+      <vcu-table-column type="seq" width="60"></vcu-table-column>
+      <vcu-table-column field="name" title="Name"></vcu-table-column>
+      <vcu-table-column field="sex" title="Sex"></vcu-table-column>
+      <vcu-table-column field="age" title="Age"></vcu-table-column>
+      <vcu-table-column field="address" title="address"></vcu-table-column>
+    </vcu-table>
   </v-card>
 </template>
 <script>
@@ -65,4 +87,18 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.vcu-table {
+  /deep/ .vcu-body--row {
+    &.row-hover-new {
+      background: red;
+      color: #fff;
+    }
+    &.row-current-new {
+      background: orange;
+      color: #fff;
+    }
+  }
+}
+</style>
 

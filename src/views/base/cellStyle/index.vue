@@ -27,6 +27,8 @@
       <vcu-table
         border
         show-footer
+        highlight-hover-row
+        highlight-current-row
         :footer-method="footerMethod"
         :header-cell-class-name="headerCellClassName"
         :row-class-name="rowClassName"
@@ -71,7 +73,9 @@
               >cell-style、header-cell-style、row-style ...</span
             >等参数
           </div>
-          <div class="red-text">注：当自定义样式之后可能会覆盖表格的样式，比如选中行..等，记得自行处理好相关样式</div>
+          <div class="red-text">
+            注：当自定义样式之后可能会覆盖表格的样式，比如选中行..等，记得自行处理好相关样式
+          </div>
         </div>
       </v-alert>
       <vcu-table
@@ -165,9 +169,9 @@ export default {
         }
       }
     },
-    footerRowClassName(a){
+    footerRowClassName(a) {
       return "bg-purple";
-      console.info(a)
+      console.info(a);
     },
     cellClassName2({ row, column }) {
       if ((row === this.selectRow) & (column === this.selectColumn)) {

@@ -112,7 +112,8 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
     editRules,
     validOpts,
     editStore,
-    validStore
+    validStore,
+    currentColumnClassName
   } = $xetable
   const { type, cellRender, editRender, align, showOverflow, className, treeNode } = column
   const { actived } = editStore
@@ -273,6 +274,7 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
       )
     }
   }
+  
   return h('td', {
     class: ['vcu-body--column', column.id, {
       [`col--${cellAlign}`]: cellAlign,
@@ -285,7 +287,7 @@ function renderColumn(h, _vm, $xetable, $seq, seq, rowid, fixedType, rowLevel, r
       'col--dirty': isDirty,
       'col--actived': editConfig && editRender && (actived.row === row && (actived.column === column || editOpts.mode === 'row')),
       'col--valid-error': hasValidError,
-      'col--current': currentColumn === column
+      [currentColumnClassName]: currentColumn === column
     }, UtilTools.getClass(className, params), UtilTools.getClass(cellClassName, params)],
     key: columnKey ? column.id : $columnIndex,
     attrs,

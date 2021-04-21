@@ -2667,7 +2667,7 @@ const Methods = {
     this.clearCurrentColumn()
     this.currentRow = row
     if (this.highlightCurrentRow) {
-      XEUtils.arrayEach(this.$el.querySelectorAll(`[data-rowid="${getRowid(this, row)}"]`), elem => addClass(elem, 'row--current'))
+      XEUtils.arrayEach(this.$el.querySelectorAll(`[data-rowid="${getRowid(this, row)}"]`), elem => addClass(elem, this.currentRowClassName))
     }
     if (change) {
       this.emitEvent('current-change', row, null)
@@ -2696,7 +2696,7 @@ const Methods = {
   clearCurrentRow() {
     this.currentRow = null
     this.hoverRow = null
-    XEUtils.arrayEach(this.$el.querySelectorAll('.row--current'), elem => removeClass(elem, 'row--current'))
+    XEUtils.arrayEach(this.$el.querySelectorAll(`.${this.currentRowClassName}`), elem => removeClass(elem, this.currentRowClassName))
     return this.$nextTick()
   },
   /**
@@ -2727,11 +2727,11 @@ const Methods = {
   setHoverRow(row) {
     const rowid = getRowid(this, row)
     this.clearHoverRow()
-    XEUtils.arrayEach(this.$el.querySelectorAll(`[data-rowid="${rowid}"]`), elem => addClass(elem, 'row--hover'))
+    XEUtils.arrayEach(this.$el.querySelectorAll(`[data-rowid="${rowid}"]`), elem => addClass(elem, this.hoverRowClassName)) // 'row--hover'
     this.hoverRow = row
   },
   clearHoverRow() {
-    XEUtils.arrayEach(this.$el.querySelectorAll('.vcu-body--row.row--hover'), elem => removeClass(elem, 'row--hover'))
+    XEUtils.arrayEach(this.$el.querySelectorAll(`.vcu-body--row.${this.hoverRowClassName}`), elem => removeClass(elem, this.hoverRowClassName))  //'row--hover'
     this.hoverRow = null
   },
   triggerHeaderCellClickEvent(evnt, params) {
@@ -2753,6 +2753,18 @@ const Methods = {
   triggerHeaderCellDBLClickEvent(evnt, params) {
     this.emitEvent('header-cell-dblclick', Object.assign({ cell: evnt.currentTarget }, params), evnt)
   },
+
+  triggerHeaderCellMouseenterEvent(evnt, params) {
+    const { column } = params
+    this.hoverColumn = column
+    return this.$nextTick()
+  },
+
+  triggerHeaderCellMouseleaveEvent(evnt, params) {
+    this.hoverColumn = null
+    return this.$nextTick()
+  },
+
   getCurrentColumn() {
     return this.highlightCurrentColumn ? this.currentColumn : null
   },

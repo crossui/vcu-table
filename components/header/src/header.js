@@ -14,20 +14,20 @@ export default {
     size: String,
     fixedType: String
   },
-  data () {
+  data() {
     return {
       headerColumn: []
     }
   },
   watch: {
-    tableColumn () {
+    tableColumn() {
       this.uploadColumn()
     }
   },
-  created () {
+  created() {
     this.uploadColumn()
   },
-  mounted () {
+  mounted() {
     const { $parent: $xetable, $el, $refs, fixedType } = this
     const { elemStore } = $xetable
     const prefix = `${fixedType || 'main'}-header-`
@@ -38,9 +38,9 @@ export default {
     elemStore[`${prefix}xSpace`] = $refs.xSpace
     elemStore[`${prefix}repair`] = $refs.repair
   },
-  render (h) {
+  render(h) {
     const { _e, $parent: $xetable, fixedType, headerColumn, fixedColumn } = this
-    const { $listeners: tableListeners, tId, resizable, border, columnKey, headerRowClassName, headerCellClassName, headerRowStyle, headerCellStyle, showHeaderOverflow: allColumnHeaderOverflow, headerAlign: allHeaderAlign, align: allAlign, highlightCurrentColumn, currentColumn, scrollXLoad, overflowX, scrollbarWidth, sortOpts, mouseConfig } = $xetable
+    const { $listeners: tableListeners, tId, resizable, border, columnKey, headerRowClassName, headerCellClassName, headerRowStyle, headerCellStyle, showHeaderOverflow: allColumnHeaderOverflow, headerAlign: allHeaderAlign, align: allAlign, highlightCurrentColumn, currentColumn, hoverColumn, scrollXLoad, overflowX, scrollbarWidth, sortOpts, mouseConfig, currentColumnClassName, highlightHoverColumn, hoverColumnClassName } = $xetable
     let { tableColumn } = this
     // 横向滚动渲染
     if (scrollXLoad) {
@@ -126,6 +126,13 @@ export default {
             if (mouseConfig) {
               thOns.mousedown = evnt => $xetable.triggerHeaderCellMousedownEvent(evnt, params)
             }
+
+            //列hover事件
+            if (highlightHoverColumn) {
+              thOns.mouseenter = evnt => $xetable.triggerHeaderCellMouseenterEvent(evnt, params)
+              thOns.mouseleave = evnt => $xetable.triggerHeaderCellMouseleaveEvent(evnt, params)
+            }
+
             return h('th', {
               class: ['vcu-header--column', column.id, {
                 [`col--${headAlign}`]: headAlign,
@@ -138,7 +145,8 @@ export default {
                 'is--sortable': column.sortable,
                 'is--filter': !!column.filters,
                 'filter--active': hasFilter,
-                'col--current': currentColumn === column
+                [currentColumnClassName]: currentColumn === column,
+                [hoverColumnClassName]: hoverColumn === column
               }, UtilTools.getClass(headerClassName, params), UtilTools.getClass(headerCellClassName, params)],
               attrs: {
                 'data-colid': column.id,
@@ -185,11 +193,11 @@ export default {
     ])
   },
   methods: {
-    uploadColumn () {
+    uploadColumn() {
       const { $parent: $xetable } = this
       this.headerColumn = $xetable.isGroup ? convertToRows(this.tableGroupColumn) : [$xetable.scrollXLoad && this.fixedType ? this.fixedColumn : this.tableColumn]
     },
-    resizeMousedown (evnt, params) {
+    resizeMousedown(evnt, params) {
       const { column } = params
       const { $parent: $xetable, $el, fixedType } = this
       const { tableBody, leftContainer, rightContainer, resizeBar: resizeBarElem } = $xetable.$refs

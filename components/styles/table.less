@@ -381,39 +381,138 @@
     }
   }
 
+  /* 预设背景颜色 */
+  .vcu-header--column,
+  .vcu-body--column,
+  .vcu-body--row,
+  .vcu-footer--row,
+  .vcu-footer--column {
+    &.bg-red {
+      background-color: red;
+      color           : #fff;
+    }
+
+    &.bg-blue {
+      background-color: blue;
+      color           : #fff;
+    }
+
+    &.bg-green {
+      background-color: green;
+      color           : #fff;
+    }
+
+    &.bg-cyan {
+      background-color: cyan;
+      color           : #fff;
+    }
+
+    &.bg-purple {
+      background-color: purple;
+      color           : #fff;
+    }
+
+    &.bg-magenta {
+      background-color: magenta;
+      color           : #fff;
+    }
+
+    &.bg-aqua {
+      background-color: aqua;
+      color           : #fff;
+    }
+
+    &.bg-lime {
+      background-color: lime;
+      color           : #fff;
+    }
+
+    &.bg-orange {
+      background-color: orange;
+      color           : #fff;
+    }
+
+    &.bg-mistyrose {
+      background-color: mistyrose;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-cornsilk {
+      background-color: cornsilk;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-palegreen {
+      background-color: palegreen;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-lightcyan {
+      background-color: lightcyan;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-lightskyblue {
+      background-color: lightskyblue;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-lavender {
+      background-color: lavender;
+      color           : @vcu-font-color;
+    }
+
+    &.bg-pink {
+      background-color: pink;
+      color           : @vcu-font-color;
+    }
+  }
+
+
+
   .vcu-body--row {
+
     &.row--stripe {
+      color           : @vcu-font-color;
       background-color: @vcu-table-row-striped-background-color;
     }
 
     &.row--radio {
+      color           : @vcu-font-color;
       background-color: @vcu-table-row-radio-background-color;
     }
 
     &.row--checked {
+      color           : @vcu-font-color;
       background-color: @vcu-table-row-checked-background-color;
     }
 
     &.row--current {
+      color           : @vcu-font-color;
       background-color: @vcu-table-row-current-background-color;
     }
 
     &.row--hover {
+      color           : @vcu-font-color;
       background-color: @vcu-table-row-hover-background-color;
 
       &.row--stripe {
+        color           : @vcu-font-color;
         background-color: @vcu-table-row-hover-striped-background-color;
       }
 
       &.row--radio {
+        color           : @vcu-font-color;
         background-color: @vcu-table-row-hover-radio-background-color;
       }
 
       &.row--checked {
+        color           : @vcu-font-color;
         background-color: @vcu-table-row-hover-checked-background-color;
       }
 
       &.row--current {
+        color           : @vcu-font-color;
         background-color: @vcu-table-row-hover-current-background-color;
       }
     }
@@ -513,7 +612,7 @@
 
   &.column--highlight {
     .vcu-header--column {
-      &:not(.col--seq) {
+      &.col--hover:not(.col--seq) {
         &:hover {
           background-color: @vcu-table-column-hover-background-color;
         }
@@ -1335,94 +1434,6 @@
     }
   }
 
-
-
-  /* 预设背景颜色 */
-  .vcu-header--column,
-  .vcu-body--column,
-  .vcu-body--row,
-  .vcu-footer--row,
-  .vcu-footer--column {
-    &.bg-red {
-      background-color: red;
-      color           : #fff;
-    }
-
-    &.bg-blue {
-      background-color: blue;
-      color           : #fff;
-    }
-
-    &.bg-green {
-      background-color: green;
-      color           : #fff;
-    }
-
-    &.bg-cyan {
-      background-color: cyan;
-      color           : #fff;
-    }
-
-    &.bg-purple {
-      background-color: purple;
-      color           : #fff;
-    }
-
-    &.bg-magenta {
-      background-color: magenta;
-      color           : #fff;
-    }
-
-    &.bg-aqua {
-      background-color: aqua;
-      color           : #fff;
-    }
-
-    &.bg-lime {
-      background-color: lime;
-      color           : #fff;
-    }
-
-    &.bg-orange {
-      background-color: orange;
-      color           : #fff;
-    }
-
-    &.bg-mistyrose {
-      background-color: mistyrose;
-      color           : #000;
-    }
-
-    &.bg-cornsilk {
-      background-color: cornsilk;
-      color           : #000;
-    }
-
-    &.bg-palegreen {
-      background-color: palegreen;
-      color           : #000;
-    }
-
-    &.bg-lightcyan {
-      background-color: lightcyan;
-      color           : #000;
-    }
-
-    &.bg-lightskyblue {
-      background-color: lightskyblue;
-      color           : #000;
-    }
-
-    &.bg-lavender {
-      background-color: lavender;
-      color           : #000;
-    }
-
-    &.bg-pink {
-      background-color: pink;
-      color           : #000;
-    }
-  }
 }
 
 /* 列选择 */

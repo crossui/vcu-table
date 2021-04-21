@@ -55,7 +55,8 @@ export default {
       currentColumn,
       overflowX,
       scrollbarWidth,
-      tooltipOpts
+      tooltipOpts,
+      currentColumnClassName
     } = $xetable
     // 如果是使用优化模式
     if (!mergeFooterList.length || !footerSpanMethod) {
@@ -201,7 +202,7 @@ export default {
                 'col--last': $columnIndex === tableColumn.length - 1,
                 'fixed--hidden': fixedHiddenColumn,
                 'col--ellipsis': hasEllipsis,
-                'col--current': currentColumn === column
+                [currentColumnClassName]: currentColumn === column
               }, UtilTools.getClass(footerClassName, params), UtilTools.getClass(footerCellClassName, params)],
               attrs,
               style: footerCellStyle ? (XEUtils.isFunction(footerCellStyle) ? footerCellStyle(params) : footerCellStyle) : null,
