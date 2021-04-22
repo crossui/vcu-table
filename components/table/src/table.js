@@ -110,19 +110,19 @@ export default {
     // 是否要高亮当前选中行
     highlightCurrentRow: { type: Boolean, default: () => GlobalConfig.table.highlightCurrentRow },
     // 高亮当前选中行CLASSNAME
-    currentRowClassName: { type: String, default: "row--current" },
+    currentRowClassName: { type: String, default: () => GlobalConfig.table.currentRowClassName },
     // 鼠标移到行是否要高亮显示
     highlightHoverRow: { type: Boolean, default: () => GlobalConfig.table.highlightHoverRow },
     // 鼠标移到行高亮显示CLASSNAME
-    hoverRowClassName: { type: String, default: "row--hover" },
+    hoverRowClassName: { type: String, default: () => GlobalConfig.table.hoverRowClassName },
     // 是否要高亮当前选中列
     highlightCurrentColumn: { type: Boolean, default: () => GlobalConfig.table.highlightCurrentColumn },
     // 列高亮显示CLASSNAME
-    currentColumnClassName: { type: String, default: "col--current" },
+    currentColumnClassName: { type: String, default: () => GlobalConfig.table.currentColumnClassName },
     // 鼠标移到列是否要高亮显示
     highlightHoverColumn: { type: Boolean, default: () => GlobalConfig.table.highlightHoverColumn },
     // 鼠标移到列高亮显示CLASSNAME
-    hoverColumnClassName: { type: String, default: "col--hover" },
+    hoverColumnClassName: { type: String, default: () => GlobalConfig.table.hoverColumnClassName },
     // 激活单元格编辑时是否高亮显示
     highlightCell: Boolean,
     // 是否显示表尾合计

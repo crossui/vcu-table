@@ -13,6 +13,7 @@
       :data="tableData"
       highlight-hover-row
       highlight-current-row
+      stripe
       border
     >
       <vcu-table-column type="seq" width="60"></vcu-table-column>
@@ -34,6 +35,8 @@
       highlight-hover-row
       highlight-current-row
       border
+      stripe
+      :row-class-name="rowClassName"
       hoverRowClassName="row-hover-new"
       currentRowClassName="row-current-new"
     >
@@ -85,17 +88,24 @@ export default {
       ],
     };
   },
+  methods: {
+    rowClassName({ rowIndex }) {
+      if ([1, 3, 5].includes(rowIndex)) {
+        return "bg-green";
+      }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
 .vcu-table {
   /deep/ .vcu-body--row {
-    &.row-hover-new {
-      background: red;
-      color: #fff;
-    }
     &.row-current-new {
       background: orange;
+      color: #fff;
+    }
+    &.row-hover-new {
+      background: red;
       color: #fff;
     }
   }

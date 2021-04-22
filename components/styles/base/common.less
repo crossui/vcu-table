@@ -1,33 +1,41 @@
 [class*="vcu-"] {
   box-sizing: border-box;
-  &:after, &:before,
-  *:after, *:before {
+
+  &:after,
+  &:before,
+  *:after,
+  *:before {
     box-sizing: border-box;
   }
 }
 
 body {
-  margin: 0;
-  line-height: 1.5;
-  font-variant: tabular-nums;
+  margin               : 0;
+  line-height          : 1.5;
+  font-variant         : tabular-nums;
   font-feature-settings: 'tnum';
 }
 
 .vcu-primary-color {
   color: @vcu-primary-color;
 }
+
 .vcu-success-color {
   color: @vcu-success-color;
 }
+
 .vcu-info-color {
   color: @vcu-info-color;
 }
+
 .vcu-warning-color {
   color: @vcu-warning-color;
 }
+
 .vcu-danger-color {
   color: @vcu-danger-color;
 }
+
 .vcu-perfect-color {
   color: @vcu-table-header-background-color;
 }
@@ -56,29 +64,117 @@ body {
 
 /*animat*/
 .t--animat {
+
   .vcu-sort--asc-btn,
   .vcu-sort--desc-btn,
   .vcu-filter--btn {
+
     &:before,
     &:after {
       .animatTransition(border);
     }
   }
+
   .vcu-input--wrapper {
     .vcu-input {
       .animatTransition(border);
     }
   }
+
   .vcu-table--expand-btn,
   .vcu-tree--node-btn {
     .animatTransition(transform);
   }
+
   .vcu-checkbox,
   .vcu-radio {
-    > input {
+    >input {
       &:checked+span {
         .animatTransition(background-color);
       }
     }
+  }
+}
+
+/* bg-color */
+.vcu-table-bg-color() {
+  &.bg-red {
+    background-color: red;
+    color           : #fff;
+  }
+
+  &.bg-blue {
+    background-color: blue;
+    color           : #fff;
+  }
+
+  &.bg-green {
+    background-color: green;
+    color           : #fff;
+  }
+
+  &.bg-cyan {
+    background-color: cyan;
+    color           : #fff;
+  }
+
+  &.bg-purple {
+    background-color: purple;
+    color           : #fff;
+  }
+
+  &.bg-magenta {
+    background-color: magenta;
+    color           : #fff;
+  }
+
+  &.bg-aqua {
+    background-color: aqua;
+    color           : #fff;
+  }
+
+  &.bg-lime {
+    background-color: lime;
+    color           : #fff;
+  }
+
+  &.bg-orange {
+    background-color: orange;
+    color           : #fff;
+  }
+
+  &.bg-mistyrose {
+    background-color: mistyrose;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-cornsilk {
+    background-color: cornsilk;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-palegreen {
+    background-color: palegreen;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-lightcyan {
+    background-color: lightcyan;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-lightskyblue {
+    background-color: lightskyblue;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-lavender {
+    background-color: lavender;
+    color           : @vcu-font-color;
+  }
+
+  &.bg-pink {
+    background-color: pink;
+    color           : @vcu-font-color;
   }
 }

@@ -22,10 +22,10 @@
       <vcu-table-column field="address" title="address"></vcu-table-column>
     </vcu-table>
 
-    <v-alert type="info" class="mb-10">
+    <v-alert type="info" class="mtb-10">
       <div slot="message">
         通过设置
-        <span class="blue-text">currentColumnClassName</span>
+        <span class="blue-text">currentColumnClassName、hoverColumnClassName</span>
         参数, 改变默认CLASSNAME
       </div>
     </v-alert>

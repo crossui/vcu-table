@@ -936,12 +936,30 @@ const apis = [
         list: []
       },
       {
+        name: 'currentRowClassName ',
+        descKey: '高亮当前行ClassName',
+        version: '',
+        type: 'string',
+        enum: '',
+        defVal: 'row--current',
+        list: []
+      },
+      {
         name: 'highlight-hover-row',
         descKey: '鼠标移到行是否要高亮显示',
         version: '',
         type: 'boolean',
         enum: '',
         defVal: 'false',
+        list: []
+      },
+      {
+        name: 'hoverRowClassName',
+        descKey: '鼠标移到行要高亮显示ClassName',
+        version: '',
+        type: 'string',
+        enum: '',
+        defVal: 'row--hover',
         list: []
       },
       {
@@ -954,12 +972,30 @@ const apis = [
         list: []
       },
       {
+        name: 'currentColumnClassName',
+        descKey: '高亮当前列ClassName',
+        version: '',
+        type: 'string',
+        enum: '',
+        defVal: 'col--current',
+        list: []
+      },
+      {
         name: 'highlight-hover-column',
         descKey: '鼠标移到列是否要高亮显示',
         version: '',
         type: 'boolean',
         enum: '',
         defVal: 'false',
+        list: []
+      },
+      {
+        name: 'hoverColumnClassName',
+        descKey: '鼠标移到列要高亮显示ClassName',
+        version: '',
+        type: 'string',
+        enum: '',
+        defVal: 'col--hover',
         list: []
       },
       {

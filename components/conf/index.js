@@ -26,6 +26,14 @@ const GlobalConfig = {
     border: false,
     round: false,
     seqTitle: null,
+    highlightCurrentRow: false,
+    highlightHoverRow: false,
+    highlightCurrentColumn: false,
+    highlightHoverColumn: false,
+    currentRowClassName: "row--current",
+    hoverRowClassName: "row--hover",
+    currentColumnClassName: "col--current",
+    hoverColumnClassName: "col--hover",
     emptyRender: {
       name: ''
     },

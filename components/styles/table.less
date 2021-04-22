@@ -381,92 +381,7 @@
     }
   }
 
-  /* 预设背景颜色 */
-  .vcu-header--column,
-  .vcu-body--column,
-  .vcu-body--row,
-  .vcu-footer--row,
-  .vcu-footer--column {
-    &.bg-red {
-      background-color: red;
-      color           : #fff;
-    }
 
-    &.bg-blue {
-      background-color: blue;
-      color           : #fff;
-    }
-
-    &.bg-green {
-      background-color: green;
-      color           : #fff;
-    }
-
-    &.bg-cyan {
-      background-color: cyan;
-      color           : #fff;
-    }
-
-    &.bg-purple {
-      background-color: purple;
-      color           : #fff;
-    }
-
-    &.bg-magenta {
-      background-color: magenta;
-      color           : #fff;
-    }
-
-    &.bg-aqua {
-      background-color: aqua;
-      color           : #fff;
-    }
-
-    &.bg-lime {
-      background-color: lime;
-      color           : #fff;
-    }
-
-    &.bg-orange {
-      background-color: orange;
-      color           : #fff;
-    }
-
-    &.bg-mistyrose {
-      background-color: mistyrose;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-cornsilk {
-      background-color: cornsilk;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-palegreen {
-      background-color: palegreen;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-lightcyan {
-      background-color: lightcyan;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-lightskyblue {
-      background-color: lightskyblue;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-lavender {
-      background-color: lavender;
-      color           : @vcu-font-color;
-    }
-
-    &.bg-pink {
-      background-color: pink;
-      color           : @vcu-font-color;
-    }
-  }
 
 
 
@@ -476,6 +391,8 @@
       color           : @vcu-font-color;
       background-color: @vcu-table-row-striped-background-color;
     }
+
+    .vcu-table-bg-color();
 
     &.row--radio {
       color           : @vcu-font-color;
@@ -525,6 +442,8 @@
           background-color: @vcu-table-row-striped-background-color;
         }
       }
+
+      .vcu-table-bg-color();
 
       &.row--radio {
         .vcu-tree--btn-wrapper {
@@ -1434,6 +1353,13 @@
     }
   }
 
+  /* 预设背景颜色 */
+  .vcu-header--column,
+  .vcu-body--column,
+  .vcu-footer--row,
+  .vcu-footer--column {
+    .vcu-table-bg-color()
+  }
 }
 
 /* 列选择 */
