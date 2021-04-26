@@ -174,7 +174,7 @@ export default {
       let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
       const recursionColumns = (res) => {
         let _column = res.map(item => {
-          if (item.hidden == undefined || !item.hidden) {
+          if ((item.hidden == undefined || !item.hidden) && (item.sys_hidden == undefined || !item.sys_hidden)) {
             let ellipsis = item.ellipsis ? true : false;
             item.showOverflow = ellipsis;
             item.showHeaderOverflow = ellipsis;
