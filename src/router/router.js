@@ -577,6 +577,14 @@ export const menuRouter = [
             component: () =>
                 import('@/views/platform/fixed-columns-and-header/index.vue')
         }, {
+            path: 'scroll-and-mergecell',
+            meta: {
+                title: '虚拟滚动+合并单元格',
+            },
+            name: 'scroll-and-mergecell',
+            component: () =>
+                import('@/views/platform/scroll-and-mergecell/index.vue')
+        }, {
             path: 'pager',
             meta: {
                 title: '分页',

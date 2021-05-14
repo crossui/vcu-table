@@ -1,36 +1,45 @@
-<!-- 药房-住院摆药-住院摆药的摆药明细 :span-method="colspanMethod" :merge-cells="mergeCells" :height="height"-->
 <template>
-  <v-card class="bymx-table">
+  <v-card title="虚拟滚动+合并单元格">
+    <v-alert type="info" class="mb-10">
+      <div slot="message">
+        <div>
+          虚拟渲染与单元格合并，可以通过设置参数 <span class="blue-text">merge-cells</span> 或调用函数 <span class="blue-text">setMergeCells</span> 来控制单元格的临时合并状态
+        </div>
+        <div class="red-text">
+          注意：合并数据属于临时行为，例如：操作数据源、显示隐藏列、固定列...等操作都会导致合并状态被取消
+        </div>
+      </div>
+    </v-alert>
+    <div class="mb-5">
+      <v-button-group>
+        <v-button @click="$refs.table.showColumnModal()">列选择</v-button>
+        <v-button @click="$refs.table.operateRestore()">还 原</v-button>
+      </v-button-group>
+    </div>
     <vcu-table
       :checkbox-config="{
         checkField: 'checked',
         trigger: 'row',
         highlight: true,
       }"
-      :context-menu="tableMenu"
-      :filterFormData="filterFormData"
       :footer-method="footerMethod"
-      :height="height"
+      :height="500"
       :loadOptions="tableOptions"
       :row-class-name="rowClassName"
-      @cell-context-menu="cellContextMenuEvent"
-      @checkbox-all="handleCheckall"
-      @checkbox-change="checkboxChangeEvent"
-      @context-menu-click="contextMenuClickEvent"
-      @header-cell-context-menu="headerCellContextMenuEvent"
       @onPageLoad="onPageLoad"
+      @onChangeColumns="onChangeColumns"
       filterModalShow
       ref="table"
       resizable
       show-footer
       show-overflow
       border
+      customModalShow
     ></vcu-table>
   </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
-import tableMixins from "./tableMixins";
 
 const colMergeCells = ({
   datas = [],
@@ -120,40 +129,15 @@ const colMergeCells = ({
 };
 
 export default {
-  name: "table-BYMX",
-  components: {},
-  props: {
-    height: {
-      type: Number,
-      default: 800,
-    },
-    systemParams: {
-      type: Object,
-      default: () => {},
-    },
-  },
-  mixins: [tableMixins],
-  watch: {},
-  computed: {},
   data() {
     return {
-      tableDatas: [],
-      // 摆药明细表格 api配置
+      tableDatas: null,
       tableOptions: {
         headUrl: "colspan/datas/header",
         pageUrl: "colspan/datas/page",
         checkbox: true,
         seq: true,
         filters: true,
-        pageFormData: {
-          YFBMBH: "",
-          nodeType: "1", //String	Yes	点击树节点（1顶层节点，2二级节点，3三级节点）
-          pBYTJMX: "", //	String	Yes	值来源接口（yf/inpatientDispensinggetDispensingConditionstext）返回值
-          pBCFYID: "0", //	String	No	nodeType<>'1'时必填，值来源接口（btnByClick）还没有就传0
-          radioType: "", //	String	No	nodeType<>'1'时必填；0按病人1所有科室2未摆药科室3所有病区4未摆药病区
-          BMBH00: "", //	String	No	nodeType<>'1'时必填；当前树的当前科室或病区部门编号
-          ZYID00: "", //	String	No	三级节点的时候住院ID
-        },
         customRender: [
           {
             key: "JCBZ00",
@@ -172,60 +156,24 @@ export default {
           },
         ],
       },
-      filterFormData: {
-        filterFindUrl: "listDispensingDetails",
-      },
-      tableMenu: {
-        className: "my-menus",
-        body: {
-          options: [
-            [
-              {
-                code: "YYJL00",
-                name: "用药记录",
-                prefixIcon: "iconfont icon-detail",
-                visible: true,
-              },
-            ],
-            [
-              {
-                code: "YZXX00",
-                name: "医嘱信息",
-                prefixIcon: "iconfont icon-file-copy",
-                className: "my-copy-item",
-              },
-            ],
-            [
-              {
-                code: "YPSMS0",
-                name: "药品说明书",
-                prefixIcon: "iconfont icon-delete red-text",
-              },
-              {
-                code: "CKHZST",
-                name: "查看患者360视图",
-                prefixIcon: "iconfont icon-filter",
-              },
-            ],
-          ],
-        },
-      },
     };
   },
-  created() {},
   mounted() {},
   methods: {
+    onChangeColumns() {
+      this.handleMergeCells(this.tableDatas);
+    },
     onPageLoad({ count, datas, response }) {
+      this.tableDatas = datas;
+      this.handleMergeCells(datas);
+    },
+    handleMergeCells(datas) {
       let _colMergeCells = colMergeCells({
         datas,
         columns: this.$refs.table.getColumns(),
         fields: ["SQKS00", "BRXM00"],
       });
       this.$refs.table.setMergeCells(_colMergeCells);
-      /* this.tableDatas = datas; 
-      setTimeout(() => {
-        
-      }, 3000); */
     },
     // 合计栏
     footerMethod({ columns, data, response }) {
@@ -251,34 +199,7 @@ export default {
         return "bg-green";
       }
     },
-    // 勾选全选
-    handleCheckall({ records, checked }) {
-      this.$emit("checkall", records, checked);
-    },
-    contextMenuClickEvent({ menu, row, column }) {
-      if (!row || !column) return;
-      this.$emit("contextMenuClickEvent", { menu, row, column });
-    },
-    headerCellContextMenuEvent({ column }) {
-      this.$refs.table.setCurrentColumn(column);
-    },
-    cellContextMenuEvent({ row }) {
-      this.$refs.table.setCurrentRow(row);
-    },
-    // 只对 type=checkbox 有效，当手动勾选并且值发生改变时触发的事件
-    checkboxChangeEvent({ checked, row, rowIndex }) {
-      this.$emit("checkboxChangeEvent", { checked, row, rowIndex });
-    },
   },
-  activated() {},
-  deactivated() {},
 };
 </script>
-<style lang='less' scoped>
-.bymx-table {
-  /deep/ .vcu-table .vcu-body--row.row--checked {
-    background-color: #1083b9;
-    color: #fff;
-  }
-}
-</style>
+

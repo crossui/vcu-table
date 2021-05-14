@@ -398,6 +398,10 @@ export default {
         })
       }
     },
+    //列选择回调
+    handleChangeColumns(columns) {
+      this.$emit("onChangeColumns", columns)
+    },
     //显示过滤窗口
     showFilterModal() {
       if (this.filterModalShow) {
@@ -432,7 +436,11 @@ export default {
       if (this.isLazy) {
         this.lazyCurrent = 1;
       }
-      this.$emit("onPageLoad", 1, [], null);
+      this.$emit("onPageLoad", {
+        datas: [],
+        count: 0,
+        response: null
+      });
     },
     //导出Excel
     async exportExcel() {

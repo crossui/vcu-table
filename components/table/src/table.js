@@ -834,6 +834,7 @@ export default {
       customModalShow,
       filterModalShow,
       filterFormDatas,
+      handleChangeColumns,
       handleSubmitFilter,
       handleReductionFilter,
       handleTableWrapMouseleaveEvent
@@ -981,6 +982,9 @@ export default {
       props: {
         columns: this.collectColumn,
         size: vSize
+      },
+      on: {
+        onChangeColumns: handleChangeColumns
       }
     }
 

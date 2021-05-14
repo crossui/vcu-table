@@ -464,7 +464,7 @@ export default {
     validateFilterColumnVal() {
       let b = true
       _.forEach(this.filterLists, (item, index) => {
-        if (item.detailValue == '') {
+        if (item.detailName == '') {
           b = index;
           return false
         }
