@@ -4,7 +4,7 @@
       <v-alert type="info" class="mb-10">
         <div slot="message">
           <div><span class="blue-text">sortablejs</span> 等库实现列拖动</div>
-          <div class="red-text">必须设置 row-key</div>
+          <div class="red-text">必须设置 column-key</div>
         </div>
       </v-alert>
 
@@ -27,9 +27,9 @@ export default {
     return {
       sortable: null,
       tableColumn: [
-        { type: "seq" },
-        { field: "name", title: "Name" },
-        { field: "sex", title: "Sex" },
+        { type: "seq", width: 60 },
+        { field: "name", title: "Name", width: 160 },
+        { field: "sex", title: "Sex", width: 260 },
         { field: "age", title: "Age" },
         { field: "address", title: "Address" },
       ],

@@ -9,8 +9,8 @@
       </v-alert>
       <vcu-table
         border
+        row-key
         ref="xTable"
-        column-key
         :columns="tableColumn"
         :data="tableData"
         :scroll-y="{ enabled: false }"
@@ -39,7 +39,6 @@ export default {
             },
           },
         },
-        { type: "seq" },
         { field: "name", title: "Name" },
         { field: "sex", title: "Sex" },
         { field: "age", title: "Age" },
