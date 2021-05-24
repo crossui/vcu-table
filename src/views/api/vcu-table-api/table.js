@@ -482,6 +482,15 @@ const platformProps = [
         list: []
       },
       {
+        name: 'saveHeaderSetUrl',
+        desc: '通用平台选项列保存接口地址',
+        version: '',
+        type: 'String',
+        enum: '',
+        defVal: 'api/data/headerSetting/saveOrUpdate',
+        list: []
+      },
+      {
         name: 'customRender',
         desc: '生成复杂数据',
         version: '',
@@ -4334,6 +4343,15 @@ const apis = [
         type: '',
         enum: '',
         defVal: '',
+        list: []
+      },
+      {
+        name: 'showOptionColumnModal',
+        descKey: '显示选项列选择窗口（带保存功能）',
+        version: '',
+        type: '',
+        enum: '',
+        defVal: '{tableName: ""}  通用查询表格接口名（必传）',
         list: []
       },
       {

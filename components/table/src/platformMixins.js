@@ -47,6 +47,10 @@ export default {
       type: String,
       default: "POST"
     },
+    saveHeaderSetUrl: {
+      type: String,
+      default: "api/data/headerSetting/saveOrUpdate"
+    },
   },
   data() {
     return {
@@ -174,11 +178,12 @@ export default {
       let customRender = this.platformOptions.customRender ? this.platformOptions.customRender : null
       const recursionColumns = (res) => {
         let _column = res.map(item => {
-          if ((item.hidden == undefined || !item.hidden) && (item.sys_hidden == undefined || !item.sys_hidden)) {
+          if (item.sys_hidden == undefined || !item.sys_hidden) {
             let ellipsis = item.ellipsis ? true : false;
             item.showOverflow = ellipsis;
             item.showHeaderOverflow = ellipsis;
             item.showFooterOverflow = ellipsis;
+            item.visible = item.hidden == undefined || !item.hidden ? true : false;
             if (item.children && item.children.length) {
               item.children = recursionColumns(item.children)
             }
@@ -392,10 +397,15 @@ export default {
     //显示列选择窗口
     showColumnModal() {
       if (this.customModalShow) {
+        this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this })
         this.columnSelectionVisible = true;
-        this.$nextTick(() => {
-          this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this })
-        })
+      }
+    },
+    //显示选项列选择窗口
+    showOptionColumnModal(params) {
+      if (this.customModalShow) {
+        this.$refs.columnSelectionModal.syncUpdate({ collectColumn: this.collectColumn, $table: this, optionsCustom: true, saveHeaderSetUrl: this.saveHeaderSetUrl, formData: params })
+        this.columnSelectionVisible = true;
       }
     },
     //列选择回调

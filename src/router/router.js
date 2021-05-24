@@ -681,6 +681,14 @@ export const menuRouter = [
             component: () =>
                 import('@/views/platform/location/index.vue')
         }, {
+            path: 'optionscustom',
+            meta: {
+                title: '选项列功能',
+            },
+            name: 'optionscustom',
+            component: () =>
+                import('@/views/platform/optionscustom/index.vue')
+        }, {
             path: 'test',
             meta: {
                 title: '测试',

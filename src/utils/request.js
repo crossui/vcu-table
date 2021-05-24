@@ -20,7 +20,7 @@ request.interceptors.request.use(config => {
 	//根据项目要求设置token
 	config.data = qs.stringify({
 		...config.data,
-		token: "b8b4d461b06646cbaf4e6e23f0108ab8"
+		token: "15c6e45214d841a2a31ebc0d85a829ac"
 	});
 	return config
 }, error => {

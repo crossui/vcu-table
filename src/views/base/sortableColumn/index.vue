@@ -88,10 +88,10 @@ export default {
           {
             handle: ".vcu-header--column:not(.col--fixed)",
             onEnd: ({ item, newIndex, oldIndex }) => {
-              let { fullColumn, tableColumn } = xTable.getTableColumn();
+              let { collectColumn, tableColumn } = xTable.getTableColumn();
               let targetThElem = item;
               let wrapperElem = targetThElem.parentNode;
-              let newColumn = fullColumn[newIndex];
+              let newColumn = collectColumn[newIndex];
               if (newColumn.fixed) {
                 // 错误的移动
                 if (newIndex > oldIndex) {
@@ -105,18 +105,18 @@ export default {
                     targetThElem
                   );
                 }
-                return this.$XModal.message({
-                  message: "固定列不允许拖动！",
-                  status: "error",
+                return this.$error({
+                  title: "错误",
+                  content: "固定列不允许拖动！",
                 });
               }
               // 转换真实索引
               let oldColumnIndex = xTable.getColumnIndex(tableColumn[oldIndex]);
               let newColumnIndex = xTable.getColumnIndex(tableColumn[newIndex]);
               // 移动到目标列
-              let currRow = fullColumn.splice(oldColumnIndex, 1)[0];
-              fullColumn.splice(newColumnIndex, 0, currRow);
-              xTable.loadColumn(fullColumn);
+              let currRow = collectColumn.splice(oldColumnIndex, 1)[0];
+              collectColumn.splice(newColumnIndex, 0, currRow);
+              xTable.loadColumn(collectColumn);
             },
           }
         );

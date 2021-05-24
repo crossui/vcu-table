@@ -144,7 +144,7 @@ export default {
             </v-select>
             <v-tooltip title="保存"><v-button size={size} class="mr-10" onClick={handleSaveTpl} loading={this.saveLoading} icon="save"></v-button></v-tooltip>
             <v-tooltip title="删除"><v-button size={size} class="mr-10" onClick={handleDelectTpl} loading={this.delectLoading} icon="delete"></v-button></v-tooltip>
-           </div>
+          </div>
           <div class="vcu-filter-content-col">
             <v-row type="flex" gutter={5}>
               <v-col span={6}>
@@ -238,7 +238,15 @@ export default {
       this.$xetable = $table
       let _columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
       _columns = XEUtils.filterTree(_columns, item => !item.children)
-
+      _columns = XEUtils.map(_columns, item => {
+        let _item = { ...item }
+        if (item.fatherKey) {
+          const fatherItem = XEUtils.findTree(collectColumn, col => col.key == item.fatherKey)
+          _item.oldTitle = item.title
+          _item.title = `${fatherItem.item.title}->${item.title}`
+        }
+        return _item
+      })
       this.tableColumns = _columns
     },
     //加载过滤字典
@@ -398,7 +406,7 @@ export default {
       this.tableColumns.forEach(item => {
         if (item.title == this.filterLists[index].detailName) {
           this.filterLists[index].detailValue = item.filter_name && item.filter_name != "" ? item.filter_name : item.ora_name
-          this.filterLists[index].detailName = item.title
+          this.filterLists[index].detailName = item.oldTitle ? item.oldTitle : item.title
         }
       })
     },

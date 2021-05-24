@@ -1,5 +1,14 @@
 <template>
   <v-card>
+    <v-alert type="info" class="mb-10">
+      <div slot="message">
+        <div>
+          调用
+          <span class="blue-text"> showOptionColumnModal </span>
+          方法，options: <span class="red-text"> tableName </span> 必须传
+        </div>
+      </div>
+    </v-alert>
     <div class="mb-10">
       <v-button @click="handleClick">选项</v-button>
       <v-button @click="$refs.xTable.showFilterModal()">过滤</v-button>
@@ -19,7 +28,6 @@
   </v-card>
 </template>
 <script>
-import XEUtils from "xe-utils";
 import Sortable from "sortablejs";
 export default {
   data() {
@@ -59,9 +67,10 @@ export default {
     }
   },
   methods: {
-    handleClickFilter() {},
     handleClick() {
-      this.$refs.xTable.showOptionColumnModal({ tableName: "1111" });
+      this.$refs.xTable.showOptionColumnModal({
+        tableName: "optionscustomdemo",
+      });
     },
     columnDrop() {
       this.$nextTick(() => {

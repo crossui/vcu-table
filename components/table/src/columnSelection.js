@@ -1,5 +1,6 @@
 import XEUtils from 'xe-utils'
 import { UtilTools } from '../../tools'
+import GlobalConfig from '../../conf'
 
 
 function renderCustoms(h, _vm) {
@@ -42,6 +43,7 @@ function renderCustoms(h, _vm) {
       )
     }
   })
+
   return h('div', {
     class: ['vcu-custom--wrapper', {
       'is--active': true
@@ -94,7 +96,7 @@ export default {
     size: {
       type: String,
       default: "default"
-    }
+    },
   },
   watch: {
     value(val) {
@@ -112,7 +114,11 @@ export default {
         isAll: false,
         isIndeterminate: false,
         visible: false
-      }
+      },
+      optionsCustom: false,
+      saveCurrSet: false,
+      saveHeaderSetUrl: "",
+      saveFormData: null
     };
   },
   render(h) {
@@ -121,6 +127,8 @@ export default {
       handleCancel,
       handleSubmit,
       resetCustomEvent,
+      optionsCustom,
+      onChangeCheckbox,
       size
     } = this;
 
@@ -145,7 +153,14 @@ export default {
     return (<v-modal {...modalProps}>
       <div class="clearfix" slot="footer">
         <div class="fl">
-          <v-button key="reset" size={size} onClick={resetCustomEvent}>还原</v-button>
+          {
+            !optionsCustom
+              ?
+              <v-button key="reset" size={size} onClick={resetCustomEvent}>还原</v-button>
+              :
+              <v-checkbox onChange={onChangeCheckbox}>保存当前设置</v-checkbox>
+          }
+
         </div>
         <div class="fr">
           <v-button key="back" size={size} onClick={handleCancel}>取消</v-button>
@@ -160,18 +175,56 @@ export default {
   },
   methods: {
     syncUpdate(params) {
-      const { collectColumn, $table } = params
+      const { collectColumn, $table, optionsCustom = false, saveHeaderSetUrl = "", formData } = params
       this.$xetable = $table
+      this.optionsCustom = optionsCustom
+      this.saveHeaderSetUrl = saveHeaderSetUrl
+      this.saveFormData = formData
       this.columns = XEUtils.filter(collectColumn, item => !XEUtils.includes(["seq", "radio", "checkbox"], item.type))
       this.checkCustomStatus()
     },
-    handleSubmit() {
+    async saveCurrSetRequest() {
+      let params = XEUtils.merge({}, this.saveFormData)
+      let headerList = XEUtils.mapTree(this.columns, (item, index) => {
+        let col = {
+          sequence: index,
+          hidden: !item.visible,
+          title: item.title,
+          width: item.resizeWidth == 0 ? item.width : item.resizeWidth.toString(),
+          key: item.key
+        }
+        return col;
+      })
+      headerList = XEUtils.toTreeArray(headerList)
+      console.info(headerList)
+      params.headerList = JSON.stringify(headerList)
+      let res = await GlobalConfig.request({
+        method: "POST",
+        url: this.saveHeaderSetUrl,
+        data: params
+      });
+      return res;
+    },
+    async handleSubmit() {
+      if (this.saveCurrSet) {
+        if (this.saveFormData == null || !this.saveFormData.tableName || this.saveFormData.tableName == "") {
+          console.error("缺少入参参数'tableName'")
+          return;
+        }
+        let res = await this.saveCurrSetRequest()
+        if (!res) {
+          this.$message.error("保存失败！！！")
+          return;
+        }
+      }
+
       this.handleCustoms()
       this.$emit("onChangeColumns", this.columns)
       this.handleCancel()
     },
     handleCancel(e) {
       this.visible = false;
+      this.saveCurrSet = false;
       this.$emit("input", this.visible);
     },
     onChange(column) {
@@ -183,7 +236,9 @@ export default {
       this.handleOptionCheck(column)
       this.checkCustomStatus()
     },
-
+    onChangeCheckbox(e) {
+      this.saveCurrSet = e.target.checked
+    },
     allCustomEvent() {
       const { $xetable, columns, customStore } = this
       const checkMethod = $xetable.customOpts.checkMethod

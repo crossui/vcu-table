@@ -251,10 +251,7 @@ export default {
         case "copy":
           if (row && column) {
             if (XEClipboard.copy(row[column.property])) {
-              /* this.$XModal.message({
-                message: app.body.msg.copyToClipboard,
-                status: "success",
-              }); */
+              
             }
           }
           break;
