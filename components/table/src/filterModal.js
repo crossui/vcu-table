@@ -168,12 +168,13 @@ export default {
               return (
                 <v-row type="flex" gutter={5} class="mb-5">
                   <v-col span={6}>
-                    <v-select size={size} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
+                    <v-select size={size} dropdownMatchSelectWidth={false} v-model={item.detailName} class="mr-10" style="width: 100%" onChange={() => { this.handleChangeColumns(index) }}>
                       {tableColumns.map(cloumnsItem => {
                         return (
-                          <v-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
-                            {cloumnsItem.title}
-                          </v-select-option>
+                          cloumnsItem.key == "action" || cloumnsItem.field == "action" ? ""
+                            : <v-select-option value={cloumnsItem.title} key={cloumnsItem.title}>
+                              {cloumnsItem.title}
+                            </v-select-option>
                         )
                       })}
                     </v-select>
@@ -243,7 +244,7 @@ export default {
         if (item.fatherKey) {
           const fatherItem = XEUtils.findTree(collectColumn, col => col.key == item.fatherKey)
           _item.oldTitle = item.title
-          _item.title = `${fatherItem.item.title}->${item.title}`
+          _item.title = `${item.title}->${fatherItem.item.title}`
         }
         return _item
       })
@@ -516,24 +517,34 @@ export default {
     //保存模板/修改模板
     submitFilterTpl() {
       if (this.defaultCondition && this.isSaveTpl) {
-        this.saveType = 3
+        this.saveType = 3 //同时设为默认过滤条件 and 同时存为模板
       } else if (!this.defaultCondition && this.isSaveTpl) {
-        this.saveType = 2
+        this.saveType = 2 //同时存为模板
       } else if (this.saveLoading) {
-        this.saveType = 2
+        this.saveType = 2 //保存模板
       } else {
         this.saveType = 1
       }
       if (this.saveType != 1 || this.saveLoading) {
-        this.tplNameVisible = true;
         if (this.findSelectId != "") {
-          this.selectOptions.forEach(item => {
-            if (this.findSelectId == item.templateId) {
-              this.tplName = item.templateName
-            }
-          })
+          const templateItem = this.selectOptions.filter(item => this.findSelectId == item.templateId)
+          if (templateItem.length) {
+            let _this = this;
+            this.$confirm({
+              title: '提示',
+              content: '确定要对当前模板进行重置吗？',
+              onOk() {
+                _this.tplName = templateItem[0].templateName
+                _this.handleSubmitFilterTpl()
+              },
+              onCancel() {
+                _this.saveLoading = false
+              },
+            });
+          }
         } else {
           this.tplName = "";
+          this.tplNameVisible = true;
         }
       } else {
         this.handleSubmitFilterTpl()

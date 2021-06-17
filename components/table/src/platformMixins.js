@@ -1,5 +1,6 @@
 import XEUtils from 'xe-utils'
 import GlobalConfig from '../../conf'
+import { convertToRows } from '../../header/src/util'
 
 export default {
   props: {
@@ -416,8 +417,10 @@ export default {
     showFilterModal() {
       if (this.filterModalShow) {
         this.filterModalVisible = true;
+        let _collectColumn = this.filterOldColumns ? this.filterColumns : this.fullColumns
+        _collectColumn = XEUtils.filter(_collectColumn, item => !item.hidden)
         this.$nextTick(() => {
-          this.$refs.filterModalDom.syncUpdate({ collectColumn: this.filterOldColumns ? this.filterColumns : this.fullColumns, $table: this })
+          this.$refs.filterModalDom.syncUpdate({ collectColumn: _collectColumn, $table: this })
         })
       }
     },
@@ -454,6 +457,7 @@ export default {
     },
     //导出Excel
     async exportExcel() {
+      //console.info(JSON.stringify(convertToRows(this.tableGroupColumn)) )
       if (this.exportExcelUrl == "") {
         console.error('参数：exportExcelUrl; 导出接口地址不能为空！！！')
       } else {

@@ -1,119 +1,235 @@
 <template>
   <v-card>
-    <div class="mb-10">
-      <v-button @click="handleClick">选项</v-button>
-      <v-button @click="$refs.xTable.showFilterModal()">过滤</v-button>
-    </div>
+    <v-button @click="$refs.ywTable.exportExcel()">导出</v-button>
     <vcu-table
+      :locking="locking"
+      :height="ywTableHeight"
+      :loadOptions="ywTableLoadOptions"
+      :filterFormData="ywTableFilterFormData"
+      :footer-method="ywTableFooterMethod"
+      :row-class-name="ywTableRowClassName"
+      :columns="ywTableColumnSource"
+      :cell-style="ywTableCellStyle"
       border
+      show-footer
+      show-overflow
+      show-footer-overflow
+      show-header-overflow
       resizable
-      column-key
-      customModalShow
       filterModalShow
-      ref="xTable"
-      :filterFormData="filterFormData"
-      :loadOptions="options"
-      :scroll-x="{ enabled: false }"
-      class="sortable-column-demo"
+      filterOldColumns
+      column-key
+      @onPageLoad="ywTableOnPageLoad"
+      @onHeaderLoad="ywTableHeaderLoad"
+      
+      :edit-config="{ trigger: 'manual', mode: 'row', autoClear: false }"
+      ref="ywTable"
     ></vcu-table>
   </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
 import Sortable from "sortablejs";
+
+const tableMergeHeader = (headerColumn = [], nameList = [], flag = "-") => {
+  const columns = [...headerColumn]
+  const obj = {}
+  nameList.map((item) => {
+    obj[item.field] = getTableColoumneEmptyItem(item)
+  })
+  let newColumns = [],
+    hasChildenList = []
+  columns.map((item) => {
+    if ((item.hidden == undefined || !item.hidden) && item.title != "序号") {
+      let isPattern = false
+      Object.keys(obj).map((key) => {
+        if (item.title.includes(`${obj[key].title + flag}`)) {
+          let title = item.title.split(flag)[1]
+          if (title.includes("(")) {
+            title = title.replace(/(\(.*\))/gi, "")
+          }
+          item.title = title
+          obj[key].children.push(item)
+          isPattern = true
+        }
+      })
+      isPattern ? "" : newColumns.push(item)
+    }
+  })
+  Object.keys(obj).map((key) => {
+    newColumns.splice(obj[key].insertIndex, 0, obj[key])
+  })
+  return newColumns
+}
+function getTableColoumneEmptyItem(item) {
+  return {
+    title: item.title,
+    insertIndex: item.insertIndex,
+    fixed: "",
+    align: "center",
+    children: []
+  }
+}
 export default {
   data() {
     return {
-      sortable: null,
-      filterFormData: {
-        filterFindUrl: "getInHospPatientList4cy",
-        operationUrl: "dataq/api/dict/operation", //正式环境不需要
-        relationUrl: "dataq/api/dict/relation", //正式环境不需要
-        filterFindFormData: {
-          deptNo: "14",
-        },
+      locking: false,
+      ywTableHeight: 300,
+      ywTableColumnSource: [],
+      ywTableFilterFormData:{
+        filterFindUrl:"showYjYw"
       },
-      options: {
-        headUrl: "dataq/api/header/optionscustomdemo",
-        pageUrl: "dataq/api/page/optionscustomdemo",
-        headerFormData: {
-          ygbh00: 4569,
-          zwxm00: "程瑾011",
-        },
-        pageFormData: {
-          limit: 500,
-          YPQLDH: "C11520",
-          YFBMBH: 2275,
-          ygbh00: 4569,
-          zwxm00: "程瑾011",
-        },
+      ywTableLoadOptions: {
+        headUrl: "dataq/api/header/showYjYw", //通用平台表头地址
+        pageUrl: "dataq/api/page/showYjYw", //通用平台列表地址
+        pageFormData: {},
+        customRender: [
+          //选择
+          {
+            key: "NX",
+            params: {
+              editRender: {
+                enabled: true,
+              },
+              slots: {
+                default: ({ row }) => {
+                  const isCheck = row.NX == "N" ? false : true
+                  return [ <v-checkbox checked={isCheck}></v-checkbox> ]
+                },
+                edit: ({ row }) => {
+                  let isCheck = row.NX == "N" ? false : true
+                  return [ <v-checkbox checked={isCheck} onChange={this.ywTableNXChange}></v-checkbox> ]
+                }
+              }
+            },
+          },
+          //类别
+          {
+            key: "MZZYBZ",
+            params: {
+              slots: {
+                default: ({ row }) => {
+                  const type = row.MZZYBZ == "0" ? "门诊" : "住院"
+                  return [ <span>{ type }</span> ]
+                },
+                edit: ({ row }) => {}
+              }
+            },
+          },
+          //自费
+          {
+            key: "SFZF00",
+            params: {
+              slots: {
+                default: ({ row }) => {
+                  const check = row.SFZF00 == "0" ? false : true
+                  return [ <v-checkbox checked={check}></v-checkbox> ]
+                },
+                edit: ({ row }) => {
+                  const check = row.SFZF00 == "0" ? false : true
+                  return [ <v-checkbox disabled checked={check}></v-checkbox> ]
+                }
+              }
+            },
+          },
+        ]
       },
     };
   },
-  created() {
-    this.columnDrop();
-  },
-  beforeDestroy() {
-    if (this.sortable) {
-      this.sortable.destroy();
-    }
-  },
+  created() {},
+  beforeDestroy() {},
   methods: {
-    handleClickFilter() {},
-    handleClick() {
-      this.$refs.xTable.showOptionColumnModal({ tableName: "1111" });
-    },
-    columnDrop() {
-      this.$nextTick(() => {
-        let xTable = this.$refs.xTable;
-        this.sortable = Sortable.create(
-          xTable.$el.querySelector(
-            ".body--wrapper>.vcu-table--header .vcu-header--row"
-          ),
-          {
-            handle: ".vcu-header--column:not(.col--fixed)",
-            onEnd: ({ item, newIndex, oldIndex }) => {
-              let { collectColumn, tableColumn } = xTable.getTableColumn();
-              let targetThElem = item;
-              let wrapperElem = targetThElem.parentNode;
-              let newColumn = collectColumn[newIndex];
-              if (newColumn.fixed) {
-                // 错误的移动
-                if (newIndex > oldIndex) {
-                  wrapperElem.insertBefore(
-                    targetThElem,
-                    wrapperElem.children[oldIndex]
-                  );
-                } else {
-                  wrapperElem.insertBefore(
-                    wrapperElem.children[oldIndex],
-                    targetThElem
-                  );
-                }
-                return this.$error({
-                  title: "错误",
-                  content: "固定列不允许拖动！",
-                });
-              }
-              // 转换真实索引
-              let oldColumnIndex = xTable.getColumnIndex(tableColumn[oldIndex]);
-              let newColumnIndex = xTable.getColumnIndex(tableColumn[newIndex]);
-              // 移动到目标列
-              let currRow = collectColumn.splice(oldColumnIndex, 1)[0];
-              collectColumn.splice(newColumnIndex, 0, currRow);
-              xTable.loadColumn(collectColumn);
-            },
+    
+    ywTableOnPageLoad({ datas, response, count }) {
+      /* this.ywTableDatasOld = _.cloneDeep(datas);
+      this.ywTableDatas = datas;
+      this.ywTableDatas.map(item => {
+        if(this.TFCheck) {
+          item.NX = "N"
+        } else {
+          if(item.ZT0000 === "已执行") {
+            item.NX = "N"
+          } else {
+            item.NX = "Y"
           }
-        );
-      });
+        }
+      })
+      const patternIndex = this.ywTableDatas.findIndex(item => item.YJDJH0 == this.ywTablePositionYJDH)
+      if(this.ywTablePositionYJDH && patternIndex != -1) {
+        this.ywTableCelClick({
+          row: datas[patternIndex],
+          $rowIndex: patternIndex,
+        })
+        setTimeout(()=>{
+          this.tablePositionTo("ywTable",patternIndex)
+        })
+        this.ywTablePositionYJDH = null
+      } else {
+        this.ywTableCelClick({
+          row: datas[0],
+          $rowIndex: 0
+        })
+      } */
+    },
+    ywTableCellStyle({ row, rowIndex, column, columnIndex }) {
+      let _style = {}
+      if(column.key == "ZT0000") {
+        switch(row.ZT0000) {
+          case "申请退费":
+          case "未收费":
+            _style.color = "blue"
+            break;
+          case "已执行":
+            _style.color = "red"
+            break;
+        }
+      }
+      if(column.key == "JZBZ00" && row.JZBZ00 == "Y") {
+        _style.background = "red"
+      }
+      return _style
+    },
+    ywTableHeaderLoad(column){
+      const nameList = [
+        {
+          field: "kdColumns",
+          title: "开单",
+          insertIndex: 15,
+        },
+        {
+          field: "zxColumns",
+          title: "执行",
+          insertIndex: 18,
+        },
+      ]
+      this.ywTableColumnSource = tableMergeHeader(column,nameList,"-")
+    },
+    ywTableRowClassName({ rowIndex, row }) {
+      let className = ""
+      if ([this.ywTableCurrIndex].includes(rowIndex)) {
+        className += "vcu-current-row ";
+      }
+      if(row.NX == "Y") {
+        className += "pi-table-color__sky "
+      }
+      if(row.ZT0000 == "已执行" || row.ZT0000 == "已退费") {
+        className += "pi-table-color__grey "
+      }
+      return className
+    },
+    ywTableFooterMethod({ columns, data, response }) {
+      const stats = response && response.data.payload.stats;
+      return [
+        columns.map((column, columnIndex) => {
+          if (XEUtils.has(stats, column.property)) {
+            return stats[column.property];
+          }
+        }),
+      ];
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.sortable-column-demo .vcu-header--row .vcu-header--column.sortable-ghost,
-.sortable-column-demo .vcu-header--row .vcu-header--column.sortable-chosen {
-  background-color: #dfecfb;
-}
 </style>

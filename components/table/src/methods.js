@@ -1013,16 +1013,22 @@ const Methods = {
    * 隐藏指定列
    * @param {ColumnInfo} column 列配置
    */
-  hideColumn(column) {
+  hideColumn(column, forever) {
     column.visible = false
+    if (forever) {
+      column.defaultVisible = false;
+    }
     return this.handleCustom()
   },
   /**
    * 显示指定列
    * @param {ColumnInfo} column 列配置
    */
-  showColumn(column) {
+  showColumn(column, forever) {
     column.visible = true
+    if (forever) {
+      column.defaultVisible = true;
+    }
     return this.handleCustom()
   },
   /**

@@ -21,13 +21,14 @@
   </v-card>
 </template>
 <script>
+import XEUtils from "xe-utils";
 import Sortable from "sortablejs";
 export default {
   data() {
     return {
       sortable: null,
       tableColumn: [
-        { type: "seq", width: 60 },
+        { type: "seq", width: 60, fixed: "left" },
         { field: "name", title: "Name", width: 160 },
         { field: "sex", title: "Sex", width: 260 },
         { field: "age", title: "Age" },
@@ -88,10 +89,11 @@ export default {
           {
             handle: ".vcu-header--column:not(.col--fixed)",
             onEnd: ({ item, newIndex, oldIndex }) => {
-              let { collectColumn, tableColumn } = xTable.getTableColumn();
+              let { collectColumn } = xTable.getTableColumn();
               let targetThElem = item;
               let wrapperElem = targetThElem.parentNode;
               let newColumn = collectColumn[newIndex];
+              let currcolid = item.getAttribute("data-colid");
               if (newColumn.fixed) {
                 // 错误的移动
                 if (newIndex > oldIndex) {
@@ -111,8 +113,11 @@ export default {
                 });
               }
               // 转换真实索引
-              let oldColumnIndex = xTable.getColumnIndex(tableColumn[oldIndex]);
-              let newColumnIndex = xTable.getColumnIndex(tableColumn[newIndex]);
+              let oldColumnIndex = XEUtils.findIndexOf(
+                collectColumn,
+                (item) => item.id === currcolid
+              );
+              let newColumnIndex = xTable.getColumnIndex(newColumn);
               // 移动到目标列
               let currRow = collectColumn.splice(oldColumnIndex, 1)[0];
               collectColumn.splice(newColumnIndex, 0, currRow);

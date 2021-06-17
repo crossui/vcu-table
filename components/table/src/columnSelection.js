@@ -118,13 +118,13 @@ export default {
       optionsCustom: false,
       saveCurrSet: false,
       saveHeaderSetUrl: "",
-      saveFormData: null
+      saveFormData: null,
+      columns: []
     };
   },
   render(h) {
     const {
       visible,
-      handleCancel,
       handleSubmit,
       resetCustomEvent,
       optionsCustom,
@@ -140,12 +140,13 @@ export default {
         },
         visible: visible,
         title: "请选择列",
+        maskClosable: false,
         destroyOnClose: true,
         wrapClassName: "columnSelection-modal",
       },
       attrs: {},
       on: {
-        cancel: handleCancel
+        cancel: resetCustomEvent
       }
     }
 
@@ -163,7 +164,7 @@ export default {
 
         </div>
         <div class="fr">
-          <v-button key="back" size={size} onClick={handleCancel}>取消</v-button>
+          <v-button key="back" size={size} onClick={resetCustomEvent}>取消</v-button>
           <v-button key="submit" type="primary" size={size} onClick={handleSubmit}>保存</v-button>
         </div>
       </div>
@@ -196,7 +197,6 @@ export default {
         return col;
       })
       headerList = XEUtils.toTreeArray(headerList)
-      console.info(headerList)
       params.headerList = JSON.stringify(headerList)
       let res = await GlobalConfig.request({
         method: "POST",
@@ -222,7 +222,7 @@ export default {
       this.$emit("onChangeColumns", this.columns)
       this.handleCancel()
     },
-    handleCancel(e) {
+    handleCancel() {
       this.visible = false;
       this.saveCurrSet = false;
       this.$emit("input", this.visible);
@@ -274,6 +274,7 @@ export default {
       const checkMethod = $xetable.customOpts.checkMethod
       this.customStore.isAll = columns.every(column => (checkMethod ? !checkMethod({ column }) : false) || column.visible)
       this.customStore.isIndeterminate = !this.customStore.isAll && columns.some(column => (!checkMethod || checkMethod({ column })) && (column.visible || column.halfVisible))
+      this.$forceUpdate()
     },
     resetCustomEvent() {
       const { $xetable, columns } = this

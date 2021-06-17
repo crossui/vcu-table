@@ -12,7 +12,7 @@
         </div>
       </v-alert>
       <div class="mb-5"></div>
-      <vcu-table ref="xTable" :loadOptions="options"> </vcu-table>
+      <vcu-table ref="xTable" :loadOptions="options" :height="200"> </vcu-table>
     </div>
   </v-card>
 </template>
