@@ -4,6 +4,16 @@ import { convertToRows } from '../../header/src/util'
 
 export default {
   props: {
+    requestTimeout: {
+      type: Number
+    },
+    exportSheetData: {
+      type: [Object, Boolean],
+    },
+    exportExcelUrlCommon: {
+      type: String,
+      default: "dataq/export/api/common"
+    },
     exportExcelUrl: {
       type: String,
       default: ""
@@ -156,6 +166,7 @@ export default {
         let res = await GlobalConfig.request({
           method: this.ajaxType,
           url: this.platformOptions.headUrl,
+          timeout: this.requestTimeout ? this.requestTimeout : undefined,
           ..._data
         });
         if (this.filterModalShow && this.filterOldColumns) {
@@ -321,7 +332,7 @@ export default {
     //获取列表数据
     async getTableListData(isRest, obj) {
       this.loadingEd = true;
-      let options = { clearFilterData: false }
+      let options = { clearFilterData: false, autoFilterRemote: false }
       options = _.merge({}, options, obj);
       //查询重置过滤条件
       if (options.clearFilterData) this.filterParameter = null;
@@ -336,6 +347,10 @@ export default {
       if (this.filterParameter != null) {
         params.filterParameter = JSON.stringify(this.filterParameter)
       }
+      if (options.autoFilterRemote) {
+        params.page = 1
+        params.filterParameter = JSON.stringify(options.autoFilterRemote)
+      }
       params = _.merge({}, params, this.platformOptions.pageFormData);
       try {
         let _data =
@@ -343,6 +358,7 @@ export default {
         let res = await GlobalConfig.request({
           method: this.ajaxType,
           url: this.platformOptions.pageUrl,
+          timeout: this.requestTimeout ? this.requestTimeout : undefined,
           ..._data
         });
 
@@ -366,7 +382,7 @@ export default {
 
         setTimeout(() => {
           this.setDatas(resData);
-          if (this.platformOptions.filters && this.resetFilters) this.handleFiltersHeaderDatas();
+          if (this.platformOptions.filters && this.resetFilters && !options.autoFilterRemote) this.handleFiltersHeaderDatas();
           this.$emit("onPageLoad", {
             datas: this.tableFullData,
             count: res.data.payload.count,
@@ -457,33 +473,105 @@ export default {
     },
     //导出Excel
     async exportExcel() {
-      //console.info(JSON.stringify(convertToRows(this.tableGroupColumn)) )
       if (this.exportExcelUrl == "") {
         console.error('参数：exportExcelUrl; 导出接口地址不能为空！！！')
       } else {
         let params = _.merge({}, this.platformOptions.pageFormData);
         try {
-          let _title = []
-          this.collectColumn.forEach(item => {
-            if (item.property != "action" && item.visible) {
-              _title.push({
-                "titleName": item.title,
-                "titleKey": item.property
-              })
+          let _title = [], _exportSheetData = new Object();
+          if (this.tableGroupColumn.length) {
+            if (!this.exportSheetData) {
+              console.error('参数：exportSheetData; 不能为空！！！')
+              return false;
             }
-          })
-          params.title = JSON.stringify(_title)
+            const columnDatas = XEUtils.toTreeArray(this.tableGroupColumn)
+            columnDatas.forEach(item => {
+              if (item.property != "action" && item.visible && !item.children) {
+                _title.push({
+                  "titleName": item.type == "seq" ? "序号" : item.type == "checkbox" ? "选择" : item.title,
+                  "titleKey": item.type == "checkbox" ? "checkbox" : item.property
+                })
+              }
+            })
+            const _tableGroupColumn = convertToRows(this.tableGroupColumn)
+            let _complexTitles = []
+            XEUtils.arrayEach(_tableGroupColumn, item => {
+              let _subArr = []
+              XEUtils.arrayEach(item, subItem => {
+                _subArr.push({
+                  title: subItem.title,
+                  rowSpan: subItem.rowSpan,
+                  colSpan: subItem.colSpan,
+                })
+              })
+              _complexTitles.push(_subArr)
+            })
+            _exportSheetData.complexTitles = _complexTitles;
+          } else {
+            this.collectColumn.forEach(item => {
+              if (item.property != "action" && item.visible) {
+                _title.push({
+                  "titleName": item.type == "seq" ? "序号" : item.type == "checkbox" ? "选择" : item.title,
+                  "titleKey": item.type == "checkbox" ? "checkbox" : item.property
+                })
+              }
+            })
+          }
+          if (this.exportSheetData) {
+            _exportSheetData.name = this.exportExcelUrl;
+            _exportSheetData.headers = this.exportSheetData.headers ? this.exportSheetData.headers : undefined;
+            _exportSheetData.footers = this.exportSheetData.footers ? this.exportSheetData.footers : undefined;
+            _exportSheetData.titles = this.exportSheetData.titles ? this.exportSheetData.titles : JSON.stringify(_title);
+
+            if (this.exportSheetData.rows) {
+              if (XEUtils.isBoolean(this.exportSheetData.rows)) {
+                const { fullData, footerData } = this.getTableData();
+                let _fullData = XEUtils.clone(fullData, true)
+                let _footerDatas = [];
+                //生成选择列的数据
+                if (XEUtils.find(_title, item => item.titleKey === "checkbox")) {
+                  const checkboxRecords = this.getCheckboxRecords()
+                  _fullData = XEUtils.map(_fullData, item => {
+                    if (XEUtils.find(checkboxRecords, checkboxItem => checkboxItem._VCUID === item._VCUID)) {
+                      item.checkbox = "是"
+                    } else {
+                      item.checkbox = "否"
+                    }
+                    return item
+                  })
+                }
+                //生成表尾数据
+                XEUtils.arrayEach(footerData, (item, index) => {
+                  let _list = new Object()
+                  XEUtils.objectEach(item, (objItem, objIndex) => {
+                    if (objItem != null) {
+                      XEUtils.set(_list, _title[objIndex]["titleKey"], objItem)
+                    }
+                  })
+                  _footerDatas.push(_list);
+                })
+                _exportSheetData.rows = _fullData.concat(_footerDatas);
+              } else {
+                _exportSheetData.rows = this.exportSheetData.rows;
+              }
+            }
+            params.exportSheetData = JSON.stringify(_exportSheetData)
+          } else {
+            params.title = JSON.stringify(_title)
+          }
+
           if (this.filterParameter != null) {
             params.filterParameter = JSON.stringify(this.filterParameter)
           }
           let res = await GlobalConfig.request({
             responseType: 'blob',
             method: "POST",
-            url: this.exportExcelUrl,
+            url: this.exportSheetData == undefined ? this.exportExcelUrl : this.exportExcelUrlCommon,
+            timeout: this.requestTimeout ? this.requestTimeout : undefined,
             data: params
           });
           if (res) {
-            let filename = this.util.formatDate(new Date(), "yyyyMMdd") + '.xls';
+            let filename = XEUtils.toDateString(new Date(), 'yyyyMMdd') + '.xls';
             if (res.headers["content-disposition"]) {
               let _name = res.headers["content-disposition"].split("filename=");
               filename = decodeURIComponent(_name[1]);

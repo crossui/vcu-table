@@ -32,7 +32,7 @@
           >加载列表数据</v-button
         >
       </div>
-      <vcu-table ref="xTable1" :loadOptions="options" locking> </vcu-table>
+      <vcu-table ref="xTable1" :loadOptions="options" locking :requestTimeout="1000"> </vcu-table>
     </div>
   </v-card>
 </template>

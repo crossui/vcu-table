@@ -918,6 +918,7 @@ const Methods = {
     if (filterColumns.length) {
       tableData = tableData.filter(row => {
         return filterColumns.every(({ column, valueList, itemList }) => {
+          if (valueList.length && filterOpts.autoFilterRemote) return true
           if (valueList.length && !filterOpts.remote) {
             const { filterRender, property } = column
             let { filterMethod } = column

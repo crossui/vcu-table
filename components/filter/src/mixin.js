@@ -106,7 +106,9 @@ export default {
       if (!filterOpts.remote) {
         this.handleTableData(true)
         this.checkSelectionStatus()
+
       }
+
       const filterList = []
       visibleColumn.filter(column => {
         const { property, filters } = column
@@ -122,6 +124,9 @@ export default {
           filterList.push({ column, property, values: valueList, datas: dataList })
         }
       })
+      if (filterOpts.autoFilterRemote) {
+        this.handleAutoFilterRemote({ column, filterOldColumns, filterColumns, property, values, datas, filters: filterList })
+      }
       this.emitEvent('filter-change', { column, filterOldColumns, filterColumns, property, values, datas, filters: filterList }, evnt)
       this.updateFooter()
       if (scrollXLoad || scrollYLoad) {
@@ -135,6 +140,25 @@ export default {
         this.recalculate()
         this.updateCellAreas()
       })
+    },
+    //列下拉过滤
+    handleAutoFilterRemote(obj) {
+      let _filterList = [], _filterIndex = 0;
+      XEUtils.arrayEach(obj.filters, (item, index) => {
+        if (item.values.length) {
+          XEUtils.arrayEach(item.values, (valitem, valindex) => {
+            _filterList.push({
+              "detailValue": item.column.filter_name && item.column.filter_name != "" ? item.column.filter_name : item.column.ora_name,
+              "detailNo": _filterIndex++,
+              "detailName": item.column.title,
+              "arithmetic": "1",
+              "fieldValue": valitem,
+              "operators": valindex < item.values.length -1 ? "2" : "1"
+            })
+          })
+        }
+      })
+      this.getTableListData(false, { autoFilterRemote: _filterList.length ? _filterList : false })
     },
     handleClearFilter(column) {
       if (column) {

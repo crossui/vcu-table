@@ -68,7 +68,8 @@ const GlobalConfig = {
     filterConfig: {
       remote: false,
       filterMethod: null,
-      showIcon: true
+      showIcon: true,
+      autoFilterRemote: false
     },
     treeConfig: {
       children: 'children',

@@ -689,6 +689,14 @@ export const menuRouter = [
             component: () =>
                 import('@/views/platform/optionscustom/index.vue')
         }, {
+            path: 'newExport',
+            meta: {
+                title: '新导出功能',
+            },
+            name: 'newExport',
+            component: () =>
+                import('@/views/platform/newExport/index.vue')
+        }, {
             path: 'test',
             meta: {
                 title: '测试',

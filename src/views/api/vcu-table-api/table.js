@@ -429,6 +429,70 @@ const platformProps = [
     list: []
   },
   {
+    name: 'exportSheetData',
+    descKey: '导出需要用到的通用查询名称,表头,复杂表头,标题,页脚,数据（新功能）',
+    version: '',
+    type: 'Object, Boolean',
+    enum: '',
+    defVal: '-',
+    list: [
+      {
+        name: 'headers',
+        descKey: '标题',
+        version: '',
+        type: 'Array',
+        enum: '',
+        defVal: '-',
+        list: []
+      },
+      {
+        name: 'footers',
+        descKey: '页脚',
+        version: '',
+        type: 'Array',
+        enum: '',
+        defVal: '-',
+        list: []
+      },
+      {
+        name: 'titles',
+        descKey: '表头',
+        version: '',
+        type: 'Array',
+        enum: '',
+        defVal: '-',
+        list: []
+      },
+      {
+        name: 'complexTitles',
+        descKey: '复杂表头',
+        version: '',
+        type: 'Array',
+        enum: '',
+        defVal: '-',
+        list: []
+      },
+      {
+        name: 'rows',
+        descKey: '数据(若前端传入数据,则不用进行通用查询)',
+        version: '',
+        type: 'Array,Boolean',
+        enum: '',
+        defVal: '-',
+        list: []
+      },
+    ]
+  },
+  {
+    name: 'exportExcelUrlCommon',
+    descKey: '导出excel文件接口默认地址（新功能）',
+    version: '',
+    type: 'String',
+    enum: '',
+    defVal: 'dataq/export/api/common',
+    list: []
+  },
+  {
     name: 'exportExcelUrl',
     descKey: '导出excel文件接口地址',
     version: '',

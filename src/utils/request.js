@@ -20,7 +20,7 @@ request.interceptors.request.use(config => {
 	//根据项目要求设置token
 	config.data = qs.stringify({
 		...config.data,
-		token: "15c6e45214d841a2a31ebc0d85a829ac"
+		token: config.data.token ? config.data.token : "ba4b5ded1a384b54b0deffac4bb5145e"
 	});
 	return config
 }, error => {
@@ -30,14 +30,14 @@ request.interceptors.request.use(config => {
 // 请求到结果的拦截处理
 request.interceptors.response.use(async (response) => {
 	const { data, headers } = response;
-	if (data.status == 200) {
-		return response
-	} else {
+	if (data.status == 500) {
 		Modal.error({
 			title: '错误提示',
 			content: data.title,
 		})
 		return false
+	} else {
+		return response
 	}
 }, (error) => {
 	// 请求错误需要自行处理
