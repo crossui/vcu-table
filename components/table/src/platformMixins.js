@@ -528,16 +528,29 @@ export default {
                 const { fullData, footerData } = this.getTableData();
                 let _fullData = XEUtils.clone(fullData, true)
                 let _footerDatas = [];
-                //生成选择列的数据
+                let _rowMethodsOptions = this.exportSheetData.rowMethods && XEUtils.isArray(this.exportSheetData.rowMethods) ? this.exportSheetData.rowMethods : []
                 if (XEUtils.find(_title, item => item.titleKey === "checkbox")) {
-                  const checkboxRecords = this.getCheckboxRecords()
-                  _fullData = XEUtils.map(_fullData, item => {
-                    if (XEUtils.find(checkboxRecords, checkboxItem => checkboxItem._VCUID === item._VCUID)) {
-                      item.checkbox = "是"
-                    } else {
-                      item.checkbox = "否"
+                  //生成选择列的数据
+                  _rowMethodsOptions.push({
+                    key: "checkbox",
+                    method: ({ row }) => {
+                      const checkboxRecords = this.getCheckboxRecords()
+                      if (XEUtils.find(checkboxRecords, checkboxItem => checkboxItem._VCUID === row._VCUID)) {
+                        return "是";
+                      } else {
+                        return "否";
+                      }
                     }
-                    return item
+                  })
+                }
+
+                //生成自定义数据
+                if (_rowMethodsOptions.length) {
+                  _fullData = XEUtils.map(_fullData, item => {
+                    XEUtils.arrayEach(_rowMethodsOptions, o => {
+                      item[o.key] = o.method({ row: item })
+                    })
+                    return item;
                   })
                 }
                 //生成表尾数据
@@ -566,7 +579,7 @@ export default {
           let res = await GlobalConfig.request({
             responseType: 'blob',
             method: "POST",
-            url: this.exportSheetData == undefined ? this.exportExcelUrl : this.exportExcelUrlCommon,
+            url: !this.exportSheetData ? this.exportExcelUrl : this.exportExcelUrlCommon,
             timeout: this.requestTimeout ? this.requestTimeout : undefined,
             data: params
           });

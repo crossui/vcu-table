@@ -109,6 +109,18 @@ export default {
       exportExcelUrl2: "qryMedicalCardLose",
       exportSheetData2: {
         rows: true,
+        rowMethods: [
+          {
+            key: "YBID00",
+            method: ({row}) => {
+              if(row.YBID00 == "0"){
+                return "否"
+              }else{
+                return "是"
+              }
+            },
+          },
+        ],
       },
       loadOptions2: {
         headUrl: "dataq/api/header/qryMedicalCardLose",

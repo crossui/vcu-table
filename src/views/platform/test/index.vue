@@ -1,88 +1,125 @@
 <template>
-  <div>
-    <v-card class="mb-10">
-      <v-button-group class="mb-10">
-        <v-button @click="handleSearch">查询</v-button>
-        <v-button @click="$refs.ywTable.showFilterModal()">过滤</v-button>
-        <v-button @click="$refs.ywTable.operateRestore()">还 原</v-button>
-        <v-button @click="$refs.ywTable.emptyTableLists()">清空数据</v-button>
-      </v-button-group>
-      <vcu-table
-        :loadOptions="loadOptions"
-        :filter-config="{ autoFilterRemote: true }"
-        @filter-change="filterChange"
-        show-overflow
-        show-footer
-        filterModalShow
-        :filterFormData="filterFormData"
-        :footer-method="footerTotalDatas"
-        border
-        ref="ywTable"
-        :height="400"
-      ></vcu-table>
-    </v-card>
-  </div>
+  <v-card>
+    <div class="mb-10">
+      <v-button @click="$refs.xTable.showColumnModal()">列选择</v-button>
+      <v-button @click="handleClick">选项</v-button>
+      <v-button @click="$refs.xTable.showFilterModal()">过滤</v-button>
+    </div>
+    <vcu-table
+      border
+      resizable
+      column-key
+      customModalShow
+      filterModalShow
+      ref="xTable"
+      :filterFormData="filterFormData"
+      :loadOptions="options"
+      :scroll-x="{ enabled: false }"
+      class="sortable-column-demo"
+    ></vcu-table>
+  </v-card>
 </template>
 <script>
 import XEUtils from "xe-utils";
-
+import Sortable from "sortablejs";
 export default {
   data() {
     return {
-      //table
+      sortable: null,
       filterFormData: {
-        filterFindUrl: "quryMedicalInsurancePayment",
-        filterFindUrlPrefix: {
-          find: "http://10.16.241.70:9089/dataq/filter/find/",
-          save: "http://10.16.241.70:9089/dataq/filter/save/",
-          delete: "http://10.16.241.70:9089/dataq/filter/delete/"
-        },
+        filterFindUrl: "getInHospPatientList4cy",
+        operationUrl: "dataq/api/dict/operation", //正式环境不需要
+        relationUrl: "dataq/api/dict/relation", //正式环境不需要
         filterFindFormData: {
           deptNo: "14",
         },
       },
-      loadOptions: {
-        headUrl:
-          "http://10.16.241.70:9089/dataq/api/header/quryMedicalInsurancePayment",
-        pageUrl:
-          "http://10.16.241.70:9089/dataq/api/page/quryMedicalInsurancePayment",
-        seq: true,
-        filters: true,
+      options: {
+        headUrl: "api/header/columnModal",
+        pageUrl: "api/page/columnModal",
+        headerFormData: {
+          ygbh00: 4569,
+          zwxm00: "程瑾011",
+        },
         pageFormData: {
-          BEGINDAY: 20200101,
-          ENDDAY: 20210622,
-          ZFFSMC: "",
-          YBMC00: "",
+          limit: 500,
+          YPQLDH: "C11520",
+          YFBMBH: 2275,
           ygbh00: 4569,
           zwxm00: "程瑾011",
         },
       },
     };
   },
-  created() {},
-  beforeDestroy() {},
+  created() {
+    this.columnDrop();
+  },
+  beforeDestroy() {
+    if (this.sortable) {
+      this.sortable.destroy();
+    }
+  },
   methods: {
-    footerTotalDatas({ columns, data, response }) {
-      const stats = response && response.data.payload.stats;
-      const footer = [
-        columns.map((column, columnIndex) => {
-          if (XEUtils.has(stats, column.property)) {
-            return stats[column.property];
+    handleClick() {
+      this.$refs.xTable.showOptionColumnModal({
+        tableName: "optionscustomdemo",
+      });
+    },
+    columnDrop() {
+      this.$nextTick(() => {
+        let xTable = this.$refs.xTable;
+        this.sortable = Sortable.create(
+          xTable.$el.querySelector(
+            ".body--wrapper>.vcu-table--header .vcu-header--row"
+          ),
+          {
+            handle: ".vcu-header--column:not(.col--fixed)",
+            onEnd: ({ item, newIndex, oldIndex }) => {
+              let { collectColumn } = xTable.getTableColumn();
+              let targetThElem = item;
+              let wrapperElem = targetThElem.parentNode;
+              let newColumn = collectColumn[newIndex];
+              let currcolid = item.getAttribute("data-colid");
+              if (newColumn.fixed) {
+                // 错误的移动
+                if (newIndex > oldIndex) {
+                  wrapperElem.insertBefore(
+                    targetThElem,
+                    wrapperElem.children[oldIndex]
+                  );
+                } else {
+                  wrapperElem.insertBefore(
+                    wrapperElem.children[oldIndex],
+                    targetThElem
+                  );
+                }
+                return this.$error({
+                  title: "错误",
+                  content: "固定列不允许拖动！",
+                });
+              }
+              // 转换真实索引
+              let oldColumnIndex = XEUtils.findIndexOf(
+                collectColumn,
+                (item) => item.id === currcolid
+              );
+              let newColumnIndex = xTable.getColumnIndex(newColumn);
+              // 移动到目标列
+              let currRow = collectColumn.splice(oldColumnIndex, 1)[0];
+              collectColumn.splice(newColumnIndex, 0, currRow);
+              xTable.loadColumn(collectColumn);
+            },
           }
-          return null;
-        }),
-      ];
-      return footer;
-    },
-    filterChange(a) {
-      //console.info(a);
-    },
-    handleSearch() {
-      this.$refs.ywTable.getTableListData(true);
+        );
+      });
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
+.sortable-column-demo .vcu-header--row .vcu-header--column.sortable-ghost,
+.sortable-column-demo .vcu-header--row .vcu-header--column.sortable-chosen {
+  background-color: #dfecfb;
+}
 </style>

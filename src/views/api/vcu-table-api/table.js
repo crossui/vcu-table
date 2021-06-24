@@ -481,6 +481,15 @@ const platformProps = [
         defVal: '-',
         list: []
       },
+      {
+        name: 'rowMethods',
+        descKey: '自定义特殊数据',
+        version: '',
+        type: 'Array',
+        enum: '',
+        defVal: '{key,method}',
+        list: []
+      },
     ]
   },
   {
