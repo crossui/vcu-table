@@ -77,7 +77,8 @@
             ref="autoTypewritTableList"
             size="small"
             isLazy
-            :stripe="tableListStripe"
+            locking
+            :stripe="defaultTableListStripe"
             :customRow="tableListCustomRow"
             :customDirectives="tableListDirectives"
             :columnsSource="loadColumns"
@@ -87,6 +88,11 @@
             :loadOptions="tableListOptions"
             @onPageLoad="onTableListPageLoad"
           ></tableList>
+          <div
+            class="typewrit-desc-wrap"
+            v-if="isShowDesc"
+            v-html="currDesc"
+          ></div>
         </div>
       </div>
     </popper>
@@ -94,20 +100,30 @@
 </template>
 
 <script>
+import popper from "@/components/popper";
+import tableList from "@/components/tableList";
 import tableView from "./mixins/tableView.js";
 import condition from "./mixins/condition.js";
 
-import request from "@/utils/request.js";
 export default {
   components: {
+    popper,
+    tableList,
   },
   mixins: [condition, tableView],
   model: {
-    prop: 'value',
-    event: 'change'
+    prop: "value",
+    event: "change",
   },
   props: {
-    backfillKey:{
+    fieldDesc: {
+      type: String,
+    },
+    isShowDesc: {
+      type: Boolean,
+      default: false,
+    },
+    backfillKey: {
       type: String,
     },
     autoInputValue: {
@@ -177,11 +193,13 @@ export default {
     inputType: {
       type: Number,
       default: 3,
-    }, //输入法类型
+    },
+    //输入法类型
     likeType: {
       type: Number,
-      default: 3,
-    }, //匹配规则：模糊查询
+      default: 1,
+    },
+    //匹配规则：模糊查询
     parentPriority: {
       type: String,
       default: "",
@@ -192,17 +210,30 @@ export default {
       this.inputValue = val;
     },
     inputValue(val) {
+      setTimeout(() => {
+        if(!this.isDBClickRow && !this.isAllowInput && this.visible) {
+          this.inputValue = ""
+        }
+      });
       this.$emit("input", val);
       this.$emit("change", val);
     },
     visible(val) {
       if (val) {
+        this.isDBClickRow = false
+        this.modalInputValue =
+          this.autoInputValue && this.isAllowInput
+            ? _.trim(this.inputValue)
+            : "";
         this.$nextTick(() => {
           this.$refs.popperDom.update();
-          
+          this.$store.commit("updateHotkeyPriority", "autoTypewrit");
         });
       } else {
+        this.modalInputValue = "";
+        this.allowWatchSearch = false;
         this.$refs.popperDom.destroy();
+        this.$store.commit("updateHotkeyPriority", this.parentPriority);
       }
     },
   },
@@ -221,24 +252,40 @@ export default {
     return {
       inputValue: this.value,
       visible: false,
+      isDBClickRow: false,
     };
   },
   created() {},
   methods: {
     handleInputKeyup(e) {
       let keyCode = e.keyCode;
-      if (keyCode == 32) {
-        this.visible = true;
-        this.$nextTick(() => {
-          this.modalInputValue = this.autoInputValue
-            ? _.trim(this.inputValue)
-            : "";
-          this.$refs.modalIputDom.$el.focus();
-        });
+      if (keyCode == 32 || (keyCode >= 65 && keyCode <= 90)) {
+        this.getAutoInputRes();
+      } else if (keyCode == 13) {
+        this.$emit("onEnter", this.inputValue);
+      } else if (
+        keyCode == 37 ||
+        keyCode == 38 ||
+        keyCode == 39 ||
+        keyCode == 40
+      ) {
+        return;
       } else {
         if (!this.isAllowInput) this.inputValue = "";
         this.$emit("selectSubmit", null);
       }
+    },
+    getAutoInputRes() {
+      this.visible = true;
+      setTimeout(() => {
+        this.modalInputValue =
+          this.autoInputValue && this.isAllowInput
+            ? _.trim(this.inputValue)
+            : "";
+        this.inputValue = this.isAllowInput ? _.trim(this.inputValue) : "";
+        this.$refs.modalIputDom.$el.focus();
+        this.$refs.autoTypewritTableList.getTableListData(true);
+      }, 300);
     },
     colsed() {
       this.visible = false;

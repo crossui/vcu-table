@@ -206,6 +206,12 @@ export default {
       return res;
     },
     async handleSubmit() {
+      const { columns } = this
+      const _c = XEUtils.filterTree(columns, item => item.visible === true)
+      if (!_c.length) {
+        let modalRes = await UtilTools.showConfirmModal({ content: "您未选择一个列，继续吗？" })
+        if (!modalRes) return false;
+      }
       if (this.saveCurrSet) {
         if (this.saveFormData == null || !this.saveFormData.tableName || this.saveFormData.tableName == "") {
           console.error("缺少入参参数'tableName'")

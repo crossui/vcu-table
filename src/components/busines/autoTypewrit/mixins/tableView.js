@@ -3,12 +3,18 @@ export default {
   mixins: [],
   watch: {
   },
+  props: {
+    tableListStripe: {
+      type: [Boolean, Function],
+      default: true
+    }
+  },
   data() {
     return {
       currIndex: 0,
       tableListDatas: null,
       tableListDirectives: [],
-      tableListStripe: (record, index) => {
+      defaultTableListStripe: (record, index) => {
         if (index == this.currIndex) {
           return "select-table-row";
         }
@@ -20,6 +26,7 @@ export default {
               this.handleTableListClick(record, index);
             },
             dblclick: event => {
+              this.isDBClickRow = true
               this.handleTableListDBClick(record, index);
             }
           }
@@ -28,6 +35,17 @@ export default {
     };
   },
   computed: {
+    currDesc() {
+      let desc = ""
+      if (this.isShowDesc) {
+        if (!this.fieldDesc || this.fieldDesc == "") {
+          console.error("fieldDesc Props Cannot be empty!!! ")
+        } else {
+          desc = this.tableListDatas && this.tableListDatas.length ? this.tableListDatas[this.currIndex][this.fieldDesc] : ""
+        }
+      }
+      return desc;
+    },
     tableListKeyMap() {
       return [
         {
@@ -57,12 +75,14 @@ export default {
         }
       ];
     },
-    tableListOptions() {
+    tableListOptions() {  //modalInputValue     inputValue
+      let _val = _.trim(this.modalInputValue);
+      _val = _val.replace(/\'/g, '\'\'');
       let option = {
         headUrl: "",
         listUrl: "",
         formData: {
-          content: this.modalInputValue,
+          content: _val,
           inputType: this.inputTypeVal,
           likeType: this.likeTypeVal
         }
@@ -74,6 +94,7 @@ export default {
     }
   },
   mounted() {
+    this.defaultTableListStripe = typeof this.tableListStripe == "boolean" ? this.defaultTableListStripe : this.tableListStripe
     this.tableListDirectives.push({
       name: "hotkey",
       value: this.tableListKeyMap
@@ -84,10 +105,11 @@ export default {
       this.currIndex = index;
     },
     handleTableListDBClick(record, index) {
+      this.isDBClickRow = true
       if (this.backfillKey) {
         this.inputValue = record[this.backfillKey] ? record[this.backfillKey] : "";
       }
-      this.$emit("selectSubmit", record);
+      this.$emit("selectSubmit", record, this.tableListDatas);
       this.colsed()
     },
     //上一页
@@ -112,12 +134,14 @@ export default {
     },
     //回车
     handleEnter() {
-      this.$emit("selectSubmit", this.tableListDatas[this.currIndex]);
+      this.isDBClickRow = true
+      this.$emit("selectSubmit", this.tableListDatas[this.currIndex],this.tableListDatas);
       this.colsed()
     },
     onTableListPageLoad(current, currPageData, response) {
       if (current <= 1) this.currIndex = 0;
       this.tableListDatas = currPageData;
+      this.allowWatchSearch = true;
     }
   }
 };

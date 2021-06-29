@@ -6,8 +6,12 @@ import { message, Modal } from 'vcu';
 // 创建一个AXIOS实例 (请求不同服务器地址或超时时长等等可以创建不同的实例)
 const request = axios.create({
 	// withCredentials: true, // 跨域请求时发送cookies
-	timeout: 30000 	// 请求超时
+	timeout: 60000 	// 请求超时
 })
+
+
+// 取消axios请求
+request.CancelToken = axios.CancelToken;
 
 // 开始设置请求 发起的拦截处理
 // config 代表发起请求的参数的实体
@@ -20,7 +24,7 @@ request.interceptors.request.use(config => {
 	//根据项目要求设置token
 	config.data = qs.stringify({
 		...config.data,
-		token: config.data.token ? config.data.token : "ba4b5ded1a384b54b0deffac4bb5145e"
+		token: config.data.token ? config.data.token : "697fccc5581a46d3a99e697807a63c27"
 	});
 	return config
 }, error => {
@@ -41,8 +45,14 @@ request.interceptors.response.use(async (response) => {
 	}
 }, (error) => {
 	// 请求错误需要自行处理
-	message.error('连接到服务器失败');
-	return false;
+	if (error.config && error.config.isHandleError && error.config.isHandleError == true) {
+		return error;
+	} else if (axios.isCancel(error)) {
+		return "cancelAxios";
+	} else {
+		message.error('连接到服务器失败');
+		return false;
+	}
 })
 
 export default request

@@ -12,7 +12,7 @@ Vue.use(VCU);
 import VCUTable from "../components/index.js";
 Vue.use(VCUTable);
 VCUTable.setup({
-  request: request
+  request: request,
 })
 
 

@@ -17,9 +17,10 @@
       </div>
       <vcu-table
         ref="xTable"
+        :filter-config="{ autoFilterRemote: true }"
         isLazy
         show-overflow
-        height="200"
+        height="300"
         :loadOptions="options"
       >
       </vcu-table>
@@ -33,6 +34,7 @@ export default {
       options: {
         headUrl: "dataq/api/header/getApproveArrearageList",
         pageUrl: "dataq/api/page/getApproveArrearageList",
+        filters: true,
         seq: true
       },
     };

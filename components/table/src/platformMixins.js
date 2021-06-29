@@ -77,7 +77,8 @@ export default {
       filterModalVisible: false,
       filterParameter: null,
       filterColumns: null,
-      resetFilters: true
+      resetFilters: true,
+      cancelAxios: null,
     }
   },
   computed: {
@@ -329,9 +330,17 @@ export default {
         this.loadColumn(this.fullColumns);
       }
     },
+    //取消获取列表数据
+    cancelGetTableListData() {
+      this.cancelAxios()
+    },
     //获取列表数据
     async getTableListData(isRest, obj) {
       this.loadingEd = true;
+      //取消之前的请求
+      if (this.cancelAxios != null) {
+        this.cancelGetTableListData();
+      }
       let options = { clearFilterData: false, autoFilterRemote: false }
       options = _.merge({}, options, obj);
       //查询重置过滤条件
@@ -349,49 +358,59 @@ export default {
       }
       if (options.autoFilterRemote) {
         params.page = 1
-        params.filterParameter = JSON.stringify(options.autoFilterRemote)
+        params.filterParameter = options.autoFilterRemote.length ? JSON.stringify(options.autoFilterRemote) : undefined
       }
       params = _.merge({}, params, this.platformOptions.pageFormData);
       try {
         let _data =
           _.toUpper(this.ajaxType) == "POST" ? { data: params } : { params };
+        const CancelToken = GlobalConfig.request.CancelToken;
         let res = await GlobalConfig.request({
           method: this.ajaxType,
           url: this.platformOptions.pageUrl,
           timeout: this.requestTimeout ? this.requestTimeout : undefined,
+          cancelToken: new CancelToken((c) => {
+            this.cancelAxios = c;
+          }),
           ..._data
         });
+        this.cancelAxios = null;
+        if (res) {
+          if (res !== "cancelAxios") {
+            this.loadDataRes = res;
+            let resData = res.data.payload.data
+            if (this.isLazy) {
+              if ((isRest && isRest == true) || options.autoFilterRemote !== false) {
+                this.tableBodyDom.scrollTop = 0;
+                this.lazyCurrent = 1;
+              } else {
+                resData = _.concat(this.tableFullData, resData);
+              }
 
-        this.loadDataRes = res;
-
-        let resData = res.data.payload.data
-        if (this.isLazy) {
-          if (isRest && isRest == true) {
-            this.tableBodyDom.scrollTop = 0;
-            this.lazyCurrent = 1;
-          } else {
-            resData = _.concat(this.tableFullData, resData);
+              if (this.lazyNoCount) {
+                this.lazyNoCountPage = resData.length ? true : false;
+              } else {
+                this.lazyCount = res.data.payload.count;
+              }
+            }
+            
+            setTimeout(() => {
+              this.setDatas(resData);
+              if (this.platformOptions.filters && this.resetFilters && !options.autoFilterRemote) this.handleFiltersHeaderDatas();
+              this.$emit("onPageLoad", {
+                datas: this.tableFullData,
+                count: res.data.payload.count,
+                response: res
+              })
+            }, 50)
+            this.loadingEd = false;
           }
-
-          if (this.lazyNoCount) {
-            this.lazyNoCountPage = resData.length ? true : false;
-          } else {
-            this.lazyCount = res.data.payload.count;
-          }
+        } else {
+          this.loadingEd = false;
         }
-
-        setTimeout(() => {
-          this.setDatas(resData);
-          if (this.platformOptions.filters && this.resetFilters && !options.autoFilterRemote) this.handleFiltersHeaderDatas();
-          this.$emit("onPageLoad", {
-            datas: this.tableFullData,
-            count: res.data.payload.count,
-            response: res
-          })
-        }, 50)
-
-      } catch (err) { }
-      this.loadingEd = false;
+      } catch (err) {
+        this.loadingEd = false;
+      }
     },
     //懒加载
     _scrollHandler() {

@@ -20,6 +20,7 @@
         </div>
       </v-alert>
 
+      <v-button @click="handleSetActiveCell">y设置编辑</v-button>
       <vcu-table
         ref="xTable"
         :data="tableData"
@@ -224,6 +225,10 @@ export default {
     getSelectLabel(value, list, valueProp = "value", labelField = "label") {
       const item = XEUtils.find(list, (item) => item[valueProp] === value);
       return item ? item[labelField] : null;
+    },
+    handleSetActiveCell() {
+      let row = this.$refs.xTable.getData(1);
+      this.$refs.xTable.setActiveCell(row,"address");
     },
   },
 };

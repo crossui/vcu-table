@@ -158,7 +158,7 @@ export default {
           })
         }
       })
-      this.getTableListData(false, { autoFilterRemote: _filterList.length ? _filterList : false })
+      this.getTableListData(false, { autoFilterRemote: _filterList })
     },
     handleClearFilter(column) {
       if (column) {

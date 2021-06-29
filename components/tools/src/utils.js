@@ -1,6 +1,7 @@
 import XEUtils from 'xe-utils/ctor'
 import GlobalConfig from '../../conf'
 import formats from '../../v-c-u-table/src/formats'
+import { Modal } from "vcu"
 
 let zindexIndex = 0
 let lastZindex = 1
@@ -271,6 +272,64 @@ export const UtilTools = {
     const type = name.substring(tIndex + 1, name.length)
     const filename = name.substring(0, tIndex)
     return { filename, type }
+  },
+  //弹出提示
+  showTipsModal(data) {
+    try {
+      return new Promise((resolve, reject) => {
+        Modal.info({
+          mask: false,
+          title: "提示",
+          class: data.className ? data.className : "",
+          autoFocusButton: null,
+          centered: true,
+          content: (h) => {
+            return h("div", {
+              domProps: {
+                innerHTML: data.content ? data.content : "",
+              },
+            })
+          },
+          okText: "确定",
+          onOk() {
+            resolve(true)
+          },
+        })
+      })
+    } catch (err) {
+      return false
+    }
+  },
+  //弹出确认提示
+  showConfirmModal(data) {
+    try {
+      return new Promise((resolve, reject) => {
+        Modal.confirm({
+          mask: false,
+          title: "提示",
+          class: data.className ? data.className : "",
+          autoFocusButton: null,
+          centered: true,
+          content: (h) => {
+            return h("div", {
+              domProps: {
+                innerHTML: data.content ? data.content : "",
+              },
+            })
+          },
+          okText: "确定",
+          onOk() {
+            resolve(true)
+          },
+          cancelText: "取消",
+          onCancel() {
+            resolve(false)
+          },
+        })
+      })
+    } catch (err) {
+      return false
+    }
   }
 }
 

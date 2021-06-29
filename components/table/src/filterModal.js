@@ -1,5 +1,6 @@
 import XEUtils from 'xe-utils'
 import GlobalConfig from '../../conf'
+import { UtilTools } from '../../tools'
 export default {
   props: {
     value: {
@@ -55,7 +56,8 @@ export default {
       tableColumns: [],
       operationList: [],
       relationList: [],
-      $xetable: null
+      $xetable: null,
+      saveTplType: false
     };
   },
   render() {
@@ -71,7 +73,8 @@ export default {
       tableColumns,
       selectOptions,
       filterLists,
-      size
+      size,
+      changeIsSaveTpl
     } = this;
     const modalProps = {
       ref: 'filterTplModalDom',
@@ -122,7 +125,7 @@ export default {
         <div class="clearfix" slot="footer">
           <div class="fl">
             <v-checkbox v-model={this.defaultCondition}>同时设为默认过滤条件</v-checkbox>
-            <v-checkbox v-model={this.isSaveTpl}>同时存为模板</v-checkbox>
+            <v-checkbox v-model={this.isSaveTpl} onChange={changeIsSaveTpl}>同时存为模板</v-checkbox>
           </div>
           <div class="fr">
             <v-button key="reduction" size={size} onClick={handleReduction}>还原</v-button>
@@ -149,7 +152,7 @@ export default {
             <v-row type="flex" gutter={5}>
               <v-col span={6}>
                 列名:
-                </v-col>
+              </v-col>
               <v-col span={4}>
                 运算符:
               </v-col>
@@ -158,7 +161,7 @@ export default {
               </v-col>
               <v-col span={3}>
                 关系符:
-                </v-col>
+              </v-col>
               <v-col span={3}>
               </v-col>
             </v-row >
@@ -438,7 +441,8 @@ export default {
       this.$emit("input", this.visible);
     },
     //提交
-    async handleSubmit() {
+    async handleSubmit(type) {
+      this.saveTplType = type === true ? type : false;
       let isEmptyColumn = this.validateFilterColumnVal();
       if (isEmptyColumn === true) {
         for (let i = 0; i < this.filterLists.length; i++) {
@@ -515,7 +519,7 @@ export default {
       return res;
     },
     //保存模板/修改模板
-    submitFilterTpl() {
+    async submitFilterTpl() {
       if (this.defaultCondition && this.isSaveTpl) {
         this.saveType = 3 //同时设为默认过滤条件 and 同时存为模板
       } else if (!this.defaultCondition && this.isSaveTpl) {
@@ -528,19 +532,12 @@ export default {
       if (this.saveType != 1 || this.saveLoading) {
         if (this.findSelectId != "") {
           const templateItem = this.selectOptions.filter(item => this.findSelectId == item.templateId)
-          if (templateItem.length) {
-            let _this = this;
-            this.$confirm({
-              title: '提示',
-              content: '确定要对当前模板进行重置吗？',
-              onOk() {
-                _this.tplName = templateItem[0].templateName
-                _this.handleSubmitFilterTpl()
-              },
-              onCancel() {
-                _this.saveLoading = false
-              },
-            });
+          this.tplName = templateItem[0].templateName
+          let modalRes = await UtilTools.showConfirmModal({ content: "确定要修改当前模板吗？" })
+          if (modalRes) {
+            this.tplNameVisible = true
+          } else {
+            this.saveLoading = false
           }
         } else {
           this.tplName = "";
@@ -556,7 +553,9 @@ export default {
       this.filterLists.forEach((item, index) => {
         let detailValue = ""
         this.tableColumns.forEach(columnsItem => {
-          if (columnsItem.title == item.detailName) detailValue = columnsItem.key
+          if (columnsItem.title == item.detailName) {
+            detailValue = columnsItem.filter_name && columnsItem.filter_name != "" ? columnsItem.filter_name : columnsItem.ora_name;
+          }
         })
         res.push({
           "detailValue": detailValue,
@@ -588,13 +587,13 @@ export default {
           data: { ...data }
         });
         if (res) {
-          this.$message.success('过滤模板保存成功！');
-          this.emitSubmit()
+          await UtilTools.showTipsModal({ content: "过滤模板保存成功！" })
+          if (!this.saveTplType) this.emitSubmit()
         } else {
-          this.$message.error('过滤模板保存失败！');
+          await UtilTools.showTipsModal({ content: "过滤模板保存失败！" })
         }
       } catch (err) {
-        this.$message.error('过滤模板保存失败！');
+        await UtilTools.showTipsModal({ content: "过滤模板保存失败！" })
       }
       this.saveLoading = false;
       this.submitLoading = false;
@@ -641,19 +640,29 @@ export default {
           data: { templateId: this.findSelectId }
         });
         if (res) {
-          this.$message.success('过滤模板删除成功！');
+          await UtilTools.showTipsModal({ content: "过滤模板删除成功！" })
           this.findSelectId = "";
           this.init()
         } else {
-          this.$message.error('过滤模板删除失败！');
+          await UtilTools.showTipsModal({ content: "过滤模板删除失败！" })
         }
       } catch (err) {
-        this.$message.error('过滤模板删除失败！');
+        await UtilTools.showTipsModal({ content: "过滤模板删除失败！" })
       }
       this.delectLoading = false;
     },
+    //提示保存模板
+    async changeIsSaveTpl(e) {
+      if (e.target.checked && this.findSelectId != "") {
+        let modalRes = await UtilTools.showConfirmModal({ content: "确定要对当前模板进行重置吗？" })
+        if (!modalRes) {
+          this.isSaveTpl = false
+        }
+      }
+    },
     //保存模板
     handleSaveTpl() {
+      this.saveTplType = true;
       this.saveLoading = true;
       this.handleSubmit(true);
     }

@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      allowWatchSearch: false,
       modalInputValue: "",
       inputTypeVal: this.inputType,
       likeTypeVal: this.likeType,
@@ -57,7 +58,7 @@ export default {
   },
   watch: {
     modalInputValue(val) {
-      this.handleConditionChange()
+      this.allowWatchSearch && this.handleConditionChange()
     }
   },
   methods: {
@@ -84,12 +85,19 @@ export default {
       this.handleConditionChange()
     },
     //输入法切换
-    changeInputType() {
-      this.$refs.autoTypewritTableList.getTableListData(true)
+    changeInputType(value) {
+      this.inputTypeVal = value;
+      this.$nextTick(() => {
+        this.$refs.autoTypewritTableList.getTableListData(true)
+      })
     },
     //匹配模式切换
-    changeLikeType() {
-      this.$refs.autoTypewritTableList.getTableListData(true)
+    changeLikeType(value) {
+      this.likeTypeVal = value;
+      this.$nextTick(() => {
+        this.$refs.autoTypewritTableList.getTableListData(true)
+      })
+
     },
     getPopupContainer() {
       return triggerNode => triggerNode.parentNode;
